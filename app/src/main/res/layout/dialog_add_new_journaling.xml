@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingStart="16dp"
+        android:paddingBottom="16dp"
+        android:paddingEnd="@dimen/margin_16">
+
+        <TextView
+            android:id="@+id/tv_heading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="@string/Add_Journaling"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_title_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="@string/title"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_heading" />
+
+        <EditText
+            android:id="@+id/et_title"
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:layout_weight="1"
+            android:background="@drawable/team_listing_item_border_color_primary"
+            android:fontFamily="@font/poppins_regular"
+            android:hint="@string/enter_title"
+            android:paddingStart="16dp"
+            android:paddingTop="3dp"
+            android:paddingEnd="16dp"
+            android:layout_marginTop="3dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/text_hint_color"
+            android:textSize="@dimen/text_size_12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_title_txt" />
+
+        <TextView
+            android:id="@+id/tv_desc_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="@string/desc"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_title" />
+
+        <EditText
+            android:id="@+id/et_desc"
+            android:layout_width="match_parent"
+            android:layout_height="89dp"
+            android:layout_weight="1"
+            android:background="@drawable/team_listing_item_border_color_primary"
+            android:fontFamily="@font/poppins_regular"
+            android:gravity="start"
+            android:hint="@string/enter_desc"
+            android:layout_marginTop="3dp"
+            android:paddingStart="16dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="16dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/text_hint_color"
+            android:textSize="@dimen/text_size_12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_desc_txt" />
+
+        <TextView
+            android:id="@+id/tv_location_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="@string/location"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_desc" />
+
+        <EditText
+            android:id="@+id/et_location"
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:layout_weight="1"
+            android:background="@drawable/team_listing_item_border_color_primary"
+            android:fontFamily="@font/poppins_regular"
+            android:hint="@string/enter_location"
+            android:paddingStart="16dp"
+            android:paddingTop="3dp"
+            android:paddingEnd="16dp"
+            android:layout_marginTop="3dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/text_hint_color"
+            android:textSize="@dimen/text_size_12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_location_txt" />
+
+        <TextView
+            android:id="@+id/tv_share_with"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="@string/share_with"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_location" />
+
+        <EditText
+            android:id="@+id/et_share_with"
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+
+            android:layout_weight="1"
+            android:background="@drawable/team_listing_item_border_color_primary"
+            android:fontFamily="@font/poppins_regular"
+            android:hint="@string/search_user"
+            android:paddingStart="16dp"
+            android:paddingTop="3dp"
+            android:layout_marginTop="3dp"
+            android:paddingEnd="16dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/text_hint_color"
+            android:textSize="@dimen/text_size_12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_share_with" />
+
+        <ImageView
+            android:id="@+id/imageView9"
+            android:layout_width="14dp"
+            android:layout_height="15dp"
+            android:layout_marginTop="32dp"
+            android:src="@drawable/ic_gratitude_share"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_share_with" />
+
+        <TextView
+            android:id="@+id/tv_attachment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="@string/attachment"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            android:layout_marginStart="8dp"
+            app:layout_constraintStart_toEndOf="@+id/imageView9"
+            app:layout_constraintTop_toBottomOf="@+id/et_share_with" />
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/attached_image"
+            android:layout_width="65dp"
+            android:layout_height="45dp"
+            android:src="@drawable/school_get_started"
+            android:scaleType="centerCrop"
+            android:visibility="visible"
+
+            android:layout_marginTop="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tv_attachment"
+            app:layout_constraintTop_toBottomOf="@+id/et_share_with"
+            app:riv_border_width="1dp"
+            app:riv_border_color="@color/color_primary"
+            app:riv_corner_radius="4dp" />
+
+        <LinearLayout
+            android:id="@+id/ll_buttons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2"
+            android:padding="2dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@+id/attached_image"
+            tools:layout_editor_absoluteX="16dp">
+
+            <Button
+                android:id="@+id/et_btn_cancel"
+                android:layout_width="match_parent"
+                android:layout_height="38dp"
+                android:layout_weight="1"
+                android:background="@drawable/rounded_corner_btn_cancel"
+                android:fontFamily="@font/poppins_regular"
+                android:hint="@string/cancel"
+                android:paddingStart="16dp"
+                android:paddingTop="3dp"
+                android:paddingEnd="16dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/black"
+                android:textSize="10dp" />
+
+            <Button
+                android:id="@+id/et_submit"
+                android:layout_width="match_parent"
+                android:layout_height="38dp"
+                android:layout_marginStart="3dp"
+                android:layout_weight="1"
+                android:background="@drawable/orange_rounded_btn_shape_15dp"
+                android:fontFamily="@font/poppins_regular"
+                android:hint="@string/submit"
+                android:paddingStart="16dp"
+                android:paddingTop="3dp"
+                android:paddingEnd="16dp"
+                android:textColor="@color/black"
+                android:textColorHint="@color/white"
+                android:textSize="10dp" />
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

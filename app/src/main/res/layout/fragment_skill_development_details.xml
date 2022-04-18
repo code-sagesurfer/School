@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".skill_development.FragmentSkillDevelopmentDetails">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    <!-- TODO: Update blank fragment layout -->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:text="@string/hello_blank_fragment"
+        android:layout_marginTop="70dp"
+        android:id="@+id/image"
+        android:background="@drawable/bg_skill_dev"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:text="@string/hello_blank_fragment"
+        android:id="@+id/skill_top_image"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/skill_development_detail"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_goal_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/poppins_medium"
+        android:text="Goal"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:maxLines="2"
+        android:layout_marginTop="24dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/skill_top_image" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:id="@+id/cl"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+       android:background="@drawable/light_orange_rounded_shape"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/image">
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:padding="16dp"
+            android:id="@+id/goal"
+
+
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/text_bg_rounded_shape_light_green">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/demo_large_text"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:textColor="@color/black"
+                android:textSize="13sp"
+                android:id="@+id/goal_desc"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/demo_date"
+                android:layout_marginTop="@dimen/margin_8"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:textColor="@color/color_primary"
+                android:textSize="11sp"
+                app:layout_constraintTop_toBottomOf="@+id/goal_desc"
+                />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/tv_question"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_medium"
+            android:text="@string/question"
+            android:textColor="@color/black"
+            android:textSize="13sp"
+            android:maxLines="2"
+            android:layout_marginTop="24dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/goal" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/demo_large_text"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:textColor="@color/black"
+            android:textSize="13sp"
+            android:id="@+id/tv_question_desc"
+            app:layout_constraintTop_toBottomOf="@+id/tv_question"
+            />
+
+        <Button
+            android:id="@+id/btn_yes"
+            android:layout_width="54dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/rounded_green_button"
+            android:fontFamily="@font/poppins_regular"
+            android:paddingTop="3dp"
+            android:text="@string/yes"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_question_desc" />
+
+        <Button
+            android:layout_width="54dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/rounded_green_button"
+            android:fontFamily="@font/poppins_regular"
+            android:paddingTop="3dp"
+            android:text="@string/no"
+            android:id="@+id/btn_no"
+            android:textColor="@color/white"
+            android:textSize="12sp"
+            android:layout_marginStart="10dp"
+            app:layout_constraintStart_toEndOf="@+id/btn_yes"
+            app:layout_constraintTop_toBottomOf="@+id/tv_question_desc" />
+
+        <TextView
+            android:id="@+id/tv_choose_date"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_medium"
+            android:text="@string/question"
+            android:textColor="@color/black"
+            android:textSize="13sp"
+            android:maxLines="2"
+            android:layout_marginTop="24dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_yes" />
+
+        <TextView
+            android:id="@+id/et_ans_2"
+            android:layout_width="150dp"
+            android:layout_height="38dp"
+            android:layout_weight="1"
+            android:background="@drawable/team_listing_item_border_color_primary"
+            android:fontFamily="@font/poppins_regular"
+            android:paddingStart="16dp"
+            android:gravity="center_vertical"
+            android:layout_marginTop="3dp"
+            android:paddingEnd="16dp"
+            android:hint="Select Date"
+            android:drawableEnd="@drawable/ic_calendar"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/text_hint_color"
+            android:textSize="@dimen/text_size_12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_choose_date"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:id="@+id/ll_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:weightSum="2"
+        android:paddingBottom="16dp"
+        android:layout_marginTop="36dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cl">
+
+        <Button
+            android:id="@+id/et_btn_cancel"
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:layout_weight="1"
+            android:background="@drawable/rounded_corner_btn_cancel"
+            android:fontFamily="@font/poppins_regular"
+            android:hint="@string/cancel"
+            android:paddingStart="16dp"
+            android:paddingTop="3dp"
+            android:layout_margin="2dp"
+            android:paddingEnd="16dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/black"
+            android:textSize="10dp" />
+
+        <Button
+            android:id="@+id/et_submit"
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:layout_marginStart="3dp"
+            android:layout_weight="1"
+            android:background="@drawable/orange_rounded_btn_shape_15dp"
+            android:fontFamily="@font/poppins_regular"
+            android:hint="@string/submit"
+            android:paddingStart="16dp"
+            android:paddingTop="3dp"
+            android:paddingEnd="16dp"
+            android:layout_margin="2dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/white"
+            android:textSize="10dp" />
+
+    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

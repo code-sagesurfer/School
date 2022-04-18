@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:fillViewport="true"
+    tools:context=".emotional_support.FragmentEmotionalSupport">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <TextView
+        android:id="@+id/tv_inspiration_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/poppins_regular"
+        android:text="@string/inspiration_content"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/imageView10"
+            android:layout_width="27dp"
+            android:layout_height="27dp"
+            android:layout_marginEnd="24dp"
+            android:src="@drawable/ic_proper_nutrition_add"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_inspiration_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_inspiration_content" />
+
+        <TextView
+            android:id="@+id/tv_add_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="@string/add_content"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@+id/imageView10"
+
+            app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_event_activity"
+        android:layout_width="match_parent"
+        android:layout_height="170dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_inspiration_content"
+        tools:listitem="@layout/layout_home_planner_item" />
+
+
+        <TextView
+            android:id="@+id/tv_mood_tracking"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="@string/mood_tracking"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rv_event_activity"/>
+
+        <ImageView
+            android:id="@+id/btn_add_mood"
+            android:layout_width="27dp"
+            android:layout_height="27dp"
+            android:layout_marginEnd="24dp"
+            android:src="@drawable/ic_proper_nutrition_add"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_mood_tracking"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_mood_tracking" />
+
+        <TextView
+            android:id="@+id/tv_add_mood"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="@string/add_mood"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@+id/btn_add_mood"
+            app:layout_constraintTop_toBottomOf="@+id/rv_event_activity" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_moods"
+            android:layout_width="match_parent"
+            android:layout_height="170dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_mood_tracking"
+            tools:listitem="@layout/layout_home_mood_item" />
+
+        <TextView
+            android:id="@+id/tv_journaling"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="@string/menu_journaling"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rv_moods"/>
+
+        <ImageView
+            android:id="@+id/btn_add_journaling"
+            android:layout_width="27dp"
+            android:layout_height="27dp"
+            android:layout_marginEnd="24dp"
+            android:src="@drawable/ic_proper_nutrition_add"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_journaling"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_journaling" />
+
+        <TextView
+            android:id="@+id/tv_add_journaling"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="@string/Add_Journaling"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@+id/btn_add_journaling"
+            app:layout_constraintTop_toBottomOf="@+id/rv_moods"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_journaling"
+            android:layout_width="match_parent"
+            android:layout_height="190dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_journaling"
+            tools:listitem="@layout/layout_home_journaling_item" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
