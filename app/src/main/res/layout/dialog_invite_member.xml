@@ -67,7 +67,7 @@
             app:layout_constraintTop_toBottomOf="@+id/imageView7" />
 
         <View
-            android:id="@+id/viewNewUser"
+            android:id="@+id/view_weekly"
             android:layout_width="93dp"
             android:layout_height="31dp"
             android:background="@drawable/rounded_background_tab_btn_blue"
@@ -81,10 +81,10 @@
             android:layout_height="wrap_content"
             android:text="@string/new_user"
             android:textSize="12sp"
-            app:layout_constraintBottom_toBottomOf="@+id/viewNewUser"
-            app:layout_constraintEnd_toEndOf="@+id/viewNewUser"
-            app:layout_constraintStart_toStartOf="@+id/viewNewUser"
-            app:layout_constraintTop_toTopOf="@+id/viewNewUser" />
+            app:layout_constraintBottom_toBottomOf="@+id/view_weekly"
+            app:layout_constraintEnd_toEndOf="@+id/view_weekly"
+            app:layout_constraintStart_toStartOf="@+id/view_weekly"
+            app:layout_constraintTop_toTopOf="@+id/view_weekly" />
 
 
         <View
