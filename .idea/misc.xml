@@ -4,24 +4,32 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/drawable-hdpi/top_left_bottom_right_corner_radious_green.xml" value="0.12" />
+        <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/drawable-v24/left_corner_rounded.xml" value="0.2955" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/drawable-v24/rounded_background_green_active.xml" value="0.32916666666666666" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/drawable-xhdpi/mood_item_rounded_border.xml" value="0.32916666666666666" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/drawable-xhdpi/text_bg_rounded_shape_light_green.xml" value="0.32916666666666666" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/drawable/background_yellow_gradient.xml" value="0.173" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/drawable/bottom_corner_rounded.xml" value="0.32916666666666666" />
+        <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/drawable/bottom_corner_rounded_assessment.xml" value="0.2955" />
+        <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/drawable/dark_blue_rounded_border.xml" value="0.2635" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/drawable/date_physical_activity_bg_gray.xml" value="0.3125" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/drawable/date_physical_activity_bg_purple.xml" value="0.3125" />
+        <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/drawable/date_physical_activity_bg_purple_36dp.xml" value="0.2815" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/drawable/layour_team_details_circular_item.xml" value="0.29259259259259257" />
+        <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/drawable/left_corner_rounded.xml" value="0.2955" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/drawable/light_orange_rounded_shape.xml" value="0.32916666666666666" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/drawable/mood_item_rounded_border.xml" value="0.32916666666666666" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/drawable/orange_rounded_btn_shape_15dp.xml" value="0.32916666666666666" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/drawable/primary_orange_rounded_border.xml" value="0.173" />
+        <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/drawable/right_corner_rounded.xml" value="0.22" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/drawable/rounded_background_blue_light.xml" value="0.29259259259259257" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/drawable/rounded_background_green_active.xml" value="0.49375" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/drawable/rounded_background_tab_btn_blue.xml" value="0.29259259259259257" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/drawable/rounded_background_white.xml" value="0.32916666666666666" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/drawable/rounded_bottom_corners_with_solid_background_.xml" value="0.2495" />
+        <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/drawable/rounded_bottom_corners_with_solid_background_small.xml" value="0.316" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/drawable/rounded_corner_btn_cancel.xml" value="0.29259259259259257" />
+        <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/drawable/rounded_corner_feedbak_bg.xml" value="0.283" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/drawable/rounded_corner_planner_home_item.xml" value="0.32916666666666666" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/drawable/rounded_corners_with_solid_background_green.xml" value="0.2495" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/drawable/rounded_green_button.xml" value="0.2925" />
@@ -37,42 +45,64 @@
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/activity_login.xml" value="0.33" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/activity_main.xml" value="0.4035936420179682" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/activity_splash.xml" value="0.25" />
-        <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/app_bar_main.xml" value="0.25" />
-        <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/content_main.xml" value="0.27037037037037037" />
+        <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/app_bar_main.xml" value="0.22" />
+        <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/content_main.xml" value="0.33" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/dialog_add_new_journaling.xml" value="0.33" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/dialog_adequate_sleep_input.xml" value="0.25" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/dialog_invite_member.xml" value="0.5" />
+        <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/fragment_about_us.xml" value="0.33" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/fragment_activity_main.xml" value="0.2496793501496366" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/fragment_add_nutrition.xml" value="0.25" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/fragment_adequate_sleep.xml" value="0.25" />
-        <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/fragment_blank.xml" value="0.27037037037037037" />
+        <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/fragment_assessment_detail_fill.xml" value="0.25" />
+        <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/fragment_assessment_main.xml" value="0.5" />
+        <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/fragment_assessmet_form_detail_view.xml" value="0.33" />
+        <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/fragment_blank.xml" value="0.25" />
+        <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/fragment_change_password.xml" value="0.25" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/fragment_crisis_management.xml" value="0.33" />
+        <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/fragment_edit_profile.xml" value="0.33" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/fragment_emotional_support_add_mood.xml" value="0.33" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/fragment_emotional_support_fragment.xml" value="0.27037037037037037" />
+        <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/fragment_f_a_q_details.xml" value="0.33" />
+        <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/fragment_feedback.xml" value="0.33" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/fragment_gallery.xml" value="0.27037037037037037" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/fragment_home.xml" value="0.27508243052284503" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/fragment_journaling_main_listing.xml" value="0.33" />
+        <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/fragment_mood_tracking_listing.xml" value="0.2496793501496366" />
+        <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/fragment_notification_listing.xml" value="0.2304403591278324" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/fragment_physical_activity_details.xml" value="0.25" />
-        <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/fragment_physical_activity_main.xml" value="0.5" />
+        <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/fragment_physical_activity_main.xml" value="0.33" />
+        <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/fragment_positive_quotes_listing.xml" value="0.33" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/fragment_proper_nutrition.xml" value="0.25" />
-        <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/fragment_selfcare_management.xml" value="0.22" />
+        <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/fragment_selfcare_management.xml" value="0.25" />
+        <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/fragment_settings.xml" value="0.5" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/fragment_skill_development.xml" value="0.25" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/fragment_skill_development_details.xml" value="0.25" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/fragment_social_activity.xml" value="0.25" />
+        <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/fragment_support.xml" value="0.33" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/fragment_team_details.xml" value="0.33" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/fragment_team_details_listing.xml" value="0.5" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/fragment_view_mood_tracking.xml" value="0.33" />
+        <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/fragment_view_more_listing.xml" value="0.2496793501496366" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/fragment_view_nutrition.xml" value="0.33" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/layour_team_details_circular_item.xml" value="0.67" />
+        <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/layout_assessment_list_item.xml" value="0.5" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/layout_home_journaling_item.xml" value="0.33" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/layout_home_mood_item.xml" value="0.5" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/layout_home_planner_item.xml" value="0.25" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/layout_journal_list_item.xml" value="0.5" />
+        <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/layout_listing_item.xml" value="0.33" />
+        <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/layout_mood_listing_item.xml" value="0.33" />
+        <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/layout_notification_list_item.xml" value="0.5" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/layout_nutrition_list_item.xml" value="0.33" />
+        <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/layout_positive_qoutes_listing_item.xml" value="0.33" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/layout_skill_development_list_item.xml" value="0.5" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/layout_sleep_history_list_item.xml" value="0.5" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/layout_team_details_listing_item.xml" value="0.33" />
+        <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/nav_header_main.xml" value="0.33" />
+        <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/toolbar_main.xml" value="0.33" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/menu/activity_main_drawer.xml" value="0.33" />
+        <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/menu/main.xml" value="0.2496793501496366" />
       </map>
     </option>
   </component>

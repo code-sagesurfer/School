@@ -49,5 +49,17 @@
         android:id="@+id/nav_edu_and_spi"
         android:name="com.example.school.education_and_speritual.FragmentEduAndSpiritual"
         android:label="@string/menu_edu_and_spi"
-        tools:layout="@layout/fragment_blank" />
+        tools:layout="@layout/" />
+
+    <fragment
+        android:id="@+id/nav_positive_quotes"
+        android:name="com.example.school.positive_quotes.FragmentPositiveQuotesListing"
+        android:label="@string/positive_quotes"
+        tools:layout="@layout/fragment_positive_quotes_listing" />
+
+    <fragment
+        android:id="@+id/nav_support"
+        android:name="com.example.school.support.FragmentSupport"
+        android:label="@string/support"
+        tools:layout="@layout/fragment_support" />
 </navigation>

@@ -670,7 +670,7 @@
 
 
                 <TextView
-                    android:id="@+id/txt_physical_activity_bp"
+                    android:id="@+id/txt_physical_activity_bpm"
                     android:layout_width="0dp"
                     android:layout_height="24dp"
                     android:layout_marginStart="16dp"

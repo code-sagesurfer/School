@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:paddingStart="16dp"
         android:paddingBottom="16dp"
-        android:paddingEnd="@dimen/margin_16">
+        android:paddingEnd="@dimen/size_margin_16">
 
         <TextView
             android:id="@+id/tv_heading"
@@ -20,7 +20,7 @@
             android:fontFamily="@font/poppins_regular"
             android:text="@string/Add_Journaling"
             android:textColor="@color/black"
-            android:textSize="@dimen/text_size_18sp"
+            android:textSize="@dimen/text_size_18"
             app:layout_constraintEnd_toEndOf="parent"
 
             app:layout_constraintStart_toStartOf="parent"
@@ -52,7 +52,7 @@
             android:layout_marginTop="3dp"
             android:textColor="@color/black"
             android:textColorHint="@color/text_hint_color"
-            android:textSize="@dimen/text_size_12sp"
+            android:textSize="@dimen/text_12"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_title_txt" />
@@ -84,7 +84,7 @@
             android:paddingEnd="16dp"
             android:textColor="@color/black"
             android:textColorHint="@color/text_hint_color"
-            android:textSize="@dimen/text_size_12sp"
+            android:textSize="@dimen/text_12"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_desc_txt" />
@@ -115,7 +115,7 @@
             android:layout_marginTop="3dp"
             android:textColor="@color/black"
             android:textColorHint="@color/text_hint_color"
-            android:textSize="@dimen/text_size_12sp"
+            android:textSize="@dimen/text_12"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_location_txt" />
@@ -148,7 +148,7 @@
             android:paddingEnd="16dp"
             android:textColor="@color/black"
             android:textColorHint="@color/text_hint_color"
-            android:textSize="@dimen/text_size_12sp"
+            android:textSize="@dimen/text_12"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_share_with" />

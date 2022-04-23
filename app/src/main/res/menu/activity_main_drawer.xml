@@ -36,5 +36,26 @@
             android:id="@+id/nav_edu_and_spi"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="@string/menu_edu_and_spi" />
+
+        <item
+            android:id="@+id/nav_positive_quotes"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/positive_quotes" />
+
+        <item
+            android:id="@+id/nav_notifications"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/notifications" />
+
+        <item
+            android:id="@+id/nav_support"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/support" />
+
+        <item
+            android:id="@+id/nav_logout"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/logout" />
+
     </group>
 </menu>

@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".support.FragmentFAQDetails">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:background="@drawable/primary_orange_rounded_border"
+        android:padding="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/faq_que1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/poppins_medium"
+            android:text="@string/faq_que_1"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toStartOf="@+id/iv_faq_btn_1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/iv_faq_btn_1"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:padding="4dp"
+            android:src="@drawable/next_arrow"
+            app:layout_constraintBottom_toBottomOf="@+id/faq_que1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_faq_que_1_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Yes, depending on the type severity of the mental illness, a person can learn to cope, improve, or experience a full recovery with proper care and treatment. Recently, there have been significant advancements in treatments for schizophrenia and clinical depression."
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/faq_que1" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/primary_orange_rounded_border"
+        android:layout_marginTop="16dp"
+        android:padding="16dp"
+        android:id="@+id/constraintLayout2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout1">
+
+        <TextView
+            android:id="@+id/faq_que2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/poppins_medium"
+            android:text="@string/faq_que_2"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toStartOf="@+id/iv_faq_btn_2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/iv_faq_btn_2"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:padding="4dp"
+            android:src="@drawable/next_arrow"
+            app:layout_constraintBottom_toBottomOf="@+id/faq_que2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_faq_que_2_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Yes, depending on the type severity of the mental illness, a person can learn to cope, improve, or experience a full recovery with proper care and treatment. Recently, there have been significant advancements in treatments for schizophrenia and clinical depression."
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/faq_que2" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/primary_orange_rounded_border"
+        android:layout_marginTop="16dp"
+        android:padding="16dp"
+        android:id="@+id/constraintLayout3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
+
+        <TextView
+            android:id="@+id/faq_que3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/poppins_medium"
+            android:text="@string/faq_que_3"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toStartOf="@+id/iv_faq_btn_3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/iv_faq_btn_3"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:padding="4dp"
+            android:src="@drawable/next_arrow"
+            app:layout_constraintBottom_toBottomOf="@+id/faq_que3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_faq_que_3_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Yes, depending on the type severity of the mental illness, a person can learn to cope, improve, or experience a full recovery with proper care and treatment. Recently, there have been significant advancements in treatments for schizophrenia and clinical depression."
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/faq_que3" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/primary_orange_rounded_border"
+        android:layout_marginTop="16dp"
+        android:padding="16dp"
+        android:id="@+id/constraintLayout4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout3">
+
+        <TextView
+            android:id="@+id/faq_que4"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/poppins_medium"
+            android:text="@string/faq_que_4"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toStartOf="@+id/iv_faq_btn_4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/iv_faq_btn_4"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:padding="4dp"
+            android:src="@drawable/next_arrow"
+            app:layout_constraintBottom_toBottomOf="@+id/faq_que4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_faq_que_4_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Yes, depending on the type severity of the mental illness, a person can learn to cope, improve, or experience a full recovery with proper care and treatment. Recently, there have been significant advancements in treatments for schizophrenia and clinical depression."
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/faq_que4" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/primary_orange_rounded_border"
+        android:layout_marginTop="16dp"
+        android:padding="16dp"
+        android:id="@+id/constraintLayout5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout4">
+
+        <TextView
+            android:id="@+id/faq_que5"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/poppins_medium"
+            android:text="@string/faq_que_5"
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toStartOf="@+id/iv_faq_btn_5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/iv_faq_btn_5"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:padding="4dp"
+            android:src="@drawable/next_arrow"
+            app:layout_constraintBottom_toBottomOf="@+id/faq_que5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_faq_que_5_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Yes, depending on the type severity of the mental illness, a person can learn to cope, improve, or experience a full recovery with proper care and treatment. Recently, there have been significant advancements in treatments for schizophrenia and clinical depression."
+            android:textColor="@color/black"
+            android:textSize="14sp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/faq_que5" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

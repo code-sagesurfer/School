@@ -80,8 +80,8 @@
         android:layout_height="85dp"
         app:cardCornerRadius="10dp"
         android:id="@+id/card_1"
-        android:layout_marginStart="@dimen/margin_16"
-        android:layout_marginEnd="@dimen/margin_16"
+        android:layout_marginStart="@dimen/size_margin_16"
+        android:layout_marginEnd="@dimen/size_margin_16"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -199,6 +199,7 @@
         android:text="@string/crisis_msg"
         android:textColor="@color/color_primary"
         android:textSize="16sp"
+        android:id="@+id/tv_note"
         android:fontFamily="@font/poppins_regular"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
@@ -207,5 +208,103 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:id="@+id/card1"
+        android:padding="16dp"
+        android:background="@drawable/primary_orange_rounded_border"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_note">
+
+        <TextView
+            android:id="@+id/tv_heading1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+            android:fontFamily="@font/poppins_regular"
+            android:text="Most frequently Used Interventions"
+            android:textColor="@color/dark_btn_blue"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@+id/iv_arrow"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:id="@+id/iv_arrow"
+            android:src="@drawable/ic_calendar"
+
+            app:layout_constraintBottom_toBottomOf="@+id/tv_heading1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_heading1" />
+        <View
+            android:id="@+id/view_1"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="5dp"
+            android:background="@color/green_active"
+            app:layout_constraintTop_toBottomOf="@+id/tv_heading1"
+            tools:layout_editor_absoluteX="1dp" />
+
+        <TextView
+            android:id="@+id/tv_"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="@string/crisis_msg"
+            android:textColor="@color/color_primary"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view_1" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:padding="16dp"
+        android:id="@+id/card2"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/primary_orange_rounded_border"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/card1">
+
+        <TextView
+            android:id="@+id/tv_heading2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+
+
+            android:layout_marginEnd="16dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="Most frequently Used Interventions"
+            android:textColor="@color/dark_btn_blue"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@+id/iv_arrow2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:id="@+id/iv_arrow2"
+            android:src="@drawable/ic_calendar"
+
+            app:layout_constraintBottom_toBottomOf="@+id/tv_heading2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_heading2" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
