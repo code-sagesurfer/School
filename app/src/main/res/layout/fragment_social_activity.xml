@@ -199,7 +199,7 @@
         app:layout_constraintTop_toBottomOf="@+id/cl_top_block" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_event_activity"
+        android:id="@+id/rv_inspirational_contents"
         android:layout_width="match_parent"
         android:layout_height="170dp"
         android:layout_marginStart="16dp"
@@ -221,7 +221,7 @@
         android:textColor="@color/black"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/rv_event_activity" />
+        app:layout_constraintTop_toBottomOf="@+id/rv_inspirational_contents" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_social_activity"

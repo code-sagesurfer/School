@@ -8,7 +8,7 @@
 
     <!-- TODO: Update blank fragment layout -->
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/et_gratitudeSearchBar"
         android:layout_width="0dp"
         android:layout_height="37dp"
         android:layout_marginStart="16dp"
@@ -20,7 +20,7 @@
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
 
-        android:text="@string/search"
+        android:hint="@string/search"
         android:textSize="@dimen/text_size_12"
         app:layout_constraintEnd_toStartOf="@+id/iv_filter"
         app:layout_constraintStart_toStartOf="parent"
@@ -47,15 +47,35 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText"
+        app:layout_constraintTop_toBottomOf="@+id/et_gratitudeSearchBar"
         tools:listitem="@layout/layout_journal_list_item" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:id="@+id/fb_add_gratitude"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toBottomOf="@+id/recyclerView"
         app:layout_constraintEnd_toEndOf="@+id/recyclerView" />
+
+    <TextView
+        android:id="@+id/tv_error_msg"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/color_primary"
+        android:text="Data Not Found"
+        android:paddingTop="3dp"
+        android:gravity="center"
+        android:textSize="16sp"
+        android:visibility="gone"
+        android:fontFamily="@font/poppins_medium"
+        app:layout_constraintTop_toBottomOf="@+id/et_gratitudeSearchBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/recyclerView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

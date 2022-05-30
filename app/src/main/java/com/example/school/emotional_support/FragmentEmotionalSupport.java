@@ -1,38 +1,113 @@
 package com.example.school.emotional_support;
 
-import androidx.lifecycle.ViewModelProvider;
-
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.school.R;
+import com.example.school.home.JournalingData;
+import com.example.school.home.ModelGratitudeListingResponseData;
+import com.example.school.home.MoodData;
+import com.example.school.home.MoodJournalDataMood_;
+import com.example.school.home.adapters.AdapterGratitudeJournalingList;
+import com.example.school.home.adapters.AdaptersMoodData;
+import com.example.school.selfcaremanagement.AdapterSelfcareData;
+import com.example.school.selfcaremanagement.Content_;
+import com.example.school.selfcaremanagement.SelfcareData;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 public class FragmentEmotionalSupport extends Fragment {
 
     private FragmentEmotionalSupportViewModel mViewModel;
-
+    RecyclerView rv_moods,rv_journaling;
+    JournalingData journalingData;
     public static FragmentEmotionalSupport newInstance() {
         return new FragmentEmotionalSupport();
     }
-
+    MoodData moodData;
+    private static final String TAG = "FragmentEmotionalSuppor";
+    SelfcareData selfcareData;
+    RecyclerView rv_inspirational_contents;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_emotional_support_fragment, container, false);
+        View view= inflater.inflate(R.layout.fragment_emotional_support_fragment, container, false);
+
+        rv_moods=view.findViewById(R.id.rv_moods);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        rv_moods.setLayoutManager(mLayoutManager);
+        rv_moods.setItemAnimator(new DefaultItemAnimator());
+
+        moodData = new MoodData();
+        journalingData=new JournalingData();
+        selfcareData=new SelfcareData();
+
+        rv_journaling = view.findViewById(R.id.rv_journaling);
+        RecyclerView.LayoutManager mLayoutManagerJournaling = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        rv_journaling.setLayoutManager(mLayoutManagerJournaling);
+        rv_journaling.setItemAnimator(new DefaultItemAnimator());
+
+        rv_inspirational_contents = view.findViewById(R.id.rv_inspirational_contents);
+        RecyclerView.LayoutManager mLayoutManagerInspContent = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        rv_inspirational_contents.setLayoutManager(mLayoutManagerInspContent);
+        rv_inspirational_contents.setItemAnimator(new DefaultItemAnimator());
+
+        return view;
     }
 
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(FragmentEmotionalSupportViewModel.class);
-        // TODO: Use the ViewModel
+    public void onResume() {
+        super.onResume();
+        moodData.fetchJournalMoodDataNew(0, 50, getContext(), getActivity(), this);
+
+        Date currentTime = Calendar.getInstance().getTime();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String strDate = dateFormat.format(currentTime);
+        journalingData.getGratitudes("", strDate, "", "",getContext(),getActivity(),this);
+
+        selfcareData.fetchSelfcareNewData(0,30,getContext(),getActivity(),TAG,true,FragmentEmotionalSupport.this);
+
     }
 
+    public void moodDataResponse(ArrayList<MoodJournalDataMood_> dataList,Context context) {
+        Toast.makeText(getContext(), "data received", Toast.LENGTH_SHORT).show();
+        AdaptersMoodData journalListAdapter = new AdaptersMoodData(getActivity(), dataList);
+       rv_moods.setAdapter(journalListAdapter);
+
+    }
+
+    public void moodDataResponseFailed() {
+
+    }
+
+    public void journalingData(ArrayList<ModelGratitudeListingResponseData> dataArrayList) {
+        AdapterGratitudeJournalingList adapterGratitudeJournalingList = new AdapterGratitudeJournalingList(dataArrayList, getContext());
+        rv_journaling.setAdapter(adapterGratitudeJournalingList);
+    }
+
+    public void setDataList(ArrayList<Content_> contentArrayList) {
+           /* careContentListAdapter =
+                                                new SelfCareContentListAdapter(activity, contentArrayList,
+                                                        SelfCareContentListFragment.this);
+                                        swipeMenuListView.setAdapter(careContentListAdapter);*/
+
+        AdapterSelfcareData selfcareDataAdapter= new AdapterSelfcareData(getContext(),contentArrayList) ;
+        rv_inspirational_contents.setAdapter(selfcareDataAdapter);
+    }
 }

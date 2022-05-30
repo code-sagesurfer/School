@@ -8,21 +8,21 @@
             android:id="@+id/nav_home"
             android:icon="@drawable/ic_menu_camera"
             android:title="@string/menu_home" />
-        <item
+        <!--<item
             android:id="@+id/nav_gallery"
             android:icon="@drawable/ic_menu_gallery"
             android:title="@string/menu_gallery" />
         <item
             android:id="@+id/nav_slideshow"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/menu_slideshow" />
+            android:title="@string/menu_slideshow" />-->
         <item
             android:id="@+id/nav_journaling"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_journaling"
             android:title="@string/menu_journaling" />
         <item
             android:id="@+id/nav_assessment"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_assessment"
             android:title="@string/menu_assessment" />
         <item
             android:id="@+id/nav_nutrition"
@@ -30,31 +30,31 @@
             android:title="@string/menu_nutrition" />
         <item
             android:id="@+id/nav_team_care"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_team_care"
             android:title="@string/menu_team_care" />
         <item
             android:id="@+id/nav_edu_and_spi"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_education_spiritual"
             android:title="@string/menu_edu_and_spi" />
 
         <item
             android:id="@+id/nav_positive_quotes"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_positive_quotes"
             android:title="@string/positive_quotes" />
 
         <item
             android:id="@+id/nav_notifications"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_notifications"
             android:title="@string/notifications" />
 
         <item
             android:id="@+id/nav_support"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_support"
             android:title="@string/support" />
 
         <item
             android:id="@+id/nav_logout"
-            android:icon="@drawable/ic_menu_slideshow"
+            android:icon="@drawable/ic_drawer_menu_logout"
             android:title="@string/logout" />
 
     </group>

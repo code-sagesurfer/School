@@ -46,6 +46,7 @@
     <string name="descriptionWithDots">Description:</string>
     <string name="search">Search</string>
     <string name="Add_Journaling">Add Journaling</string>
+    <string name="Journaling">Journaling</string>
     <string name="title">Title</string>
     <string name="enter_title">Enter Title</string>
     <string name="enter_desc">Enter Description</string>
@@ -168,13 +169,16 @@
     <string name="frequently_asked_questions">Frequently Asked Questions</string>
     <string name="feedback">Feedback</string>
     <string name="about_us">About Us</string>
+    <string name="upload_permission">"Need to provide permission to upload file. "</string>
     <string name="notifications">Notifications</string>
     <string name="support">Support</string>
     <string name="positive_quotes">Positive Quotes</string>
     <string name="logout">Logout</string>
     <string name="planner">Planner</string>
+    <string name="runtime_permissions_txt">Please enable ALL permissions from app settings.</string>
     <string name="menu_team">Team</string>
     <string name="toolkit">Toolkit</string>
+    <string name="no_result_found">Sorry, No result were found</string>
     <string name="faq_que_1">What causes mental illnesses?</string>
     <string name="faq_que_2">Does stress cause mental illness?</string>
     <string name="faq_que_3">How do I get for a mental illness?</string>
@@ -189,4 +193,21 @@
     <string name="sagesurfer_email">support@sagesurfer.com</string>
     <string name="company_website">www.sagesurfer.com</string>
     <string name="website">Website</string>
+    <string name="intake">Intake</string>
+    <string name="consent_form">Consent Form</string>
+    <string name="consent">Consent</string>
+    <string name="status">status:</string>
+    <string name="partially_completed">Partially Completed</string>
+    <string name="remember_me">Remember Me</string>
+    <string name="something_went_wrong">Something went wrong</string>
+    <string name="invalid_input">Invalid Input</string>
+    <string name="invalid_server_code">Invalid server code</string>
+    <string name="loading">Loading</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+    <string name="select_friends">Select Friends</string>
+    <string name="upload_successful">Upload successful</string>
+    <string name="failed">Failed</string>
+    <string name="internal_error_occurred">Internal Error Occurred</string>
+    <string name="network_error_occurred">Network Error Occurred</string>
 </resources>

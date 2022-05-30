@@ -133,11 +133,10 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/et_location" />
 
-        <EditText
-            android:id="@+id/et_share_with"
+        <TextView
+            android:id="@+id/tv_share_with_friends"
             android:layout_width="match_parent"
             android:layout_height="38dp"
-
             android:layout_weight="1"
             android:background="@drawable/team_listing_item_border_color_primary"
             android:fontFamily="@font/poppins_regular"
@@ -146,6 +145,7 @@
             android:paddingTop="3dp"
             android:layout_marginTop="3dp"
             android:paddingEnd="16dp"
+            android:gravity="center_vertical"
             android:textColor="@color/black"
             android:textColorHint="@color/text_hint_color"
             android:textSize="@dimen/text_12"
@@ -161,7 +161,7 @@
             android:src="@drawable/ic_gratitude_share"
 
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_share_with" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_share_with_friends" />
 
         <TextView
             android:id="@+id/tv_attachment"
@@ -174,20 +174,19 @@
             android:textSize="12sp"
             android:layout_marginStart="8dp"
             app:layout_constraintStart_toEndOf="@+id/imageView9"
-            app:layout_constraintTop_toBottomOf="@+id/et_share_with" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_share_with_friends" />
 
         <com.makeramen.roundedimageview.RoundedImageView
             android:id="@+id/attached_image"
             android:layout_width="65dp"
             android:layout_height="45dp"
-            android:src="@drawable/school_get_started"
             android:scaleType="centerCrop"
             android:visibility="visible"
 
             android:layout_marginTop="24dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/tv_attachment"
-            app:layout_constraintTop_toBottomOf="@+id/et_share_with"
+            app:layout_constraintTop_toBottomOf="@+id/tv_share_with_friends"
             app:riv_border_width="1dp"
             app:riv_border_color="@color/color_primary"
             app:riv_corner_radius="4dp" />
@@ -219,9 +218,9 @@
                 android:textSize="10dp" />
 
             <Button
-                android:id="@+id/et_submit"
+                android:id="@+id/btn_submit"
                 android:layout_width="match_parent"
-                android:layout_height="38dp"
+                android:layout_height="42dp"
                 android:layout_marginStart="3dp"
                 android:layout_weight="1"
                 android:background="@drawable/orange_rounded_btn_shape_15dp"

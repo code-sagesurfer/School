@@ -79,7 +79,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_weight="1">
+                android:layout_weight="1"
+                android:id="@+id/ll_like"
+                >
 
                 <com.airbnb.lottie.LottieAnimationView
                     android:id="@+id/animation_like"
@@ -107,6 +109,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:id="@+id/ll_share"
                 android:layout_weight="1">
 
                 <ImageView
@@ -136,6 +139,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:id="@+id/cl_view"
                 android:layout_weight="1">
 
                 <TextView

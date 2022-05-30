@@ -7,7 +7,7 @@
     android:orientation="vertical"
     tools:context=".home.MainActivity">
 
-    <com.google.android.material.appbar.AppBarLayout
+    <!--<com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -24,19 +24,19 @@
             android:elevation="0dp"
             app:titleTextColor="@color/black" />
 
-    </com.google.android.material.appbar.AppBarLayout>
+    </com.google.android.material.appbar.AppBarLayout>-->
 
-    <!--<include
-        android:id="@+id/toolbar"
+    <include
+        android:id="@+id/my_toolbar"
         layout="@layout/toolbar_main"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:theme="@style/Theme.School.AppBarOverlay"
-        />-->
+        />
 
     <include
-        android:id="@+id/include5"
+        android:id="@+id/include_content_main"
         layout="@layout/content_main"
         />
 

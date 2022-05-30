@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity"
+    tools:context=".login.LoginActivity"
     android:background="@color/white">
 
     <ScrollView
@@ -116,25 +116,36 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/et_password" />
 
+                <CheckBox
+                    android:id="@+id/cb_remember_me"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/remember_me"
+                    android:textColor="@color/text_hint_color"
+                    android:textSize="16sp"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/et_code" />
+
                 <TextView
                     android:id="@+id/btn_login"
                     android:layout_width="match_parent"
 
                     android:layout_height="55dp"
-                    android:layout_marginTop="36dp"
                     android:background="@drawable/orange_rounded_btn_shape_15dp"
+                    android:fontFamily="@font/poppins_regular"
                     android:gravity="center"
                     android:paddingStart="24dp"
                     android:paddingEnd="24dp"
-                    android:fontFamily="@font/poppins_regular"
                     android:text="@string/login"
+                    android:layout_marginTop="16dp"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
                     android:textSize="17sp"
 
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/et_code" />
+                    app:layout_constraintTop_toBottomOf="@+id/cb_remember_me" />
 
                 <View
                     android:layout_width="match_parent"
