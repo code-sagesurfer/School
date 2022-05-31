@@ -210,4 +210,7 @@
     <string name="failed">Failed</string>
     <string name="internal_error_occurred">Internal Error Occurred</string>
     <string name="network_error_occurred">Network Error Occurred</string>
+    <string name="gratitude_filter">Gratitude Filter</string>
+    <string name="start_date">Start Date</string>
+    <string name="end_date">End Date</string>
 </resources>

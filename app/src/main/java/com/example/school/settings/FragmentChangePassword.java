@@ -11,9 +11,9 @@ import android.view.ViewGroup;
 import com.example.school.R;
 
 /**
- * A simple {@link Fragment} subclass.
- * Use the {@link FragmentChangePassword#newInstance} factory method to
- * create an instance of this fragment.
+ * @author Rahul Maske (rahul.maske@sagesurfer.com)
+ * Created on 31/05/2022
+ * Last Modified on
  */
 public class FragmentChangePassword extends Fragment {
 

@@ -284,6 +284,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     Preferences.save(General.CLIENT_SECRET, mRewardsCategoryResponseModel.getDetails().getClientSecret());
                     Preferences.save(General.TIMEZONE, DeviceInfo.getTimeZone());
                     Preferences.save(General.TIMEZONE_SERVER, mRewardsCategoryResponseModel.getDetails().getUserTimezone());
+                    Preferences.save(General.COUNTRY_ID, mRewardsCategoryResponseModel.getDetails().getCountry());
+                    Preferences.save(General.STATE_ID, mRewardsCategoryResponseModel.getDetails().getState());
+                    Preferences.save(General.CITY, mRewardsCategoryResponseModel.getDetails().getCity());
+                    Preferences.save(General.FIRST_NAME, mRewardsCategoryResponseModel.getDetails().getFirstname());
+                    Preferences.save(General.LAST_NAME, mRewardsCategoryResponseModel.getDetails().getLastname());
+                    Preferences.save(General.USERNAME, mRewardsCategoryResponseModel.getDetails().getUsername());
+                    Preferences.save(General.EMAIL, mRewardsCategoryResponseModel.getDetails().getEmail());
+                    Preferences.save(General.NAME, mRewardsCategoryResponseModel.getDetails().getName());
+                    Preferences.save(General.BIRTDATE, mRewardsCategoryResponseModel.getDetails().getDob());
                   //  Preferences.save(Constants.DOMAIN_CODE, Preferences.get(Constants.DOMAIN_CODE));
 
 

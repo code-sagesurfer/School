@@ -55,7 +55,9 @@
         android:layout_height="wrap_content"
         android:id="@+id/fb_add_gratitude"
         android:layout_marginEnd="16dp"
+        app:srcCompat="@drawable/fab_add"
         android:layout_marginBottom="16dp"
+        android:backgroundTint="#22d369"
         app:layout_constraintBottom_toBottomOf="@+id/recyclerView"
         app:layout_constraintEnd_toEndOf="@+id/recyclerView" />
 

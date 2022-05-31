@@ -19,13 +19,23 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
         android:fontFamily="@font/poppins_regular"
-
         android:paddingTop="@dimen/nav_header_vertical_spacing"
         android:text="@string/setting"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/iv_settings"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:paddingTop="@dimen/nav_header_vertical_spacing"
+        android:layout_marginEnd="8dp"
+        android:src="@drawable/ic_setting"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_settings"
+        app:layout_constraintEnd_toStartOf="@+id/tv_settings"
+        app:layout_constraintTop_toTopOf="@+id/tv_settings" />
 
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/iv_user_profile"
@@ -36,7 +46,6 @@
         android:src="@drawable/square_img_demo"
         app:civ_border_color="@color/green_active"
         app:civ_border_width="2dp"
-
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_settings" />
 
@@ -50,7 +59,6 @@
         android:textColor="@color/black"
         android:textSize="16sp"
         android:fontFamily="@font/poppins_medium"
-
         android:text="Olivia Brown"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         app:layout_constraintEnd_toEndOf="parent"
@@ -61,7 +69,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="@string/students"
-
+        android:id="@+id/tv_role"
         android:layout_marginStart="16dp"
         android:textColor="@color/color_primary"
         android:textSize="12sp"

@@ -67,8 +67,11 @@
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/dialog_add_new_journaling.xml" value="0.33" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/dialog_adequate_sleep_input.xml" value="0.25" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/dialog_friend_list.xml" value="0.33" />
+        <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/dialog_gratitude_date_filter_.xml" value="0.33" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/dialog_invite_member.xml" value="0.5" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/dialog_notification_item_clicked.xml" value="0.33" />
+        <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/drop_down_selected_text_item_layout.xml" value="0.2496793501496366" />
+        <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/drop_down_text_item_layout.xml" value="0.2496793501496366" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/fragment_about_us.xml" value="0.33" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/fragment_activity_main.xml" value="0.2496793501496366" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/fragment_add_nutrition.xml" value="0.25" />
@@ -99,7 +102,7 @@
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/fragment_positive_quotes_listing.xml" value="0.33" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/fragment_proper_nutrition.xml" value="0.25" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/fragment_selfcare_management.xml" value="0.33" />
-        <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/fragment_settings.xml" value="0.5" />
+        <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/fragment_settings.xml" value="0.33" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/fragment_skill_development.xml" value="0.25" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/fragment_skill_development_details.xml" value="0.25" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/fragment_social_activity.xml" value="0.25" />
@@ -112,7 +115,7 @@
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/item_list_dialog_fragment.xml" value="0.2496793501496366" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/layour_team_details_circular_item.xml" value="0.67" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/layout_assessment_list_item.xml" value="0.5" />
-        <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/layout_home_journaling_item.xml" value="0.33" />
+        <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/layout_home_journaling_item.xml" value="0.5" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/layout_home_mood_item.xml" value="0.5" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/layout_home_planner_item.xml" value="0.5" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/layout_inspirational_content_item.xml" value="0.5" />
@@ -130,7 +133,7 @@
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/nav_header_main.xml" value="0.33" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/progress_dialog.xml" value="0.24476110645431684" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/team_list_item_layout.xml" value="0.5" />
-        <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/toolbar_main.xml" value="0.33" />
+        <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/toolbar_main.xml" value="0.5" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/menu/activity_main_drawer.xml" value="0.33" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/menu/main.xml" value="0.2496793501496366" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/menu/menu_uploader_items.xml" value="0.2496793501496366" />

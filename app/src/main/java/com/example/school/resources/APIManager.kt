@@ -460,6 +460,12 @@ class APIManager {
         call.enqueue(aCallback)
     }
 
+    fun mobile_user_settings(@Body params: RequestBody, aCallback: Callback<JsonElement>) {
+        updateAPi()
+        val call: Call<JsonElement> = mApiService!!.mobile_user_settings(params)
+        call.enqueue(aCallback)
+    }
+
     fun mobile_from_builder(@Body params: RequestBody, aCallback: Callback<JsonElement>) {
         updateAPi()
         val call: Call<JsonElement> = mApiService!!.mobile_form_builder(params)

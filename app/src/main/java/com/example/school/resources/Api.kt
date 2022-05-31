@@ -157,6 +157,9 @@ interface Api {
     @POST("mobile_selfcare_new.php")
     fun mobile_self_care(@Body params: RequestBody): Call<JsonElement>
 
+    @POST("mobile_user_settings.php")
+    fun mobile_user_settings(@Body params: RequestBody): Call<JsonElement>
+
     @POST("mobile_self_goal.php")
     fun mobile_self_goal(@Body params: RequestBody): Call<JsonElement>
 

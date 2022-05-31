@@ -285,6 +285,9 @@ public class Details {
         return email;
     }
 
+    public String getName() {
+        return this.firstname + " " + this.lastname;
+    }
     public void setEmail(String email) {
         this.email = email;
     }

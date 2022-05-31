@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".settings.FragmentEditProfile">
 
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
     <View
         android:id="@+id/view7"
         android:layout_width="match_parent"
@@ -15,6 +19,23 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+        <TextView
+            android:id="@+id/iv_save_data"
+            android:layout_width="38dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            app:layout_goneMarginEnd="16dp"
+            android:visibility="visible"
+            android:text="Save"
+            android:fontFamily="@font/poppins_medium"
+
+            android:layout_marginEnd="16dp"
+            android:textColor="@color/black"
+
+
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
     <TextView
         android:id="@+id/textView10"
         android:layout_width="match_parent"
@@ -37,7 +58,7 @@
         android:src="@drawable/square_img_demo"
         app:civ_border_color="@color/green_active"
         app:civ_border_width="2dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -62,6 +83,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -90,6 +112,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="13sp"
+                android:id="@+id/et_fname"
                 android:textColor="@color/black"
                 android:fontFamily="@font/poppins_medium"
                 android:gravity="start"
@@ -132,6 +155,7 @@
                     android:textColor="@color/black"
                     android:fontFamily="@font/poppins_medium"
                     android:gravity="start"
+                    android:id="@+id/et_lname"
                     android:backgroundTint="@color/color_primary" />
             </LinearLayout>
 
@@ -221,6 +245,9 @@
         android:layout_marginEnd="24dp"
         android:textColor="@color/black"
         android:id="@+id/et_dob"
+        android:clickable="false"
+        android:editable="false"
+        android:focusable="false"
         android:textSize="13sp"
         android:fontFamily="@font/poppins_regular"
         android:backgroundTint="@color/color_primary"
@@ -243,14 +270,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/et_dob" />
-    <EditText
+
+        <Spinner
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
-        android:textColor="@color/black"
-        android:id="@+id/et_country"
+
+        android:id="@+id/sp_country"
         android:textSize="13sp"
+
+        style="@style/Widget.AppCompat.EditText"
         android:fontFamily="@font/poppins_regular"
         android:backgroundTint="@color/color_primary"
         app:layout_constraintEnd_toEndOf="parent"
@@ -266,20 +296,22 @@
         android:layout_marginTop="16dp"
         android:fontFamily="@font/poppins_medium"
         android:gravity="start"
+
         android:text="@string/state"
         android:textColor="@color/black"
         android:textSize="13sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_country" />
+        app:layout_constraintTop_toBottomOf="@+id/sp_country" />
 
-    <EditText
+    <Spinner
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
         android:textColor="@color/black"
-        android:id="@+id/et_state"
+        android:id="@+id/sp_state"
+        style="@style/Widget.AppCompat.EditText"
         android:textSize="13sp"
         android:fontFamily="@font/poppins_regular"
         android:backgroundTint="@color/color_primary"
@@ -301,20 +333,21 @@
         android:textSize="13sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_state" />
+        app:layout_constraintTop_toBottomOf="@+id/sp_state" />
 
-    <EditText
+    <Spinner
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
         android:textColor="@color/black"
-        android:id="@+id/et_city"
+        android:id="@+id/sp_city"
         android:textSize="13sp"
+        style="@style/Widget.AppCompat.EditText"
         android:fontFamily="@font/poppins_regular"
         android:backgroundTint="@color/color_primary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_city" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

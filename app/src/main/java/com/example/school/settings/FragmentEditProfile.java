@@ -1,39 +1,108 @@
 package com.example.school.settings;
 
+import android.app.DatePickerDialog;
+import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.school.R;
+import com.example.school.home.MainActivity;
+import com.example.school.resources.APIManager;
+import com.example.school.resources.Actions_;
+import com.example.school.resources.General;
+import com.example.school.resources.GetCounters;
+import com.example.school.resources.GetTime;
+import com.example.school.resources.Preferences;
+import com.example.school.resources.Urls_;
+import com.example.school.resources.apidata.MakeCall;
+import com.example.school.resources.showstatus.ShowToast;
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+
+import org.w3c.dom.Text;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
-public class FragmentEditProfile extends Fragment {
-
-
+/**
+ * @author Rahul Maske (rahul.maske@sagesurfer.com)
+ * Created on 31/05/2022
+ * Last Modified on
+ */
+public class FragmentEditProfile extends Fragment implements View.OnClickListener{
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private static final String TAG = "FragmentEditProfile";
+    private int sYear, sMonth, sDay;
+    private ArrayList<Student_> cityArrayList = new ArrayList<>(), countryArrayList = new ArrayList<>();
+    ArrayList<GetState>stateArrayList = new ArrayList<>();
+    private int mYear = 0, mMonth = 0, mDay = 0;
+    private MainActivity mainActivity;
+    static int stateId = 0;
+    static int cityId = 0;
+    @BindView(R.id.et_fname)
+    EditText et_fname;
 
+    @BindView(R.id.et_lname)
+    EditText et_lname;
 
-    private String mParam1;
-    private String mParam2;
+    @BindView(R.id.et_username)
+    EditText et_username;
 
+    @BindView(R.id.et_email)
+    EditText et_email;
+
+    @BindView(R.id.et_dob)
+    EditText et_dob;
+
+    @BindView(R.id.sp_city)
+    Spinner sp_city;
+
+    @BindView(R.id.sp_state)
+    Spinner sp_state;
+
+    @BindView(R.id.sp_country)
+    Spinner sp_country;
+
+    @BindView(R.id.iv_save_data)
+    TextView iv_save_data;
+
+    StatesFetch statesFetch;
+    CityFetch cityFetch;
+    String dateOfBirth;
     public FragmentEditProfile() {
-        // Required empty public constructor
+
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment FragmentEditProfile.
-     */
-
+    boolean showMsg = true;
     public static FragmentEditProfile newInstance(String param1, String param2) {
         FragmentEditProfile fragment = new FragmentEditProfile();
         Bundle args = new Bundle();
@@ -44,11 +113,19 @@ public class FragmentEditProfile extends Fragment {
     }
 
     @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        if (getActivity() instanceof MainActivity) {
+            mainActivity = (MainActivity) getActivity();
+            mainActivity.setToolbarTitleText("Edit Profile Setting");
+        }
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+
         }
     }
 
@@ -56,6 +133,370 @@ public class FragmentEditProfile extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_edit_profile, container, false);
+        View view = inflater.inflate(R.layout.fragment_edit_profile, container, false);
+        ButterKnife.bind(this, view);
+        statesFetch = new StatesFetch();
+        cityFetch = new CityFetch();
+        sp_country.setOnItemSelectedListener(onCountrySelected);
+        sp_state.setOnItemSelectedListener(onStateSelected);
+        sp_city.setOnItemSelectedListener(onCitySelected);
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        et_lname.setText(Preferences.get(General.LAST_NAME));
+        et_fname.setText(Preferences.get(General.FIRST_NAME));
+        et_email.setText(Preferences.get(General.EMAIL));
+        et_username.setText(Preferences.get(General.USERNAME));
+        et_dob.setText(Preferences.get(General.BIRTDATE));
+        dateOfBirth=Preferences.get(General.BIRTDATE);
+        iv_save_data.setOnClickListener(this);
+        et_dob.setOnClickListener(this);
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        loadCountryListNew();
+    }
+
+    private final AdapterView.OnItemSelectedListener onCountrySelected = new AdapterView.OnItemSelectedListener() {
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            sp_country.setSelection(position);
+            showMsg = true;
+            statesFetch.loadStateList(countryArrayList.get(sp_country.getSelectedItemPosition()).getId(), TAG, getContext(), getActivity(), FragmentEditProfile.this);
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+        }
+    };
+
+    private final AdapterView.OnItemSelectedListener onStateSelected = new AdapterView.OnItemSelectedListener() {
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            sp_state.setSelection(position);
+            showMsg = true;
+            Log.i(TAG, "onItemSelected: "+position);
+            cityFetch.loadCityList(stateArrayList.get(sp_state.getSelectedItemPosition()).getId(), getContext(), getActivity(), FragmentEditProfile.this);
+
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+        }
+    };
+
+    private final AdapterView.OnItemSelectedListener onCitySelected = new AdapterView.OnItemSelectedListener() {
+        @Override
+        public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+            sp_city.setSelection(position);
+
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> parent) {
+        }
+    };
+
+    private void loadCountryListNew() {
+        HashMap<String, String> requestMap = new HashMap<>();
+        requestMap.put(General.ACTION, Actions_.GET_COUNTRY);
+        requestMap.put(General.USER_ID, Preferences.get(General.USER_ID));
+        String url = Preferences.get(General.DOMAIN) + "/" + Urls_.SELF_CARE_URL;
+        RequestBody requestBody = MakeCall.make(requestMap, url, TAG, getContext(), getActivity());
+        if (requestBody != null) {
+            try {
+                APIManager.Companion.getInstance().showProgressDialog(getActivity(), false, "Loading Countries...");
+
+                APIManager.Companion.getInstance().mobile_self_care(requestBody, new Callback<JsonElement>() {
+                    @Override
+                    public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
+                        APIManager.Companion.getInstance().dismissProgressDialog();
+                        try {
+                            JsonElement element = response.body();
+                            Gson gson = new Gson();
+                            ModelCountryResponse mGetProfileResponse = gson.fromJson(response.body(), ModelCountryResponse.class);
+                            countryArrayList = new ArrayList<>();
+                            //countryArrayList.addAll(CaseloadParser_.parseStudentList(response, Actions_.GET_COUNTRY, getContext(), TAG));
+                            countryArrayList = mGetProfileResponse.getData_list_country();
+                            if (countryArrayList.get(0).getStatus() == 1) {
+                                ArrayList<String> countryNameList = new ArrayList<String>();
+                                for (int i = 0; i < countryArrayList.size(); i++) {
+                                    countryNameList.add(countryArrayList.get(i).getName());
+                                }
+
+                                if (countryNameList.size() > 0) {
+                                    ArrayAdapter<String> adapterConsumer = new ArrayAdapter<String>(getContext(), R.layout.drop_down_selected_text_item_layout, countryNameList);
+                                    adapterConsumer.setDropDownViewResource(R.layout.drop_down_text_item_layout);
+                                    sp_country.setAdapter(adapterConsumer);
+
+                                    for (int i = 0; i < countryArrayList.size(); i++) {
+                                        if (Integer.parseInt(Preferences.get(General.COUNTRY_ID)) == countryArrayList.get(i).getId()) {
+                                            //for default selection of country
+                                            sp_country.setSelection(i);
+                                            break;
+                                        }
+                                    }
+                                }
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<JsonElement> call, Throwable t) {
+
+                        APIManager.Companion.getInstance().dismissProgressDialog();
+                    }
+                });
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+    public void setStateData(ArrayList<GetState> stateArrayList) {
+        this.stateArrayList=stateArrayList;
+        if (stateArrayList.get(0).getStatus().equals("1")) {
+            ArrayList<String> stateNameList = new ArrayList<String>();
+            for (int i = 0; i < stateArrayList.size(); i++) {
+                stateNameList.add(stateArrayList.get(i).getName());
+            }
+
+            if (stateNameList.size() > 0) {
+                ArrayAdapter<String> adapterConsumer = new ArrayAdapter<String>(getContext(), R.layout.drop_down_selected_text_item_layout, stateNameList);
+                adapterConsumer.setDropDownViewResource(R.layout.drop_down_text_item_layout);
+                sp_state.setAdapter(adapterConsumer);
+
+                for (int i = 0; i < stateArrayList.size(); i++) {
+                    if (Integer.parseInt(Preferences.get(General.STATE_ID))==stateArrayList.get(i).getId()) {
+                        //for default selection of state
+                        sp_state.setSelection(i);
+                        break;
+                    }
+                }
+            }
+        } else {
+            if (showMsg) {
+                stateArrayList.clear();
+                Toast.makeText(getContext(), "State: No Data", Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
+
+
+    @Override
+    public void onClick(View view) {
+        if (view.getId()==R.id.iv_save_data){
+            saveUpdatedProfile();
+        }else if (view.getId()==R.id.et_dob){
+            DatePickerDialog datePicker = new DatePickerDialog(getContext(),
+                    new DatePickerDialog.OnDateSetListener() {
+                        @Override
+                        public void onDateSet(DatePicker view, int year,
+                                              int monthOfYear, int dayOfMonth) {
+                            monthOfYear = (monthOfYear + 1);
+                            sDay = dayOfMonth;
+                            sMonth = monthOfYear;
+                            sYear = year;
+
+                            dateOfBirth = sYear + "-" + GetCounters.checkDigit(sMonth) + "-" + GetCounters.checkDigit(sDay);
+                            try {
+                                Log.i(TAG, "onDateSet: day " + sDay);
+                                Log.i(TAG, "onDateSet: sMonth " + sMonth);
+                                Log.i(TAG, "onDateSet: sYear " + sYear);
+                                Log.i(TAG, "onDateSet: date_of_birth " + dateOfBirth);
+                                int result = compareDate(mYear + "-" + (mMonth + 1) + "-" + mDay, dateOfBirth);
+                                if (result == 1) {
+                                    et_dob.setText(GetTime.yy_mm_dd(dateOfBirth));
+                                    //Preferences.save(General.BIRTDATE, GetTime.yy_mm_dd(date_of_birth));
+                                } else {
+                                    dateOfBirth = null;
+                                    et_dob.setText("");
+                                    ShowToast.toast("Invalid Date of Birth", getContext());
+                                }
+                            } catch (ParseException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    }, mYear, mMonth, mDay);
+
+            datePicker.show();
+        }
+    }
+
+    private void saveUpdatedProfile() {
+        HashMap<String, String> requestMap = new HashMap<>();
+        requestMap.put(General.ACTION, Actions_.EDIT_PROFILE);
+        requestMap.put(General.DOB, et_dob.getText().toString().trim());
+        requestMap.put(General.FIRST_NAME, et_fname.getText().toString().trim());
+        requestMap.put(General.LAST_NAME, et_lname.getText().toString().trim());
+
+        int posCounrty = sp_country.getSelectedItemPosition();
+        int counrtyId = countryArrayList.get(posCounrty).getId();
+        requestMap.put(General.COUNTRY, String.valueOf(counrtyId));
+
+
+        if (stateArrayList.size() == 0) {
+            requestMap.put(General.STATE, String.valueOf(stateId));
+        } else {
+            int posState = sp_state.getSelectedItemPosition();
+            stateId = stateArrayList.get(posState).getId();
+            requestMap.put(General.STATE, String.valueOf(stateId));
+        }
+
+
+        if (cityArrayList.size() == 0) {
+            requestMap.put(General.CITY, String.valueOf(cityId));
+        } else {
+            int posCity = sp_city.getSelectedItemPosition();
+            cityId = cityArrayList.get(posCity).getId();
+            requestMap.put(General.CITY, String.valueOf(cityId));
+        }
+        requestMap.put(General.USER_ID, Preferences.get(General.USER_ID));
+
+        String url = Preferences.get(General.DOMAIN) + Urls_.MOBILE_USER_SETTING;
+
+        RequestBody requestBody = MakeCall.make(requestMap, url, TAG, getContext(), getActivity());
+
+        if (requestBody != null) {
+            try {
+
+                APIManager.Companion.getInstance().showProgressDialog(getActivity(), false, "Updating profile...");
+
+                APIManager.Companion.getInstance().mobile_user_settings(requestBody, new Callback<JsonElement>() {
+                    @Override
+                    public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
+                        APIManager.Companion.getInstance().dismissProgressDialog();
+                        try {
+                            if (response!=null){
+                                JsonElement element = response.body();
+                                Gson gson = new Gson();
+
+                                Log.i(TAG, "onResponse: saveUpdatedProfile "+response.body().toString());
+                                ModelUpdateProfileResponse modelStatesResponse = gson.fromJson(response.body(), ModelUpdateProfileResponse.class);
+                                {
+                                    if (modelStatesResponse.getEditProfile().getStatus()==1){
+                                        Toast.makeText(mainActivity, ""+modelStatesResponse.getEditProfile().getMsg(), Toast.LENGTH_SHORT).show();
+                                        Preferences.save(General.FIRST_NAME,""+et_fname.getText().toString().trim());
+
+                                        Preferences.save(General.LAST_NAME,""+et_lname.getText().toString().trim());
+                                        Preferences.save(General.USERNAME,""+et_username.getText().toString().trim());
+                                        Preferences.save(General.COUNTRY_ID, counrtyId);
+                                        Preferences.save(General.EMAIL, ""+et_email.getText().toString().trim());
+                                        Preferences.save(General.STATE_ID, stateId);
+                                        Preferences.save(General.CITY_ID, cityId);
+                                        //Preferences.save(General.BIRTDATE, GetTime.yy_mm_dd(date_of_birth));
+
+                                        Preferences.save(General.BIRTDATE, dateOfBirth);
+                                        Preferences.save(General.NAME,""+et_fname.getText().toString().trim()+" "+
+                                                et_lname.getText().toString().trim());
+                                    }else{
+                                        Toast.makeText(mainActivity, ""+modelStatesResponse.getEditProfile().getMsg(), Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<JsonElement> call, Throwable t) {
+                        APIManager.Companion.getInstance().dismissProgressDialog();
+                    }
+                });
+
+               /* String response = NetworkCall_.post(url, requestBody, TAG, getContext(), getActivity());
+                if (response != null) {
+                    JsonObject jsonObject = GetJson_.getJson(response);
+                    JsonObject jsonAddJournal = jsonObject.getAsJsonObject(Actions_.EDIT_PROFILE);
+                    if (jsonAddJournal.get(General.STATUS).getAsInt() == 1) {
+                        Toast.makeText(getContext(), jsonAddJournal.get(General.MSG).getAsString(), Toast.LENGTH_LONG).show();
+                        onBackPressed();
+                        Preferences.save(General.FIRST_NAME,""+et_firstname.getText().toString().trim());
+                        Preferences.save(General.LAST_NAME,""+et_lastname.getText().toString().trim());
+                        Preferences.save(General.LAST_NAME,""+et_lastname.getText().toString().trim());
+                        Preferences.save(General.USERNAME,""+et_username.getText().toString().trim());
+                        Preferences.save(General.LAST_NAME,""+et_lastname.getText().toString().trim());
+                        Preferences.save(General.COUNTRY_ID, counrtyId);
+                        Preferences.save(General.EMAIL, ""+et_email.getText().toString().trim());
+                        Preferences.save(General.STATE_ID, stateId);
+                        Preferences.save(General.CITY_ID, cityId);
+                        //Preferences.save(General.BIRTDATE, GetTime.yy_mm_dd(date_of_birth));
+                        Log.i(TAG, "submitUserSetting: BIRTDATE "+date_of_birth);
+                        Preferences.save(General.BIRTDATE, date_of_birth);
+                        Preferences.save(General.NAME,""+et_firstname.getText().toString().trim()+" "+
+                                et_lastname.getText().toString().trim());
+
+                        mainActivity.setDrawerUserName(et_firstname.getText().toString().trim()+" "+
+                                et_lastname.getText().toString().trim());
+
+                    } else {
+                        Toast.makeText(getContext(),
+                                jsonAddJournal.get(General.ERROR).getAsString(),
+                                Toast.LENGTH_LONG).show();
+                    }
+                }*/
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void setCityData(ArrayList<GetState> cityArrayList) {
+        Log.i(TAG, "setCityData: "+cityArrayList.size());
+        if (cityArrayList.get(0).getStatus().equals("1")) {
+
+            ArrayList<String> cityNameList = new ArrayList<String>();
+            for (int i = 0; i < cityArrayList.size(); i++) {
+                cityNameList.add(cityArrayList.get(i).getName());
+            }
+
+            if (cityNameList.size() > 0) {
+                ArrayAdapter<String> adapterConsumer = new ArrayAdapter<String>(getContext(), R.layout.drop_down_selected_text_item_layout, cityNameList);
+                adapterConsumer.setDropDownViewResource(R.layout.drop_down_text_item_layout);
+                sp_city.setAdapter(adapterConsumer);
+
+                for (int i = 0; i < cityArrayList.size(); i++) {
+                    if (Integer.parseInt(Preferences.get(General.CITY_ID)) == cityArrayList.get(i).getId()) {
+                        //for default selection of state
+                        sp_city.setSelection(i);
+                        break;
+                    }
+                }
+
+            }
+
+        } else {
+            if (showMsg) {
+                cityArrayList.clear();
+                Toast.makeText(getContext(), "City : No Data", Toast.LENGTH_LONG).show();
+            }
+        }
+    }
+
+    private int compareDate(String today, String selected_date) throws ParseException {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar calendar1 = Calendar.getInstance();
+        Calendar calendar2 = Calendar.getInstance();
+
+        Date date1 = dateFormat.parse(today);
+        Date date2 = dateFormat.parse(selected_date);
+
+        calendar1.setTime(date1);
+        calendar2.setTime(date2);
+
+        return calendar1.compareTo(calendar2);
     }
 }

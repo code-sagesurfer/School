@@ -11,6 +11,7 @@ import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Menu;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -33,6 +34,7 @@ import com.example.school.resources.showstatus.ShowLoader;
 import com.example.school.resources.Urls_;
 import com.example.school.resources.oauth.OauthPreferences;
 import com.example.school.resources.showstatus.ShowToast;
+import com.example.school.settings.FragmentSettings;
 import com.example.school.toolkit.ItemListDialogFragment;
 import com.google.android.material.navigation.NavigationView;
 import com.google.gson.JsonArray;
@@ -43,32 +45,38 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
+
 /**
  * @author Rahul Maske (rahul.maske@sagesurfer.com)
- *
+ * <p>
  * Last Modified on
  */
-public class MainActivity extends AppCompatActivity implements View.OnClickListener,NavigationView.OnNavigationItemSelectedListener{
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
-    private LinearLayout ll_home,ll_nav_second_menu,ll_nav_third_menu,ll_nav_toolkit;
+    private LinearLayout ll_home, ll_nav_second_menu, ll_nav_third_menu, ll_nav_toolkit;
     private Toolbar main_toolbar;
     private String[] mNavigationDrawerItemTitles;
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     Toolbar toolbar;
-    private TextView tv_settings;
+    private TextView tv_role, tv_user_name;
+    private TextView tv_settings, tv_toolbar_title;
     iSelectedImageResponse imageResponseInterface;
     private static final String TAG = "MainActivity";
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
     long SelectedFile;
+    TextView iv_save_data;
+    ImageView iv_settings;
+
     @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -86,6 +94,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         };
         //toggle.setDrawerIndicatorEnabled(false);
         toolbar = (Toolbar) findViewById(R.id.main_toolbar);
+        tv_toolbar_title = toolbar.findViewById(R.id.tv_toolbar_title);
+        iv_save_data = toolbar.findViewById(R.id.iv_save_data);
+
+
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(false);
@@ -93,31 +105,33 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         toolbar.setNavigationIcon(R.drawable.drawer_menu);
 
 
-        imageResponseInterface=new JournalingMainListing();
+        imageResponseInterface = new JournalingMainListing();
         mDrawerLayout.setDrawerListener(toggle);
         toggle.setDrawerIndicatorEnabled(true);
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        View headerview = navigationView.getHeaderView(0);
         navigationView.setNavigationItemSelectedListener(this);
+
+        tv_user_name = headerview.findViewById(R.id.tv_user_name);
+        tv_role = headerview.findViewById(R.id.tv_role);
+        tv_user_name.setText(Preferences.get(General.NAME));
+        tv_role.setText(Preferences.get(General.ROLE));
+
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-               // AppLog.i(MainActivity.class.getSimpleName(), "Toolbar icon" + toolbar.getNavigationIcon());
-                mDrawerLayout.openDrawer(Gravity.START);
+                // AppLog.i(MainActivity.class.getSimpleName(), "Toolbar icon" + toolbar.getNavigationIcon());
+                mDrawerLayout.openDrawer(GravityCompat.START);
             }
         });
 
-        /*tv_settings=navigationView.findViewById(R.id.tv_settings);
-        tv_settings.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Toast.makeText(MainActivity.this, "Hello ", Toast.LENGTH_SHORT).show();
-            }
-        });
-*/
+        tv_settings = headerview.findViewById(R.id.tv_settings);
+        iv_settings = headerview.findViewById(R.id.iv_settings);
+        iv_settings.setOnClickListener(this);
+        tv_settings.setOnClickListener(this);
 
-
-        FragmentManager fragManager =getSupportFragmentManager();
+        FragmentManager fragManager = getSupportFragmentManager();
         FragmentTransaction ft = fragManager.beginTransaction();
         //ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left);
         ft.replace(R.id.main_container, new HomeFragment(), "HomeFragment");
@@ -146,9 +160,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
+        // Inflate the menu three dots; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.main, menu);
-        return true;
+        return false;
     }
 
     @Override
@@ -161,52 +175,63 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.ll_nav_toolkit:
                 openToolkit();
+                break;
+
+            case R.id.tv_settings:
+            case R.id.iv_settings:
+                FragmentManager fragManager =getSupportFragmentManager();
+                FragmentTransaction ft = fragManager.beginTransaction();
+                //ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left);
+                ft.replace(R.id.main_container, new FragmentSettings(), "FragmentSettings");
+                //ft.addToBackStack("HomeFragment");
+                ft.commit();
+                mDrawerLayout.closeDrawer(Gravity.LEFT);
+                break;
         }
     }
 
     private void openToolkit() {
         ItemListDialogFragment fragmentCreateFolder =
                 ItemListDialogFragment.newInstance(1);
-        fragmentCreateFolder.show(getSupportFragmentManager(),"ItemListDialogFragment");
+        fragmentCreateFolder.show(getSupportFragmentManager(), "ItemListDialogFragment");
     }
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         AppLog.i(TAG, "onNavigationItemSelected: ");
-        AppLog.i(TAG, "onMenuItemClick: item "+item.getTitle());
-        if (item.getTitle().toString().equals("Home"))
-        {
-            FragmentManager fragManager =getSupportFragmentManager();
+        AppLog.i(TAG, "onMenuItemClick: item " + item.getTitle());
+        if (item.getTitle().toString().equals("Home")) {
+            FragmentManager fragManager = getSupportFragmentManager();
             FragmentTransaction ft = fragManager.beginTransaction();
             //ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left);
             ft.replace(R.id.main_container, new HomeFragment(), "HomeFragment");
             //ft.addToBackStack("HomeFragment");
             ft.commit();
-            mDrawerLayout.closeDrawer(Gravity.START);
-        }else if(item.getTitle().toString().equals("Journaling")){
-            FragmentManager fragManager =getSupportFragmentManager();
+            mDrawerLayout.closeDrawer(Gravity.LEFT);
+        } else if (item.getTitle().toString().equals("Journaling")) {
+            FragmentManager fragManager = getSupportFragmentManager();
             FragmentTransaction ft = fragManager.beginTransaction();
             //ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left);
             ft.replace(R.id.main_container, new JournalingMainListing(), "JournalingMainListing");
             //ft.addToBackStack("HomeFragment");
             ft.commit();
-            mDrawerLayout.closeDrawer(Gravity.START);
-        }else if(item.getTitle().toString().equals("Logout")){
+            mDrawerLayout.closeDrawer(Gravity.LEFT);
+        } else if (item.getTitle().toString().equals("Logout")) {
             OauthPreferences.clear();
             Preferences.clear();
 
             SharedPreferences loginPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
-            SharedPreferences.Editor loginPrefsEditor=loginPreferences.edit();
+            SharedPreferences.Editor loginPrefsEditor = loginPreferences.edit();
             loginPrefsEditor.clear();
             loginPrefsEditor.apply();
 
-            Intent intent=new Intent(MainActivity.this, LoginActivity.class);
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(intent);
             finish();
-            mDrawerLayout.closeDrawer(Gravity.START);
+            mDrawerLayout.closeDrawer(Gravity.LEFT);
         }
         return true;
     }
@@ -214,7 +239,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Log.i(TAG, "onActivityResult: requestCode "+requestCode);
+        Log.i(TAG, "onActivityResult: requestCode " + requestCode);
         try {
             String file_path = UriUtils.getPathFromUri(MainActivity.this, data.getData());
             double size = FileOperations.getSizeMB(file_path);
@@ -245,8 +270,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        Log.i(TAG, "onActivityResult: requestCode "+requestCode);
-        switch (requestCode){
+        Log.i(TAG, "onActivityResult: requestCode " + requestCode);
+        switch (requestCode) {
             case 2021:
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
@@ -258,6 +283,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    public void setToolbarTitleText(String displayText) {
+        tv_toolbar_title.setText(displayText);
+        toolbar.setBackgroundColor(getResources().getColor(R.color.setting_page_background_yellow));
+    }
+
     @SuppressLint("StaticFieldLeak")
     private class UploadFile extends AsyncTask<String, Void, Integer> {
         ShowLoader showLoader;
@@ -267,7 +297,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         protected void onPreExecute() {
             super.onPreExecute();
             showLoader = new ShowLoader();
-            showLoader.showUploadDialog(MainActivity.this,"Uploading...");
+            showLoader.showUploadDialog(MainActivity.this, "Uploading...");
         }
 
         @Override
@@ -356,4 +386,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
     }
+
+
 }

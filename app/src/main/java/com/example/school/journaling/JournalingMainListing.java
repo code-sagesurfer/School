@@ -4,6 +4,7 @@ import static androidx.core.content.ContextCompat.checkSelfPermission;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -34,6 +35,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -50,6 +52,7 @@ import com.example.school.resources.AppLog;
 import com.example.school.resources.General;
 import com.example.school.resources.Preferences;
 import com.example.school.resources.Urls_;
+import com.example.school.resources.Utils;
 import com.example.school.resources.apidata.MakeCall;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
@@ -62,6 +65,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 
 import okhttp3.RequestBody;
 import retrofit2.Call;
@@ -84,6 +88,7 @@ public class JournalingMainListing extends Fragment implements iSelectedImageRes
     private String mParam2;
     static String SelectedFileId = "";
     String file_path = "";
+    boolean isStartDate=true;
     AdapterGratitudeJournalingMainList adapterGratitudeJournalingList;
     StringBuffer nameBuffer, idBuffer;
     FragmentActivity fragmentActivity;
@@ -95,7 +100,7 @@ public class JournalingMainListing extends Fragment implements iSelectedImageRes
     EditText et_title, et_desc, et_location;
     static TextView tv_share_with_friends, tv_attachment;
     static RoundedImageView attached_image;
-
+    ImageView iv_filter;
     public JournalingMainListing() {
         // Required empty public constructor
     }
@@ -138,6 +143,7 @@ public class JournalingMainListing extends Fragment implements iSelectedImageRes
         fb_add_gratitude = view.findViewById(R.id.fb_add_gratitude);
         recyclerView = view.findViewById(R.id.recyclerView);
         tv_error_msg = view.findViewById(R.id.tv_error_msg);
+        iv_filter = view.findViewById(R.id.iv_filter);
         et_gratitudeSearchBar = view.findViewById(R.id.et_gratitudeSearchBar);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(mLayoutManager);
@@ -152,6 +158,13 @@ public class JournalingMainListing extends Fragment implements iSelectedImageRes
             @Override
             public void onClick(View view) {
                 openDialogAddGratitude();
+            }
+        });
+
+        iv_filter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openDialogForFilterByDate();
             }
         });
 
@@ -690,5 +703,106 @@ public class JournalingMainListing extends Fragment implements iSelectedImageRes
     public void showEmptyDataMessage(ArrayList<ModelGratitudeListingResponseData> dataArrayList) {
         tv_error_msg.setVisibility(View.VISIBLE);
         recyclerView.setVisibility(View.GONE);
+    }
+
+
+    public void openDialogForFilterByDate() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
+        LayoutInflater inflater = this.getLayoutInflater();
+        View view = inflater.inflate(R.layout.dialog_gratitude_date_filter_, null);
+        builder.setView(view);
+        AlertDialog dialog = builder.create();
+        AppLog.i(TAG, "openDialogForFilterByDate: ");
+
+        TextView et_start_date = view.findViewById(R.id.et_start_date);
+        TextView tv_end_error = view.findViewById(R.id.tv_end_error);
+        TextView tv_start_error = view.findViewById(R.id.tv_start_error);
+        TextView tv_end_date = view.findViewById(R.id.tv_sober_start_date);
+        ImageView imageviewclose = view.findViewById(R.id.imageviewclose);
+        ImageView imageviewsubmit = view.findViewById(R.id.imageviewsubmit);
+        final Calendar myCalendar = Calendar.getInstance();
+
+        DatePickerDialog.OnDateSetListener date = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                // TODO Auto-generated method stub
+                myCalendar.set(Calendar.YEAR, year);
+                myCalendar.set(Calendar.MONTH, monthOfYear);
+                myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
+                if (isStartDate) {
+                    String myFormat = "yyyy-MM-dd"; //In which you need put here
+                    SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+                    et_start_date.setText(sdf.format(myCalendar.getTime()));
+                    if (tv_start_error.isShown()) {
+                        tv_start_error.setVisibility(View.GONE);
+                    }
+                } else {
+                    String myFormat = "yyyy-MM-dd"; //In which you need put here
+                    SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+                    tv_end_date.setText(sdf.format(myCalendar.getTime()));
+                    tv_end_error.setVisibility(View.GONE);
+                }
+            }
+
+        };
+
+        et_start_date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isStartDate = true;
+                new DatePickerDialog(getContext(), date, myCalendar
+                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
+
+        tv_end_date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isStartDate = false;
+                new DatePickerDialog(getContext(), date, myCalendar
+                        .get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
+                        myCalendar.get(Calendar.DAY_OF_MONTH)).show();
+            }
+        });
+
+        imageviewclose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        imageviewsubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (et_start_date.getText().toString().equalsIgnoreCase("")) {
+                    tv_start_error.setVisibility(View.VISIBLE);
+                    tv_start_error.setText("Field Required.");
+                } else if (tv_end_date.getText().toString().equalsIgnoreCase("")) {
+                    tv_end_error.setVisibility(View.VISIBLE);
+                    tv_end_error.setText("Field Required.");
+                } else {
+                    Date startDate = Utils.convertStringToDate(et_start_date.getText().toString(), "yyyy-MM-dd");
+                    Date endDate = Utils.convertStringToDate(tv_end_date.getText().toString(), "yyyy-MM-dd");
+                    if (endDate.after(startDate)) {
+                        Date currentTime = Calendar.getInstance().getTime();
+                        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                        String strDate = dateFormat.format(currentTime);
+                        //getGratitudes("", strDate, et_start_date.getText().toString(), tv_end_date.getText().toString());
+                        journalingData.getGratitudes("", strDate, ""+et_start_date.getText().toString(), ""+tv_end_date.getText().toString(), getContext(), getActivity(), JournalingMainListing.this);
+                        dialog.dismiss();
+                    } else {
+                        tv_end_error.setVisibility(View.VISIBLE);
+                        tv_end_error.setText("End date should be greater.");
+                        //tv_end_date.setError("End date should be greater..");
+                    }
+                }
+            }
+        });
+
+        dialog.show();
+        dialog.setCanceledOnTouchOutside(true);
+        dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
     }
 }
