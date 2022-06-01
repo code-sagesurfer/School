@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide;
 import com.example.school.R;
 import com.example.school.home.MoodJournalDataMood_;
 import com.example.school.home.MoodJournalData_;
+import com.example.school.resources.AppLog;
 
 import java.util.List;
 
@@ -24,7 +25,7 @@ public class AdaptersMoodData extends RecyclerView.Adapter<AdaptersMoodData.View
     Context mContext;
     Fragment fragment;
     public List<MoodJournalDataMood_> moodJournalData_list;
-
+    private static final String TAG = "AdaptersMoodData";
     public AdaptersMoodData(Context mContext, List<MoodJournalDataMood_> journalList) {
         this.mContext = mContext;
         this.fragment = fragment;
@@ -41,7 +42,7 @@ public class AdaptersMoodData extends RecyclerView.Adapter<AdaptersMoodData.View
     @Override
     public void onBindViewHolder(@NonNull ViewHolderMood holder, int position) {
         MoodJournalDataMood_ data = moodJournalData_list.get(position);
-        Log.i("AdapterMedicineNCounts", "onBindViewHolder: "+data.getMood_url());
+        AppLog.i(TAG, "onBindViewHolder: "+data.getMood_url());
         if (data.getMood_url() != null) {
             Glide.with(mContext)
                     .load(data.getMood_url())

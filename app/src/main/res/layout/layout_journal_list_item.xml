@@ -30,7 +30,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <de.hdodenhof.circleimageview.CircleImageView
-                android:id="@+id/iv_user_prodile"
+                android:id="@+id/iv_user_profile"
                 android:layout_width="42dp"
                 android:layout_height="42dp"
 
@@ -55,8 +55,8 @@
                 android:textSize="14sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toStartOf="@+id/iv_more"
-                app:layout_constraintStart_toEndOf="@+id/iv_user_prodile"
-                app:layout_constraintTop_toTopOf="@+id/iv_user_prodile" />
+                app:layout_constraintStart_toEndOf="@+id/iv_user_profile"
+                app:layout_constraintTop_toTopOf="@+id/iv_user_profile" />
 
             <TextView
                 android:id="@+id/tv_gj_list_date"
@@ -66,7 +66,7 @@
                 android:text="@string/date"
                 android:textColor="@color/black"
                 android:textSize="9sp"
-                app:layout_constraintStart_toEndOf="@+id/iv_user_prodile"
+                app:layout_constraintStart_toEndOf="@+id/iv_user_profile"
                 app:layout_constraintTop_toBottomOf="@+id/tv_gj_list_username" />
 
             <androidx.appcompat.widget.AppCompatImageView
@@ -76,7 +76,9 @@
                 android:layout_marginTop="@dimen/size_margin_16"
                 android:layout_marginEnd="@dimen/margin_8"
                 android:padding="@dimen/size_6"
-                android:src="@drawable/ic_gratitude_share"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:tint="@color/gray_text"
+                android:src="@drawable/vi_three_white_dots_v"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -89,7 +91,7 @@
             android:layout_marginStart="@dimen/size_margin_16"
             android:layout_marginTop="12dp"
             android:layout_marginEnd="@dimen/size_margin_16"
-            android:fontFamily="@font/poppins_regular"
+            android:fontFamily="@font/poppins_medium"
 
             android:text="Title:"
             android:textColor="@color/black"
@@ -119,7 +121,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/size_margin_16"
-            android:fontFamily="@font/poppins_regular"
+            android:fontFamily="@font/poppins_medium"
             android:text="@string/descriptionWithDots"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_12"
@@ -151,7 +153,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/size_margin_16"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="4dp"
             android:layout_marginEnd="@dimen/size_margin_16"
             android:fontFamily="@font/poppins_medium"
             android:maxLength="200"
@@ -160,6 +162,7 @@
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_12"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_description" />
 
@@ -207,8 +210,8 @@
 
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/iv_share"
-                android:layout_width="13dp"
-                android:layout_height="14dp"
+                android:layout_width="@dimen/size_margin_16"
+                android:layout_height="@dimen/size_margin_16"
                 android:layout_marginEnd="@dimen/size_margin_16"
                 android:background="@drawable/ic_gratitude_share"
                 app:layout_constraintBottom_toBottomOf="@+id/animation_like"
@@ -227,28 +230,34 @@
                 app:layout_constraintEnd_toStartOf="@+id/iv_share"
                 app:layout_constraintTop_toTopOf="@+id/animation_like" />
 
-            <ImageView
+            <!--<ImageView
                 android:id="@+id/iv_like"
                 android:layout_width="@dimen/size_margin_16"
                 android:layout_height="@dimen/size_margin_16"
                 android:layout_marginEnd="@dimen/size_margin_16"
-                android:src="@drawable/ic_gratitude_share"
-
-                android:visibility="gone"
+                android:visibility="visible"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/tv_like_count" />
+                app:layout_constraintEnd_toStartOf="@+id/tv_like_count" />-->
+
+            <ImageView
+                android:id="@+id/iv_like"
+                android:layout_width="20dp"
+                android:layout_height="22dp"
+                android:layout_marginEnd="@dimen/size_margin_16"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/tv_like_count"
+                app:layout_constraintTop_toTopOf="@+id/tv_share_count" />
 
             <com.airbnb.lottie.LottieAnimationView
                 android:id="@+id/animation_like"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginEnd="@dimen/size_margin_16"
-                android:visibility="visible"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/iv_like"
-
                 app:layout_constraintStart_toStartOf="parent"
-
                 app:layout_constraintTop_toTopOf="@+id/tv_like_count"
                 app:lottie_autoPlay="false"
                 app:lottie_loop="false"

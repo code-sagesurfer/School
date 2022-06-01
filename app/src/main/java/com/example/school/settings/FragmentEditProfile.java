@@ -20,6 +20,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.school.R;
 import com.example.school.home.MainActivity;
 import com.example.school.resources.APIManager;
@@ -46,6 +47,7 @@ import java.util.HashMap;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import de.hdodenhof.circleimageview.CircleImageView;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -94,6 +96,15 @@ public class FragmentEditProfile extends Fragment implements View.OnClickListene
 
     @BindView(R.id.iv_save_data)
     TextView iv_save_data;
+
+    @BindView(R.id.tv_header_uname)
+    TextView tv_header_uname;
+
+    @BindView(R.id.tv_header_role)
+    TextView tv_header_role;
+
+    @BindView(R.id.iv_user_profile)
+    CircleImageView iv_user_profile;
 
     StatesFetch statesFetch;
     CityFetch cityFetch;
@@ -151,10 +162,18 @@ public class FragmentEditProfile extends Fragment implements View.OnClickListene
         et_email.setText(Preferences.get(General.EMAIL));
         et_username.setText(Preferences.get(General.USERNAME));
         et_dob.setText(Preferences.get(General.BIRTDATE));
+        tv_header_uname.setText(Preferences.get(General.NAME));
+        tv_header_role.setText(Preferences.get(General.ROLE));
         dateOfBirth=Preferences.get(General.BIRTDATE);
         iv_save_data.setOnClickListener(this);
         et_dob.setOnClickListener(this);
-
+        if (Preferences.get(General.IMAGE)!=null && Preferences.get(General.IMAGE).length()!=0 ) {
+            Glide.with(this)
+                    .load(Preferences.get(General.IMAGE))
+                    .placeholder(R.drawable.ic_user_male)
+                    .error(R.drawable.ic_user_male)
+                    .into(iv_user_profile);
+        }
     }
 
     @Override

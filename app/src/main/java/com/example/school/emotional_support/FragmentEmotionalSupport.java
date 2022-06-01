@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.example.school.R;
 import com.example.school.home.JournalingData;
+import com.example.school.home.MainActivity;
 import com.example.school.home.ModelGratitudeListingResponseData;
 import com.example.school.home.MoodData;
 import com.example.school.home.MoodJournalDataMood_;
@@ -44,6 +45,16 @@ public class FragmentEmotionalSupport extends Fragment {
     private static final String TAG = "FragmentEmotionalSuppor";
     SelfcareData selfcareData;
     RecyclerView rv_inspirational_contents;
+    MainActivity mainActivity;
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        if (context instanceof MainActivity) {
+            mainActivity = (MainActivity) context;
+            mainActivity.setToolbarTitleText(getString(R.string.emotional_support));
+        }
+    }
+
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
@@ -79,7 +90,7 @@ public class FragmentEmotionalSupport extends Fragment {
         Date currentTime = Calendar.getInstance().getTime();
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String strDate = dateFormat.format(currentTime);
-        journalingData.getGratitudes("", strDate, "", "",getContext(),getActivity(),this);
+        journalingData.fetchGratitudesDataList("", strDate, "", "",getContext(),getActivity(),this);
 
         selfcareData.fetchSelfcareNewData(0,30,getContext(),getActivity(),TAG,true,FragmentEmotionalSupport.this);
 

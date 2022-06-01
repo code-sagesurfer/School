@@ -1,10 +1,9 @@
 package com.example.school.home;
 
-import android.app.Activity;
 import android.content.Context;
-import android.net.wifi.hotspot2.pps.HomeSp;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -26,7 +25,6 @@ import com.example.school.home.adapters.AdapterGratitudeJournalingList;
 import com.example.school.home.adapters.AdapterPlannerData;
 import com.example.school.home.adapters.AdaptersMoodData;
 import com.example.school.home.ui.ModelGratitudeListingResponse;
-import com.example.school.home.ui.interfaces.MoodDataListner;
 import com.example.school.intakeconsent.FragmentIntakeConsentMain;
 import com.example.school.nutrition.FragmentProperNutrition;
 import com.example.school.physical_activity.FragmentPhysicalActivityMain;
@@ -34,11 +32,9 @@ import com.example.school.resources.APIManager;
 import com.example.school.resources.Actions_;
 import com.example.school.resources.AppLog;
 import com.example.school.resources.General;
-import com.example.school.resources.GetCounters;
 import com.example.school.resources.Preferences;
 import com.example.school.resources.Urls_;
 import com.example.school.resources.apidata.MakeCall;
-import com.example.school.resources.oauth.SaveData;
 import com.example.school.skill_development.FragmentSkillDevelopment;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
@@ -74,9 +70,19 @@ public class HomeFragment extends Fragment {
     public ArrayList<MoodJournal_> journalArrayList;
     private static final String TAG = "MoodData";
     RecyclerView rv_mood;
-
+    MainActivity mainActivity;
     public HomeFragment() {
         // Required empty public constructor
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        if (context instanceof MainActivity) {
+            mainActivity = (MainActivity) context;
+            mainActivity.setToolbarTitleText(getString(R.string.menu_home));
+            mainActivity.changeDrawerIcon(false);
+        }
     }
 
     public static HomeFragment newInstance(String param1, String param2) {
@@ -161,8 +167,6 @@ public class HomeFragment extends Fragment {
                 openFragmentAdequateSleep();
             }
         });
-
-
         return root;
     }
 
@@ -173,7 +177,7 @@ public class HomeFragment extends Fragment {
         Date currentTime = Calendar.getInstance().getTime();
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String strDate = dateFormat.format(currentTime);
-        journalingData.getGratitudes("", strDate, "", "",getContext(),getActivity(),this);
+        journalingData.fetchGratitudesDataList("", strDate, "", "",getContext(),getActivity(),this);
 
         getPlannerData(0, 20, strDate);
     }
@@ -240,65 +244,7 @@ public class HomeFragment extends Fragment {
     }
 
 
-    /*"action=get_gratitude_list
-           userid=10206
-           date=//Selected date otherwise current date year-month-day fromat
-           search=test"*/
-    private void getGratitudes(String searchText, String Date, String startDate, String endDate) {
-        HashMap<String, String> requestMap = new HashMap<>();
-        requestMap.put(General.ACTION, Actions_.GET_GRATITUDE_LIST);
-        requestMap.put(General.SEARCH, searchText);
-        //requestMap.put(Constants.DATE, formattedDate);
-        requestMap.put(General.DATE, "" + Date);
-        requestMap.put("userid", "" + Preferences.get(General.USER_ID));
-        requestMap.put(General.FROM_DATE, "" + startDate);
-        requestMap.put(General.TO_DATE, "" + endDate);
 
-        APIManager.Companion.getInstance().showProgressDialog(getContext(), false,
-                getActivity().getString(R.string.loading));
-        String url = Preferences.get(General.DOMAIN) + "/" + Urls_.MOBILE_GRATITUDE_JOURNALING;
-        RequestBody requestBody = MakeCall.make(requestMap, url, TAG, getActivity(), getActivity());
-        if (requestBody != null) {
-            try {
-                APIManager.Companion.getInstance().get_gratitude_list(requestBody, new Callback<JsonElement>() {
-                    @Override
-                    public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
-                        APIManager.Companion.getInstance().dismissProgressDialog();
-                        try {
-                            Gson gson = new Gson();
-                            assert response.body() != null;
-                            String resposeBody = response.body().toString();
-                            AppLog.i(TAG, "onResponse: " + resposeBody);
-                            ModelGratitudeListingResponse gratitudeListingResponse = gson.fromJson(response.body(), ModelGratitudeListingResponse.class);
-                            if (gratitudeListingResponse.getStatus() == 200) {
-                                dataArrayList = gratitudeListingResponse.getData();
-                                if (dataArrayList.size() > 0) {
-                                    AdapterGratitudeJournalingList adapterGratitudeJournalingList = new AdapterGratitudeJournalingList(dataArrayList, getContext());
-                                    homeBinding.rvJournaling.setAdapter(adapterGratitudeJournalingList);
-                                } else {
-
-                                }
-                            } else {
-
-                                //Toast.makeText(getContext(), "Data not found", Toast.LENGTH_SHORT).show();
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(Call<JsonElement> call, Throwable t) {
-                        APIManager.Companion.getInstance().dismissProgressDialog();
-                    }
-                });
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        } else {
-            //showError(true, status);
-        }
-    }
 
 
     private void getPlannerData(int min, int max, String date) {
@@ -348,7 +294,7 @@ public class HomeFragment extends Fragment {
 
 
     public void moodDataResponse(ArrayList<MoodJournalDataMood_> dataList, Context context) {
-        Toast.makeText(context, "data received", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(context, "data received", Toast.LENGTH_SHORT).show();
         AdaptersMoodData journalListAdapter = new AdaptersMoodData(getActivity(), dataList);
         this.homeBinding.rvMood.setAdapter(journalListAdapter);
         // this.rv_mood.setAdapter(journalListAdapter);

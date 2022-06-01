@@ -272,13 +272,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             jsonElementCall.enqueue(new Callback<JsonElement>() {
                 @Override
                 public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
-                    Log.e(TAG, "onResponse: " + response.toString());
+                    AppLog.e(TAG, "onResponse: " + response.toString());
                     JsonElement mJsonElement = response.body();
                     Gson gson = new Gson();
                     ModelMainResponse mRewardsCategoryResponseModel = gson.fromJson(String.valueOf(response.body()), ModelMainResponse.class);
-                    Log.e(TAG, "onResponse: " + mRewardsCategoryResponseModel.getDrawer().get(0).getMenu());
 
 
+                    if (mRewardsCategoryResponseModel.getDetails().getStatus()==1){
                     Preferences.save(General.USER_ID, mRewardsCategoryResponseModel.getDetails().getUserid());
                     Preferences.save(General.CLIENT_ID, mRewardsCategoryResponseModel.getDetails().getClientId());
                     Preferences.save(General.CLIENT_SECRET, mRewardsCategoryResponseModel.getDetails().getClientSecret());
@@ -293,10 +293,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     Preferences.save(General.EMAIL, mRewardsCategoryResponseModel.getDetails().getEmail());
                     Preferences.save(General.NAME, mRewardsCategoryResponseModel.getDetails().getName());
                     Preferences.save(General.BIRTDATE, mRewardsCategoryResponseModel.getDetails().getDob());
+                    Preferences.save(General.ROLE, mRewardsCategoryResponseModel.getDetails().getRole());
+                    Preferences.save(General.ROLE_ID, mRewardsCategoryResponseModel.getDetails().getRoleId());
+                    Preferences.save(General.GENDER, mRewardsCategoryResponseModel.getDetails().getGender());
+                    Preferences.save(General.IMAGE, mRewardsCategoryResponseModel.getDetails().getImage());
                   //  Preferences.save(Constants.DOMAIN_CODE, Preferences.get(Constants.DOMAIN_CODE));
 
 
-                    Log.i(TAG, "onResponse: url " + Preferences.get(General.DOMAIN));
+                        AppLog.i(TAG, "onResponse: url " + Preferences.get(General.DOMAIN));
 
                     if (mRewardsCategoryResponseModel.getDetails().getUserid() != null) {
                         Authorize authorize = new Authorize(LoginActivity.this);
@@ -309,25 +313,28 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 mRewardsCategoryResponseModel.getDetails().getClientSecret(),
                                 Preferences.get(General.DOMAIN).replaceAll(General.INSATNCE_NAME, ""),
                                 getApplicationContext());
+                    }
 
-
+                    }else{
+                        Toast.makeText(LoginActivity.this, ""+mRewardsCategoryResponseModel.getDetails().getError(), Toast.LENGTH_SHORT).show();
                     }
                 }
 
                 @Override
                 public void onFailure(Call<JsonElement> call, Throwable t) {
-                    Log.e(TAG, "onResponse: " + t.getMessage());
+                    AppLog.e(TAG, "onResponse: " + t.getMessage());
                 }
             });
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
-            Log.e(TAG, "onResponse: " + e.getMessage());
+            AppLog.e(TAG, "onResponse: " + e.getMessage());
         }
     }
 
     //AuthorizationCallbacks overridden methods after getting authorized
     @Override
     public void authorizationSuccessCallback(JSONObject jsonObject) {
+        AppLog.d(TAG, "authorizationSuccessCallback: ");
         Token token = new Token(this);
         token.getToken(Preferences.get(General.CLIENT_ID),
                 Preferences.get(General.CLIENT_SECRET),
@@ -336,7 +343,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void authorizationFailCallback(JSONObject jsonObject) {
-        Toast.makeText(this, "Authorization Failed", Toast.LENGTH_SHORT).show();
+        AppLog.d(TAG, "authorizationFailCallback: ");
     }
     //AuthorizationCallbacks overridden methods after getting authorized end
 
@@ -344,7 +351,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     //TokenCallbacks overridden methods after getting token after authorization
     @Override
     public void tokenSuccessCallback(JSONObject jsonObject) {
-        Toast.makeText(this, "token call back called", Toast.LENGTH_SHORT).show();
+
+        AppLog.d(TAG, "tokenSuccessCallback: ");
         Intent intent = new Intent(LoginActivity.this, MainActivity.class);
         startActivity(intent);
         finish();
@@ -352,7 +360,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void tokenFailCallback(JSONObject jsonObject) {
-
+        AppLog.d(TAG, "tokenFailCallback: ");
     }
 }
 //TokenCallbacks overridden methods after getting token after authorization end}

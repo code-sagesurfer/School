@@ -83,7 +83,7 @@
                 android:id="@+id/ll_like"
                 >
 
-                <com.airbnb.lottie.LottieAnimationView
+                <!--<com.airbnb.lottie.LottieAnimationView
                     android:id="@+id/animation_like"
                     android:layout_width="16dp"
                     android:layout_height="16dp"
@@ -92,6 +92,17 @@
                     app:lottie_loop="false"
                     android:background="@color/black"
                     android:layout_marginStart="16dp"/>
+-->
+                <ImageView
+                    android:id="@+id/iv_like"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+
+                    android:visibility="visible"
+                    android:layout_marginStart="16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/tv_like_count"
+                    app:layout_constraintTop_toTopOf="@+id/tv_share_count" />
 
                 <TextView
                     android:id="@+id/tv_likes"

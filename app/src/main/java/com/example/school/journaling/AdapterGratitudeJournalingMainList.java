@@ -3,7 +3,6 @@ package com.example.school.journaling;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -11,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -19,7 +17,6 @@ import androidx.appcompat.view.ContextThemeWrapper;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.cardview.widget.CardView;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -87,7 +84,7 @@ public class AdapterGratitudeJournalingMainList extends RecyclerView.Adapter<Ada
 
         if (model.getGratituteDescription().equalsIgnoreCase("")) {
            // holder.tv_desc_text_Na.setText("N/A");
-            holder.tv_desc_text_Na.setVisibility(View.VISIBLE);
+            //holder.tv_desc_text_Na.setVisibility(View.VISIBLE);
         } else {
             //holder.tv_desc_text_Na.setVisibility(View.GONE);
             holder.tv_description.setText(model.getGratituteDescription());
@@ -129,11 +126,11 @@ public class AdapterGratitudeJournalingMainList extends RecyclerView.Adapter<Ada
         if (!model.getIsLikeSymbol().equalsIgnoreCase("Like")) {
             holder.animation_like.setMinAndMaxProgress(0.0f, 0.5f);
             holder.animation_like.playAnimation();
-           // holder.iv_like.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_gratitude_like_fill_red_heart));
+            holder.iv_like.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_gratitude_like_fill_red_heart));
         } else {
             holder.animation_like.setMinAndMaxProgress(0.5f, 1.0f);
             holder.animation_like.playAnimation();
-          //  holder.iv_like.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_gratitude_unlike_heart));
+            holder.iv_like.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_gratitude_unlike_heart));
         }
         //GratitudeJournalingMain gratitudeJournalingMain = (GratitudeJournalingMain) fragment;
         if (model.getProfileImage() != null && model.getProfileImage().length() > 0) {
@@ -191,9 +188,10 @@ public class AdapterGratitudeJournalingMainList extends RecyclerView.Adapter<Ada
             dataArrayList.clear();
             dataArrayList.addAll((List<ModelGratitudeListingResponseData>) results.values);
             if (dataArrayList.isEmpty()) {
-                //journalingMain.showErrorMessage(true);
+                journalingMain.showEmptyDataMessage();
                 // Toast.makeText(mContext, "No Result Found", Toast.LENGTH_SHORT).show();
             } else {
+                journalingMain.showData();
                 //journalingMain.showErrorMessage(false);
             }
             notifyDataSetChanged();
@@ -213,8 +211,8 @@ public class AdapterGratitudeJournalingMainList extends RecyclerView.Adapter<Ada
             super(itemView);
             animation_like = itemView.findViewById(R.id.animation_like);
             animation_like.setOnClickListener(this);
-            iv_user_prodile = itemView.findViewById(R.id.iv_user_prodile);
-            //iv_like = itemView.findViewById(R.id.iv_like);
+            iv_user_prodile = itemView.findViewById(R.id.iv_user_profile);
+            iv_like = itemView.findViewById(R.id.iv_like);
             iv_share = itemView.findViewById(R.id.iv_share);
             tv_gj_list_username = itemView.findViewById(R.id.tv_gj_list_username);
             tv_like_count = itemView.findViewById(R.id.tv_like_count);
@@ -228,7 +226,7 @@ public class AdapterGratitudeJournalingMainList extends RecyclerView.Adapter<Ada
             //tv_desc_text_Na = itemView.findViewById(R.id.tv_desc_text_Na);
             main_card = itemView.findViewById(R.id.main_card);
             iv_more.setOnClickListener(this);
-//            iv_like.setOnClickListener(this);
+            iv_like.setOnClickListener(this);
         }
 
         @Override
@@ -254,9 +252,9 @@ public class AdapterGratitudeJournalingMainList extends RecyclerView.Adapter<Ada
         public void onClick(View v) {
             if (v.getId() == R.id.iv_more) {
                 showOptionMenu(v);
-            } else if (v.getId() == R.id.iv_like) {
+            } /*else if (v.getId() == R.id.iv_like) {
                 toggleLike(getAbsoluteAdapterPosition());
-            } else if (v.getId() == R.id.animation_like) {
+            } */else if (v.getId() == R.id.animation_like || v.getId()==R.id.iv_like) {
                 if (!dataArrayList.get(getAbsoluteAdapterPosition()).getIsLikeSymbol().equalsIgnoreCase("Like")) {
                     animation_like.setMinAndMaxProgress(0.0f, 0.5f);
                     animation_like.playAnimation();
@@ -269,10 +267,7 @@ public class AdapterGratitudeJournalingMainList extends RecyclerView.Adapter<Ada
                     dataArrayList.get(getAbsoluteAdapterPosition()).setIsLikeSymbol("Unlike");
                     toggleLike(getAbsoluteAdapterPosition());
                     //notifyDataSetChanged();
-
                 }
-
-
             }
         }
         private void showOptionMenu(View v) {
@@ -297,6 +292,7 @@ public class AdapterGratitudeJournalingMainList extends RecyclerView.Adapter<Ada
 
         @SuppressLint("NotifyDataSetChanged")
         private void toggleLike(int absoluteAdapterPosition) {
+            journalingMain.onClickedLike(dataArrayList.get(absoluteAdapterPosition));
             int likeCount = Integer.parseInt(dataArrayList.get(absoluteAdapterPosition).getLikeCount());
             if (dataArrayList.get(absoluteAdapterPosition).getIsLikeSymbol().equalsIgnoreCase("Like")) {
                 if (likeCount != 0) {
@@ -313,7 +309,6 @@ public class AdapterGratitudeJournalingMainList extends RecyclerView.Adapter<Ada
         }
 
         private void deleteItem(ModelGratitudeListingResponseData modelGratitudeListingResponseData) {
-
             //journalingMain.deleteGratitude(modelGratitudeListingResponseData);
         }
 

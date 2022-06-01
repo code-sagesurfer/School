@@ -17,10 +17,18 @@
         android:textColor="@color/black"
         android:textSize="14sp"
         android:layout_marginTop="8dp"
-        android:drawableEnd="@drawable/ic_calendar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:layout_width="5dp"
+        android:layout_height="10dp"
+        android:background="@drawable/arrow_left"
+        android:backgroundTint="@color/blue_arrow_settings"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_edit_profile"
+        app:layout_constraintEnd_toEndOf="@+id/tv_edit_profile"
+        app:layout_constraintTop_toTopOf="@+id/tv_edit_profile" />
 
     <View
         android:layout_width="match_parent"
@@ -41,18 +49,28 @@
         android:textColor="@color/black"
         android:textSize="14sp"
         android:layout_marginTop="@dimen/margin_12"
-        android:drawableEnd="@drawable/ic_calendar"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/v1" />
 
+    <ImageView
+        android:layout_width="5dp"
+        android:layout_height="10dp"
+        android:id="@+id/iv_arrow_2"
+        android:background="@drawable/arrow_left"
+        android:backgroundTint="@color/blue_arrow_settings"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_change_password"
+        app:layout_constraintEnd_toEndOf="@+id/tv_change_password"
+        app:layout_constraintTop_toTopOf="@+id/tv_change_password" />
+
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
+        android:id="@+id/v2"
         android:layout_marginTop="@dimen/margin_12"
         android:background="@color/color_primary"
         app:layout_constraintTop_toBottomOf="@+id/tv_change_password"
         tools:layout_editor_absoluteX="16dp" />
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

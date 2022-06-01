@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
@@ -40,7 +41,16 @@ public class AdapterGratitudeJournalingList extends RecyclerView.Adapter<Adapter
         holder.tv_title.setText(data.getGratituteName());
         holder.tv_location.setText("Location : Static data");
         holder.tv_date.setText(data.getAddedDate());
-        holder.tv_date.setText(data.getAddedDate());
+
+        if (!data.getIsLikeSymbol().equalsIgnoreCase("Like")) {
+            //holder.animation_like.setMinAndMaxProgress(0.0f, 0.5f);
+            //holder.animation_like.playAnimation();
+            holder.iv_like.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_gratitude_like_fill_red_heart));
+        } else {
+            //holder.animation_like.setMinAndMaxProgress(0.5f, 1.0f);
+           // holder.animation_like.playAnimation();
+            holder.iv_like.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_gratitude_unlike_heart));
+        }
     }
 
     @Override
@@ -52,14 +62,19 @@ public class AdapterGratitudeJournalingList extends RecyclerView.Adapter<Adapter
         TextView tv_title,tv_location,tv_date;
         LinearLayout ll_like,ll_share;
         ConstraintLayout cl_view;
+        ImageView iv_like;
         public ViewHolderJournaling(@NonNull View itemView) {
             super(itemView);
             tv_title=itemView.findViewById(R.id.tv_title);
             tv_location=itemView.findViewById(R.id.tv_location);
             tv_date=itemView.findViewById(R.id.tv_date);
+            iv_like=itemView.findViewById(R.id.iv_like);
             ll_like=itemView.findViewById(R.id.ll_like);
+
             ll_share=itemView.findViewById(R.id.ll_share);
             cl_view=itemView.findViewById(R.id.cl_view);
         }
+
+
     }
 }

@@ -37,7 +37,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     <TextView
-        android:id="@+id/textView10"
+        android:id="@+id/tv_header_uname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
@@ -49,10 +49,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_user_prodile" />
+        app:layout_constraintTop_toBottomOf="@+id/iv_user_profile" />
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/iv_user_prodile"
+        android:id="@+id/iv_user_profile"
         android:layout_width="67dp"
         android:layout_height="67dp"
         android:src="@drawable/square_img_demo"
@@ -64,7 +64,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView12"
+        android:id="@+id/tv_header_role"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_medium"
@@ -75,7 +75,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView10" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_header_uname" />
 
 
     <LinearLayout
@@ -187,6 +187,9 @@
         android:textColor="@color/black"
         android:id="@+id/et_username"
         android:textSize="13sp"
+        android:editable="false"
+        android:clickable="false"
+        android:focusable="false"
         android:fontFamily="@font/poppins_regular"
         android:backgroundTint="@color/color_primary"
         app:layout_constraintEnd_toEndOf="parent"
@@ -247,6 +250,7 @@
         android:id="@+id/et_dob"
         android:clickable="false"
         android:editable="false"
+        android:drawableEnd="@drawable/ic_calendar"
         android:focusable="false"
         android:textSize="13sp"
         android:fontFamily="@font/poppins_regular"

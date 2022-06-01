@@ -50,6 +50,7 @@ public class FragmentSettings extends Fragment implements View.OnClickListener{
         if (getActivity() instanceof MainActivity) {
             mainActivity = (MainActivity) getActivity();
             mainActivity.setToolbarTitleText("Settings");
+            mainActivity.changeDrawerIcon(true);
         }
     }
 

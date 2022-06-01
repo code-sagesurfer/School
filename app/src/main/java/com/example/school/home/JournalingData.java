@@ -40,7 +40,7 @@ public class JournalingData {
            userid=10206
            date=//Selected date otherwise current date year-month-day fromat
            search=test"*/
-    public void getGratitudes(String searchText, String Date, String startDate, String endDate, Context context, Activity activity, Fragment fragment) {
+    public void fetchGratitudesDataList(String searchText, String Date, String startDate, String endDate, Context context, Activity activity, Fragment fragment) {
         HashMap<String, String> requestMap = new HashMap<>();
         requestMap.put(General.ACTION, Actions_.GET_GRATITUDE_LIST);
         requestMap.put(General.SEARCH, searchText);
@@ -80,18 +80,11 @@ public class JournalingData {
                                         journalingMainListing.journalingData(dataArrayList);
                                     }
                                 } else {
-                                    if (fragment instanceof HomeFragment){
-                                       // fragmentHome =(HomeFragment)fragment;
-                                        //fragmentHome.journalingData(dataArrayList);
-                                    }else if(fragment instanceof FragmentEmotionalSupport){
-                                        //fragmentEmotionalSupport =(FragmentEmotionalSupport)fragment;
-//                                        fragmentEmotionalSupport.journalingData(dataArrayList);
-                                    }else if(fragment instanceof JournalingMainListing){
-                                        journalingMainListing =(JournalingMainListing)fragment;
-                                        journalingMainListing.showEmptyDataMessage(dataArrayList);
-                                    }
+                                    showErrorMessage(fragment);
                                 }
                             } else {
+                                showErrorMessage(fragment);
+
                                 //Toast.makeText(getContext(), "Data not found", Toast.LENGTH_SHORT).show();
                             }
                         } catch (Exception e) {
@@ -112,4 +105,18 @@ public class JournalingData {
             APIManager.Companion.getInstance().dismissProgressDialog();
         }
     }
+
+    public void showErrorMessage(Fragment fragment){
+        if (fragment instanceof HomeFragment){
+            // fragmentHome =(HomeFragment)fragment;
+            //fragmentHome.journalingData(dataArrayList);
+        }else if(fragment instanceof FragmentEmotionalSupport){
+            //fragmentEmotionalSupport =(FragmentEmotionalSupport)fragment;
+//                                        fragmentEmotionalSupport.journalingData(dataArrayList);
+        }else if(fragment instanceof JournalingMainListing){
+            journalingMainListing =(JournalingMainListing)fragment;
+            journalingMainListing.showEmptyDataMessage();
+        }
+    }
+
 }

@@ -13,15 +13,10 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContract;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
-import androidx.core.app.ActivityOptionsCompat;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -41,9 +36,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.example.school.R;
 import com.example.school.home.JournalingData;
+import com.example.school.home.MainActivity;
 import com.example.school.home.ModelGratitudeListingResponseData;
 import com.example.school.home.ui.ModelGratitudeListingResponse;
 import com.example.school.resources.APIManager;
@@ -78,7 +73,6 @@ import retrofit2.Response;
  * Last Modified on
  */
 public class JournalingMainListing extends Fragment implements iSelectedImageResponse{
-
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     RecyclerView recyclerView;
@@ -99,6 +93,7 @@ public class JournalingMainListing extends Fragment implements iSelectedImageRes
     EditText et_gratitudeSearchBar;
     EditText et_title, et_desc, et_location;
     static TextView tv_share_with_friends, tv_attachment;
+    MainActivity mainActivity;
     static RoundedImageView attached_image;
     ImageView iv_filter;
     public JournalingMainListing() {
@@ -109,8 +104,9 @@ public class JournalingMainListing extends Fragment implements iSelectedImageRes
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        if (context instanceof FragmentActivity) {
-            fragmentActivity = (FragmentActivity) context;
+        if (context instanceof MainActivity) {
+            mainActivity = (MainActivity) context;
+            mainActivity.setToolbarTitleText(getString(R.string.menu_journaling));
         }
     }
 
@@ -157,14 +153,14 @@ public class JournalingMainListing extends Fragment implements iSelectedImageRes
         fb_add_gratitude.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openDialogAddGratitude();
+                dialogAddGratitude();
             }
         });
 
         iv_filter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                openDialogForFilterByDate();
+                dialogForFilterByDate();
             }
         });
 
@@ -207,7 +203,7 @@ public class JournalingMainListing extends Fragment implements iSelectedImageRes
         Date currentTime = Calendar.getInstance().getTime();
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String strDate = dateFormat.format(currentTime);
-        journalingData.getGratitudes("", strDate, "", "", getContext(), getActivity(), JournalingMainListing.this);
+        journalingData.fetchGratitudesDataList("", strDate, "", "", getContext(), getActivity(), JournalingMainListing.this);
     }
 
 
@@ -225,7 +221,7 @@ public class JournalingMainListing extends Fragment implements iSelectedImageRes
 
 
 
-    public void openDialogAddGratitude() {
+    public void dialogAddGratitude() {
         AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
         LayoutInflater inflater = this.getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_add_new_journaling, null);
@@ -241,6 +237,7 @@ public class JournalingMainListing extends Fragment implements iSelectedImageRes
         et_desc = view.findViewById(R.id.et_desc);
         et_location = view.findViewById(R.id.et_location);
         Button btn_submit = view.findViewById(R.id.btn_submit);
+        Button btn_cancel_gratitude = view.findViewById(R.id.btn_cancel_gratitude);
 
         tv_attachment = view.findViewById(R.id.tv_attachment);
         //iv_error_message = view.findViewById(R.id.iv_error_message);
@@ -262,11 +259,19 @@ public class JournalingMainListing extends Fragment implements iSelectedImageRes
                 }
             }
         }*/
+
+        btn_cancel_gratitude.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.dismiss();
+            }
+        });
+
         tv_share_with_friends.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (modelFriendListData.size() > 0) {
-                    openDialogFriendAndTeamMembers();
+                    dialogShowFriendAndTeamMembers();
                     Log.i(TAG, "onClick: tv_share_with_friends openDialogFriendAndTeamMembers");
                 } else {
                     Log.i(TAG, "onClick: tv_share_with_friends getTeamMembersAndFriends");
@@ -464,7 +469,7 @@ public class JournalingMainListing extends Fragment implements iSelectedImageRes
 
                             if (listResponse.getStatus() == 200) {
                                 modelFriendListData = listResponse.getData();
-                                openDialogFriendAndTeamMembers();
+                                dialogShowFriendAndTeamMembers();
                             } else {
                                 Toast.makeText(getActivity(), "No friends available.", Toast.LENGTH_SHORT).show();
                             }
@@ -487,7 +492,7 @@ public class JournalingMainListing extends Fragment implements iSelectedImageRes
 
     }
 
-    public void openDialogFriendAndTeamMembers() {
+    public void dialogShowFriendAndTeamMembers() {
         AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
         LayoutInflater inflater = this.getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_friend_list, null);
@@ -613,7 +618,7 @@ public class JournalingMainListing extends Fragment implements iSelectedImageRes
                 attached_image.setImageDrawable(getActivity().getApplicationContext().getResources().getDrawable(R.drawable.vi_text_file));
             }
 
-            tv_attachment.setText("File Attached");
+
         }
     }
 
@@ -679,7 +684,7 @@ public class JournalingMainListing extends Fragment implements iSelectedImageRes
 
                             Date calDate = Calendar.getInstance().getTime();
                             //calender_view.setDate(calDate);
-                            journalingData.getGratitudes("", strDate, "", "", getContext(), getActivity(), JournalingMainListing.this);
+                            journalingData.fetchGratitudesDataList("", strDate, "", "", getContext(), getActivity(), JournalingMainListing.this);
                             //getEventsForMonth();
                         } else {
 //                          showError(true, 2);
@@ -700,13 +705,13 @@ public class JournalingMainListing extends Fragment implements iSelectedImageRes
         }
     }
 
-    public void showEmptyDataMessage(ArrayList<ModelGratitudeListingResponseData> dataArrayList) {
+    public void showEmptyDataMessage() {
         tv_error_msg.setVisibility(View.VISIBLE);
         recyclerView.setVisibility(View.GONE);
     }
 
 
-    public void openDialogForFilterByDate() {
+    public void dialogForFilterByDate() {
         AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
         LayoutInflater inflater = this.getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_gratitude_date_filter_, null);
@@ -790,7 +795,7 @@ public class JournalingMainListing extends Fragment implements iSelectedImageRes
                         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                         String strDate = dateFormat.format(currentTime);
                         //getGratitudes("", strDate, et_start_date.getText().toString(), tv_end_date.getText().toString());
-                        journalingData.getGratitudes("", strDate, ""+et_start_date.getText().toString(), ""+tv_end_date.getText().toString(), getContext(), getActivity(), JournalingMainListing.this);
+                        journalingData.fetchGratitudesDataList("", strDate, ""+et_start_date.getText().toString(), ""+tv_end_date.getText().toString(), getContext(), getActivity(), JournalingMainListing.this);
                         dialog.dismiss();
                     } else {
                         tv_end_error.setVisibility(View.VISIBLE);
@@ -804,5 +809,57 @@ public class JournalingMainListing extends Fragment implements iSelectedImageRes
         dialog.show();
         dialog.setCanceledOnTouchOutside(true);
         dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+    }
+
+    public void showData() {
+        tv_error_msg.setVisibility(View.GONE);
+        recyclerView.setVisibility(View.VISIBLE);
+    }
+
+    public void onClickedLike(ModelGratitudeListingResponseData model) {
+        LikeUnlikeGratitude likeUnlikeGratitude=new LikeUnlikeGratitude();
+        likeUnlikeGratitude.onClickedLike(model,getContext(),getActivity());
+       /* HashMap<String, String> requestMap = new HashMap<>();
+        requestMap.put(General.ACTION, "like_gratitute");
+        requestMap.put("gratitute_journling_id", model.getGratituteId());
+
+        //APIManager.Companion.getInstance().showProgressDialog(getContext(), false, "loading..");
+        String url = Preferences.get(General.DOMAIN) + "/" + Urls_.MOBILE_GRATITUDE_JOURNALING;
+        RequestBody requestBody = MakeCall.make(requestMap, url, TAG, getContext(),getActivity());
+        if (requestBody != null) {
+            try {
+                APIManager.Companion.getInstance().get_gratitude_list(requestBody, new Callback<JsonElement>() {
+                    @Override
+                    public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
+                        //APIManager.Companion.getInstance().dismissProgressDialog();
+                        try {
+                            Gson gson = new Gson();
+                            ModelLikeResponse mTodoMonthListingModel = gson.fromJson(response.body(), ModelLikeResponse.class);
+                            if (mTodoMonthListingModel.getStatus() == 200) {
+                                if (!mTodoMonthListingModel.getData().get(0).getIsLikeSymbol().equalsIgnoreCase("Like")) {
+                                    Toast.makeText(getActivity(), "Like", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(getActivity(), "Unlike", Toast.LENGTH_SHORT).show();
+                                }
+                                //mTodoMonthListingModel.getData().get(0).getIsLikeSymbol()
+                                //adapterGratitudeMainListing.changeLikeForGratitude(mTodoMonthListingModel.getData(), model.getGratituteId());
+
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<JsonElement> call, Throwable t) {
+                        //APIManager.Companion.getInstance().dismissProgressDialog();
+                    }
+                });
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            //showError(true, status);
+        }*/
     }
 }

@@ -17,6 +17,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.school.R;
 import com.example.school.databinding.ActivityMainBinding;
 import com.example.school.journaling.JournalingMainListing;
@@ -52,6 +53,8 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 /**
  * @author Rahul Maske (rahul.maske@sagesurfer.com)
  * <p>
@@ -67,6 +70,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     Toolbar toolbar;
+    boolean showHide;
+    CircleImageView iv_user_profile;
     private TextView tv_role, tv_user_name;
     private TextView tv_settings, tv_toolbar_title;
     iSelectedImageResponse imageResponseInterface;
@@ -115,9 +120,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         tv_user_name = headerview.findViewById(R.id.tv_user_name);
         tv_role = headerview.findViewById(R.id.tv_role);
+        iv_user_profile = headerview.findViewById(R.id.iv_user_profile);
         tv_user_name.setText(Preferences.get(General.NAME));
         tv_role.setText(Preferences.get(General.ROLE));
 
+        if (Preferences.get(General.IMAGE)!=null && Preferences.get(General.IMAGE).length()!=0 ) {
+            Glide.with(this)
+                    .load(Preferences.get(General.IMAGE))
+                    .placeholder(R.drawable.ic_user_male)
+                    .error(R.drawable.ic_user_male)
+                    .into(iv_user_profile);
+        }
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -192,6 +205,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
         }
     }
+
+    public void changeDrawerIcon(boolean showHide) {
+        this.showHide = showHide;
+        if (showHide) {
+            toolbar.setNavigationIcon(R.drawable.vi_left_arrow_white);
+            toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onBackPressed();
+                }
+            });
+        } else {
+            toolbar.setNavigationIcon(R.drawable.drawer_menu);
+            toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+                @SuppressLint("WrongConstant")
+                @Override
+                public void onClick(View v) {
+                    AppLog.i(MainActivity.class.getSimpleName(), "Toolbar icon" + toolbar.getNavigationIcon());
+                    mDrawerLayout.openDrawer(Gravity.START);
+                }
+            });
+        }
+    }
+
 
     private void openToolkit() {
         ItemListDialogFragment fragmentCreateFolder =

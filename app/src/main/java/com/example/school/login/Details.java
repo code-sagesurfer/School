@@ -170,6 +170,8 @@ public class Details {
     @Expose
     private String clientSecret;
 
+
+
     @SerializedName("landing_questions")
     @Expose
     private int landingQuestions;
