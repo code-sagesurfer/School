@@ -13,33 +13,42 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.example.school.R;
-import com.example.school.home.PlannerData;
+import com.example.school.home.HomeFragment;
+import com.example.school.home.ModelPlannerData;
+import com.example.school.home.dailyplanner.FragmentPlannerMain;
 
 import java.util.ArrayList;
 
 public class AdapterPlannerData extends RecyclerView.Adapter<AdapterPlannerData.ViewHolderPlanner>{
     Context mContext;
     Fragment fragment;
-    ArrayList<PlannerData> dataArrayList;
+    ArrayList<ModelPlannerData> dataArrayList;
     private static final String TAG = "AdapterPlannerData";
-    public AdapterPlannerData(Context mContext, ArrayList<PlannerData> dataArrayList) {
+    public AdapterPlannerData(Context mContext, ArrayList<ModelPlannerData> dataArrayList, Fragment fragment) {
         this.mContext = mContext;
         this.dataArrayList = dataArrayList;
+        this.fragment = fragment;
     }
 
     @NonNull
     @Override
     public ViewHolderPlanner onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_home_planner_item, parent, false);
-        return new ViewHolderPlanner(itemView);
+        if (fragment instanceof HomeFragment){
+            View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.layout_home_planner_item, parent, false);
+            return new ViewHolderPlanner(itemView);
+        }else{
+            View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.planner_main_listing_item, parent, false);
+            return new ViewHolderPlanner(itemView);
+        }
+
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolderPlanner holder, int position) {
-        PlannerData plannerData=dataArrayList.get(position);
-        holder.tv_planner_title.setText(plannerData.getName());
-        holder.tv_date.setText(plannerData.getcDate());
-        Log.i(TAG, "onBindViewHolder: "+plannerData.getName());
+        ModelPlannerData modelPlannerData =dataArrayList.get(position);
+        holder.tv_planner_title.setText(modelPlannerData.getName());
+        holder.tv_date.setText(modelPlannerData.getcDate());
+        Log.i(TAG, "onBindViewHolder: "+ modelPlannerData.getName());
     }
 
     @Override
@@ -47,12 +56,24 @@ public class AdapterPlannerData extends RecyclerView.Adapter<AdapterPlannerData.
         return dataArrayList.size();
     }
 
-    class ViewHolderPlanner extends RecyclerView.ViewHolder {
+    class ViewHolderPlanner extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView tv_planner_title,tv_date;
         public ViewHolderPlanner(@NonNull View itemView) {
             super(itemView);
             tv_planner_title=itemView.findViewById(R.id.tv_title);
             tv_date=itemView.findViewById(R.id.tv_date);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            if (fragment instanceof HomeFragment){
+                HomeFragment homeFragment=(HomeFragment)fragment;
+                homeFragment.showDetailDialog(dataArrayList.get(getAbsoluteAdapterPosition()));
+            }else if (fragment instanceof FragmentPlannerMain){
+                FragmentPlannerMain fragmentPlannerMain=(FragmentPlannerMain)fragment;
+                fragmentPlannerMain.showDetailDialog(dataArrayList.get(getAbsoluteAdapterPosition()));
+            }
         }
     }
 }

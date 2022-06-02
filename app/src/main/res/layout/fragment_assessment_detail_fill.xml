@@ -118,7 +118,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_date_of_birth" />
 
     <TextView
-        android:id="@+id/tv_question_1"
+        android:id="@+id/tv_date"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -135,7 +135,7 @@
         android:id="@+id/rg_que_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@+id/tv_question_1">
+        app:layout_constraintTop_toBottomOf="@+id/tv_date">
 
         <RadioButton
             android:id="@+id/rb_not_at_all_1"

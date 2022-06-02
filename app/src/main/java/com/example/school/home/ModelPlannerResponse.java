@@ -8,13 +8,13 @@ import java.util.ArrayList;
 public class ModelPlannerResponse {
     @SerializedName("get_data")
     @Expose
-    private ArrayList<PlannerData> getData = null;
+    private ArrayList<ModelPlannerData> getData = null;
 
-    public ArrayList<PlannerData> getGetData() {
+    public ArrayList<ModelPlannerData> getGetData() {
         return getData;
     }
 
-    public void setGetData(ArrayList<PlannerData> getData) {
+    public void setGetData(ArrayList<ModelPlannerData> getData) {
         this.getData = getData;
     }
 }

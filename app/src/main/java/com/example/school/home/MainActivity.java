@@ -20,9 +20,11 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.school.R;
 import com.example.school.databinding.ActivityMainBinding;
+import com.example.school.home.dailyplanner.FragmentPlannerMain;
 import com.example.school.journaling.JournalingMainListing;
 import com.example.school.journaling.iSelectedImageResponse;
 import com.example.school.login.LoginActivity;
+import com.example.school.moodtracking.FragmentMoodTrackingListing;
 import com.example.school.resources.Actions_;
 import com.example.school.resources.AppLog;
 import com.example.school.resources.CheckFileType;
@@ -106,7 +108,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(false);
-
+        getSupportActionBar().setElevation(0);
+        getSupportActionBar().getHideOffset();
         toolbar.setNavigationIcon(R.drawable.drawer_menu);
 
 
@@ -245,7 +248,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             FragmentTransaction ft = fragManager.beginTransaction();
             //ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left);
             ft.replace(R.id.main_container, new HomeFragment(), "HomeFragment");
-            //ft.addToBackStack("HomeFragment");
+
             ft.commit();
             mDrawerLayout.closeDrawer(Gravity.LEFT);
         } else if (item.getTitle().toString().equals("Journaling")) {
@@ -253,7 +256,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             FragmentTransaction ft = fragManager.beginTransaction();
             //ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left);
             ft.replace(R.id.main_container, new JournalingMainListing(), "JournalingMainListing");
-            //ft.addToBackStack("HomeFragment");
+            ft.addToBackStack("HomeFragment");
+            ft.commit();
+            mDrawerLayout.closeDrawer(Gravity.LEFT);
+        }else if (item.getTitle().toString().equals("Mood Tracking")) {
+            FragmentManager fragManager = getSupportFragmentManager();
+            FragmentTransaction ft = fragManager.beginTransaction();
+            //ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left);
+            ft.replace(R.id.main_container, new FragmentMoodTrackingListing(), "FragmentMoodTrackingListing");
+            ft.addToBackStack("HomeFragment");
+            ft.commit();
+            mDrawerLayout.closeDrawer(Gravity.LEFT);
+        } else if (item.getTitle().toString().equals("Daily Planner")) {
+            FragmentManager fragManager = getSupportFragmentManager();
+            FragmentTransaction ft = fragManager.beginTransaction();
+            //ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left);
+            ft.replace(R.id.main_container, new FragmentPlannerMain(), "FragmentPlannerMain");
+            ft.addToBackStack("HomeFragment");
             ft.commit();
             mDrawerLayout.closeDrawer(Gravity.LEFT);
         } else if (item.getTitle().toString().equals("Logout")) {

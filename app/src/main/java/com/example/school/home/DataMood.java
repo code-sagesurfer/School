@@ -27,7 +27,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MoodData {
+public class DataMood {
     private int previous_min;
     boolean firstTimeLoading = true;
     public ArrayList<MoodJournal_> journalArrayList;
@@ -65,7 +65,7 @@ public class MoodData {
                     if (mJsonElement != null) {
                         ModelMoodListResponse moodListResponse = gson.fromJson(mJsonElement.toString(), ModelMoodListResponse.class);
                         if (response != null) {
-                            if (moodListResponse.getMoodDataList().get(0).getStatus() != 2) {
+                            if (moodListResponse.getMoodDataList().get(0).getStatus() == 1) {
                                 journalArrayList = moodListResponse.getMoodDataList();
                                 if (journalArrayList.size() > 0) {
                                     if (firstTimeLoading) {
@@ -75,20 +75,21 @@ public class MoodData {
                                                 fragmentHome = (HomeFragment) fragment;
                                                 fragmentHome.moodDataResponse(journalArrayList.get(0).getData().get(0).getMood(), context);
                                             } else if (fragment instanceof FragmentEmotionalSupport) {
-                                                fragmentEmotionalSupport = (FragmentEmotionalSupport) fragment;
-                                                fragmentEmotionalSupport.moodDataResponse(journalArrayList.get(0).getData().get(0).getMood(), context);
+
+                                                showError(fragment);
                                             }
                                         } else {
-                                            fragmentHome.moodDataResponseFailed();
+                                            showError(fragment);
                                         }
                                     } else {
+                                        showError(fragment);
                                         Log.i(TAG, "onResponse: fetchTeamDetailsNew not firstTimeLoading");
                                     }
                                 } else {
-
+                                    showError(fragment);
                                 }
                             } else {
-
+                                showError(fragment);
                             }
                         }
                     }
@@ -102,6 +103,16 @@ public class MoodData {
             });
         }else{
             APIManager.Companion.getInstance().dismissProgressDialog();
+        }
+    }
+
+    public void showError(Fragment fragment){
+        if (fragment instanceof HomeFragment) {
+            fragmentHome = (HomeFragment) fragment;
+            fragmentHome.moodDataResponseFailed();
+        } else if (fragment instanceof FragmentEmotionalSupport) {
+            fragmentEmotionalSupport = (FragmentEmotionalSupport) fragment;
+            fragmentEmotionalSupport.moodDataResponseFailed();
         }
     }
 }

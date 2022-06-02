@@ -26,7 +26,9 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="Theme.School.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="Theme.School.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" >
+    <item name="android:elevation">0dp</item>
+    </style>
 
     <style name="Theme.School.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 

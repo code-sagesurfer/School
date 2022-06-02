@@ -28,7 +28,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class JournalingData {
+public class DataJournaling {
 
     private static final String TAG = "JournalingData";
     ArrayList<ModelGratitudeListingResponseData> dataArrayList;
@@ -108,8 +108,8 @@ public class JournalingData {
 
     public void showErrorMessage(Fragment fragment){
         if (fragment instanceof HomeFragment){
-            // fragmentHome =(HomeFragment)fragment;
-            //fragmentHome.journalingData(dataArrayList);
+            fragmentHome =(HomeFragment)fragment;
+            fragmentHome.journalingDataFailed();
         }else if(fragment instanceof FragmentEmotionalSupport){
             //fragmentEmotionalSupport =(FragmentEmotionalSupport)fragment;
 //                                        fragmentEmotionalSupport.journalingData(dataArrayList);

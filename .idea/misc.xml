@@ -72,6 +72,7 @@
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/dialog_gratitude_date_filter_.xml" value="0.33" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/dialog_invite_member.xml" value="0.5" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/dialog_notification_item_clicked.xml" value="0.33" />
+        <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/dialog_view_detail.xml" value="0.33" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/drop_down_selected_text_item_layout.xml" value="0.2496793501496366" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/drop_down_text_item_layout.xml" value="0.2496793501496366" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/fragment_about_us.xml" value="0.33" />
@@ -91,7 +92,7 @@
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/fragment_f_a_q_details.xml" value="0.33" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/fragment_feedback.xml" value="0.33" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/fragment_gallery.xml" value="0.27037037037037037" />
-        <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/fragment_home.xml" value="0.3862433862433862" />
+        <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/fragment_home.xml" value="0.22" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/fragment_intake.xml" value="0.33" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/fragment_intake_consent_main.xml" value="0.33" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/fragment_item_list_dialog_list_dialog.xml" value="0.2496793501496366" />
@@ -101,6 +102,7 @@
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/fragment_notification_listing.xml" value="0.2304403591278324" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/fragment_physical_activity_details.xml" value="0.25" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/fragment_physical_activity_main.xml" value="0.33" />
+        <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/fragment_planner_main.xml" value="0.2496793501496366" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/fragment_positive_quotes_listing.xml" value="0.33" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/fragment_proper_nutrition.xml" value="0.25" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/fragment_selfcare_management.xml" value="0.33" />
@@ -118,7 +120,7 @@
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/layour_team_details_circular_item.xml" value="0.67" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/layout_assessment_list_item.xml" value="0.5" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/layout_home_journaling_item.xml" value="0.5" />
-        <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/layout_home_mood_item.xml" value="0.5" />
+        <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/layout_home_mood_item.xml" value="0.75" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/layout_home_planner_item.xml" value="0.5" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/layout_inspirational_content_item.xml" value="0.5" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/layout_intake_consent_list_item.xml" value="0.33" />
@@ -133,6 +135,7 @@
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/layout_team_details_listing_item.xml" value="0.33" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/layout_toolkit_item.xml" value="0.33" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/nav_header_main.xml" value="0.33" />
+        <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/planner_main_listing_item.xml" value="0.33" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/progress_dialog.xml" value="0.24476110645431684" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/team_list_item_layout.xml" value="0.5" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/layout/toolbar_main.xml" value="0.5" />

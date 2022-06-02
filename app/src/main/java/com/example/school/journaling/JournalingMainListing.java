@@ -37,7 +37,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.school.R;
-import com.example.school.home.JournalingData;
+import com.example.school.home.DataJournaling;
 import com.example.school.home.MainActivity;
 import com.example.school.home.ModelGratitudeListingResponseData;
 import com.example.school.home.ui.ModelGratitudeListingResponse;
@@ -77,7 +77,7 @@ public class JournalingMainListing extends Fragment implements iSelectedImageRes
     private static final String ARG_PARAM2 = "param2";
     RecyclerView recyclerView;
     ArrayList<ModelFriendListResponseData> modelFriendListData;
-    JournalingData journalingData;
+    DataJournaling dataJournaling;
     private String mParam1;
     private String mParam2;
     static String SelectedFileId = "";
@@ -144,7 +144,7 @@ public class JournalingMainListing extends Fragment implements iSelectedImageRes
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        journalingData = new JournalingData();
+        dataJournaling = new DataJournaling();
         modelFriendListData = new ArrayList<>();
 
         nameBuffer = new StringBuffer();
@@ -203,7 +203,7 @@ public class JournalingMainListing extends Fragment implements iSelectedImageRes
         Date currentTime = Calendar.getInstance().getTime();
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String strDate = dateFormat.format(currentTime);
-        journalingData.fetchGratitudesDataList("", strDate, "", "", getContext(), getActivity(), JournalingMainListing.this);
+        dataJournaling.fetchGratitudesDataList("", strDate, "", "", getContext(), getActivity(), JournalingMainListing.this);
     }
 
 
@@ -684,7 +684,7 @@ public class JournalingMainListing extends Fragment implements iSelectedImageRes
 
                             Date calDate = Calendar.getInstance().getTime();
                             //calender_view.setDate(calDate);
-                            journalingData.fetchGratitudesDataList("", strDate, "", "", getContext(), getActivity(), JournalingMainListing.this);
+                            dataJournaling.fetchGratitudesDataList("", strDate, "", "", getContext(), getActivity(), JournalingMainListing.this);
                             //getEventsForMonth();
                         } else {
 //                          showError(true, 2);
@@ -795,7 +795,7 @@ public class JournalingMainListing extends Fragment implements iSelectedImageRes
                         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                         String strDate = dateFormat.format(currentTime);
                         //getGratitudes("", strDate, et_start_date.getText().toString(), tv_end_date.getText().toString());
-                        journalingData.fetchGratitudesDataList("", strDate, ""+et_start_date.getText().toString(), ""+tv_end_date.getText().toString(), getContext(), getActivity(), JournalingMainListing.this);
+                        dataJournaling.fetchGratitudesDataList("", strDate, ""+et_start_date.getText().toString(), ""+tv_end_date.getText().toString(), getContext(), getActivity(), JournalingMainListing.this);
                         dialog.dismiss();
                     } else {
                         tv_end_error.setVisibility(View.VISIBLE);

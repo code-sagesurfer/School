@@ -16,10 +16,10 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.school.R;
-import com.example.school.home.JournalingData;
+import com.example.school.home.DataJournaling;
 import com.example.school.home.MainActivity;
 import com.example.school.home.ModelGratitudeListingResponseData;
-import com.example.school.home.MoodData;
+import com.example.school.home.DataMood;
 import com.example.school.home.MoodJournalDataMood_;
 import com.example.school.home.adapters.AdapterGratitudeJournalingList;
 import com.example.school.home.adapters.AdaptersMoodData;
@@ -37,11 +37,11 @@ public class FragmentEmotionalSupport extends Fragment {
 
     private FragmentEmotionalSupportViewModel mViewModel;
     RecyclerView rv_moods,rv_journaling;
-    JournalingData journalingData;
+    DataJournaling dataJournaling;
     public static FragmentEmotionalSupport newInstance() {
         return new FragmentEmotionalSupport();
     }
-    MoodData moodData;
+    DataMood dataMood;
     private static final String TAG = "FragmentEmotionalSuppor";
     SelfcareData selfcareData;
     RecyclerView rv_inspirational_contents;
@@ -65,8 +65,8 @@ public class FragmentEmotionalSupport extends Fragment {
         rv_moods.setLayoutManager(mLayoutManager);
         rv_moods.setItemAnimator(new DefaultItemAnimator());
 
-        moodData = new MoodData();
-        journalingData=new JournalingData();
+        dataMood = new DataMood();
+        dataJournaling =new DataJournaling();
         selfcareData=new SelfcareData();
 
         rv_journaling = view.findViewById(R.id.rv_journaling);
@@ -85,12 +85,12 @@ public class FragmentEmotionalSupport extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        moodData.fetchJournalMoodDataNew(0, 50, getContext(), getActivity(), this);
+        dataMood.fetchJournalMoodDataNew(0, 50, getContext(), getActivity(), this);
 
         Date currentTime = Calendar.getInstance().getTime();
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String strDate = dateFormat.format(currentTime);
-        journalingData.fetchGratitudesDataList("", strDate, "", "",getContext(),getActivity(),this);
+        dataJournaling.fetchGratitudesDataList("", strDate, "", "",getContext(),getActivity(),this);
 
         selfcareData.fetchSelfcareNewData(0,30,getContext(),getActivity(),TAG,true,FragmentEmotionalSupport.this);
 

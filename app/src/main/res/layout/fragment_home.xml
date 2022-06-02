@@ -166,7 +166,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+
             android:weightSum="2"
             android:id="@+id/ll2"
             android:layout_marginStart="16dp"
@@ -270,7 +270,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+
             android:weightSum="2"
             android:id="@+id/ll3"
             android:layout_marginStart="16dp"
@@ -412,60 +412,94 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_text_mood" />
+        <TextView
+            android:id="@+id/tv_error_msg"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@color/color_primary"
+            android:text="Data Not Found"
+            android:paddingTop="3dp"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:visibility="gone"
+            android:fontFamily="@font/poppins_medium"
+            app:layout_constraintTop_toBottomOf="@+id/tv_text_mood"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
 
+             />
         <TextView
             android:id="@+id/tv_journaling"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
 
-
             android:fontFamily="@font/poppins_regular"
             android:text="@string/Journaling"
-
+            app:layout_goneMarginTop="50dp"
             android:textColor="@color/black"
             android:textSize="11sp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/rv_mood" />
+
         <TextView
             android:id="@+id/tv_view_all_journaling"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:paddingStart="18dp"
-            android:paddingEnd="18dp"
-            android:paddingTop="3dp"
-            android:gravity="center_vertical"
-            android:fontFamily="@font/poppins_regular"
-            android:text="@string/view_all"
+            android:layout_marginEnd="16dp"
             android:background="@drawable/text_bg_rounded_shape_light_gray"
+            android:fontFamily="@font/poppins_regular"
+            android:gravity="center_vertical"
+            android:paddingStart="18dp"
+            android:paddingTop="3dp"
+            android:paddingEnd="18dp"
+            android:text="@string/view_all"
             android:textColor="@color/black"
             android:textSize="11sp"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_journaling"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rv_mood" />
+            app:layout_constraintTop_toTopOf="@+id/tv_journaling" />
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_journaling"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="150dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_journaling"
+            tools:listitem="@layout/layout_home_journaling_item" />
+
+        <TextView
+            android:id="@+id/tv_error_msg2"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
-            android:layout_marginTop="16dp"
-            android:orientation="horizontal"
-            android:id="@+id/rv_journaling"
-            tools:listitem="@layout/layout_home_journaling_item"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:background="@color/color_primary"
+            android:text="Data Not Found"
+            android:paddingTop="3dp"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:visibility="gone"
+            android:fontFamily="@font/poppins_medium"
+            app:layout_constraintTop_toBottomOf="@+id/tv_journaling"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_journaling" />
+            app:layout_constraintEnd_toEndOf="parent"
+
+            />
 
         <TextView
             android:id="@+id/tv_planner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-
-
             android:fontFamily="@font/poppins_regular"
             android:text="@string/planner"
 
@@ -475,6 +509,27 @@
             android:layout_marginTop="16dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/rv_journaling" />
+
+        <TextView
+            android:id="@+id/tv_error_msg3"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@color/color_primary"
+            android:text="Data Not Found"
+            android:paddingTop="3dp"
+            android:gravity="center"
+            android:textSize="16sp"
+            android:layout_marginTop="@dimen/size_margin_16"
+            android:visibility="gone"
+            android:fontFamily="@font/poppins_medium"
+            app:layout_constraintTop_toBottomOf="@+id/tv_planner"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+
+            />
+
         <TextView
             android:id="@+id/tv_view_all_planner"
             android:layout_width="wrap_content"

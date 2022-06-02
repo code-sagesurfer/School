@@ -11,11 +11,11 @@
         <!--<item
             android:id="@+id/nav_gallery"
             android:icon="@drawable/ic_menu_gallery"
-            android:title="@string/menu_gallery" />
+            android:title="@string/menu_gallery" />-->
         <item
-            android:id="@+id/nav_slideshow"
+            android:id="@+id/nav_mood_tracking"
             android:icon="@drawable/ic_menu_slideshow"
-            android:title="@string/menu_slideshow" />-->
+            android:title="@string/mood_tracking" />
         <item
             android:id="@+id/nav_journaling"
             android:icon="@drawable/ic_journaling"
@@ -28,6 +28,10 @@
             android:id="@+id/nav_nutrition"
             android:icon="@drawable/ic_menu_slideshow"
             android:title="@string/menu_nutrition" />
+        <item
+            android:id="@+id/nav_daily_planner"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/menu_daily_planner" />
         <item
             android:id="@+id/nav_team_care"
             android:icon="@drawable/ic_team_care"

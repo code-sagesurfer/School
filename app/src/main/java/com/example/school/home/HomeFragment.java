@@ -1,5 +1,6 @@
 package com.example.school.home;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 
@@ -12,20 +13,24 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.example.school.FragmentAdequateSleep;
+import com.example.school.ItemDetailView;
 import com.example.school.R;
 import com.example.school.databinding.FragmentHomeBinding;
 import com.example.school.emotional_support.FragmentEmotionalSupport;
 import com.example.school.home.adapters.AdapterGratitudeJournalingList;
 import com.example.school.home.adapters.AdapterPlannerData;
 import com.example.school.home.adapters.AdaptersMoodData;
-import com.example.school.home.ui.ModelGratitudeListingResponse;
+import com.example.school.home.dailyplanner.FragmentPlannerMain;
 import com.example.school.intakeconsent.FragmentIntakeConsentMain;
+import com.example.school.journaling.JournalingMainListing;
+import com.example.school.moodtracking.DashboardData;
+import com.example.school.moodtracking.FragmentMoodTrackingListing;
 import com.example.school.nutrition.FragmentProperNutrition;
 import com.example.school.physical_activity.FragmentPhysicalActivityMain;
 import com.example.school.resources.APIManager;
@@ -45,6 +50,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 import okhttp3.RequestBody;
 import retrofit2.Call;
@@ -59,11 +65,12 @@ import retrofit2.Response;
 public class HomeFragment extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    MoodData moodData;
-    JournalingData journalingData;
+    DataMood dataMood;
+    DataJournaling dataJournaling;
     FragmentHomeBinding homeBinding;
     private String mParam1;
     private String mParam2;
+    DataPlanner dataPlanner;
     ArrayList<ModelGratitudeListingResponseData> dataArrayList;
     private int previous_min;
     boolean firstTimeLoading = true;
@@ -71,6 +78,7 @@ public class HomeFragment extends Fragment {
     private static final String TAG = "MoodData";
     RecyclerView rv_mood;
     MainActivity mainActivity;
+
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -124,8 +132,9 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        moodData = new MoodData();
-        journalingData=new JournalingData();
+        dataMood = new DataMood();
+        dataJournaling = new DataJournaling();
+        dataPlanner = new DataPlanner();
         //rv_mood = getView().findViewById(R.id.rv_mood);
 
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
@@ -167,19 +176,59 @@ public class HomeFragment extends Fragment {
                 openFragmentAdequateSleep();
             }
         });
+
+        homeBinding.tvViewAllJournaling.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fragManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction ft = fragManager.beginTransaction();
+                //ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left);
+                ft.replace(R.id.main_container, new JournalingMainListing(), "JournalingMainListing");
+                ft.addToBackStack("HomeFragment");
+                ft.commit();
+            }
+        });
+
+        homeBinding.tvViewAllPlanner.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fragManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction ft = fragManager.beginTransaction();
+                //ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left);
+                ft.replace(R.id.main_container, new FragmentPlannerMain(), "FragmentPlannerMain");
+                ft.addToBackStack("HomeFragment");
+                ft.commit();
+            }
+        });
+
+        homeBinding.tvViewAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fragManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction ft = fragManager.beginTransaction();
+                //ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left);
+                ft.replace(R.id.main_container, new FragmentMoodTrackingListing(), "FragmentMoodTrackingListing");
+                ft.addToBackStack("HomeFragment");
+                ft.commit();
+            }
+        });
         return root;
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        moodData.fetchJournalMoodDataNew(0, 50, getContext(), getActivity(), HomeFragment.this);
+        //moodData.fetchJournalMoodDataNew(0, 50, getContext(), getActivity(), HomeFragment.this);
+        DashboardData dashboardData = new DashboardData();
+        dashboardData.getDashboardData(getContext(), getActivity(), this);
+
+
         Date currentTime = Calendar.getInstance().getTime();
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String strDate = dateFormat.format(currentTime);
-        journalingData.fetchGratitudesDataList("", strDate, "", "",getContext(),getActivity(),this);
+        dataJournaling.fetchGratitudesDataList("", strDate, "", "", getContext(), getActivity(), this);
+        dataPlanner.getPlannerData(0, 50, strDate, TAG, getContext(), getActivity(), HomeFragment.this);
 
-        getPlannerData(0, 20, strDate);
     }
 
     private void openFragmentAdequateSleep() {
@@ -243,10 +292,6 @@ public class HomeFragment extends Fragment {
         ft.commit();
     }
 
-
-
-
-
     private void getPlannerData(int min, int max, String date) {
         Log.i(TAG, "getSagesurfer: calling");
 
@@ -272,11 +317,18 @@ public class HomeFragment extends Fragment {
                         assert response.body() != null;
                         String resposeBody = response.body().toString();
                         AppLog.i(TAG, "onResponse: " + resposeBody);
-                        ModelPlannerResponse plannerResponse = gson.fromJson(response.body(), ModelPlannerResponse.class);
-                        AdapterPlannerData adapterPlannerData = new AdapterPlannerData(getContext(), plannerResponse.getGetData());
-                        homeBinding.rvPlanner.setAdapter(adapterPlannerData);
 
-                        Log.i(TAG, "onResponse: getPlannerData " + plannerResponse.getGetData().get(0).getStatus());
+                        ModelPlannerResponse plannerResponse = gson.fromJson(response.body(), ModelPlannerResponse.class);
+                        if (plannerResponse.getGetData().get(0).getStatus() == 1) {
+                            AdapterPlannerData adapterPlannerData = new AdapterPlannerData(getContext(), plannerResponse.getGetData(), HomeFragment.this);
+                            homeBinding.rvPlanner.setAdapter(adapterPlannerData);
+                            homeBinding.tvErrorMsg3.setVisibility(View.GONE);
+                            homeBinding.rvPlanner.setVisibility(View.VISIBLE);
+                            Log.i(TAG, "onResponse: getPlannerData " + plannerResponse.getGetData().get(0).getStatus());
+                        } else {
+                            homeBinding.tvErrorMsg3.setVisibility(View.VISIBLE);
+                            homeBinding.rvPlanner.setVisibility(View.GONE);
+                        }
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -287,7 +339,7 @@ public class HomeFragment extends Fragment {
                     APIManager.Companion.getInstance().dismissProgressDialog();
                 }
             });
-        }else{
+        } else {
             APIManager.Companion.getInstance().dismissProgressDialog();
         }
     }
@@ -297,15 +349,52 @@ public class HomeFragment extends Fragment {
         //Toast.makeText(context, "data received", Toast.LENGTH_SHORT).show();
         AdaptersMoodData journalListAdapter = new AdaptersMoodData(getActivity(), dataList);
         this.homeBinding.rvMood.setAdapter(journalListAdapter);
+        this.homeBinding.rvMood.setVisibility(View.VISIBLE);
+        this.homeBinding.tvErrorMsg.setVisibility(View.GONE);
         // this.rv_mood.setAdapter(journalListAdapter);
+    }
 
+    public void moodDataResponse2(List<Mood> mood, Activity activity) {
+        //Toast.makeText(context, "data received", Toast.LENGTH_SHORT).show();
+        MoodAdapterForHomeListing journalListAdapter = new MoodAdapterForHomeListing(activity, mood);
+        this.homeBinding.rvMood.setAdapter(journalListAdapter);
+        this.homeBinding.rvMood.setVisibility(View.VISIBLE);
+        this.homeBinding.tvErrorMsg.setVisibility(View.GONE);
+        // this.rv_mood.setAdapter(journalListAdapter);
     }
 
     public void moodDataResponseFailed() {
+        this.homeBinding.rvMood.setVisibility(View.GONE);
+        this.homeBinding.tvErrorMsg.setVisibility(View.VISIBLE);
     }
 
+
     public void journalingData(ArrayList<ModelGratitudeListingResponseData> dataArrayList) {
-        AdapterGratitudeJournalingList adapterGratitudeJournalingList = new AdapterGratitudeJournalingList(dataArrayList, getContext());
+        AdapterGratitudeJournalingList adapterGratitudeJournalingList = new AdapterGratitudeJournalingList(dataArrayList,
+                getContext());
         homeBinding.rvJournaling.setAdapter(adapterGratitudeJournalingList);
+    }
+
+    public void journalingDataFailed() {
+        this.homeBinding.rvJournaling.setVisibility(View.GONE);
+        this.homeBinding.tvErrorMsg2.setVisibility(View.VISIBLE);
+    }
+
+    public void showDetailDialog(ModelPlannerData modelPlannerData) {
+        ItemDetailView detailView = new ItemDetailView();
+        detailView.showDetailDialog(getActivity(), getContext(), TAG, modelPlannerData);
+    }
+
+    public void setPlannerData(ModelPlannerResponse plannerResponse) {
+        if (plannerResponse.getGetData().get(0).getStatus() == 1) {
+            AdapterPlannerData adapterPlannerData = new AdapterPlannerData(getContext(), plannerResponse.getGetData(), HomeFragment.this);
+            this.homeBinding.rvPlanner.setAdapter(adapterPlannerData);
+            this.homeBinding.tvErrorMsg3.setVisibility(View.GONE);
+            this.homeBinding.rvPlanner.setVisibility(View.VISIBLE);
+            Log.i(TAG, "onResponse: getPlannerData " + plannerResponse.getGetData().get(0).getStatus());
+        } else {
+            this.homeBinding.tvErrorMsg3.setVisibility(View.VISIBLE);
+            this.homeBinding.rvPlanner.setVisibility(View.GONE);
+        }
     }
 }

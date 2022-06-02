@@ -3,16 +3,16 @@ package com.example.school.home;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class PlannerData {
+public class ModelPlannerData {
     @SerializedName("last_updated")
     @Expose
-    private Integer lastUpdated;
+    private int lastUpdated;
     @SerializedName("c_date")
     @Expose
     private String cDate;
     @SerializedName("timestamp")
     @Expose
-    private Integer timestamp;
+    private int timestamp;
     @SerializedName("id")
     @Expose
     private String id;
@@ -48,22 +48,22 @@ public class PlannerData {
     private String location;
     @SerializedName("is_read")
     @Expose
-    private Integer isRead;
+    private int isRead;
     @SerializedName("is_delete")
     @Expose
-    private Integer isDelete;
+    private int isDelete;
     @SerializedName("participants")
     @Expose
-    private Integer participants;
+    private int participants;
     @SerializedName("status")
     @Expose
-    private Integer status;
+    private int status;
 
-    public Integer getLastUpdated() {
+    public int getLastUpdated() {
         return lastUpdated;
     }
 
-    public void setLastUpdated(Integer lastUpdated) {
+    public void setLastUpdated(int lastUpdated) {
         this.lastUpdated = lastUpdated;
     }
 
@@ -75,11 +75,11 @@ public class PlannerData {
         this.cDate = cDate;
     }
 
-    public Integer getTimestamp() {
+    public int getTimestamp() {
         return timestamp;
     }
 
-    public void setTimestamp(Integer timestamp) {
+    public void setTimestamp(int timestamp) {
         this.timestamp = timestamp;
     }
 
@@ -171,35 +171,35 @@ public class PlannerData {
         this.location = location;
     }
 
-    public Integer getIsRead() {
+    public int getIsRead() {
         return isRead;
     }
 
-    public void setIsRead(Integer isRead) {
+    public void setIsRead(int isRead) {
         this.isRead = isRead;
     }
 
-    public Integer getIsDelete() {
+    public int getIsDelete() {
         return isDelete;
     }
 
-    public void setIsDelete(Integer isDelete) {
+    public void setIsDelete(int isDelete) {
         this.isDelete = isDelete;
     }
 
-    public Integer getParticipants() {
+    public int getParticipants() {
         return participants;
     }
 
-    public void setParticipants(Integer participants) {
+    public void setParticipants(int participants) {
         this.participants = participants;
     }
 
-    public Integer getStatus() {
+    public int getStatus() {
         return status;
     }
 
-    public void setStatus(Integer status) {
+    public void setStatus(int status) {
         this.status = status;
     }
 }
