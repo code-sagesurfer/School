@@ -14,7 +14,7 @@ import com.makeramen.roundedimageview.RoundedImageView;
 
 public class ItemDetailView {
 
-    public void showDetailDialog(Activity activity, Context context, String TAG, ModelPlannerData modelPlannerData) {
+    public void showDetailDialog(Activity activity, Context context, String TAG, ModelDetailData modelPlannerData) {
         AlertDialog.Builder builder = new AlertDialog.Builder(activity);
         LayoutInflater inflater = activity.getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_view_detail, null);
@@ -28,9 +28,11 @@ public class ItemDetailView {
         TextView tv_title = view.findViewById(R.id.tv_title);
         TextView tv_date = view.findViewById(R.id.tv_date);
         TextView tv_desc = view.findViewById(R.id.tv_desc);
-        tv_title.setText(modelPlannerData.getName());
-        tv_date.setText(modelPlannerData.getcDate());
+        tv_title.setText(modelPlannerData.getTitle());
+        tv_date.setText(modelPlannerData.getDate());
         tv_desc.setText(modelPlannerData.getDesc());
+
+
 
 
         dialog.show();

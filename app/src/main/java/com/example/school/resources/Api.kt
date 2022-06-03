@@ -46,6 +46,9 @@ interface Api {
     @POST("mobile_dashboard.php")
     fun getmobile_dashboard(@Body params: RequestBody): Call<JsonElement>
 
+    @POST(Urls_.MOBILE_REWARDS)
+    fun getRewardsData(@Body body: RequestBody?): Call<JsonElement>
+
     @POST("mobile_youth_operations_new.php")
     fun mobile_youth_operations_new(@Body params: RequestBody): Call<JsonElement>
 

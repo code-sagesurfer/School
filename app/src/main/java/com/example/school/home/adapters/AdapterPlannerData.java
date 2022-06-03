@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 
+import com.example.school.ModelDetailData;
 import com.example.school.R;
 import com.example.school.home.HomeFragment;
 import com.example.school.home.ModelPlannerData;
@@ -67,12 +68,14 @@ public class AdapterPlannerData extends RecyclerView.Adapter<AdapterPlannerData.
 
         @Override
         public void onClick(View view) {
+            ModelPlannerData modelPlannerData = dataArrayList.get(getAbsoluteAdapterPosition());
             if (fragment instanceof HomeFragment){
                 HomeFragment homeFragment=(HomeFragment)fragment;
-                homeFragment.showDetailDialog(dataArrayList.get(getAbsoluteAdapterPosition()));
+                homeFragment.showDetailDialog(new ModelDetailData(modelPlannerData.getName(),modelPlannerData.getcDate(),"",modelPlannerData.getDesc()));
             }else if (fragment instanceof FragmentPlannerMain){
                 FragmentPlannerMain fragmentPlannerMain=(FragmentPlannerMain)fragment;
-                fragmentPlannerMain.showDetailDialog(dataArrayList.get(getAbsoluteAdapterPosition()));
+                //fragmentPlannerMain.showDetailDialog(dataArrayList.get(getAbsoluteAdapterPosition()));
+                fragmentPlannerMain.showDetailDialog( new ModelDetailData(modelPlannerData.getName(),modelPlannerData.getcDate(),"",modelPlannerData.getDesc()));
             }
         }
     }

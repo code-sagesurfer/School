@@ -7,6 +7,7 @@ import android.util.Log;
 import androidx.fragment.app.Fragment;
 
 import com.example.school.R;
+
 import com.example.school.emotional_support.FragmentEmotionalSupport;
 import com.example.school.home.HomeFragment;
 import com.example.school.resources.APIManager;
@@ -16,6 +17,7 @@ import com.example.school.resources.General;
 import com.example.school.resources.Preferences;
 import com.example.school.resources.Urls_;
 import com.example.school.resources.apidata.MakeCall;
+import com.example.school.social_activity.SocialActivityFragment;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 
@@ -33,7 +35,9 @@ import retrofit2.Response;
  */
 public class SelfcareData {
     FragmentEmotionalSupport fragmentEmotionalSupport;
+    SocialActivityFragment socialActivityFragment;
     int previous_min=0;
+    FragmentSelfcareManagement fragmentSelfcareManagement;
     static boolean selfCareFirstTimeLoading;
     private ArrayList<Content_> contentArrayList;
     public void fetchSelfcareNewData(int min, int max, Context context, Activity activity, String TAG, boolean firstTimeLoading, Fragment fragment) {
@@ -81,19 +85,25 @@ public class SelfcareData {
                                         if (fragment instanceof FragmentEmotionalSupport) {
                                             fragmentEmotionalSupport = (FragmentEmotionalSupport) fragment;
                                             fragmentEmotionalSupport.setDataList(contentArrayList);
+                                        }else if (fragment instanceof SocialActivityFragment) {
+                                            socialActivityFragment=(SocialActivityFragment) fragment;
+                                            socialActivityFragment.setDataList(contentArrayList);
+                                        }else if (fragment instanceof FragmentSelfcareManagement) {
+                                            fragmentSelfcareManagement=(FragmentSelfcareManagement) fragment;
+                                            fragmentSelfcareManagement.setDataList(contentArrayList);
                                         }
-
-
                                     } else {
                                         Log.i(TAG, "onResponse: fetch not firstTimeLoading");
                                         //careContentListAdapter.addData(contentArrayList);
-
+                                        showError(fragment);
                                     }
 
                                 } else {
+                                    showError(fragment);
                                     // showError(true, contentArrayList.get(0).getStatus());
                                 }
                             } else {
+                                showError(fragment);
                                 //showError(true, 12);
                             }
 //
@@ -115,4 +125,18 @@ public class SelfcareData {
             e.printStackTrace();
         }
     }
+
+    private void showError(Fragment fragment) {
+        if (fragment instanceof FragmentEmotionalSupport) {
+            fragmentEmotionalSupport = (FragmentEmotionalSupport) fragment;
+            //fragmentEmotionalSupport.setDataList(contentArrayList);
+        }else if (fragment instanceof SocialActivityFragment) {
+            socialActivityFragment=(SocialActivityFragment) fragment;
+            //socialActivityFragment.setDataList(contentArrayList);
+        }else if (fragment instanceof FragmentSelfcareManagement) {
+            fragmentSelfcareManagement=(FragmentSelfcareManagement) fragment;
+            fragmentSelfcareManagement.showError();
+        }
+    }
+
 }

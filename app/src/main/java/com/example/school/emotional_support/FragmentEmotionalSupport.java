@@ -74,7 +74,7 @@ public class FragmentEmotionalSupport extends Fragment {
         rv_journaling.setLayoutManager(mLayoutManagerJournaling);
         rv_journaling.setItemAnimator(new DefaultItemAnimator());
 
-        rv_inspirational_contents = view.findViewById(R.id.rv_inspirational_contents);
+        rv_inspirational_contents = view.findViewById(R.id.rv_events);
         RecyclerView.LayoutManager mLayoutManagerInspContent = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         rv_inspirational_contents.setLayoutManager(mLayoutManagerInspContent);
         rv_inspirational_contents.setItemAnimator(new DefaultItemAnimator());
@@ -118,7 +118,7 @@ public class FragmentEmotionalSupport extends Fragment {
                                                         SelfCareContentListFragment.this);
                                         swipeMenuListView.setAdapter(careContentListAdapter);*/
 
-        AdapterSelfcareData selfcareDataAdapter= new AdapterSelfcareData(getContext(),contentArrayList) ;
+        AdapterSelfcareData selfcareDataAdapter= new AdapterSelfcareData(getContext(),contentArrayList,FragmentEmotionalSupport.this) ;
         rv_inspirational_contents.setAdapter(selfcareDataAdapter);
     }
 }

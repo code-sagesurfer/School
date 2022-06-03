@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 
 import com.example.school.FragmentAdequateSleep;
 import com.example.school.ItemDetailView;
+import com.example.school.ModelDetailData;
 import com.example.school.R;
 import com.example.school.databinding.FragmentHomeBinding;
 import com.example.school.emotional_support.FragmentEmotionalSupport;
@@ -41,6 +42,7 @@ import com.example.school.resources.Preferences;
 import com.example.school.resources.Urls_;
 import com.example.school.resources.apidata.MakeCall;
 import com.example.school.skill_development.FragmentSkillDevelopment;
+import com.example.school.social_activity.SocialActivityFragment;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 
@@ -287,7 +289,7 @@ public class HomeFragment extends Fragment {
         FragmentManager fragManager = getActivity().getSupportFragmentManager();
         FragmentTransaction ft = fragManager.beginTransaction();
         //ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left);
-        ft.replace(R.id.main_container, new FragmentIntakeConsentMain(), "SocialActivityFragment");
+        ft.replace(R.id.main_container, new SocialActivityFragment(), "SocialActivityFragment");
         //ft.addToBackStack("HomeFragment");
         ft.commit();
     }
@@ -380,7 +382,7 @@ public class HomeFragment extends Fragment {
         this.homeBinding.tvErrorMsg2.setVisibility(View.VISIBLE);
     }
 
-    public void showDetailDialog(ModelPlannerData modelPlannerData) {
+    public void showDetailDialog(ModelDetailData modelPlannerData) {
         ItemDetailView detailView = new ItemDetailView();
         detailView.showDetailDialog(getActivity(), getContext(), TAG, modelPlannerData);
     }

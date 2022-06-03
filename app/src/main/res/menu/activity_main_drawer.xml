@@ -33,6 +33,10 @@
             android:icon="@drawable/ic_menu_slideshow"
             android:title="@string/menu_daily_planner" />
         <item
+            android:id="@+id/nav_self_care"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/menu_self_care" />
+        <item
             android:id="@+id/nav_team_care"
             android:icon="@drawable/ic_team_care"
             android:title="@string/menu_team_care" />

@@ -270,6 +270,12 @@ class APIManager {
         call.enqueue(aCallback)
     }
 
+    fun getRewardsData(@Body params: RequestBody, aCallback: Callback<JsonElement>) {
+        updateAPi()
+        val call: Call<JsonElement> = mApiService!!.getRewardsData(params)
+        call.enqueue(aCallback)
+    }
+
     fun getmobile_dashboard(@Body params: RequestBody, aCallback: Callback<JsonElement>) {
         updateAPi()
         val call: Call<JsonElement> = mApiService!!.getmobile_dashboard(params)

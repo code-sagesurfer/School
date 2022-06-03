@@ -8,7 +8,7 @@
 
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_inspirational_contents"
+        android:id="@+id/rv_events"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"

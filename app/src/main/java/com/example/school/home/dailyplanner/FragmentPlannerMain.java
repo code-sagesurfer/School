@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.school.ItemDetailView;
+import com.example.school.ModelDetailData;
 import com.example.school.R;
 import com.example.school.home.DataPlanner;
 import com.example.school.home.HomeFragment;
@@ -103,8 +104,9 @@ public class FragmentPlannerMain extends Fragment {
         }
     }
 
-    public void showDetailDialog(ModelPlannerData modelPlannerData) {
+    public void showDetailDialog(ModelDetailData modelPlannerData) {
+
         ItemDetailView detailView = new ItemDetailView();
-        detailView.showDetailDialog(getActivity(), getContext(), TAG, modelPlannerData);
+        detailView.showDetailDialog(getActivity(), getContext(), TAG,modelPlannerData);
     }
 }

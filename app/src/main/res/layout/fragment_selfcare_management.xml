@@ -49,17 +49,34 @@
         android:id="@+id/tv_text_educational"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
-
         android:fontFamily="@font/poppins_regular"
         android:text="@string/educational"
-
         android:textColor="@color/black"
         android:textSize="16sp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cl_top_block" />
+
+        <TextView
+            android:id="@+id/tv_error_msg_education"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@color/color_primary"
+            android:text="Data Not Found"
+            android:textColor="@color/white"
+            android:paddingTop="3dp"
+            android:gravity="center"
+            android:textSize="13sp"
+            android:visibility="gone"
+            android:fontFamily="@font/poppins_regular"
+            app:layout_constraintTop_toBottomOf="@+id/tv_text_educational"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+
+            />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_educational"
@@ -73,13 +90,33 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_text_educational"
         tools:listitem="@layout/layout_home_planner_item" />
 
+        <TextView
+            android:id="@+id/tv_education_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/text_bg_rounded_shape_light_gray"
+            android:fontFamily="@font/poppins_regular"
+            android:gravity="center_vertical"
+            android:paddingStart="18dp"
+            android:paddingTop="3dp"
+            android:paddingEnd="18dp"
+            android:text="@string/view_all"
+            android:textColor="@color/black"
+            android:textSize="11sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_text_educational"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_text_educational" />
+
+        <!--spiritual________________________________________  -->
+
     <TextView
         android:id="@+id/tv_text_spiritual"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/poppins_regular"
         android:text="@string/spiritual"
-
+        app:layout_goneMarginTop="50dp"
         android:textColor="@color/black"
         android:textSize="16sp"
         android:layout_marginStart="16dp"
@@ -87,17 +124,58 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rv_educational" />
 
+        <TextView
+            android:id="@+id/tv_error_msg_spiritual"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@color/color_primary"
+            android:text="Data Not Found"
+            android:textColor="@color/white"
+            android:paddingTop="3dp"
+            android:gravity="center"
+            android:textSize="13sp"
+            android:visibility="gone"
+            android:fontFamily="@font/poppins_regular"
+            app:layout_constraintTop_toBottomOf="@+id/tv_text_spiritual"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+
+            />
+
+        <TextView
+            android:id="@+id/tv_spiritual_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/text_bg_rounded_shape_light_gray"
+            android:fontFamily="@font/poppins_regular"
+            android:gravity="center_vertical"
+            android:paddingStart="18dp"
+            android:paddingTop="3dp"
+            android:paddingEnd="18dp"
+            android:text="@string/view_all"
+            android:textColor="@color/black"
+            android:textSize="11sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_text_spiritual"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_text_spiritual" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_spiritual"
         android:layout_width="match_parent"
         android:layout_height="160dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
+        app:layout_goneMarginTop="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_text_spiritual"
         tools:listitem="@layout/layout_home_planner_item" />
+
+        <!--nutritional________________________________________  -->
 
         <TextView
             android:id="@+id/tv_Nutritional_Guidance"
@@ -105,13 +183,51 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_regular"
             android:text="@string/Nutritional_Guidance"
-
+            app:layout_goneMarginTop="50dp"
             android:textColor="@color/black"
             android:textSize="16sp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/rv_spiritual" />
+
+        <TextView
+            android:id="@+id/tv_error_msg_nutri"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@color/color_primary"
+            android:text="Data Not Found"
+            android:textColor="@color/white"
+            android:paddingTop="3dp"
+            android:gravity="center"
+            android:textSize="13sp"
+            android:visibility="gone"
+            android:fontFamily="@font/poppins_regular"
+            app:layout_constraintTop_toBottomOf="@+id/tv_Nutritional_Guidance"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+
+            />
+
+        <TextView
+            android:id="@+id/tv_nutrition_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/text_bg_rounded_shape_light_gray"
+            android:fontFamily="@font/poppins_regular"
+            android:gravity="center_vertical"
+            android:paddingStart="18dp"
+            android:paddingTop="3dp"
+            android:paddingEnd="18dp"
+            android:text="@string/view_all"
+            android:textColor="@color/black"
+            android:textSize="11sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_Nutritional_Guidance"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_Nutritional_Guidance" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_Nutritional_Guidance"
@@ -125,19 +241,61 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_Nutritional_Guidance"
             tools:listitem="@layout/layout_home_planner_item" />
 
+
+        <!--campus________________________________________  -->
         <TextView
-            android:id="@+id/tv_Campus_Resources"
+            android:id="@+id/tv_campus_res"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_regular"
             android:text="@string/Nutritional_Guidance"
-
+            app:layout_goneMarginTop="50dp"
             android:textColor="@color/black"
             android:textSize="16sp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/rv_Nutritional_Guidance" />
+
+
+
+        <TextView
+            android:id="@+id/tv_Campus_Resources_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/text_bg_rounded_shape_light_gray"
+            android:fontFamily="@font/poppins_regular"
+            android:gravity="center_vertical"
+            android:paddingStart="18dp"
+            android:paddingTop="3dp"
+            android:paddingEnd="18dp"
+            android:text="@string/view_all"
+            android:textColor="@color/black"
+            android:textSize="11sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_campus_res"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tv_campus_res" />
+
+        <TextView
+            android:id="@+id/tv_error_msg_campus"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@color/color_primary"
+            android:text="Data Not Found"
+            android:textColor="@color/white"
+            android:paddingTop="3dp"
+            android:gravity="center"
+            android:textSize="13sp"
+            android:visibility="gone"
+            android:fontFamily="@font/poppins_regular"
+            app:layout_constraintTop_toBottomOf="@+id/tv_campus_res"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+
+            />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_Campus_Resources"
@@ -148,7 +306,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_Campus_Resources"
+            app:layout_constraintTop_toBottomOf="@+id/tv_campus_res"
             tools:listitem="@layout/layout_home_planner_item" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

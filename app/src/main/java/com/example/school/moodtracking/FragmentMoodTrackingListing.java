@@ -1,6 +1,7 @@
 package com.example.school.moodtracking;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -15,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.school.R;
+import com.example.school.home.MainActivity;
 import com.example.school.home.Mood;
 
 import java.util.List;
@@ -30,6 +32,7 @@ public class FragmentMoodTrackingListing extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     static RecyclerView rv_mood_list;
+    MainActivity mainActivity;
 
     private String mParam1;
     private String mParam2;
@@ -38,6 +41,14 @@ public class FragmentMoodTrackingListing extends Fragment {
         // Required empty public constructor
     }
 
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        if (context instanceof MainActivity){
+            mainActivity=(MainActivity) context;
+            mainActivity.setToolbarTitleText(getString(R.string.mood_tracking));
+        }
+    }
 
     public static FragmentMoodTrackingListing newInstance(String param1, String param2) {
         FragmentMoodTrackingListing fragment = new FragmentMoodTrackingListing();

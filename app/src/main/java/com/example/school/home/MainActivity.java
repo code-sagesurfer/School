@@ -37,6 +37,7 @@ import com.example.school.resources.showstatus.ShowLoader;
 import com.example.school.resources.Urls_;
 import com.example.school.resources.oauth.OauthPreferences;
 import com.example.school.resources.showstatus.ShowToast;
+import com.example.school.selfcaremanagement.FragmentSelfcareManagement;
 import com.example.school.settings.FragmentSettings;
 import com.example.school.toolkit.ItemListDialogFragment;
 import com.google.android.material.navigation.NavigationView;
@@ -267,6 +268,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             ft.addToBackStack("HomeFragment");
             ft.commit();
             mDrawerLayout.closeDrawer(Gravity.LEFT);
+        }else if (item.getTitle().toString().equals("Self-Care")) {
+            FragmentManager fragManager = getSupportFragmentManager();
+            FragmentTransaction ft = fragManager.beginTransaction();
+            //ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left);
+            ft.replace(R.id.main_container, new FragmentSelfcareManagement(), "FragmentSelfcareManagement");
+            ft.addToBackStack("HomeFragment");
+            ft.commit();
+            mDrawerLayout.closeDrawer(Gravity.LEFT);
         } else if (item.getTitle().toString().equals("Daily Planner")) {
             FragmentManager fragManager = getSupportFragmentManager();
             FragmentTransaction ft = fragManager.beginTransaction();
@@ -341,7 +350,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public void setToolbarTitleText(String displayText) {
         tv_toolbar_title.setText(displayText);
-        toolbar.setBackgroundColor(getResources().getColor(R.color.setting_page_background_yellow));
     }
 
     @SuppressLint("StaticFieldLeak")
