@@ -1,44 +1,56 @@
 package com.example.school.skill_development;
 
+import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.example.school.R;
+import com.example.school.home.MainActivity;
+import com.example.school.resources.General;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link FragmentSkillDevelopmentDetails#newInstance} factory method to
- * create an instance of this fragment.
- */
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
+
 public class FragmentSkillDevelopmentDetails extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+    @BindView(R.id.tv_question_desc)
+    TextView tv_question_desc;
+
+    @BindView(R.id.goal_desc)
+    TextView goal_desc;
+
+    @BindView(R.id.tv_date)
+    TextView tv_date;
+
+
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
+    Goal_ goal_;
     private String mParam1;
     private String mParam2;
+    MainActivity mainActivity;
+    private static final String TAG = "FragmentSkillDevelopmen";
 
     public FragmentSkillDevelopmentDetails() {
-        // Required empty public constructor
+
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment FragmentSkillDevelopmentDetails.
-     */
-    // TODO: Rename and change types and number of parameters
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+
+
+    }
+
     public static FragmentSkillDevelopmentDetails newInstance(String param1, String param2) {
         FragmentSkillDevelopmentDetails fragment = new FragmentSkillDevelopmentDetails();
         Bundle args = new Bundle();
@@ -52,8 +64,10 @@ public class FragmentSkillDevelopmentDetails extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            if (getArguments().containsKey(General.GOAL_OBJ)){
+                goal_= (Goal_) getArguments().getSerializable(General.GOAL_OBJ);
+                Log.d(TAG, "onCreate: "+goal_.getName());
+            }
         }
     }
 
@@ -61,6 +75,22 @@ public class FragmentSkillDevelopmentDetails extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_skill_development_details, container, false);
+        View view = inflater.inflate(R.layout.fragment_skill_development_details, container, false);
+        ButterKnife.bind(this,view);
+
+        tv_question_desc.setText(goal_.getName());
+        tv_date.setText(goal_.getStart_date());
+        goal_desc.setText(goal_.getDescription());
+        return view;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (getContext() instanceof MainActivity){
+            mainActivity =(MainActivity) getContext();
+            mainActivity.setToolbarTitleText("Skill Development Details");
+            mainActivity.changeDrawerIcon(true);
+        }
     }
 }

@@ -20,6 +20,7 @@
         <androidx.cardview.widget.CardView
             android:layout_width="75dp"
             android:layout_height="80dp"
+            android:id="@+id/cv_total"
             app:cardCornerRadius="10dp"
 
             app:cardBackgroundColor="#F19336">
@@ -38,11 +39,12 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/textView6"
+                    android:id="@+id/tv_total_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_medium"
-                    android:text="21"
+                    android:text="0"
+
                     android:paddingTop="3dp"
                     android:textColor="@color/white"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -59,7 +61,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView6" />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_total_count" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
@@ -68,6 +70,7 @@
             android:layout_width="75dp"
             android:layout_height="80dp"
             app:cardCornerRadius="10dp"
+            android:id="@+id/cv_active"
             android:layout_marginStart="8dp"
             app:cardBackgroundColor="#FFD426">
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -85,11 +88,11 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/a1"
+                    android:id="@+id/tv_active"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_medium"
-                    android:text="05"
+                    android:text="0"
                     android:paddingTop="3dp"
                     android:textColor="@color/white"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -106,7 +109,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/a1" />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_active" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
@@ -132,11 +135,11 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/c1"
+                    android:id="@+id/tv_completed"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_medium"
-                    android:text="05"
+                    android:text="0"
                     android:paddingTop="3dp"
                     android:textColor="@color/white"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -153,7 +156,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/c1" />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_completed" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
@@ -179,11 +182,11 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/m1"
+                    android:id="@+id/tv_missed"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/poppins_medium"
-                    android:text="05"
+                    android:text="0"
                     android:paddingTop="3dp"
                     android:textColor="@color/white"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -200,7 +203,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/m1" />
+                    app:layout_constraintTop_toBottomOf="@+id/tv_missed" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
@@ -214,7 +217,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:fontFamily="@font/poppins_medium"
-        android:text="@string/missed"
+        android:text="@string/goal"
         android:textColor="@color/black"
 
         android:textSize="14sp"
@@ -224,6 +227,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:id="@+id/rv_goals"
         tools:listitem="@layout/layout_skill_development_list_item"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView7" />

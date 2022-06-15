@@ -2,19 +2,16 @@ package com.example.school.home.dailyplanner;
 
 import android.content.Context;
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import com.example.school.ItemDetailView;
 import com.example.school.ModelDetailData;
 import com.example.school.R;
@@ -24,12 +21,10 @@ import com.example.school.home.MainActivity;
 import com.example.school.home.ModelPlannerData;
 import com.example.school.home.ModelPlannerResponse;
 import com.example.school.home.adapters.AdapterPlannerData;
-
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-
 
 public class FragmentPlannerMain extends Fragment {
     DataPlanner dataPlanner;
@@ -105,7 +100,6 @@ public class FragmentPlannerMain extends Fragment {
     }
 
     public void showDetailDialog(ModelDetailData modelPlannerData) {
-
         ItemDetailView detailView = new ItemDetailView();
         detailView.showDetailDialog(getActivity(), getContext(), TAG,modelPlannerData);
     }

@@ -70,6 +70,26 @@ public class GetTime {
     }
 
     @SuppressLint("SimpleDateFormat")
+    public static String month_DdYyyy(String original_date) {
+        //Log.e(GetTime.class.getSimpleName(), "original_date: " + original_date);
+        if (original_date == null) {
+            return "";
+        }
+        if (original_date.trim().length() <= 0) {
+            return "";
+        }
+        SimpleDateFormat originalFormat = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat convertFormat = new SimpleDateFormat("MMM dd, yyyy");
+        try {
+            Date originalDate = originalFormat.parse(original_date);
+            return convertFormat.format(originalDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return original_date;
+    }
+
+    @SuppressLint("SimpleDateFormat")
     public static String yy_mm_dd(String original_date) {
         //Log.e(GetTime.class.getSimpleName(), "original_date: " + original_date);
         if (original_date == null) {

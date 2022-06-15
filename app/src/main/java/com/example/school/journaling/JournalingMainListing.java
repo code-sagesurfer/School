@@ -29,13 +29,16 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.school.R;
 import com.example.school.home.DataJournaling;
 import com.example.school.home.MainActivity;
@@ -82,6 +85,7 @@ public class JournalingMainListing extends Fragment implements iSelectedImageRes
     private String mParam2;
     static String SelectedFileId = "";
     String file_path = "";
+    AlertDialog.Builder builder;
     boolean isStartDate=true;
     AdapterGratitudeJournalingMainList adapterGratitudeJournalingList;
     StringBuffer nameBuffer, idBuffer;
@@ -96,6 +100,7 @@ public class JournalingMainListing extends Fragment implements iSelectedImageRes
     MainActivity mainActivity;
     static RoundedImageView attached_image;
     ImageView iv_filter;
+    ModelGratitudeListingResponseData gratitudeModelDataForEdit;
     public JournalingMainListing() {
         // Required empty public constructor
     }
@@ -139,6 +144,7 @@ public class JournalingMainListing extends Fragment implements iSelectedImageRes
         fb_add_gratitude = view.findViewById(R.id.fb_add_gratitude);
         recyclerView = view.findViewById(R.id.recyclerView);
         tv_error_msg = view.findViewById(R.id.tv_error_msg);
+
         iv_filter = view.findViewById(R.id.iv_filter);
         et_gratitudeSearchBar = view.findViewById(R.id.et_gratitudeSearchBar);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
@@ -153,7 +159,9 @@ public class JournalingMainListing extends Fragment implements iSelectedImageRes
         fb_add_gratitude.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                dialogAddGratitude();
+                isEdit = false;
+                getAllCategories();
+
             }
         });
 
@@ -181,10 +189,11 @@ public class JournalingMainListing extends Fragment implements iSelectedImageRes
             }
         });
 
+
         return view;
     }
-
     private void performSearch(String toString) {
+
         if (adapterGratitudeJournalingList != null) {
             adapterGratitudeJournalingList.getFilter().filter(toString);
         }
@@ -218,10 +227,14 @@ public class JournalingMainListing extends Fragment implements iSelectedImageRes
     }
 
 
+    public void editGratitude(ModelGratitudeListingResponseData modelGratitudeListingResponseData) {
+        gratitudeModelDataForEdit = modelGratitudeListingResponseData;
+        isEdit = true;
+        getAllCategories();
+        //openDialogAddGratitude();
 
-
-
-    public void dialogAddGratitude() {
+    }
+    public void dialogAddGratitude(ArrayList<ModelCategoryResponseData> data, ModelCategoryResponse categoryResponse) {
         AlertDialog.Builder builder = new AlertDialog.Builder(requireActivity());
         LayoutInflater inflater = this.getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_add_new_journaling, null);
@@ -229,10 +242,10 @@ public class JournalingMainListing extends Fragment implements iSelectedImageRes
         AlertDialog dialog = builder.create();
         AppLog.i(TAG, " handleIntent showMembersDialog: ");
         //AppCompatImageView iv_main_banner = view.findViewById(R.id.iv_main_banner);
-        // Glide.with(getContext()).load(categoryResponse.getBanner_image()).into(iv_main_banner);
+        //Glide.with(getContext()).load(categoryResponse.getBanner_image()).into(iv_main_banner);
 
         et_title = view.findViewById(R.id.et_title);
-        //Spinner sp_category = view.findViewById(R.id.sp_category);
+        Spinner sp_category = view.findViewById(R.id.sp_category);
         tv_share_with_friends = view.findViewById(R.id.tv_share_with_friends);
         et_desc = view.findViewById(R.id.et_desc);
         et_location = view.findViewById(R.id.et_location);
@@ -249,16 +262,73 @@ public class JournalingMainListing extends Fragment implements iSelectedImageRes
 
         //ImageView imageviespeak1 = view.findViewById(R.id.imageviespeak1);
 
-        TextView tv_desc = view.findViewById(R.id.tv_desc);
-        /*ArrayAdapter aa = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, nameList);
-        aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);*/
-       /* if (isEdit) {
+        if (isEdit) {
+            et_title.setText(gratitudeModelDataForEdit.getGratituteName());
+            et_desc.setText(gratitudeModelDataForEdit.getGratituteDescription());
+            //tv_file_name.setText(gratitudeModelDataForEdit.getFileAttachment());
+            if (!gratitudeModelDataForEdit.getSharedUserName().equalsIgnoreCase("")
+                    || gratitudeModelDataForEdit.getSharedUserName().equalsIgnoreCase(" ")) {
+                tv_share_with_friends.setText(gratitudeModelDataForEdit.getSharedUserName());
+            } else {
+                tv_share_with_friends.setText(getContext().getString(R.string.share_with_friends));
+            }
+
+            //idBuffer.append(gratitudeModelDataForEdit.getSharedUserIds());
+            //tv_share_with_friends.setText(gratitudeModelDataForEdit.get);
+            tv_share_with_friends.setEnabled(false);
+            tv_share_with_friends.setBackgroundColor(getContext().getResources().getColor(R.color.disable_button_color));
+            String fileName = gratitudeModelDataForEdit.getFileAttachment();
+            if (gratitudeModelDataForEdit.getFileAttachment().equalsIgnoreCase("")) {
+                attached_image.setVisibility(View.GONE);
+            } else {
+                attached_image.setVisibility(View.VISIBLE);
+            }
+
+            int index = fileName.lastIndexOf('.');
+            if (index > 0) {
+                String extension = fileName.substring(index + 1);
+                System.out.println("File extension is " + extension);
+                if (extension.equalsIgnoreCase("docx")) {
+                    attached_image.setImageDrawable(getContext().getResources().getDrawable(R.drawable.vi_doc_file));
+                } else if (extension.equalsIgnoreCase("jpg")
+                        || extension.equalsIgnoreCase("jpeg")
+                        || extension.equalsIgnoreCase("png")
+                ) {
+                    Glide.with(getContext()).load(gratitudeModelDataForEdit.getFileAttachment()).into(attached_image);
+                } else if (extension.equalsIgnoreCase("pdf")) {
+                    attached_image.setImageDrawable(getContext().getResources().getDrawable(R.drawable.vi_pdf_file));
+                } else if (extension.equalsIgnoreCase("xlsx")
+                        || extension.equalsIgnoreCase("xls")
+                        || extension.equalsIgnoreCase("xlt")
+                ) {
+                    attached_image.setImageDrawable(getContext().getResources().getDrawable(R.drawable.vi_xls_file));
+                } else if (extension.equalsIgnoreCase("txt")) {
+                    attached_image.setImageDrawable(getContext().getResources().getDrawable(R.drawable.vi_text_file));
+                }
+            }
+        }
+
+
+        ArrayList<String> nameList = new ArrayList<>();
+        nameList.add("Select Category");
+        for (ModelCategoryResponseData item : data) {
+            nameList.add(item.getCategoryName());
+        }
+
+
+        ArrayAdapter aa = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, nameList);
+        aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sp_category.setAdapter(aa);
+
+        if (isEdit) {
             for (int i = 0; i < data.size(); i++) {
                 if (gratitudeModelDataForEdit.getGratituteCategory().equalsIgnoreCase(data.get(i).getCategoryName())) {
                     sp_category.setSelection(i + 1);
                 }
             }
-        }*/
+        }
+
+
 
         btn_cancel_gratitude.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -276,6 +346,41 @@ public class JournalingMainListing extends Fragment implements iSelectedImageRes
                 } else {
                     Log.i(TAG, "onClick: tv_share_with_friends getTeamMembersAndFriends");
                     getTeamMembersAndFriends();
+                }
+            }
+        });
+
+        tv_attachment.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Preferences.save(General.UPLOADING_FROM, "GratitudeJournalingMain");
+               /* ActivityCompat.requestPermissions(getActivity(),
+                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                        2021);*/
+                checkPermission();
+            }
+        });
+
+        btn_submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (et_title.getText().toString().equalsIgnoreCase("")) {
+                    et_title.setError("Field required.");
+                } else if (sp_category.getSelectedItemPosition() == 0) {
+                    Toast.makeText(getActivity(), "Please select category", Toast.LENGTH_SHORT).show();
+                } else {
+                    /*addGratitudeJournaling(gratitude_title.getText().toString(),
+                            et_description.getText().toString(),
+                            sp_category.getSelectedItemPosition());*/
+                    try {
+                        String categoryId = data.get(sp_category.getSelectedItemPosition() - 1).getCategoryId();
+
+                        addGratitudeJournaling(et_title.getText().toString(),
+                                et_desc.getText().toString(), categoryId);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    dialog.dismiss();
                 }
             }
         });
@@ -324,40 +429,7 @@ public class JournalingMainListing extends Fragment implements iSelectedImageRes
             }
         });*/
 
-        tv_attachment.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Preferences.save(General.UPLOADING_FROM, "GratitudeJournalingMain");
-               /* ActivityCompat.requestPermissions(getActivity(),
-                        new String[]{Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                        2021);*/
-                checkPermission();
-            }
-        });
 
-        btn_submit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (et_title.getText().toString().equalsIgnoreCase("")) {
-                    et_title.setError("Field required.");
-                }/* else if (sp_category.getSelectedItemPosition() == 0) {
-                    Toast.makeText(getActivity(), "Please select category", Toast.LENGTH_SHORT).show();
-                }*/ else {
-                    /*addGratitudeJournaling(gratitude_title.getText().toString(),
-                            et_description.getText().toString(),
-                            sp_category.getSelectedItemPosition());*/
-                    try {
-                        //String categoryId = data.get(sp_category.getSelectedItemPosition() - 1).getCategoryId();
-
-                        addGratitudeJournaling(et_title.getText().toString(),
-                                et_desc.getText().toString(), "2");
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    dialog.dismiss();
-                }
-            }
-        });
 
         /* imageviewsubmit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -396,9 +468,6 @@ public class JournalingMainListing extends Fragment implements iSelectedImageRes
                 //idBuffer.delete(0, idBuffer.length());
             }
         });*/
-
-
-
         dialog.show();
         dialog.setCanceledOnTouchOutside(true);
         dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
@@ -419,7 +488,7 @@ public class JournalingMainListing extends Fragment implements iSelectedImageRes
                     2021);
         }
     }
-    AlertDialog.Builder builder;
+
     @SuppressLint("ResourceType")
     private void showRotationalPremissionDialog() {
         builder = new AlertDialog.Builder(requireActivity());
@@ -861,5 +930,53 @@ public class JournalingMainListing extends Fragment implements iSelectedImageRes
         } else {
             //showError(true, status);
         }*/
+    }
+
+    public void getAllCategories() {
+        HashMap<String, String> requestMap = new HashMap<>();
+        requestMap.put(General.ACTION, Actions_.GRATITUDE_GET_CATAGORY);
+
+        APIManager.Companion.getInstance().showProgressDialog(getContext(), false,
+                getActivity().getString(R.string.loading));
+        String url = Preferences.get(General.DOMAIN) + "/" + Urls_.MOBILE_GRATITUDE_JOURNALING;
+        RequestBody requestBody = MakeCall.make(requestMap, url, TAG, getActivity(), getActivity());
+        if (requestBody != null) {
+            try {
+                APIManager.Companion.getInstance().get_gratitude_list(requestBody, new Callback<JsonElement>() {
+                    @Override
+                    public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
+                        APIManager.Companion.getInstance().dismissProgressDialog();
+                        try {
+                            Gson gson = new Gson();
+                            ModelCategoryResponse categoryResponse = gson.fromJson(response.body(), ModelCategoryResponse.class);
+                            if (categoryResponse.getStatus() == 200) {
+                                ArrayList<ModelCategoryResponseData> data = categoryResponse.getData();
+
+
+                                dialogAddGratitude(data, categoryResponse);
+
+
+                                //Toast.makeText(getActivity(), "Deleted Successfully..", Toast.LENGTH_SHORT).show();
+                            } else {
+
+                                //showError(true, 2);
+                                //Toast.makeText(getContext(), "Data not found", Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<JsonElement> call, Throwable t) {
+                        APIManager.Companion.getInstance().dismissProgressDialog();
+                    }
+                });
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            //showError(true, status);
+        }
     }
 }

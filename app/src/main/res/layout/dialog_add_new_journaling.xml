@@ -90,6 +90,36 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_desc_txt" />
 
         <TextView
+            android:id="@+id/tv_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/poppins_regular"
+            android:text="@string/category"
+            android:textColor="@color/black"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_desc" />
+
+        <Spinner
+            android:id="@+id/sp_category"
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:layout_weight="1"
+            android:background="@drawable/team_listing_item_border_color_primary"
+            android:fontFamily="@font/poppins_regular"
+            android:hint="@string/enter_location"
+            android:paddingStart="16dp"
+            android:paddingTop="3dp"
+            android:paddingEnd="16dp"
+            android:layout_marginTop="3dp"
+            android:textColor="@color/black"
+            android:textColorHint="@color/text_hint_color"
+            android:textSize="@dimen/text_12"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_category" />
+        <TextView
             android:id="@+id/tv_location_txt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -99,7 +129,7 @@
             android:textColor="@color/black"
             android:textSize="12sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/et_desc" />
+            app:layout_constraintTop_toBottomOf="@+id/sp_category" />
 
         <EditText
             android:id="@+id/et_location"

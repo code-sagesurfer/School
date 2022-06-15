@@ -18,6 +18,7 @@ public class General {
     public static final String DEVICE = "device";
     public static final String UID = "uid";
     public static final String INFO = "info";
+    public static final String TOOLBAR_TITLE = "toolbar_title";
     public static final String USERNAME = "username";
     public static final String PASSWORD = "password";
     public static final String START_TIME = "start_time";
@@ -117,6 +118,8 @@ public class General {
     public static final String TASK_OWNER = "task_owner";
     
     public static final String MEETING_DATA_FROM_DIRECT_CALL = "meeting_data_direct";
+    public static final String GOAL_OBJ = "GoalObject";
+    public static final String TEAM_DATA = "team_data";
     public static String WELCOME_IMAGE_SKIP_ONCE_URL = "welcomeImageSkipOnce";
     public static final String TIMESTAMP = "timestamp";
     public static final String CHECK = "check";

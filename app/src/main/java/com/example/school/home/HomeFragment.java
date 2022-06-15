@@ -224,7 +224,6 @@ public class HomeFragment extends Fragment {
         DashboardData dashboardData = new DashboardData();
         dashboardData.getDashboardData(getContext(), getActivity(), this);
 
-
         Date currentTime = Calendar.getInstance().getTime();
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String strDate = dateFormat.format(currentTime);

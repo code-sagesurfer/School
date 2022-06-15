@@ -1,33 +1,46 @@
 package com.example.school.support;
 
+import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.school.R;
+import com.example.school.home.MainActivity;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link FragmentSupport#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class FragmentSupport extends Fragment {
+public class FragmentSupport extends Fragment implements View.OnClickListener{
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
+    CardView card_faq,cv_feedback,cv_about_us;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    MainActivity mainActivity;
 
     public FragmentSupport() {
         // Required empty public constructor
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+
     }
 
     /**
@@ -61,6 +74,71 @@ public class FragmentSupport extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_support, container, false);
+        View view = inflater.inflate(R.layout.fragment_support, container, false);
+        card_faq=view.findViewById(R.id.card_faq);
+        cv_feedback=view.findViewById(R.id.cv_feedback);
+
+        cv_about_us=view.findViewById(R.id.cv_about_us);
+
+        card_faq.setOnClickListener(this);
+        cv_feedback.setOnClickListener(this);
+        cv_about_us.setOnClickListener(this);
+
+        return view;
+    }
+
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (getContext() instanceof MainActivity) {
+            mainActivity = (MainActivity) getContext();
+            mainActivity.setToolbarTitleText(getString(R.string.support));
+            mainActivity.changeDrawerIcon(false);
+        }
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.card_faq:
+                openFragmentFAQ();
+                break;
+
+            case R.id.cv_feedback:
+                openFragmentFeedback();
+                break;
+
+            case R.id.cv_about_us:
+                openFragmentAboutUs();
+                break;
+        }
+    }
+
+    private void openFragmentFeedback() {
+        FragmentManager fragManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction ft = fragManager.beginTransaction();
+        //ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left);
+        ft.replace(R.id.main_container, new FragmentFeedback(), "FragmentFeedback");
+        ft.addToBackStack("FragmentSupport");
+        ft.commit();
+    }
+
+    private void openFragmentFAQ() {
+        FragmentManager fragManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction ft = fragManager.beginTransaction();
+        //ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left);
+        ft.replace(R.id.main_container, new FragmentFAQDetails(), "FragmentFAQDetails");
+        ft.addToBackStack("FragmentSupport");
+        ft.commit();
+    }
+
+    private void openFragmentAboutUs() {
+        FragmentManager fragManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction ft = fragManager.beginTransaction();
+        //ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left);
+        ft.replace(R.id.main_container, new FragmentAboutUs(), "FragmentAboutUs");
+        ft.addToBackStack("FragmentSupport");
+        ft.commit();
     }
 }

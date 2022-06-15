@@ -1,7 +1,9 @@
 package com.example.school.support;
 
+import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -9,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.school.R;
+import com.example.school.home.MainActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -21,10 +24,21 @@ public class FragmentFAQDetails extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
+    MainActivity mainActivity;
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    // Required empty public constructor
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        if (context instanceof MainActivity) {
+            mainActivity = (MainActivity) context;
+            mainActivity.setToolbarTitleText(getString(R.string.faq));
+            mainActivity.changeDrawerIcon(true);
+        }
+    }
 
     public FragmentFAQDetails() {
         // Required empty public constructor

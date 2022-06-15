@@ -184,6 +184,9 @@ interface Api {
     @POST("mobile_gratitude_journaling.php")
     fun get_gratitude_list(@Body params: RequestBody): Call<JsonElement>
 
+    @POST(Urls_.MOBILE_COMETCHAT_TEAMS)
+    fun get_team_list(@Body params: RequestBody): Call<JsonElement>
+
     @POST("mobile_fms.php")
     fun get_mobile_fms(@Body params: RequestBody): Call<JsonElement>
 

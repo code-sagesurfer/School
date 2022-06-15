@@ -353,6 +353,12 @@ class APIManager {
         call.enqueue(aCallback)
     }
 
+    fun get_team_list(@Body params: RequestBody, aCallback: Callback<JsonElement>) {
+        updateAPi()
+        val call: Call<JsonElement> = mApiService!!.get_team_list(params)
+        call.enqueue(aCallback)
+    }
+
     fun get_mobile_fms(@Body params: RequestBody, aCallback: Callback<JsonElement>) {
         updateAPi()
         val call: Call<JsonElement> = mApiService!!.get_mobile_fms(params)

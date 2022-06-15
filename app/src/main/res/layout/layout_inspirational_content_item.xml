@@ -21,7 +21,7 @@
         <com.makeramen.roundedimageview.RoundedImageView
                 android:layout_width="225dp"
                 android:layout_height="108dp"
-                android:src="@drawable/image_test"
+                android:src="@drawable/placeholder"
                 android:scaleType="centerCrop"
                 app:riv_mutate_background="true"
                 android:id="@+id/iv_main"

@@ -80,7 +80,7 @@ public class SelfcareData {
                             if (contentArrayList.size() > 0) {
                                 if (contentArrayList.get(0).getStatus() == 1) {
                                     if (selfCareFirstTimeLoading) {
-                                        Log.i(TAG, "onResponse: fetch firstTimeLoading");
+                                        Log.i(TAG, "onResponse: fetch firstTimeLoading array "+contentArrayList.size());
                                         selfCareFirstTimeLoading = false;
                                         if (fragment instanceof FragmentEmotionalSupport) {
                                             fragmentEmotionalSupport = (FragmentEmotionalSupport) fragment;

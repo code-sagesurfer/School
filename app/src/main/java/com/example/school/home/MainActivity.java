@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MenuItem;
@@ -19,12 +20,16 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.school.R;
+
 import com.example.school.databinding.ActivityMainBinding;
+import com.example.school.emotional_support.FragmentEmotionalSupport;
 import com.example.school.home.dailyplanner.FragmentPlannerMain;
+import com.example.school.home.ui.ModelGratitudeListingResponse;
 import com.example.school.journaling.JournalingMainListing;
 import com.example.school.journaling.iSelectedImageResponse;
 import com.example.school.login.LoginActivity;
 import com.example.school.moodtracking.FragmentMoodTrackingListing;
+import com.example.school.resources.APIManager;
 import com.example.school.resources.Actions_;
 import com.example.school.resources.AppLog;
 import com.example.school.resources.CheckFileType;
@@ -33,15 +38,22 @@ import com.example.school.resources.FileUpload;
 import com.example.school.resources.General;
 import com.example.school.resources.Preferences;
 import com.example.school.resources.UriUtils;
+import com.example.school.resources.apidata.MakeCall;
 import com.example.school.resources.showstatus.ShowLoader;
 import com.example.school.resources.Urls_;
 import com.example.school.resources.oauth.OauthPreferences;
 import com.example.school.resources.showstatus.ShowToast;
 import com.example.school.selfcaremanagement.FragmentSelfcareManagement;
 import com.example.school.settings.FragmentSettings;
+import com.example.school.skill_development.FragmentSkillDevelopment;
+import com.example.school.support.FragmentSupport;
+import com.example.school.team_care.FragmentTeamDetails;
+import com.example.school.team_care.ModelTeamListResponse;
 import com.example.school.toolkit.ItemListDialogFragment;
 import com.google.android.material.navigation.NavigationView;
+import com.google.gson.Gson;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
@@ -56,7 +68,13 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.HashMap;
+
 import de.hdodenhof.circleimageview.CircleImageView;
+import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /**
  * @author Rahul Maske (rahul.maske@sagesurfer.com)
@@ -191,6 +209,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        changeDrawerIcon(false);
+    }
+
+    @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ll_nav_toolkit:
@@ -268,11 +292,29 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             ft.addToBackStack("HomeFragment");
             ft.commit();
             mDrawerLayout.closeDrawer(Gravity.LEFT);
+        }else if (item.getTitle().toString().equals("Team Care")) {
+            getTeamListFromServer();
         }else if (item.getTitle().toString().equals("Self-Care")) {
             FragmentManager fragManager = getSupportFragmentManager();
             FragmentTransaction ft = fragManager.beginTransaction();
             //ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left);
             ft.replace(R.id.main_container, new FragmentSelfcareManagement(), "FragmentSelfcareManagement");
+            ft.addToBackStack("HomeFragment");
+            ft.commit();
+            mDrawerLayout.closeDrawer(Gravity.LEFT);
+        }else if (item.getTitle().toString().equals("Support")) {
+            FragmentManager fragManager = getSupportFragmentManager();
+            FragmentTransaction ft = fragManager.beginTransaction();
+            //ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left);
+            ft.replace(R.id.main_container, new FragmentSupport(), "FragmentSupport");
+            ft.addToBackStack("HomeFragment");
+            ft.commit();
+            mDrawerLayout.closeDrawer(Gravity.LEFT);
+        }else if (item.getTitle().toString().equals("Goal Management")) {
+            FragmentManager fragManager = getSupportFragmentManager();
+            FragmentTransaction ft = fragManager.beginTransaction();
+            //ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left);
+            ft.replace(R.id.main_container, new FragmentSkillDevelopment(), "FragmentSkillDevelopment");
             ft.addToBackStack("HomeFragment");
             ft.commit();
             mDrawerLayout.closeDrawer(Gravity.LEFT);
@@ -299,6 +341,69 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             mDrawerLayout.closeDrawer(Gravity.LEFT);
         }
         return true;
+    }
+
+    private void getTeamListFromServer() {
+        HashMap<String, String> requestMap = new HashMap<>();
+        requestMap.put(General.ACTION, Actions_.ALL_TEAMS);
+        requestMap.put(General.CODE, Preferences.get(General.DOMAIN_CODE));
+        requestMap.put(General.ISFORTEAMCHAT, "0");
+       /* if (isTeamDetails) {
+            requestMap.put(General.USER_ID, Preferences.get(General.USER_ID));
+            requestMap.put(General.GROUP_ID, Preferences.get(General.GROUP_ID));
+        }*/
+        String url = Preferences.get(General.DOMAIN) + "/" + Urls_.MOBILE_NORMAL_TEAMS;
+        RequestBody requestBody = MakeCall.make(requestMap, url, TAG, this, MainActivity.this);
+
+        try {
+            APIManager.Companion.getInstance().get_team_list(requestBody, new Callback<JsonElement>() {
+                @Override
+                public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
+                    APIManager.Companion.getInstance().dismissProgressDialog();
+                    try {
+                        Gson gson = new Gson();
+                        assert response.body() != null;
+                        String resposeBody = response.body().toString();
+                        AppLog.i(TAG, "onResponse: " + resposeBody);
+                        ModelTeamListResponse gratitudeListingResponse = gson.fromJson(response.body(), ModelTeamListResponse.class);
+                        if (gratitudeListingResponse.getAllTeams().get(0).getStatus() == 1) {
+                            if (gratitudeListingResponse.getAllTeams().size()==1){
+                                Bundle bundle=new Bundle();
+                                FragmentTeamDetails teamDetails= new FragmentTeamDetails();
+                                bundle.putParcelable(General.TEAM_DATA, (Parcelable) gratitudeListingResponse);
+                                teamDetails.setArguments(bundle);
+
+                                FragmentManager fragManager = getSupportFragmentManager();
+                                FragmentTransaction ft = fragManager.beginTransaction();
+                                ft.replace(R.id.main_container,teamDetails, "FragmentTeamDetails");
+                                ft.addToBackStack("HomeFragment");
+                                ft.commit();
+                                mDrawerLayout.closeDrawer(Gravity.LEFT);
+                            }else{
+                                Toast.makeText(MainActivity.this, "Please login with adult..", Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            //Toast.makeText(getContext(), "Data not found", Toast.LENGTH_SHORT).show();
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<JsonElement> call, Throwable t) {
+                    APIManager.Companion.getInstance().dismissProgressDialog();
+                }
+            });
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        /*FragmentManager fragManager = getSupportFragmentManager();
+        FragmentTransaction ft = fragManager.beginTransaction();
+        ft.replace(R.id.main_container, new FragmentTeamDetails(), "FragmentTeamDetails");
+        ft.addToBackStack("HomeFragment");
+        ft.commit();
+        mDrawerLayout.closeDrawer(Gravity.LEFT);*/
     }
 
     @Override
@@ -450,6 +555,4 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
     }
-
-
 }

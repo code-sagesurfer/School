@@ -234,7 +234,7 @@ public class AdapterGratitudeJournalingMainList extends RecyclerView.Adapter<Ada
             switch (item.getItemId()) {
 
                 case R.id.menu_edit:
-                    //editItemDetails(dataArrayList.get(getAbsoluteAdapterPosition()));
+                    editItemDetails(dataArrayList.get(getAbsoluteAdapterPosition()));
                     return true;
 
                 case R.id.menu_delete:
@@ -313,5 +313,12 @@ public class AdapterGratitudeJournalingMainList extends RecyclerView.Adapter<Ada
         }
 
     }
+
+    private void editItemDetails(ModelGratitudeListingResponseData modelGratitudeListingResponseData) {
+        //GratitudeJournalingMain journalingMain = (GratitudeJournalingMain) fragment;
+        journalingMain.editGratitude(modelGratitudeListingResponseData);
+
+    }
+
 
 }

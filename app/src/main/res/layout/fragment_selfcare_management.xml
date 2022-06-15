@@ -248,7 +248,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_regular"
-            android:text="@string/Nutritional_Guidance"
+            android:text="@string/campus_resources"
             app:layout_goneMarginTop="50dp"
             android:textColor="@color/black"
             android:textSize="16sp"

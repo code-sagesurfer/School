@@ -16,10 +16,11 @@
     <color name="green_light">#E4F2E5</color>
     <color name="dark_btn_blue">#7B5FED</color>
     <color name="light_blue">#E2DBFE</color>
-    <color name="light_orange_edit_text_bg">#FEF9F3</color>
+    <color name="light_orange_edit_text_bg">#FDF6ED</color>
     <color name="text_color_blue">#7B5FED</color>
     <color name="transparent">@android:color/transparent</color>
     <color name="splash_text1">#F19336</color>
+    <color name="disable_button_color">#e0e0e0</color>
     <color name="list_divider">#9e9e9e</color>
     <color name="poll_vote_1">#bb7fea</color>
     <color name="text_hint_color">#707070</color>
@@ -35,6 +36,13 @@
     <color name="color_shadow">#BAF0E6E6</color>
     <color name="link_color">#0C76BC</color>
     <color name="blue_arrow_settings">#865AE6</color>
-
+    <color name="online">#19ae0a</color>
+    <!--self development / goal management-->
+    <color name="self_goal_completed">#5dc94b</color>
+    <color name="self_goal_missed">#ed5c5c</color>
+    <color name="self_goal_active">#e6a84e</color>
+    <color name="self_goal_total">#f46dbc</color>
+    <color name="text_color_read">#848484</color>
+    <color name="text_color_primary">#333333</color>
 
 </resources>

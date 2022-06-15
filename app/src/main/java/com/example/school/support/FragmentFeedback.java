@@ -1,7 +1,9 @@
 package com.example.school.support;
 
+import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -9,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.school.R;
+import com.example.school.home.MainActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,6 +28,16 @@ public class FragmentFeedback extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+    MainActivity mainActivity;
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        if (context instanceof MainActivity) {
+            mainActivity = (MainActivity) context;
+            mainActivity.setToolbarTitleText(getString(R.string.feedback));
+            mainActivity.changeDrawerIcon(true);
+        }
+    }
 
     public FragmentFeedback() {
         // Required empty public constructor

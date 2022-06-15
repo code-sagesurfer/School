@@ -17,6 +17,10 @@
             android:icon="@drawable/ic_menu_slideshow"
             android:title="@string/mood_tracking" />
         <item
+            android:id="@+id/nav_goal_management"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="@string/goal_management" />
+        <item
             android:id="@+id/nav_journaling"
             android:icon="@drawable/ic_journaling"
             android:title="@string/menu_journaling" />

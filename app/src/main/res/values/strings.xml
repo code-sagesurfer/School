@@ -106,6 +106,7 @@
     <string name="self_care_management">Self Care\nManagement</string>
     <string name="educational">Educational</string>
     <string name="spiritual">Spiritual</string>
+
     <string name="Nutritional_Guidance">Nutritional Guidance</string>
     <string name="last_night_sleep">Last Night Sleep</string>
     <string name="sleep_history">Sleep History</string>
@@ -222,4 +223,13 @@
     <string name="emotional_support">Emotional Support</string>
     <string name="menu_daily_planner">Daily Planner</string>
     <string name="menu_self_care">Self-Care</string>
+    <string name="campus_resources">Campus Resources</string>
+    <string name="faq">FAQ</string>
+    <string name="nutritional_guidance">Nutritional Guidance</string>
+    <string name="self_care">Self-Care</string>
+    <string name="goal">Goal</string>
+    <string name="goal_management">Goal Management</string>
+    <string name="Choose_Date">Choose Date</string>
+    <string name="category">Category</string>
+    <string name="share_with_friends">Share with friends</string>
 </resources>

@@ -34,7 +34,6 @@ public class ItemDetailView {
 
 
 
-
         dialog.show();
         dialog.setCanceledOnTouchOutside(true);
         dialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);

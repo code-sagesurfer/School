@@ -1,7 +1,7 @@
 package com.example.school.selfcaremanagement;
 
 import android.content.Context;
-import android.util.Log;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.school.ModelDetailData;
 import com.example.school.R;
 import com.example.school.emotional_support.FragmentEmotionalSupport;
 import com.example.school.social_activity.SocialActivityFragment;
@@ -64,7 +65,7 @@ public class AdapterSelfcareData extends RecyclerView.Adapter<AdapterSelfcareDat
         return contentArrayList.size();
     }
 
-    public class ViewHolderSelfCare extends RecyclerView.ViewHolder {
+    public class ViewHolderSelfCare extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView tv_title,tv_date,tv_duration;
         RoundedImageView iv_main;
         public ViewHolderSelfCare(@NonNull View itemView) {
@@ -73,6 +74,20 @@ public class AdapterSelfcareData extends RecyclerView.Adapter<AdapterSelfcareDat
             tv_date=itemView.findViewById(R.id.tv_date);
             tv_duration=itemView.findViewById(R.id.tv_duration);
             iv_main=itemView.findViewById(R.id.iv_main);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            Content_ content_= contentArrayList.get(getAbsoluteAdapterPosition());
+            if (fragment instanceof FragmentEmotionalSupport) {
+                FragmentEmotionalSupport emotionalSupport=(FragmentEmotionalSupport) fragment;
+
+            }else if (fragment instanceof FragmentSelfcareManagement){
+                FragmentSelfcareManagement selfcareManagement= (FragmentSelfcareManagement) fragment;
+                selfcareManagement.showDetailDialog(new ModelDetailData(""+content_.getTitle(),
+                        "",""+content_.getThumb_path(),""+content_.getDescription()));
+            }
         }
     }
 }

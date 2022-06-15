@@ -1,6 +1,9 @@
 package com.example.school;
 
-public class ModelDetailData {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public class ModelDetailData implements Parcelable {
 
     String Title;
     String Date;
@@ -13,6 +16,25 @@ public class ModelDetailData {
         ImagePath = imagePath;
         Desc = desc;
     }
+
+    protected ModelDetailData(Parcel in) {
+        Title = in.readString();
+        Date = in.readString();
+        ImagePath = in.readString();
+        Desc = in.readString();
+    }
+
+    public static final Creator<ModelDetailData> CREATOR = new Creator<ModelDetailData>() {
+        @Override
+        public ModelDetailData createFromParcel(Parcel in) {
+            return new ModelDetailData(in);
+        }
+
+        @Override
+        public ModelDetailData[] newArray(int size) {
+            return new ModelDetailData[size];
+        }
+    };
 
     public String getTitle() {
         return Title;
@@ -44,5 +66,19 @@ public class ModelDetailData {
 
     public void setDesc(String desc) {
         Desc = desc;
+    }
+
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(Title);
+        parcel.writeString(Date);
+        parcel.writeString(ImagePath);
+        parcel.writeString(Desc);
     }
 }
