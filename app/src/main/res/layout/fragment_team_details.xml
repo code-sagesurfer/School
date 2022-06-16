@@ -97,7 +97,7 @@
         <TextView
             android:id="@+id/tv_user_name_main"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="20dp"
             android:fontFamily="@font/poppins_regular"
             android:gravity="center"
             android:text="@string/middle_school"
@@ -110,7 +110,7 @@
         <TextView
             android:id="@+id/tv_role_main"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="20dp"
             android:fontFamily="@font/poppins_regular"
             android:gravity="center"
             android:maxLength="24"
@@ -126,7 +126,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout8"
+        android:id="@+id/cl_user_1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
@@ -163,7 +163,7 @@
         <TextView
             android:id="@+id/tv_user_name_1"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="20dp"
             android:fontFamily="@font/poppins_regular"
             android:gravity="center"
             android:text="@string/middle_school"
@@ -176,7 +176,7 @@
         <TextView
             android:id="@+id/tv_role_1"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="20dp"
             android:fontFamily="@font/poppins_regular"
             android:gravity="center"
             android:maxLength="24"
@@ -192,13 +192,13 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout9"
+        android:id="@+id/cl_user_2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:visibility="visible"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/constraintLayout8"
+        android:layout_marginEnd="24dp"
+        app:layout_constraintBottom_toBottomOf="@+id/cl_user_1"
         app:layout_constraintEnd_toStartOf="@+id/cv_adult"
 
         app:layout_constraintTop_toTopOf="@+id/cv_adult">
@@ -231,7 +231,7 @@
         <TextView
             android:id="@+id/tv_user_name_2"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="20dp"
             android:fontFamily="@font/poppins_regular"
             android:gravity="center"
             android:text="@string/middle_school"
@@ -244,7 +244,7 @@
         <TextView
             android:id="@+id/tv_role_2"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="20dp"
             android:fontFamily="@font/poppins_regular"
             android:gravity="center"
             android:maxLength="24"
@@ -264,8 +264,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="@+id/constraintLayout8"
-        android:layout_marginStart="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/cl_user_1"
+        android:layout_marginStart="24dp"
         app:layout_constraintStart_toEndOf="@+id/cv_adult"
         app:layout_constraintTop_toTopOf="@+id/cv_adult">
 
@@ -297,7 +297,7 @@
         <TextView
             android:id="@+id/tv_user_name_6"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="20dp"
             android:fontFamily="@font/poppins_regular"
             android:gravity="center"
             android:text="@string/middle_school"
@@ -310,7 +310,7 @@
         <TextView
             android:id="@+id/tv_role_6"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="20dp"
             android:fontFamily="@font/poppins_regular"
             android:gravity="center"
             android:maxLength="24"
@@ -338,7 +338,7 @@
         <TextView
             android:id="@+id/tv_user_name_4"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="20dp"
             android:fontFamily="@font/poppins_regular"
             android:gravity="center"
             android:text="@string/middle_school"
@@ -351,7 +351,7 @@
         <TextView
             android:id="@+id/tv_role_4"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="20dp"
             android:fontFamily="@font/poppins_regular"
             android:gravity="center"
             android:maxLength="24"
@@ -398,7 +398,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="visible"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="24dp"
         app:layout_constraintBottom_toBottomOf="@+id/cv_adult"
         app:layout_constraintEnd_toStartOf="@+id/cv_adult"
         app:layout_constraintTop_toTopOf="@+id/cl_user_4">
@@ -419,7 +419,7 @@
         <TextView
             android:id="@+id/tv_role_3"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="20dp"
             android:fontFamily="@font/poppins_regular"
             android:gravity="center"
             android:maxLength="24"
@@ -465,7 +465,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="visible"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="24dp"
         app:layout_constraintBottom_toBottomOf="@+id/cv_adult"
         app:layout_constraintStart_toEndOf="@+id/cv_adult"
         app:layout_constraintTop_toTopOf="@+id/cl_user_4">
@@ -473,7 +473,7 @@
         <TextView
             android:id="@+id/tv_user_name_5"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="20dp"
             android:fontFamily="@font/poppins_regular"
             android:gravity="center"
             android:text="@string/middle_school"
@@ -486,7 +486,7 @@
         <TextView
             android:id="@+id/tv_role_5"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="20dp"
             android:fontFamily="@font/poppins_regular"
             android:gravity="center"
             android:maxLength="24"
@@ -620,7 +620,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <View
-                android:id="@+id/view2"
+                android:id="@+id/vw_view_all"
                 android:layout_width="98dp"
                 android:layout_height="29dp"
 
@@ -639,13 +639,13 @@
                 android:text="@string/view_all"
                 android:textColor="@color/white"
                 android:textSize="13sp"
-                app:layout_constraintBottom_toBottomOf="@+id/view2"
-                app:layout_constraintStart_toStartOf="@+id/view2"
-                app:layout_constraintTop_toTopOf="@id/view2" />
+                app:layout_constraintBottom_toBottomOf="@+id/vw_view_all"
+                app:layout_constraintStart_toStartOf="@+id/vw_view_all"
+                app:layout_constraintTop_toTopOf="@id/vw_view_all" />
 
             <TextView
                 android:layout_width="22dp"
-                android:layout_height="22dp"
+                android:layout_height="20dp"
                 android:layout_marginTop="5dp"
                 android:layout_marginEnd="8dp"
                 android:fontFamily="@font/poppins_regular"
@@ -655,10 +655,10 @@
                 android:textColor="@color/green_active"
                 android:textSize="12sp"
                 android:gravity="center"
-                app:layout_constraintBottom_toBottomOf="@+id/view2"
-                app:layout_constraintEnd_toEndOf="@+id/view2"
+                app:layout_constraintBottom_toBottomOf="@+id/vw_view_all"
+                app:layout_constraintEnd_toEndOf="@+id/vw_view_all"
 
-                app:layout_constraintTop_toTopOf="@id/view2" />
+                app:layout_constraintTop_toTopOf="@id/vw_view_all" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

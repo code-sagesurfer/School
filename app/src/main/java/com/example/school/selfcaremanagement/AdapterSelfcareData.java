@@ -58,6 +58,8 @@ public class AdapterSelfcareData extends RecyclerView.Adapter<AdapterSelfcareDat
                     .into(holder.iv_main);
 
         }
+
+
     }
 
     @Override
