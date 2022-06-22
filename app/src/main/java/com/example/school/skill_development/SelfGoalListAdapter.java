@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.res.Resources;
 import android.graphics.Rect;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.cardview.widget.CardView;
@@ -21,7 +23,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.school.R;
 import com.example.school.resources.GetTime;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+
+import okhttp3.RequestBody;
 
 /**
  * @author Rahul Maske (monikam@sagesurfer.com)
@@ -73,6 +83,7 @@ public class SelfGoalListAdapter extends RecyclerView.Adapter {
             percentText = (TextView) view.findViewById(R.id.selfgoallistitem_percent);
             tv_final_status = (TextView) view.findViewById(R.id.tv_final_status);
 
+
             cardview=view.findViewById(R.id.cardview);
 
             progressBar = (ProgressBar) view.findViewById(R.id.selfgoallistitem_pb);
@@ -123,6 +134,7 @@ public class SelfGoalListAdapter extends RecyclerView.Adapter {
 
         if (goal_.getToday_status() == 1) {
             viewHolder.tv_today_status.setVisibility(View.VISIBLE);
+            viewHolder.tv_today_status_text.setVisibility(View.VISIBLE);
             //viewHolder.inputLabel.setVisibility(View.VISIBLE);
 //            viewHolder.mainLayout.setBackgroundResource(R.drawable.red_rounded_border);
             viewHolder.cardview.setBackgroundResource(R.drawable.cardview_red);
@@ -130,6 +142,7 @@ public class SelfGoalListAdapter extends RecyclerView.Adapter {
             viewHolder.tv_today_status.setTextColor(activity.getResources().getColor(R.color.self_goal_missed));
         } else if (goal_.getToday_status() == 2) {
             viewHolder.tv_today_status.setVisibility(View.VISIBLE);
+            viewHolder.tv_today_status_text.setVisibility(View.VISIBLE);
            // viewHolder.inputLabel.setVisibility(View.VISIBLE);
 //            viewHolder.mainLayout.setBackgroundResource(R.drawable.green_rounded_border);
             viewHolder.cardview.setBackgroundResource(R.drawable.carview_green);
@@ -183,25 +196,25 @@ public class SelfGoalListAdapter extends RecyclerView.Adapter {
         Rect bounds = viewHolder.progressBar.getProgressDrawable().getBounds();
         viewHolder.tv_final_status.setVisibility(View.GONE);
         if (status == 0) {
-            //
             // viewHolder.imageviewstatusdisplay.setImageResource(R.drawable.ic_goal3);
             viewHolder.tv_final_status.setBackgroundResource(R.drawable.goal_active_rounded_rectangle);
             viewHolder.progressBar.setProgressDrawable(resources.getDrawable(R.drawable.goal_progress_active));
-            viewHolder.statusText.setText(resources.getString(R.string.active));
+            viewHolder.tv_today_status.setText(resources.getString(R.string.active));
             viewHolder.percentText.setTextColor(resources.getColor(R.color.self_goal_active));
         } else if (status == 1) {
             //viewHolder.imageviewstatusdisplay.setImageResource(R.drawable.ic_goal1);
             viewHolder.tv_final_status.setBackgroundResource(R.drawable.goal_completed_rounded_rectangle);
             viewHolder.progressBar.setProgressDrawable(resources.getDrawable(R.drawable.goal_progress_completed));
-            viewHolder.tv_final_status.setText(resources.getString(R.string.completed));
+            viewHolder.tv_today_status.setText(resources.getString(R.string.completed));
             viewHolder.percentText.setTextColor(resources.getColor(R.color.self_goal_completed));
         } else {
            // viewHolder.imageviewstatusdisplay.setImageResource(R.drawable.ic_goal2);
             viewHolder.tv_final_status.setBackgroundResource(R.drawable.goal_missed_rounded_rectangle);
             viewHolder.progressBar.setProgressDrawable(resources.getDrawable(R.drawable.goal_progress_missed));
-            viewHolder.tv_final_status.setText(resources.getString(R.string.missed));
+            viewHolder.tv_today_status.setText(resources.getString(R.string.missed));
             viewHolder.percentText.setTextColor(resources.getColor(R.color.self_goal_missed));
         }
         viewHolder.progressBar.getProgressDrawable().setBounds(bounds);
     }
+
 }

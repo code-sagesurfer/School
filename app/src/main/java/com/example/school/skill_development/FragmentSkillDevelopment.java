@@ -13,12 +13,15 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.school.R;
+import com.example.school.goalmanagement.FragmentAddGoal;
 import com.example.school.home.MainActivity;
 import com.example.school.resources.APIManager;
 import com.example.school.resources.Actions_;
@@ -27,10 +30,16 @@ import com.example.school.resources.General;
 import com.example.school.resources.Preferences;
 import com.example.school.resources.Urls_;
 import com.example.school.resources.apidata.MakeCall;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 
 import butterknife.BindView;
@@ -52,6 +61,9 @@ public class FragmentSkillDevelopment extends Fragment implements SelfGoalListAd
 
     @BindView(R.id.tv_active)
     TextView tv_active;
+
+    @BindView(R.id.fb_add_goal)
+    FloatingActionButton fb_add_goal;
 
     @BindView(R.id.tv_missed)
     TextView tv_missed;
@@ -104,7 +116,17 @@ public class FragmentSkillDevelopment extends Fragment implements SelfGoalListAd
         RecyclerView.LayoutManager mLayoutManagerJournaling = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         rv_goals.setLayoutManager(mLayoutManagerJournaling);
         rv_goals.setItemAnimator(new DefaultItemAnimator());
-
+        fb_add_goal.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentAddGoal developmentDetails=new FragmentAddGoal();
+                FragmentManager fm=getActivity().getSupportFragmentManager();
+                FragmentTransaction ft=fm.beginTransaction();
+                ft.replace(R.id.main_container,developmentDetails,TAG);
+                ft.addToBackStack("FragmentSkillDevelopment");
+                ft.commit();
+            }
+        });
         return view;
     }
 
@@ -233,6 +255,8 @@ public class FragmentSkillDevelopment extends Fragment implements SelfGoalListAd
 
     }
 
+
+
     // make network call to fetch goal counters based on goal status
     private void getGoalsNew() {
         HashMap<String, String> requestMap = new HashMap<>();
@@ -287,4 +311,6 @@ public class FragmentSkillDevelopment extends Fragment implements SelfGoalListAd
         tv_active.setText(running);
         tv_total_count.setText(total);
     }
+
+
 }

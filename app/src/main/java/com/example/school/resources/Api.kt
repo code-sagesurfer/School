@@ -49,6 +49,9 @@ interface Api {
     @POST(Urls_.MOBILE_REWARDS)
     fun getRewardsData(@Body body: RequestBody?): Call<JsonElement>
 
+    @POST("mobile_support.php")
+    fun mobile_support(@Body params: RequestBody): Call<JsonElement>
+
     @POST("mobile_youth_operations_new.php")
     fun mobile_youth_operations_new(@Body params: RequestBody): Call<JsonElement>
 
@@ -183,6 +186,9 @@ interface Api {
 
     @POST("mobile_gratitude_journaling.php")
     fun get_gratitude_list(@Body params: RequestBody): Call<JsonElement>
+
+    @POST(Urls_.MOBILE_SELF_GOAL)
+    fun self_goal(@Body params: RequestBody): Call<JsonElement>
 
     @POST(Urls_.MOBILE_COMETCHAT_TEAMS)
     fun get_team_list(@Body params: RequestBody): Call<JsonElement>

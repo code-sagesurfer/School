@@ -11,12 +11,14 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
+import androidx.exifinterface.media.ExifInterface;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
@@ -47,14 +49,23 @@ import com.example.school.home.ui.ModelGratitudeListingResponse;
 import com.example.school.resources.APIManager;
 import com.example.school.resources.Actions_;
 import com.example.school.resources.AppLog;
+import com.example.school.resources.CheckFileType;
+import com.example.school.resources.FileOperations;
+import com.example.school.resources.FileUpload;
 import com.example.school.resources.General;
 import com.example.school.resources.Preferences;
+import com.example.school.resources.UriUtils;
 import com.example.school.resources.Urls_;
 import com.example.school.resources.Utils;
 import com.example.school.resources.apidata.MakeCall;
+import com.example.school.resources.showstatus.ShowLoader;
+import com.example.school.resources.showstatus.ShowToast;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.text.DateFormat;
@@ -244,8 +255,8 @@ public class JournalingMainListing extends Fragment implements iSelectedImageRes
         //AppCompatImageView iv_main_banner = view.findViewById(R.id.iv_main_banner);
         //Glide.with(getContext()).load(categoryResponse.getBanner_image()).into(iv_main_banner);
 
-        et_title = view.findViewById(R.id.et_title);
-        Spinner sp_category = view.findViewById(R.id.sp_category);
+        et_title = view.findViewById(R.id.et_goal_title);
+        Spinner sp_category = view.findViewById(R.id.sp_goal_frequency);
         tv_share_with_friends = view.findViewById(R.id.tv_share_with_friends);
         et_desc = view.findViewById(R.id.et_desc);
         et_location = view.findViewById(R.id.et_location);
@@ -256,7 +267,7 @@ public class JournalingMainListing extends Fragment implements iSelectedImageRes
         //iv_error_message = view.findViewById(R.id.iv_error_message);
 
         // ImageView imageviewclose = view.findViewById(R.id.imageviewclose);
-        attached_image = view.findViewById(R.id.attached_image);
+        attached_image = view.findViewById(R.id.iv_goal_attached_image);
         //ImageView imageviewsubmit = view.findViewById(R.id.imageviewsubmit);
         //tv_file_name = view.findViewById(R.id.tv_file_name);
 
@@ -474,12 +485,15 @@ public class JournalingMainListing extends Fragment implements iSelectedImageRes
     }
 
     private void checkPermission() {
+        Preferences.initialize(getContext());
+        Preferences.save(General.UPLOADING_CONTENT_FROM,"JournalingMainListing");
+
         if (checkSelfPermission(
                 requireActivity(), Manifest.permission.READ_EXTERNAL_STORAGE) ==
                 PackageManager.PERMISSION_GRANTED) {
             Intent musicIntent = new Intent(Intent.ACTION_GET_CONTENT);
             musicIntent.setType("*/*");
-            startActivityForResult(musicIntent, 2021);
+            getActivity().startActivityForResult(musicIntent, 2021);
         } else if (shouldShowRequestPermissionRationale(Manifest.permission.READ_EXTERNAL_STORAGE)) {
             showRotationalPremissionDialog();
         } else {
@@ -635,18 +649,47 @@ public class JournalingMainListing extends Fragment implements iSelectedImageRes
     }
 
 
-    @Override
+  /*  @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         Log.d(TAG, "onActivityResult: "+requestCode);
+        try {
+            String file_path = UriUtils.getPathFromUri(MainActivity.this, data.getData());
+            double size = FileOperations.getSizeMB(file_path);
+            if (file_path == null || file_path.trim().length() <= 0) {
+                Log.i(TAG, "onActivityResult: path");
+                showErrorMessage("Please Select Valid File");
+               // imageResponseInterface.showErrorMessage("Please Select Valid File");
+                //Toast.makeText(MainActivity.this, "Please select valid file", Toast.LENGTH_SHORT).show();
+            } else if (size > 10.0) {
+                Log.i(TAG, "onActivityResult: size " + size);
+                Log.i(TAG, "onActivityResult: size greater");
+                //showErrorMessage
+                showErrorMessage("Max file size allowed is 10MB");
+                //Toast.makeText(MainActivity.this, "Max file size allowed is 10MB", Toast.LENGTH_SHORT).show();
+            } else if (CheckFileType.isDocument(file_path) || CheckFileType.xlsFile(file_path)
+                    || CheckFileType.pdfFile(file_path) || CheckFileType.imageFile(file_path)) {
+                Log.i(TAG, "onActivityResult: uploading");
+                new MainActivity.UploadFile().execute(file_path);
+            } else {
+                showErrorMessage("Please Select Valid File");
+                //Toast.makeText(MainActivity.this, "Please Select Valid File", Toast.LENGTH_SHORT).show();
+            }
+
+
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
+*/
 
     @Override
     public void onImageSelectedMethod1(Context context, String path, long file_id) {
         file_path = path;
        // tv_file_name.setText(file_path);
         SelectedFileId = String.valueOf(file_id);
-        attached_image.setVisibility(View.VISIBLE);
+        this.attached_image.setVisibility(View.VISIBLE);
         //iv_error_message.setVisibility(View.GONE);
         checkThumbnailAndSet(file_path);
     }
@@ -977,6 +1020,117 @@ public class JournalingMainListing extends Fragment implements iSelectedImageRes
             }
         } else {
             //showError(true, status);
+        }
+    }
+
+    long SelectedFile;
+    @SuppressLint("StaticFieldLeak")
+    private class UploadFile extends AsyncTask<String, Void, Integer> {
+        ShowLoader showLoader;
+        String path;
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            showLoader = new ShowLoader();
+            showLoader.showUploadDialog(getActivity(), "Uploading...");
+        }
+
+        @Override
+        protected Integer doInBackground(String... params) {
+            path = params[0];
+            int status = 12;
+            String file_name = FileOperations.getFileName(path);
+            String url = Preferences.get(General.DOMAIN).
+                    replaceAll(General.INSATNCE_NAME, "") + Urls_.MOBILE_UPLOADER;
+            AppLog.i(TAG, "File Upload URL: " + url);
+            String user_id = Preferences.get(General.USER_ID);
+            try {
+                String response = FileUpload.uploadFile(path, file_name, user_id, url,
+                        Actions_.FMS, getContext(), getActivity());
+                //Log.i(UploadFileActivity.class.getSimpleName(), "upload response " + response);
+                if (response != null) {
+                    JsonParser jsonParser = new JsonParser();
+                    JsonObject jsonObject = jsonParser.parse(response).getAsJsonObject();
+                    if (jsonObject.has(Actions_.FMS)) {
+                        JsonArray jsonArray = jsonObject.getAsJsonArray(Actions_.FMS);
+                        if (jsonArray != null) {
+                            JsonObject object = jsonArray.get(0).getAsJsonObject();
+                            if (object.has(General.STATUS)) {
+                                status = object.get(General.STATUS).getAsInt();
+                                if (status == 1) {
+                                    SelectedFile = object.get(General.ID).getAsLong();
+                                    AppLog.i(TAG, "doInBackground: file_id" + SelectedFile);
+                                }
+                            } else {
+                                status = 11;
+                            }
+                        } else {
+                            status = 11;
+                        }
+                    }
+                } else {
+                    status = 11;
+                }
+            } catch (Exception e1) {
+                e1.printStackTrace();
+            }
+            return status;
+        }
+
+        @Override
+        protected void onPostExecute(Integer result) {
+            super.onPostExecute(result);
+            if (showLoader != null)
+                showLoader.dismissUploadDialog();
+
+            switch (result) {
+                case 1:
+                    ShowToast.toast(getResources().getString(R.string.upload_successful), getActivity());
+                    AppLog.i(TAG, "onPostExecute: " + FileOperations.getFileName(path));
+                    AppLog.i(TAG, "onPostExecute: path" + path);
+                    //filename = FileOperations.getFileName(path);
+                    //et_select_file.setText(filename);
+                    //Preferences.save("FileName", filename);
+                    Preferences.save("file_id", SelectedFile);
+                    if (Preferences.contains(General.UPLOADING_FROM)
+                            && Preferences.get(General.UPLOADING_FROM).equalsIgnoreCase("GratitudeJournalingMain")) {
+                        //permissionResult.onUploadImageForGratitude(SelectedFile,MainActivity.this,path);
+                        //showErrorMessage
+                        Preferences.save(General.UPLOADING_CONTENT_FROM, "JournalingMainListing");
+                       /* if (Preferences.contains(General.UPLOADING_CONTENT_FROM)) {
+                            if (Preferences.get(General.UPLOADING_CONTENT_FROM).equalsIgnoreCase("JournalingMainListing")) {
+                                imageResponseInterface.onImageSelectedMethod1(MainActivity.this, path, SelectedFile);
+                            } else if (Preferences.get(General.UPLOADING_CONTENT_FROM).equalsIgnoreCase("FragmentAddGoal")) {
+                                interfaceGoalImageResponseHandler.onGoalImageSelected(MainActivity.this, path, SelectedFile);
+                            }
+                        }*/
+
+                        onImageSelectedMethod1(getContext(), path, SelectedFile);
+
+
+                    } else {
+                        //permissionResult.onUploadImageForMedicine(SelectedFile, MainActivity.this);
+//                    permissionResult.onUploadImageForMedicine(SelectedFile,MainActivity.this);
+                        Log.i(TAG, "onPostExecute : file_id" + SelectedFile);
+                    }
+                    //et_select_file.setText(FileOperations.getFileName(path));
+                    break;
+                case 2:
+                    ShowToast.toast(getResources().getString(R.string.failed), getActivity());
+                    showLoader.dismissUploadDialog();
+                    break;
+                case 11:
+                    ShowToast.toast(getResources().getString(R.string.internal_error_occurred), getActivity());
+                    showLoader.dismissUploadDialog();
+                    break;
+                case 12:
+                    ShowToast.toast(getResources().getString(R.string.network_error_occurred), getActivity());
+                    showLoader.dismissUploadDialog();
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }

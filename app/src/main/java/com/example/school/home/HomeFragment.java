@@ -222,7 +222,7 @@ public class HomeFragment extends Fragment {
         super.onResume();
         //moodData.fetchJournalMoodDataNew(0, 50, getContext(), getActivity(), HomeFragment.this);
         DashboardData dashboardData = new DashboardData();
-        dashboardData.getDashboardData(getContext(), getActivity(), this);
+        dashboardData.getDashboardData(getContext(), getActivity(), HomeFragment.this);
 
         Date currentTime = Calendar.getInstance().getTime();
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");

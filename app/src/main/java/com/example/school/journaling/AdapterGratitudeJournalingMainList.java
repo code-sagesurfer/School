@@ -222,7 +222,7 @@ public class AdapterGratitudeJournalingMainList extends RecyclerView.Adapter<Ada
             tv_title = itemView.findViewById(R.id.tv_title);
             tv_gj_list_date = itemView.findViewById(R.id.tv_gj_list_date);
             iv_more = itemView.findViewById(R.id.iv_more);
-            attached_image = itemView.findViewById(R.id.attached_image);
+            attached_image = itemView.findViewById(R.id.iv_goal_attached_image);
             //tv_desc_text_Na = itemView.findViewById(R.id.tv_desc_text_Na);
             main_card = itemView.findViewById(R.id.main_card);
             iv_more.setOnClickListener(this);

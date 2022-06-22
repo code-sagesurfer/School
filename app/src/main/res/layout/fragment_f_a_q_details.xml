@@ -7,19 +7,31 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".support.FragmentFAQDetails">
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/rv_faq_list"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        />
+
+
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
+        android:layout_marginTop="16dp"
         android:background="@drawable/primary_orange_rounded_border"
         android:padding="16dp"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/rv_faq_list">
 
         <TextView
-            android:id="@+id/faq_que1"
+            android:id="@+id/faq_que"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:fontFamily="@font/poppins_medium"
@@ -36,7 +48,7 @@
             android:layout_height="20dp"
             android:padding="4dp"
             android:src="@drawable/next_arrow"
-            app:layout_constraintBottom_toBottomOf="@+id/faq_que1"
+            app:layout_constraintBottom_toBottomOf="@+id/faq_que"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -51,7 +63,7 @@
             android:textSize="14sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/faq_que1" />
+            app:layout_constraintTop_toBottomOf="@+id/faq_que" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -60,6 +72,7 @@
         android:background="@drawable/primary_orange_rounded_border"
         android:layout_marginTop="16dp"
         android:padding="16dp"
+        android:visibility="gone"
         android:id="@+id/constraintLayout2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -108,6 +121,7 @@
         android:background="@drawable/primary_orange_rounded_border"
         android:layout_marginTop="16dp"
         android:padding="16dp"
+        android:visibility="gone"
         android:id="@+id/constraintLayout3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -156,6 +170,7 @@
         android:background="@drawable/primary_orange_rounded_border"
         android:layout_marginTop="16dp"
         android:padding="16dp"
+        android:visibility="gone"
         android:id="@+id/constraintLayout4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -204,6 +219,7 @@
         android:background="@drawable/primary_orange_rounded_border"
         android:layout_marginTop="16dp"
         android:padding="16dp"
+        android:visibility="gone"
         android:id="@+id/constraintLayout5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

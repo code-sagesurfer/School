@@ -23,6 +23,8 @@ import com.example.school.R;
 
 import com.example.school.databinding.ActivityMainBinding;
 import com.example.school.emotional_support.FragmentEmotionalSupport;
+import com.example.school.goalmanagement.FragmentAddGoal;
+import com.example.school.goalmanagement.InterfaceGoalImageResponseHandler;
 import com.example.school.home.dailyplanner.FragmentPlannerMain;
 import com.example.school.home.ui.ModelGratitudeListingResponse;
 import com.example.school.journaling.JournalingMainListing;
@@ -96,6 +98,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private TextView tv_role, tv_user_name;
     private TextView tv_settings, tv_toolbar_title;
     iSelectedImageResponse imageResponseInterface;
+    InterfaceGoalImageResponseHandler interfaceGoalImageResponseHandler;
     private static final String TAG = "MainActivity";
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
@@ -133,6 +136,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
         imageResponseInterface = new JournalingMainListing();
+        interfaceGoalImageResponseHandler = new FragmentAddGoal();
         mDrawerLayout.setDrawerListener(toggle);
         toggle.setDrawerIndicatorEnabled(true);
 
@@ -146,7 +150,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tv_user_name.setText(Preferences.get(General.NAME));
         tv_role.setText(Preferences.get(General.ROLE));
 
-        if (Preferences.get(General.IMAGE)!=null && Preferences.get(General.IMAGE).length()!=0 ) {
+        if (Preferences.get(General.IMAGE) != null && Preferences.get(General.IMAGE).length() != 0) {
             Glide.with(this)
                     .load(Preferences.get(General.IMAGE))
                     .placeholder(R.drawable.ic_user_male)
@@ -223,7 +227,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             case R.id.tv_settings:
             case R.id.iv_settings:
-                FragmentManager fragManager =getSupportFragmentManager();
+                FragmentManager fragManager = getSupportFragmentManager();
                 FragmentTransaction ft = fragManager.beginTransaction();
                 //ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left);
                 ft.replace(R.id.main_container, new FragmentSettings(), "FragmentSettings");
@@ -284,7 +288,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             ft.addToBackStack("HomeFragment");
             ft.commit();
             mDrawerLayout.closeDrawer(Gravity.LEFT);
-        }else if (item.getTitle().toString().equals("Mood Tracking")) {
+        } else if (item.getTitle().toString().equals("Mood Tracking")) {
             FragmentManager fragManager = getSupportFragmentManager();
             FragmentTransaction ft = fragManager.beginTransaction();
             //ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left);
@@ -292,9 +296,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             ft.addToBackStack("HomeFragment");
             ft.commit();
             mDrawerLayout.closeDrawer(Gravity.LEFT);
-        }else if (item.getTitle().toString().equals("Team Care")) {
+        } else if (item.getTitle().toString().equals("Team Care")) {
             getTeamListFromServer();
-        }else if (item.getTitle().toString().equals("Self-Care")) {
+        } else if (item.getTitle().toString().equals("Self-Care")) {
             FragmentManager fragManager = getSupportFragmentManager();
             FragmentTransaction ft = fragManager.beginTransaction();
             //ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left);
@@ -302,7 +306,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             ft.addToBackStack("HomeFragment");
             ft.commit();
             mDrawerLayout.closeDrawer(Gravity.LEFT);
-        }else if (item.getTitle().toString().equals("Support")) {
+        } else if (item.getTitle().toString().equals("Support")) {
             FragmentManager fragManager = getSupportFragmentManager();
             FragmentTransaction ft = fragManager.beginTransaction();
             //ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left);
@@ -310,7 +314,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             ft.addToBackStack("HomeFragment");
             ft.commit();
             mDrawerLayout.closeDrawer(Gravity.LEFT);
-        }else if (item.getTitle().toString().equals("Goal Management")) {
+        } else if (item.getTitle().toString().equals("Goal Management")) {
             FragmentManager fragManager = getSupportFragmentManager();
             FragmentTransaction ft = fragManager.beginTransaction();
             //ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left);
@@ -367,19 +371,19 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         AppLog.i(TAG, "onResponse: " + resposeBody);
                         ModelTeamListResponse gratitudeListingResponse = gson.fromJson(response.body(), ModelTeamListResponse.class);
                         if (gratitudeListingResponse.getAllTeams().get(0).getStatus() == 1) {
-                            if (gratitudeListingResponse.getAllTeams().size()==1){
-                                Bundle bundle=new Bundle();
-                                FragmentTeamDetails teamDetails= new FragmentTeamDetails();
+                            if (gratitudeListingResponse.getAllTeams().size() == 1) {
+                                Bundle bundle = new Bundle();
+                                FragmentTeamDetails teamDetails = new FragmentTeamDetails();
                                 bundle.putParcelable(General.TEAM_DATA, (Parcelable) gratitudeListingResponse);
                                 teamDetails.setArguments(bundle);
 
                                 FragmentManager fragManager = getSupportFragmentManager();
                                 FragmentTransaction ft = fragManager.beginTransaction();
-                                ft.replace(R.id.main_container,teamDetails, "FragmentTeamDetails");
+                                ft.replace(R.id.main_container, teamDetails, "FragmentTeamDetails");
                                 ft.addToBackStack("HomeFragment");
                                 ft.commit();
                                 mDrawerLayout.closeDrawer(Gravity.LEFT);
-                            }else{
+                            } else {
                                 Toast.makeText(MainActivity.this, "Please login with adult..", Toast.LENGTH_SHORT).show();
                             }
                         } else {
@@ -409,30 +413,65 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Log.i(TAG, "onActivityResult: requestCode " + requestCode);
-        try {
-            String file_path = UriUtils.getPathFromUri(MainActivity.this, data.getData());
-            double size = FileOperations.getSizeMB(file_path);
-            if (file_path == null || file_path.trim().length() <= 0) {
-                Log.i(TAG, "onActivityResult: path");
-                imageResponseInterface.showErrorMessage("Please Select Valid File");
-                //Toast.makeText(MainActivity.this, "Please select valid file", Toast.LENGTH_SHORT).show();
-            } else if (size > 10.0) {
-                Log.i(TAG, "onActivityResult: size " + size);
-                Log.i(TAG, "onActivityResult: size greater");
-                //showErrorMessage
-                imageResponseInterface.showErrorMessage("Max file size allowed is 10MB");
-                //Toast.makeText(MainActivity.this, "Max file size allowed is 10MB", Toast.LENGTH_SHORT).show();
-            } else if (CheckFileType.isDocument(file_path) || CheckFileType.xlsFile(file_path)
-                    || CheckFileType.pdfFile(file_path) || CheckFileType.imageFile(file_path)) {
-                Log.i(TAG, "onActivityResult: uploading");
-                new UploadFile().execute(file_path);
-            } else {
-                imageResponseInterface.showErrorMessage("Please Select Valid File");
-                //Toast.makeText(MainActivity.this, "Please Select Valid File", Toast.LENGTH_SHORT).show();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+        Log.i(TAG, "onActivityResult: requestCode " + requestCode +" "+resultCode);
+
+        switch (requestCode) {
+            case General.JOURNALING_PERMISSION:
+                try {
+                    String file_path = UriUtils.getPathFromUri(MainActivity.this, data.getData());
+                    double size = FileOperations.getSizeMB(file_path);
+                    if (file_path == null || file_path.trim().length() <= 0) {
+                        Log.i(TAG, "onActivityResult: path");
+                        imageResponseInterface.showErrorMessage("Please Select Valid File");
+                        //Toast.makeText(MainActivity.this, "Please select valid file", Toast.LENGTH_SHORT).show();
+                    } else if (size > 10.0) {
+                        Log.i(TAG, "onActivityResult: size " + size);
+                        Log.i(TAG, "onActivityResult: size greater");
+                        //showErrorMessage
+                        imageResponseInterface.showErrorMessage("Max file size allowed is 10MB");
+                        //Toast.makeText(MainActivity.this, "Max file size allowed is 10MB", Toast.LENGTH_SHORT).show();
+                    } else if (CheckFileType.isDocument(file_path) || CheckFileType.xlsFile(file_path)
+                            || CheckFileType.pdfFile(file_path) || CheckFileType.imageFile(file_path)) {
+                        Log.i(TAG, "onActivityResult: uploading");
+                        new UploadFile().execute(file_path);
+                    } else {
+                        imageResponseInterface.showErrorMessage("Please Select Valid File");
+                        //Toast.makeText(MainActivity.this, "Please Select Valid File", Toast.LENGTH_SHORT).show();
+                    }
+                    break;
+
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            case 201:
+                try {
+                    String file_path = UriUtils.getPathFromUri(MainActivity.this, data.getData());
+                    double size = FileOperations.getSizeMB(file_path);
+                    if (file_path == null || file_path.trim().length() <= 0) {
+                        Log.i(TAG, "onActivityResult: path");
+                        interfaceGoalImageResponseHandler.showGoalErrorMessage("Please Select Valid File");
+                        //Toast.makeText(MainActivity.this, "Please select valid file", Toast.LENGTH_SHORT).show();
+                    } else if (size > 10.0) {
+                        Log.i(TAG, "onActivityResult: size " + size);
+                        Log.i(TAG, "onActivityResult: size greater");
+                        //showErrorMessage
+                        interfaceGoalImageResponseHandler.showGoalErrorMessage("Max file size allowed is 10MB");
+                        //Toast.makeText(MainActivity.this, "Max file size allowed is 10MB", Toast.LENGTH_SHORT).show();
+                    } else if (CheckFileType.isDocument(file_path) || CheckFileType.xlsFile(file_path)
+                            || CheckFileType.pdfFile(file_path) || CheckFileType.imageFile(file_path)) {
+                        Log.i(TAG, "onActivityResult: uploading");
+                        new UploadFile().execute(file_path);
+
+                    } else {
+                        interfaceGoalImageResponseHandler.showGoalErrorMessage("Please Select Valid File");
+                        //Toast.makeText(MainActivity.this, "Please Select Valid File", Toast.LENGTH_SHORT).show();
+                    }
+                    break;
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
         }
 
     }
@@ -440,14 +479,25 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        Log.i(TAG, "onActivityResult: requestCode " + requestCode);
+        Log.i(TAG, "onActivityResult: requestCode " + requestCode );
         switch (requestCode) {
-            case 2021:
+
+            case General.JOURNALING_PERMISSION:
+
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     Intent musicIntent = new Intent(Intent.ACTION_GET_CONTENT);
                     musicIntent.setType("*/*");
-                    startActivityForResult(musicIntent, 2021);
+                    startActivityForResult(musicIntent, General.JOURNALING_PERMISSION);
+                }
+                break;
+
+            case 201:
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Intent musicIntent = new Intent(Intent.ACTION_GET_CONTENT);
+                    musicIntent.setType("*/*");
+                    startActivityForResult(musicIntent, General.GOAL_PERMISSION);
                 }
                 break;
         }
@@ -530,7 +580,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             && Preferences.get(General.UPLOADING_FROM).equalsIgnoreCase("GratitudeJournalingMain")) {
                         //permissionResult.onUploadImageForGratitude(SelectedFile,MainActivity.this,path);
                         //showErrorMessage
-                        imageResponseInterface.onImageSelectedMethod1(MainActivity.this, path, SelectedFile);
+
+                        if (Preferences.contains(General.UPLOADING_CONTENT_FROM)) {
+                            if (Preferences.get(General.UPLOADING_CONTENT_FROM).equalsIgnoreCase("JournalingMainListing")) {
+                                imageResponseInterface.onImageSelectedMethod1(MainActivity.this, path, SelectedFile);
+                            } else if (Preferences.get(General.UPLOADING_CONTENT_FROM).equalsIgnoreCase("FragmentAddGoal")) {
+                                Log.i(TAG, "onPostExecute:FragmentAddGoal ");
+                                interfaceGoalImageResponseHandler.onGoalImageSelected(MainActivity.this, path, SelectedFile);
+                            }
+                        }
+
+
                     } else {
                         //permissionResult.onUploadImageForMedicine(SelectedFile, MainActivity.this);
 //                    permissionResult.onUploadImageForMedicine(SelectedFile,MainActivity.this);
@@ -555,4 +615,5 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
     }
+
 }

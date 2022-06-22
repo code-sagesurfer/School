@@ -24,7 +24,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/faq_que1"
+            android:id="@+id/faq_que"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -51,7 +51,7 @@
             android:textColorHint="#A5A5A5"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/faq_que1" />
+            app:layout_constraintTop_toBottomOf="@+id/faq_que" />
 
         <LinearLayout
             android:id="@+id/linearLayout2"

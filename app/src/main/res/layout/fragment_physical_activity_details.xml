@@ -92,7 +92,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <View
-            android:id="@+id/view_weekly"
+            android:id="@+id/view_new_user"
             android:layout_width="93dp"
             android:layout_height="31dp"
             android:background="@drawable/rounded_background_white"
@@ -110,10 +110,10 @@
             android:textColor="@color/black"
             android:textSize="12sp"
 
-            app:layout_constraintBottom_toBottomOf="@+id/view_weekly"
-            app:layout_constraintEnd_toEndOf="@+id/view_weekly"
-            app:layout_constraintStart_toStartOf="@+id/view_weekly"
-            app:layout_constraintTop_toTopOf="@+id/view_weekly" />
+            app:layout_constraintBottom_toBottomOf="@+id/view_new_user"
+            app:layout_constraintEnd_toEndOf="@+id/view_new_user"
+            app:layout_constraintStart_toStartOf="@+id/view_new_user"
+            app:layout_constraintTop_toTopOf="@+id/view_new_user" />
 
 
         <View
@@ -124,7 +124,7 @@
             android:background="@drawable/rounded_background_tab_btn_blue"
 
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/view_weekly"
+            app:layout_constraintEnd_toStartOf="@+id/view_new_user"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_chainStyle="spread_inside"
             app:layout_constraintStart_toStartOf="parent"
@@ -153,7 +153,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/view_weekly"
+            app:layout_constraintStart_toEndOf="@+id/view_new_user"
             app:layout_constraintTop_toTopOf="@+id/view3"
             app:layout_constraintVertical_bias="0.545" />
 

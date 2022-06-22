@@ -22,7 +22,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/faq_que1"
+            android:id="@+id/faq_que"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -47,7 +47,7 @@
             android:weightSum="2"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/faq_que1">
+            app:layout_constraintTop_toBottomOf="@+id/faq_que">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"

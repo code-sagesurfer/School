@@ -150,6 +150,22 @@
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/menu/activity_main_drawer.xml" value="0.33" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/menu/main.xml" value="0.2496793501496366" />
         <entry key="..\:/Users/rahulm/AndroidStudioProjects/School/app/src/main/res/menu/menu_uploader_items.xml" value="0.2496793501496366" />
+        <entry key="..\:/workspace/School_17_06_2022/app/src/main/res/drawable/rounded_background_blue_light.xml" value="0.263" />
+        <entry key="..\:/workspace/School_17_06_2022/app/src/main/res/drawable/rounded_background_tab_btn_blue.xml" value="0.263" />
+        <entry key="..\:/workspace/School_17_06_2022/app/src/main/res/drawable/rounded_green_button.xml" value="0.262" />
+        <entry key="..\:/workspace/School_17_06_2022/app/src/main/res/drawable/rounded_white_button_with_border.xml" value="0.262" />
+        <entry key="..\:/workspace/School_17_06_2022/app/src/main/res/drawable/team_listing_item_border_color_primary.xml" value="0.27" />
+        <entry key="..\:/workspace/School_17_06_2022/app/src/main/res/layout/dialog_add_new_journaling.xml" value="0.33" />
+        <entry key="..\:/workspace/School_17_06_2022/app/src/main/res/layout/dialog_invite_member.xml" value="0.33" />
+        <entry key="..\:/workspace/School_17_06_2022/app/src/main/res/layout/fragment_add_goal.xml" value="0.33" />
+        <entry key="..\:/workspace/School_17_06_2022/app/src/main/res/layout/fragment_crisis_management.xml" value="0.33" />
+        <entry key="..\:/workspace/School_17_06_2022/app/src/main/res/layout/fragment_f_a_q_details.xml" value="0.30416666666666664" />
+        <entry key="..\:/workspace/School_17_06_2022/app/src/main/res/layout/fragment_journaling_main_listing.xml" value="0.2574074074074074" />
+        <entry key="..\:/workspace/School_17_06_2022/app/src/main/res/layout/fragment_skill_development.xml" value="0.26296296296296295" />
+        <entry key="..\:/workspace/School_17_06_2022/app/src/main/res/layout/fragment_skill_development_details.xml" value="0.33" />
+        <entry key="..\:/workspace/School_17_06_2022/app/src/main/res/layout/fragment_team_details.xml" value="0.30416666666666664" />
+        <entry key="..\:/workspace/School_17_06_2022/app/src/main/res/layout/layout_skill_development_list_item.xml" value="0.5" />
+        <entry key="..\:/workspace/School_17_06_2022/app/src/main/res/layout/row_faq.xml" value="0.30416666666666664" />
       </map>
     </option>
   </component>

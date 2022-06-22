@@ -270,6 +270,12 @@ class APIManager {
         call.enqueue(aCallback)
     }
 
+    fun mobile_support(@Body params: RequestBody, aCallback: Callback<JsonElement>) {
+        updateAPi()
+        val call: Call<JsonElement> = mApiService!!.mobile_support(params)
+        call.enqueue(aCallback)
+    }
+
     fun getRewardsData(@Body params: RequestBody, aCallback: Callback<JsonElement>) {
         updateAPi()
         val call: Call<JsonElement> = mApiService!!.getRewardsData(params)
@@ -350,6 +356,12 @@ class APIManager {
     fun get_gratitude_list(@Body params: RequestBody, aCallback: Callback<JsonElement>) {
         updateAPi()
         val call: Call<JsonElement> = mApiService!!.get_gratitude_list(params)
+        call.enqueue(aCallback)
+    }
+
+    fun self_goal(@Body params: RequestBody, aCallback: Callback<JsonElement>) {
+        updateAPi()
+        val call: Call<JsonElement> = mApiService!!.self_goal(params)
         call.enqueue(aCallback)
     }
 

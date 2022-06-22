@@ -5,6 +5,11 @@ package com.example.school.resources;
  * Last Modified on
  */
 public class General {
+
+    /*permissions constants*/
+    public static final int JOURNALING_PERMISSION = 2021;
+    public static final int GOAL_PERMISSION=201;
+
     public static final String DOMAIN="domain";
     public static final String ACTION ="action" ;
     public static final String KEY = "k";
@@ -120,6 +125,8 @@ public class General {
     public static final String MEETING_DATA_FROM_DIRECT_CALL = "meeting_data_direct";
     public static final String GOAL_OBJ = "GoalObject";
     public static final String TEAM_DATA = "team_data";
+
+    public static final String UPLOADING_CONTENT_FROM = "uploading_content_from";
     public static String WELCOME_IMAGE_SKIP_ONCE_URL = "welcomeImageSkipOnce";
     public static final String TIMESTAMP = "timestamp";
     public static final String CHECK = "check";

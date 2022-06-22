@@ -139,11 +139,11 @@
             android:layout_height="30dp"
             android:layout_marginStart="24dp"
             android:layout_marginTop="8dp"
-            android:background="@drawable/rounded_green_button"
+            android:background="@drawable/rounded_white_button_with_border"
             android:fontFamily="@font/poppins_regular"
             android:paddingTop="3dp"
             android:text="@string/yes"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="12sp"
 
             app:layout_constraintStart_toStartOf="parent"
@@ -153,12 +153,12 @@
             android:layout_width="54dp"
             android:layout_height="30dp"
             android:layout_marginTop="8dp"
-            android:background="@drawable/rounded_green_button"
+            android:background="@drawable/rounded_white_button_with_border"
             android:fontFamily="@font/poppins_regular"
             android:paddingTop="3dp"
             android:text="@string/no"
             android:id="@+id/btn_no"
-            android:textColor="@color/white"
+            android:textColor="@color/black"
             android:textSize="12sp"
             android:layout_marginStart="10dp"
             app:layout_constraintStart_toEndOf="@+id/btn_yes"
@@ -181,7 +181,7 @@
             app:layout_constraintTop_toBottomOf="@+id/btn_yes" />
 
         <TextView
-            android:id="@+id/et_ans_2"
+            android:id="@+id/tv_input_date"
             android:layout_width="150dp"
             android:layout_height="38dp"
             android:layout_weight="1"
@@ -201,6 +201,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_choose_date"
             />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
