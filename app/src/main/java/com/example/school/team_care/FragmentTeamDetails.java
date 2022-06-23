@@ -230,8 +230,8 @@ public class FragmentTeamDetails extends Fragment {
         View view = inflater.inflate(R.layout.fragment_team_details, container, false);
         ButterKnife.bind(this, view);
         hideCards();
-        getGroupMemberListWithRales(teamData.getAllTeams().get(0).getGroupId());
-        setDataToMainAndOtherUsers();
+
+
 
         vw_view_all.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -259,6 +259,7 @@ public class FragmentTeamDetails extends Fragment {
         });
         return view;
     }
+
 
     private ArrayList<Choices_> roleArrayList = new ArrayList<>();
     private ArrayAdapter<String> teamIdAdapter;
@@ -606,6 +607,10 @@ public class FragmentTeamDetails extends Fragment {
             mainActivity.setToolbarTitleText(getString(R.string.Personal_Support_Team));
             mainActivity.changeDrawerIcon(false);
         }
+
+        getGroupMemberListWithRales(teamData.getAllTeams().get(0).getGroupId());
+
+        setDataToMainAndOtherUsers();
     }
 
     String selectedRole;

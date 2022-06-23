@@ -43,7 +43,6 @@ public class FragmentFAQDetails extends Fragment implements View.OnClickListener
     private static final String TAG = "FragmentFAQDetails";
     FAQAdapter mFAQAdapter;
 
-
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
@@ -90,34 +89,27 @@ public class FragmentFAQDetails extends Fragment implements View.OnClickListener
 
     private void getFAQ() {
         APIManager.Companion.getInstance().showProgressDialog(getContext(), true, "Loading....");
-
         HashMap<String, String> requestMap = new HashMap<>();
         requestMap.put(General.ACTION, "get_faq");
 
         String url = Preferences.get(General.DOMAIN) + Urls_.MOBILE_SUPPORT;
-
         RequestBody requestBody = MakeCall.make(requestMap, url, TAG, getContext(), getActivity());
-
         APIManager.Companion.getInstance().mobile_support(requestBody, new Callback<JsonElement>() {
             @Override
             public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
                 APIManager.Companion.getInstance().dismissProgressDialog();
                 try {
                     JsonElement element = response.body();
-
                     Gson gson = new Gson();
-                    FAQModel mDashBoardResponse = gson.fromJson(element.toString(), FAQModel.class);
-                    if (!mDashBoardResponse.getGet_faq().isEmpty()) {
-                        mFAQAdapter.addData(mDashBoardResponse.getGet_faq());
+                    ModelFAQResponse mDashBoardResponse = gson.fromJson(element.toString(), ModelFAQResponse.class);
+                    if (!mDashBoardResponse.getGetFaq().isEmpty()) {
+                        mFAQAdapter.addData(mDashBoardResponse.getGetFaq());
                         //mFAQAdapter.objList.get(0).setSelect("1");
                         mFAQAdapter.notifyDataSetChanged();
                     }
-
-
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
             }
 
             @Override

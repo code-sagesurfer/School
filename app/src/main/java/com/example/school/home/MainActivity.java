@@ -21,6 +21,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.example.school.R;
 
+import com.example.school.assessment.FragmentAssessmentMain;
 import com.example.school.databinding.ActivityMainBinding;
 import com.example.school.emotional_support.FragmentEmotionalSupport;
 import com.example.school.goalmanagement.FragmentAddGoal;
@@ -84,7 +85,6 @@ import retrofit2.Response;
  * Last Modified on
  */
 public class MainActivity extends AppCompatActivity implements View.OnClickListener, NavigationView.OnNavigationItemSelectedListener {
-
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
     private LinearLayout ll_home, ll_nav_second_menu, ll_nav_third_menu, ll_nav_toolkit;
@@ -126,6 +126,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tv_toolbar_title = toolbar.findViewById(R.id.tv_toolbar_title);
         iv_save_data = toolbar.findViewById(R.id.iv_save_data);
 
+        //bottom navigation views
+        LinearLayout ll_home=findViewById(R.id.ll_home);
+        LinearLayout ll_nav_second_menu=findViewById(R.id.ll_nav_second_menu);
+        LinearLayout ll_nav_third_menu=findViewById(R.id.ll_nav_third_menu);
+        LinearLayout ll_nav_toolkit=findViewById(R.id.ll_nav_toolkit);
+        ll_home.setOnClickListener(this);
+        ll_nav_second_menu.setOnClickListener(this);
+        ll_nav_third_menu.setOnClickListener(this);
+        ll_nav_toolkit.setOnClickListener(this);
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -235,6 +244,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 ft.commit();
                 mDrawerLayout.closeDrawer(Gravity.LEFT);
                 break;
+            case R.id.ll_home:
+                FragmentManager fragManagerHome = getSupportFragmentManager();
+                FragmentTransaction ftHome = fragManagerHome.beginTransaction();
+                //ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left);
+                ftHome.replace(R.id.main_container, new HomeFragment(), "HomeFragment");
+                //ft.addToBackStack("HomeFragment");
+                ftHome.commit();
+                mDrawerLayout.closeDrawer(Gravity.LEFT);
+                break;
+
+                case R.id.ll_nav_second_menu:
+                FragmentManager fragManagerPlanner = getSupportFragmentManager();
+                FragmentTransaction ftPlanner = fragManagerPlanner.beginTransaction();
+                //ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left);
+                ftPlanner.replace(R.id.main_container, new FragmentPlannerMain(), "FragmentPlannerMain");
+                //ft.addToBackStack("HomeFragment");
+                ftPlanner.commit();
+                mDrawerLayout.closeDrawer(Gravity.LEFT);
+                break;
+
+            case R.id.ll_nav_third_menu:
+                getTeamListFromServer();
+                break;
+
+
         }
     }
 
@@ -327,6 +361,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             FragmentTransaction ft = fragManager.beginTransaction();
             //ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left);
             ft.replace(R.id.main_container, new FragmentPlannerMain(), "FragmentPlannerMain");
+            ft.addToBackStack("HomeFragment");
+            ft.commit();
+            mDrawerLayout.closeDrawer(Gravity.LEFT);
+        }else if (item.getTitle().toString().equals("Assessment")) {
+            FragmentManager fragManager = getSupportFragmentManager();
+            FragmentTransaction ft = fragManager.beginTransaction();
+            //ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left);
+            ft.replace(R.id.main_container, new FragmentAssessmentMain(), "FragmentAssessmentMain");
             ft.addToBackStack("HomeFragment");
             ft.commit();
             mDrawerLayout.closeDrawer(Gravity.LEFT);
@@ -615,5 +657,4 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         }
     }
-
 }

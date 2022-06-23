@@ -8,6 +8,7 @@
     tools:context=".assessment.FragmentAssessmentMain">
 
     <View
+        android:id="@+id/view2"
         android:layout_width="match_parent"
         android:layout_height="90dp"
         android:background="@drawable/rounded_bottom_corners_with_solid_background_small"
@@ -28,8 +29,9 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="36dp"
             android:layout_weight="1"
+            android:id="@+id/cl_pending_forms"
             android:layout_marginEnd="5dp"
             android:background="@drawable/date_physical_activity_bg_purple_36dp">
 
@@ -40,64 +42,79 @@
                 android:gravity="center"
                 android:textColor="@color/white"
                 android:textSize="12sp"
-
+                android:id="@+id/tv_pending_forms"
                 android:fontFamily="@font/poppins_regular"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/iv_pending_count"
+                app:layout_constraintEnd_toStartOf="@+id/tv_pending_count"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:layout_width="@dimen/txt_size_35"
-                android:layout_height="35dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:gravity="center"
+                android:visibility="gone"
                 android:layout_marginEnd="8dp"
                 android:textColor="@color/color_primary"
-                android:id="@+id/iv_pending_count"
+                android:id="@+id/tv_pending_count"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:background="@drawable/rounded_background_white"
-                android:text="12"
                 />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="36dp"
             android:layout_weight="1"
+            android:id="@+id/cl_submitted_forms"
             android:layout_marginStart="5dp"
             android:background="@drawable/rounded_background_white">
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/pending_forms"
+                android:text="@string/submitted_forms"
                 android:gravity="center"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:textSize="12sp"
+
+                android:id="@+id/tv_submitted_form"
                 android:fontFamily="@font/poppins_regular"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/iv_submitted_count"
+                app:layout_constraintEnd_toStartOf="@+id/tv_submitted_count"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:layout_width="@dimen/txt_size_35"
-                android:layout_height="35dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
                 android:gravity="center"
+                android:visibility="gone"
                 android:layout_marginEnd="8dp"
                 android:textColor="@color/white"
-                android:id="@+id/iv_submitted_count"
+                android:id="@+id/tv_submitted_count"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:background="@drawable/date_physical_activity_bg_purple_36dp"
-                android:text="12"
+
                 />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:id="@+id/fl_assessment_container"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

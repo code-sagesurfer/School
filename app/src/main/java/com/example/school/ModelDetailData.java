@@ -81,4 +81,14 @@ public class ModelDetailData implements Parcelable {
         parcel.writeString(ImagePath);
         parcel.writeString(Desc);
     }
+
+    @Override
+    public String toString() {
+        return "ModelDetailData{" +
+                "Title='" + Title + '\'' +
+                ", Date='" + Date + '\'' +
+                ", ImagePath='" + ImagePath + '\'' +
+                ", Desc='" + Desc + '\'' +
+                '}';
+    }
 }

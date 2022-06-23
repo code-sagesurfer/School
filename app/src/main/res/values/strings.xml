@@ -239,6 +239,7 @@
     <string name="goal_discription">Goal Description</string>
     <string name="sage024">sage024</string>
     <string name="sage052">sage052</string>
+    <string name="submitted_forms">Submitted Forms</string>
     <string-array name="goal_frequency">
         <item>Select Frequency</item>
         <item>Daily</item>

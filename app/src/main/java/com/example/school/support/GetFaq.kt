@@ -3,7 +3,7 @@ package com.example.school.support
 import com.google.gson.annotations.SerializedName
 import java.io.Serializable
 
-class GetFaq : Serializable {
+data class GetFaq (var isSelected :String): Serializable {
 
     @SerializedName("answer")
     var answer = ""
@@ -17,4 +17,8 @@ class GetFaq : Serializable {
 
     @SerializedName("isVisible")
     var isVisible = ""
+
+
+
+
 }

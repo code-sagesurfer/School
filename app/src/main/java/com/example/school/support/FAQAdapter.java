@@ -22,7 +22,7 @@ public class FAQAdapter extends RecyclerView.Adapter<FAQAdapter.MyHolder> {
 
 
     private Context context;
-    public ArrayList<GetFaq> objList;
+    public ArrayList<ModelGetFaq> objList;
     View.OnClickListener clickListener = null;
 
     public FAQAdapter(Context context, View.OnClickListener clickListener) {
@@ -40,22 +40,23 @@ public class FAQAdapter extends RecyclerView.Adapter<FAQAdapter.MyHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull MyHolder holder, int position) {
-        holder.faq_que.setText(objList.get(position).getQuestion_title());
+        holder.faq_que.setText(objList.get(position).getQuestionTitle());
         holder.tv_faq_que_desc.setText(objList.get(position).getAnswer());
 
+        if (objList.get(position).getIsSelected()==1){
+            holder.tv_faq_que_desc.setVisibility(View.VISIBLE);
+        }else{
+            holder.tv_faq_que_desc.setVisibility(View.GONE);
+        }
+
         /*
-
-
         if (objList.get(position).isVisible().equals("1")) {
             holder.lblTitle.setTextColor(Color.parseColor("#03a9f4"));
         } else {
             holder.lblTitle.setTextColor(Color.BLACK);
         }
-
-
         holder.btnForward.setImageResource(objList.get(position).isVisible().equals("1") ? R.drawable.down_icon : R.drawable.ic_arrow_endright);
         holder.lblDescription.setVisibility(objList.get(position).isVisible().equals("1") ? View.VISIBLE : View.GONE);
-
         holder.btnForward.setTag(position);
         holder.btnForward.setOnClickListener(clickListener);*/
 
@@ -89,19 +90,31 @@ public class FAQAdapter extends RecyclerView.Adapter<FAQAdapter.MyHolder> {
         public void onClick(View view) {
             if (view.getId()==R.id.iv_faq_btn){
                 tv_faq_que_desc.setVisibility(View.VISIBLE);
-                changeData();
+                changeData(getAbsoluteAdapterPosition());
             }
         }
     }
 
-    public void addData(List<GetFaq> obj) {
+    public void addData(List<ModelGetFaq> obj) {
         objList = new ArrayList<>();
         objList.addAll(obj);
+        objList.get(0).setIsSelected(1);
         this.notifyDataSetChanged();
     }
 
-    public void changeData(){
+    public void changeData(int absoluteAdapterPosition){
 
+        for (ModelGetFaq getFaq :objList){
+            if (getFaq.getIsSelected()==1){
+                getFaq.setIsSelected(0);
+            }
+        }
+        if (objList.get(absoluteAdapterPosition).getIsSelected()==0) {
+            objList.get(absoluteAdapterPosition).setIsSelected(1);
+        }else{
+            objList.get(absoluteAdapterPosition).setIsSelected(0);
+        }
+        this.notifyDataSetChanged();
     }
 
 }

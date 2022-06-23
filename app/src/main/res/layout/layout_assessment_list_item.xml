@@ -15,7 +15,7 @@
 
 
         <ImageView
-            android:id="@+id/imageView16"
+            android:id="@+id/iv_form_bg"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
@@ -35,6 +35,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/demo_text"
+            android:id="@+id/tv_heading_text"
             android:textColor="@color/white"
             android:fontFamily="@font/poppins_regular"
             app:layout_constraintTop_toTopOf="parent"
@@ -51,7 +52,7 @@
             android:background="@drawable/bottom_corner_rounded_assessment"
             android:layout_marginStart="5dp"
             android:layout_marginEnd="5dp"
-            app:layout_constraintBottom_toBottomOf="@+id/imageView16"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_form_bg"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
