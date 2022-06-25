@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="260dp"
+    android:layout_width="340dp"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="10dp"
@@ -19,7 +19,7 @@
         android:text="Title : I do not want to talk with anyone"
         android:fontFamily="@font/poppins_medium"
         android:textColor="@color/black"
-        android:textSize="14sp"
+        android:textSize="18sp"
         android:layout_margin="16dp"
         android:layout_marginTop="24dp"
         android:id="@+id/tv_title"
@@ -37,7 +37,7 @@
             android:fontFamily="@font/poppins_regular"
             android:text="Location : India"
             android:textColor="@color/black"
-            android:textSize="12sp"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_title" />
@@ -50,7 +50,7 @@
             android:gravity="center"
             android:text="10 Mar, 22  06:30 PM"
             android:textColor="@color/color_primary"
-            android:textSize="11sp"
+            android:textSize="16sp"
             android:layout_marginStart="16dp"
 
             app:layout_constraintStart_toStartOf="parent"
@@ -59,7 +59,7 @@
         <View
             android:id="@+id/view"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="50dp"
             android:layout_marginTop="8dp"
             android:background="@drawable/bottom_corner_rounded"
             app:layout_constraintEnd_toEndOf="parent"
@@ -95,8 +95,8 @@
 -->
                 <ImageView
                     android:id="@+id/iv_like"
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
 
                     android:visibility="visible"
                     android:layout_marginStart="16dp"
@@ -112,7 +112,7 @@
                     android:gravity="center"
                     android:text="@string/like"
                     android:textColor="@color/black"
-                    android:textSize="12sp"
+                    android:textSize="14sp"
                     android:layout_marginStart="16dp" />
             </LinearLayout>
 
@@ -125,8 +125,8 @@
 
                 <ImageView
                     android:id="@+id/iv_share"
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
                     android:visibility="visible"
                     android:layout_gravity="center"
                     app:lottie_autoPlay="false"
@@ -144,7 +144,7 @@
                     android:gravity="center"
                     android:text="@string/share"
                     android:textColor="@color/black"
-                    android:textSize="12sp"
+                    android:textSize="14sp"
                     android:layout_marginStart="16dp" />
             </LinearLayout>
 
@@ -166,7 +166,7 @@
                     android:text="@string/view"
                     android:background="@drawable/text_bg_rounded_shape_light_green"
                     android:textColor="@color/black"
-                    android:textSize="12sp"
+                    android:textSize="14sp"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

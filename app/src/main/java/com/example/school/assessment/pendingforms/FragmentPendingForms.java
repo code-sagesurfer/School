@@ -46,13 +46,14 @@ public class FragmentPendingForms extends Fragment {
     TextView tv_error_msg;
 
 
-    boolean isLoading=false;
+    boolean isLoading = false;
     private static final String TAG = "FragmentPendingForms";
     private ArrayList<Forms_> formsArrayList;
-    private int minSize=0;
-    private int maxSize=30;
+    private int minSize = 0;
+    private int maxSize = 30;
     private PendingFormListAdapter pendingFormListAdapter;
-    private boolean firstTimeLoading=true;
+    private boolean firstTimeLoading = true;
+
     public FragmentPendingForms() {
         //Required empty public constructor
     }
@@ -77,8 +78,8 @@ public class FragmentPendingForms extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        firstTimeLoading=true;
-        getListNew(0,50);
+        firstTimeLoading = true;
+        getListNew(0, 50);
 
     }
 
@@ -87,37 +88,36 @@ public class FragmentPendingForms extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_pending_forms, container, false);
-        ButterKnife.bind(this,view);
+        ButterKnife.bind(this, view);
 
         RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(getContext(), 2);
         rv_pending_forms.setLayoutManager(mLayoutManager);
         rv_pending_forms.setItemAnimator(new DefaultItemAnimator());
 
-       /* rv_pending_forms.addOnScrollListener(new RecyclerView.OnScrollListener() {
+        rv_pending_forms.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                LinearLayoutManager linearLayoutManager= (LinearLayoutManager) recyclerView.getLayoutManager();
-                if (!isLoading){
-                    if (linearLayoutManager!=null && linearLayoutManager.findLastCompletelyVisibleItemPosition()==formsArrayList.size()-1){
-                        getListNew(minSize,maxSize);
-                        isLoading=true;
+                LinearLayoutManager linearLayoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+                if (!isLoading) {
+                    if (linearLayoutManager != null && linearLayoutManager.findLastCompletelyVisibleItemPosition() == formsArrayList.size() - 1) {
+                        getListNew(minSize, maxSize);
+                        isLoading = true;
                     }
                 }
             }
-        });*/
+        });
         return view;
     }
 
 
     private void getListNew(int min, int max) {
-
         HashMap<String, String> requestMap = new HashMap<>();
         requestMap.put(General.ACTION, Actions_.GET_LIST);
         requestMap.put(General.MIN, "" + min);
         requestMap.put(General.MAX, "" + max);
 
-        requestMap.put("form_date", "" );
+        requestMap.put("form_date", "");
         requestMap.put("to_date", "");
 
         String url = Preferences.get(General.DOMAIN) + "/" + Urls_.MOBILE_FORM_BUILDER;
@@ -135,19 +135,20 @@ public class FragmentPendingForms extends Fragment {
                         ModelFormListResponse listResponse = gson.fromJson(mJsonElement.toString(), ModelFormListResponse.class);
 
                         if (listResponse.getGet_pending_list().get(0).getStatus() == 1) {
-                            minSize=maxSize+1;
-                            maxSize=maxSize+20;
+                            minSize = maxSize + 1;
+                            maxSize = maxSize + 20;
                             tv_error_msg.setVisibility(View.GONE);
                             rv_pending_forms.setVisibility(View.VISIBLE);
                             formsArrayList = listResponse.getGet_pending_list();
 
                             if (firstTimeLoading) {
-                                pendingFormListAdapter = new PendingFormListAdapter( formsArrayList, getContext());
+                                firstTimeLoading=false;
+                                pendingFormListAdapter = new PendingFormListAdapter(formsArrayList, getContext());
                                 rv_pending_forms.setAdapter(pendingFormListAdapter);
-                                isLoading=false;
+                                isLoading = false;
                             } else {
                                 pendingFormListAdapter.addData(formsArrayList);
-                                isLoading=false;
+                                isLoading = false;
                             }
 
                           /*  try {
@@ -172,8 +173,9 @@ public class FragmentPendingForms extends Fragment {
                             }*/
 
                         } else {
+                            if (firstTimeLoading){
                             tv_error_msg.setVisibility(View.VISIBLE);
-                            rv_pending_forms.setVisibility(View.GONE);
+                            rv_pending_forms.setVisibility(View.GONE);}
                         }
                     } catch (Exception e) {
                         e.printStackTrace();

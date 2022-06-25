@@ -32,6 +32,7 @@ import com.example.school.journaling.JournalingMainListing;
 import com.example.school.journaling.iSelectedImageResponse;
 import com.example.school.login.LoginActivity;
 import com.example.school.moodtracking.FragmentMoodTrackingListing;
+import com.example.school.notification.FragmentNotificationListing;
 import com.example.school.resources.APIManager;
 import com.example.school.resources.Actions_;
 import com.example.school.resources.AppLog;
@@ -104,7 +105,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private CharSequence mTitle;
     long SelectedFile;
     TextView iv_save_data;
-    ImageView iv_settings;
+    ImageView iv_settings, iv_notification;
 
     @SuppressLint("RestrictedApi")
     @Override
@@ -125,12 +126,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         toolbar = (Toolbar) findViewById(R.id.main_toolbar);
         tv_toolbar_title = toolbar.findViewById(R.id.tv_toolbar_title);
         iv_save_data = toolbar.findViewById(R.id.iv_save_data);
+        iv_notification = toolbar.findViewById(R.id.iv_notification);
+        iv_notification.setOnClickListener(this);
 
         //bottom navigation views
-        LinearLayout ll_home=findViewById(R.id.ll_home);
-        LinearLayout ll_nav_second_menu=findViewById(R.id.ll_nav_second_menu);
-        LinearLayout ll_nav_third_menu=findViewById(R.id.ll_nav_third_menu);
-        LinearLayout ll_nav_toolkit=findViewById(R.id.ll_nav_toolkit);
+        LinearLayout ll_home = findViewById(R.id.ll_home);
+        LinearLayout ll_nav_second_menu = findViewById(R.id.ll_nav_second_menu);
+        LinearLayout ll_nav_third_menu = findViewById(R.id.ll_nav_third_menu);
+        LinearLayout ll_nav_toolkit = findViewById(R.id.ll_nav_toolkit);
         ll_home.setOnClickListener(this);
         ll_nav_second_menu.setOnClickListener(this);
         ll_nav_third_menu.setOnClickListener(this);
@@ -142,7 +145,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         getSupportActionBar().setElevation(0);
         getSupportActionBar().getHideOffset();
         toolbar.setNavigationIcon(R.drawable.drawer_menu);
-
 
         imageResponseInterface = new JournalingMainListing();
         interfaceGoalImageResponseHandler = new FragmentAddGoal();
@@ -254,7 +256,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 mDrawerLayout.closeDrawer(Gravity.LEFT);
                 break;
 
-                case R.id.ll_nav_second_menu:
+            case R.id.ll_nav_second_menu:
                 FragmentManager fragManagerPlanner = getSupportFragmentManager();
                 FragmentTransaction ftPlanner = fragManagerPlanner.beginTransaction();
                 //ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left);
@@ -266,6 +268,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
             case R.id.ll_nav_third_menu:
                 getTeamListFromServer();
+                break;
+
+            case R.id.iv_notification:
+                FragmentManager fragManagerNotification = getSupportFragmentManager();
+                FragmentTransaction ftNotification = fragManagerNotification.beginTransaction();
+                //ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left);
+                ftNotification.replace(R.id.main_container, new FragmentNotificationListing(), "FragmentNotificationListing");
+                //ft.addToBackStack("HomeFragment");
+                ftNotification.commit();
+                mDrawerLayout.closeDrawer(Gravity.LEFT);
                 break;
 
 
@@ -364,7 +376,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             ft.addToBackStack("HomeFragment");
             ft.commit();
             mDrawerLayout.closeDrawer(Gravity.LEFT);
-        }else if (item.getTitle().toString().equals("Assessment")) {
+        } else if (item.getTitle().toString().equals("Assessment")) {
             FragmentManager fragManager = getSupportFragmentManager();
             FragmentTransaction ft = fragManager.beginTransaction();
             //ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left);
@@ -455,7 +467,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Log.i(TAG, "onActivityResult: requestCode " + requestCode +" "+resultCode);
+        Log.i(TAG, "onActivityResult: requestCode " + requestCode + " " + resultCode);
 
         switch (requestCode) {
             case General.JOURNALING_PERMISSION:
@@ -521,7 +533,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        Log.i(TAG, "onActivityResult: requestCode " + requestCode );
+        Log.i(TAG, "onActivityResult: requestCode " + requestCode);
         switch (requestCode) {
 
             case General.JOURNALING_PERMISSION:

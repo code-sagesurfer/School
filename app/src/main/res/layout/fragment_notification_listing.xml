@@ -11,9 +11,30 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="@string/hello_blank_fragment"
+        android:id="@+id/rv_notification"
+        tools:listitem="@layout/layout_notification_list_item"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_error_msg"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/color_primary"
+        android:text="Data Not Found"
+        android:paddingTop="3dp"
+        android:gravity="center"
+        android:textSize="16sp"
+        android:visibility="gone"
+        android:fontFamily="@font/poppins_medium"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

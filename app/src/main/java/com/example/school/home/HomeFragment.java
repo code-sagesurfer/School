@@ -18,6 +18,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.bumptech.glide.Glide;
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.example.school.FragmentAdequateSleep;
 import com.example.school.ItemDetailView;
 import com.example.school.ModelDetailData;
@@ -54,6 +57,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -73,6 +77,7 @@ public class HomeFragment extends Fragment {
     private String mParam1;
     private String mParam2;
     DataPlanner dataPlanner;
+    CircleImageView iv_user_profile;
     ArrayList<ModelGratitudeListingResponseData> dataArrayList;
     private int previous_min;
     boolean firstTimeLoading = true;
@@ -80,6 +85,28 @@ public class HomeFragment extends Fragment {
     private static final String TAG = "MoodData";
     RecyclerView rv_mood;
     MainActivity mainActivity;
+    int [] viewIds = {
+            R.id.tv_role_bottom_top,
+            R.id.imageView,
+            R.id.iv_user_profile,
+            R.id.rv_quotes,
+            R.id.cl_physical_activity,
+            R.id.cl_skill_development,
+            R.id.cl_emotional_support,
+            R.id.cl_proper_nutrition,
+            R.id.cl_social_activities,
+            R.id.cl_adequate_sleep,
+            R.id.tv_text_mood,
+            R.id.tv_view_all,
+            R.id.rv_mood,
+            R.id.tv_journaling,
+            R.id.tv_view_all_journaling,
+            R.id.rv_journaling,
+            R.id.tv_planner,
+            R.id.tv_view_all_planner,
+            R.id.rv_planner,
+
+    };
 
     public HomeFragment() {
         // Required empty public constructor
@@ -214,6 +241,14 @@ public class HomeFragment extends Fragment {
                 ft.commit();
             }
         });
+
+        if (Preferences.get(General.IMAGE) != null && Preferences.get(General.IMAGE).length() != 0) {
+            Glide.with(this)
+                    .load(Preferences.get(General.IMAGE))
+                    .placeholder(R.drawable.ic_user_male)
+                    .error(R.drawable.ic_user_male)
+                    .into(homeBinding.ivUserProfile);
+        }
         return root;
     }
 
@@ -221,6 +256,8 @@ public class HomeFragment extends Fragment {
     public void onResume() {
         super.onResume();
         //moodData.fetchJournalMoodDataNew(0, 50, getContext(), getActivity(), HomeFragment.this);
+        showAnimationEffect();
+
         DashboardData dashboardData = new DashboardData();
         dashboardData.getDashboardData(getContext(), getActivity(), HomeFragment.this);
 
@@ -230,6 +267,16 @@ public class HomeFragment extends Fragment {
         dataJournaling.fetchGratitudesDataList("", strDate, "", "", getContext(), getActivity(), this);
         dataPlanner.getPlannerData(0, 50, strDate, TAG, getContext(), getActivity(), HomeFragment.this);
 
+    }
+
+    private void showAnimationEffect() {
+
+        for(int itemId :viewIds) {
+            YoYo.with(Techniques.ZoomIn)
+                    .duration(800)
+                    .repeat(0)
+                    .playOn(getView().findViewById(itemId));
+        }
     }
 
     private void openFragmentAdequateSleep() {
@@ -320,7 +367,7 @@ public class HomeFragment extends Fragment {
                         AppLog.i(TAG, "onResponse: " + resposeBody);
 
                         ModelPlannerResponse plannerResponse = gson.fromJson(response.body(), ModelPlannerResponse.class);
-                        if (plannerResponse.getGetData().get(0).getStatus() == 1) {
+                        if (plannerResponse.getGetData().get(0).getStatus() .equalsIgnoreCase("1")) {
                             AdapterPlannerData adapterPlannerData = new AdapterPlannerData(getContext(), plannerResponse.getGetData(), HomeFragment.this);
                             homeBinding.rvPlanner.setAdapter(adapterPlannerData);
                             homeBinding.tvErrorMsg3.setVisibility(View.GONE);
@@ -387,7 +434,7 @@ public class HomeFragment extends Fragment {
     }
 
     public void setPlannerData(ModelPlannerResponse plannerResponse) {
-        if (plannerResponse.getGetData().get(0).getStatus() == 1) {
+        if (plannerResponse.getGetData().get(0).getStatus().equalsIgnoreCase("1")) {
             AdapterPlannerData adapterPlannerData = new AdapterPlannerData(getContext(), plannerResponse.getGetData(), HomeFragment.this);
             this.homeBinding.rvPlanner.setAdapter(adapterPlannerData);
             this.homeBinding.tvErrorMsg3.setVisibility(View.GONE);

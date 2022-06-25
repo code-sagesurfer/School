@@ -41,7 +41,7 @@ public class DataPlanner {
         String url = Preferences.get(General.DOMAIN) + Urls_.MOBILE_DAY_PLANNER;
         RequestBody requestBody = MakeCall.make(requestMap, url, TAG, context, activity);
 
-        AppLog.e(TAG, "getSagesurfer: " + requestBody);
+        AppLog.e(TAG, "getPlannerData getSagesurfer: " + requestBody);
         if (requestBody != null) {
             APIManager.Companion.getInstance().mobile_day_planner(requestBody, new Callback<JsonElement>() {
                 @Override
@@ -51,8 +51,7 @@ public class DataPlanner {
                         Gson gson = new Gson();
                         assert response.body() != null;
                         String resposeBody = response.body().toString();
-                        AppLog.i(TAG, "onResponse: " + resposeBody);
-
+                        AppLog.i(TAG, "getPlannerData onResponse: " + resposeBody);
                         ModelPlannerResponse plannerResponse = gson.fromJson(response.body(), ModelPlannerResponse.class);
                         if (fragment instanceof HomeFragment){
                             HomeFragment homeFragment=(HomeFragment) fragment;

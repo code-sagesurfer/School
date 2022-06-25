@@ -120,12 +120,12 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_height="@dimen/text_size_12"
-                app:layout_constraintBottom_toTopOf="@+id/tv_"
+                app:layout_constraintBottom_toTopOf="@+id/tv_description"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_chainStyle="packed" />
 
             <TextView
-                android:id="@+id/tv_"
+                android:id="@+id/tv_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"

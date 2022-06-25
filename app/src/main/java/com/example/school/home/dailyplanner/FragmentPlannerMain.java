@@ -71,7 +71,7 @@ public class FragmentPlannerMain extends Fragment {
         rv_planner = view.findViewById(R.id.rv_planner);
         tv_error_msg = view.findViewById(R.id.tv_error_msg);
         dataPlanner= new DataPlanner();
-        RecyclerView.LayoutManager mLayoutManagerPlanner = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
+        RecyclerView.LayoutManager mLayoutManagerPlanner = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         rv_planner.setLayoutManager(mLayoutManagerPlanner);
         rv_planner.setItemAnimator(new DefaultItemAnimator());
         return view;
@@ -87,7 +87,7 @@ public class FragmentPlannerMain extends Fragment {
     }
 
     public void setPlannerData(ModelPlannerResponse plannerResponse) {
-        if (plannerResponse.getGetData().get(0).getStatus() == 1) {
+        if (plannerResponse.getGetData().get(0).getStatus() .equalsIgnoreCase("1")) {
             AdapterPlannerData adapterPlannerData = new AdapterPlannerData(getContext(), plannerResponse.getGetData(), FragmentPlannerMain.this);
             rv_planner.setAdapter(adapterPlannerData);
             tv_error_msg.setVisibility(View.GONE);

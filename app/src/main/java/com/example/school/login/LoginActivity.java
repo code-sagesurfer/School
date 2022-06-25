@@ -1,16 +1,22 @@
 package com.example.school.login;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.example.school.BuildConfig;
 import com.example.school.R;
 import com.example.school.home.MainActivity;
@@ -34,9 +40,12 @@ import com.example.school.resources.oauth.Authorize;
 import com.example.school.resources.oauth.Token;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
+
 import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.HashMap;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -76,6 +85,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         ButterKnife.bind(this);
 
+        //Hiding keyboard
+        InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+        View view = getCurrentFocus();
+        //If no view currently has focus, create a new one, just so we can grab a window token from it
+        if (view == null) {
+            view = new View(this);
+        }
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         serverCodeList = new ArrayList<>();
         loginPreferences = getSharedPreferences("loginPrefs_school", MODE_PRIVATE);
 
@@ -93,6 +110,59 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        showAnimation();
+    }
+
+    private void showAnimation() {
+        YoYo.with(Techniques.ZoomIn)
+                .duration(800)
+                .repeat(0)
+                .playOn(findViewById(R.id.et_username));
+
+        YoYo.with(Techniques.ZoomIn)
+                .duration(800)
+                .repeat(0)
+                .playOn(findViewById(R.id.et_password));
+        YoYo.with(Techniques.ZoomIn)
+                .duration(800)
+                .repeat(0)
+                .playOn(findViewById(R.id.et_code));
+        YoYo.with(Techniques.ZoomIn)
+                .duration(800)
+                .repeat(0)
+                .playOn(findViewById(R.id.btn_login));
+
+        YoYo.with(Techniques.ZoomIn)
+                .duration(800)
+                .repeat(0)
+                .playOn(findViewById(R.id.cb_remember_me));
+
+        YoYo.with(Techniques.ZoomIn)
+                .duration(800)
+                .repeat(0)
+                .playOn(findViewById(R.id.tv_forgot_pass));
+
+        YoYo.with(Techniques.ZoomIn)
+                .duration(800)
+                .repeat(0)
+                .playOn(findViewById(R.id.textView10));
+        YoYo.with(Techniques.ZoomIn)
+                .duration(800)
+                .repeat(0)
+                .playOn(findViewById(R.id.textView11));
+        YoYo.with(Techniques.ZoomIn)
+                .duration(800)
+                .repeat(0)
+                .playOn(findViewById(R.id.tv_text_std_login));
+        YoYo.with(Techniques.ZoomIn)
+                .duration(800)
+                .repeat(0)
+                .playOn(findViewById(R.id.iv_sagesurfer_icon));
     }
 
     @OnClick
@@ -278,45 +348,45 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     ModelMainResponse mRewardsCategoryResponseModel = gson.fromJson(String.valueOf(response.body()), ModelMainResponse.class);
 
 
-                    if (mRewardsCategoryResponseModel.getDetails().getStatus()==1){
-                    Preferences.save(General.USER_ID, mRewardsCategoryResponseModel.getDetails().getUserid());
-                    Preferences.save(General.CLIENT_ID, mRewardsCategoryResponseModel.getDetails().getClientId());
-                    Preferences.save(General.CLIENT_SECRET, mRewardsCategoryResponseModel.getDetails().getClientSecret());
-                    Preferences.save(General.TIMEZONE, DeviceInfo.getTimeZone());
-                    Preferences.save(General.TIMEZONE_SERVER, mRewardsCategoryResponseModel.getDetails().getUserTimezone());
-                    Preferences.save(General.COUNTRY_ID, mRewardsCategoryResponseModel.getDetails().getCountry());
-                    Preferences.save(General.STATE_ID, mRewardsCategoryResponseModel.getDetails().getState());
-                    Preferences.save(General.CITY, mRewardsCategoryResponseModel.getDetails().getCity());
-                    Preferences.save(General.FIRST_NAME, mRewardsCategoryResponseModel.getDetails().getFirstname());
-                    Preferences.save(General.LAST_NAME, mRewardsCategoryResponseModel.getDetails().getLastname());
-                    Preferences.save(General.USERNAME, mRewardsCategoryResponseModel.getDetails().getUsername());
-                    Preferences.save(General.EMAIL, mRewardsCategoryResponseModel.getDetails().getEmail());
-                    Preferences.save(General.NAME, mRewardsCategoryResponseModel.getDetails().getName());
-                    Preferences.save(General.BIRTDATE, mRewardsCategoryResponseModel.getDetails().getDob());
-                    Preferences.save(General.ROLE, mRewardsCategoryResponseModel.getDetails().getRole());
-                    Preferences.save(General.ROLE_ID, mRewardsCategoryResponseModel.getDetails().getRoleId());
-                    Preferences.save(General.GENDER, mRewardsCategoryResponseModel.getDetails().getGender());
-                    Preferences.save(General.IMAGE, mRewardsCategoryResponseModel.getDetails().getImage());
-                  //  Preferences.save(Constants.DOMAIN_CODE, Preferences.get(Constants.DOMAIN_CODE));
+                    if (mRewardsCategoryResponseModel.getDetails().getStatus() == 1) {
+                        Preferences.save(General.USER_ID, mRewardsCategoryResponseModel.getDetails().getUserid());
+                        Preferences.save(General.CLIENT_ID, mRewardsCategoryResponseModel.getDetails().getClientId());
+                        Preferences.save(General.CLIENT_SECRET, mRewardsCategoryResponseModel.getDetails().getClientSecret());
+                        Preferences.save(General.TIMEZONE, DeviceInfo.getTimeZone());
+                        Preferences.save(General.TIMEZONE_SERVER, mRewardsCategoryResponseModel.getDetails().getUserTimezone());
+                        Preferences.save(General.COUNTRY_ID, mRewardsCategoryResponseModel.getDetails().getCountry());
+                        Preferences.save(General.STATE_ID, mRewardsCategoryResponseModel.getDetails().getState());
+                        Preferences.save(General.CITY, mRewardsCategoryResponseModel.getDetails().getCity());
+                        Preferences.save(General.FIRST_NAME, mRewardsCategoryResponseModel.getDetails().getFirstname());
+                        Preferences.save(General.LAST_NAME, mRewardsCategoryResponseModel.getDetails().getLastname());
+                        Preferences.save(General.USERNAME, mRewardsCategoryResponseModel.getDetails().getUsername());
+                        Preferences.save(General.EMAIL, mRewardsCategoryResponseModel.getDetails().getEmail());
+                        Preferences.save(General.NAME, mRewardsCategoryResponseModel.getDetails().getName());
+                        Preferences.save(General.BIRTDATE, mRewardsCategoryResponseModel.getDetails().getDob());
+                        Preferences.save(General.ROLE, mRewardsCategoryResponseModel.getDetails().getRole());
+                        Preferences.save(General.ROLE_ID, mRewardsCategoryResponseModel.getDetails().getRoleId());
+                        Preferences.save(General.GENDER, mRewardsCategoryResponseModel.getDetails().getGender());
+                        Preferences.save(General.IMAGE, mRewardsCategoryResponseModel.getDetails().getImage());
+                        //  Preferences.save(Constants.DOMAIN_CODE, Preferences.get(Constants.DOMAIN_CODE));
 
 
                         AppLog.i(TAG, "onResponse: url " + Preferences.get(General.DOMAIN));
 
-                    if (mRewardsCategoryResponseModel.getDetails().getUserid() != null) {
-                        Authorize authorize = new Authorize(LoginActivity.this);
+                        if (mRewardsCategoryResponseModel.getDetails().getUserid() != null) {
+                            Authorize authorize = new Authorize(LoginActivity.this);
                         /*authorize.authorizeUserForApp(mRewardsCategoryResponseModel.getDetails().getClientId(),
                                 mRewardsCategoryResponseModel.getDetails().getClientSecret(),
                                 Preferences.get(Constants.DOMAIN).replaceAll(Constants.INSATNCE_NAME, ""),
                                 getApplicationContext(),LoginActivity.this);*/
 
-                        authorize.getAuthorized(mRewardsCategoryResponseModel.getDetails().getClientId(),
-                                mRewardsCategoryResponseModel.getDetails().getClientSecret(),
-                                Preferences.get(General.DOMAIN).replaceAll(General.INSATNCE_NAME, ""),
-                                getApplicationContext());
-                    }
+                            authorize.getAuthorized(mRewardsCategoryResponseModel.getDetails().getClientId(),
+                                    mRewardsCategoryResponseModel.getDetails().getClientSecret(),
+                                    Preferences.get(General.DOMAIN).replaceAll(General.INSATNCE_NAME, ""),
+                                    getApplicationContext());
+                        }
 
-                    }else{
-                        Toast.makeText(LoginActivity.this, ""+mRewardsCategoryResponseModel.getDetails().getError(), Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(LoginActivity.this, "" + mRewardsCategoryResponseModel.getDetails().getError(), Toast.LENGTH_SHORT).show();
                     }
                 }
 
@@ -363,4 +433,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         AppLog.d(TAG, "tokenFailCallback: ");
     }
 }
+
+
 //TokenCallbacks overridden methods after getting token after authorization end}

@@ -70,7 +70,6 @@ public class AdapterGratitudeJournalingList extends RecyclerView.Adapter<Adapter
             tv_date=itemView.findViewById(R.id.tv_date);
             iv_like=itemView.findViewById(R.id.iv_like);
             ll_like=itemView.findViewById(R.id.ll_like);
-
             ll_share=itemView.findViewById(R.id.ll_share);
             cl_view=itemView.findViewById(R.id.cl_view);
         }

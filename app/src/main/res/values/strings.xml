@@ -22,6 +22,7 @@
     <string name="like">Like</string>
     <string name="share">Share</string>
     <string name="view">View</string>
+    <string name="addictition_notification_msg"> has beed shared addiction with you.</string>
     <string name="personal_support_team">Personal Support Team</string>
     <string name="care_team">Care Team</string>
     <string name="event_activity">Event Activity</string>
