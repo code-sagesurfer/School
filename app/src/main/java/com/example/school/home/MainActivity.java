@@ -277,7 +277,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 ftNotification.replace(R.id.main_container, new FragmentNotificationListing(), "FragmentNotificationListing");
                 //ft.addToBackStack("HomeFragment");
                 ftNotification.commit();
-                mDrawerLayout.closeDrawer(Gravity.LEFT);
+
                 break;
 
 

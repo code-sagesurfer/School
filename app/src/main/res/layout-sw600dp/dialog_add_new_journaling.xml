@@ -3,14 +3,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    app:cardCornerRadius="8dp"
+
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingStart="16dp"
-        android:paddingBottom="16dp"
-        android:paddingEnd="@dimen/size_margin_16">
+        android:paddingStart="24dp"
+        android:paddingBottom="24dp"
+        android:paddingEnd="@dimen/size_24">
 
         <TextView
             android:id="@+id/tv_heading"
@@ -34,7 +36,7 @@
             android:fontFamily="@font/poppins_regular"
             android:text="@string/title"
             android:textColor="@color/black"
-            android:textSize="14sp"
+            android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_heading" />
 
@@ -46,14 +48,14 @@
             android:background="@drawable/team_listing_item_border_color_primary"
             android:fontFamily="@font/poppins_regular"
             android:hint="@string/enter_title"
-            android:inputType="textCapWords"
             android:paddingStart="16dp"
             android:paddingTop="3dp"
             android:paddingEnd="16dp"
             android:layout_marginTop="3dp"
             android:textColor="@color/black"
             android:textColorHint="@color/text_hint_color"
-            android:textSize="@dimen/text_size_14"
+            android:textSize="16sp"
+            android:inputType="textCapWords"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_title_txt" />
@@ -66,7 +68,7 @@
             android:fontFamily="@font/poppins_regular"
             android:text="@string/desc"
             android:textColor="@color/black"
-            android:textSize="14sp"
+            android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/et_goal_title" />
 
@@ -86,7 +88,7 @@
             android:paddingEnd="16dp"
             android:textColor="@color/black"
             android:textColorHint="@color/text_hint_color"
-            android:textSize="14sp"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_desc_txt" />
@@ -117,7 +119,7 @@
             android:layout_marginTop="3dp"
             android:textColor="@color/black"
             android:textColorHint="@color/text_hint_color"
-            android:textSize="14sp"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_frequency" />
@@ -129,7 +131,7 @@
             android:fontFamily="@font/poppins_regular"
             android:text="@string/location"
             android:textColor="@color/black"
-            android:textSize="14sp"
+            android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/sp_goal_frequency" />
 
@@ -147,7 +149,7 @@
             android:layout_marginTop="3dp"
             android:textColor="@color/black"
             android:textColorHint="@color/text_hint_color"
-            android:textSize="14sp"
+            android:textSize="16sp"
             android:inputType="textCapWords"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -162,7 +164,7 @@
             android:fontFamily="@font/poppins_regular"
             android:text="@string/share_with"
             android:textColor="@color/black"
-            android:textSize="14sp"
+            android:textSize="16sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/et_location" />
 
@@ -181,7 +183,7 @@
             android:gravity="center_vertical"
             android:textColor="@color/black"
             android:textColorHint="@color/text_hint_color"
-            android:textSize="14sp"
+            android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_share_with" />
@@ -204,7 +206,7 @@
             android:fontFamily="@font/poppins_regular"
             android:text="@string/attachment"
             android:textColor="@color/black"
-            android:textSize="14sp"
+            android:textSize="16sp"
             android:layout_marginStart="8dp"
             app:layout_constraintStart_toEndOf="@+id/imageView9"
             app:layout_constraintTop_toBottomOf="@+id/tv_share_with_friends" />
@@ -246,7 +248,7 @@
                 android:paddingStart="16dp"
                 android:paddingTop="3dp"
                 android:paddingEnd="16dp"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 android:textColor="@color/black"
                 android:textColorHint="@color/black"
                 />
@@ -265,7 +267,7 @@
                 android:paddingEnd="16dp"
                 android:textColor="@color/black"
                 android:textColorHint="@color/white"
-                android:textSize="14sp"/>
+                android:textSize="16sp"/>
 
         </LinearLayout>
 

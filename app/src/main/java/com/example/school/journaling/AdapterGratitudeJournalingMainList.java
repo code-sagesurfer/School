@@ -124,13 +124,13 @@ public class AdapterGratitudeJournalingMainList extends RecyclerView.Adapter<Ada
         }
 
         if (!model.getIsLikeSymbol().equalsIgnoreCase("Like")) {
-            holder.animation_like.setMinAndMaxProgress(0.0f, 0.5f);
-            holder.animation_like.playAnimation();
-            holder.iv_like.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_gratitude_like_fill_red_heart));
+            //holder.animation_like.setMinAndMaxProgress(0.0f, 0.5f);
+            //holder.animation_like.playAnimation();
+            holder.iv_like.setImageDrawable(mContext.getResources().getDrawable(R.drawable.gratitude_like_fill_red_heart));
         } else {
-            holder.animation_like.setMinAndMaxProgress(0.5f, 1.0f);
-            holder.animation_like.playAnimation();
-            holder.iv_like.setImageDrawable(mContext.getResources().getDrawable(R.drawable.ic_gratitude_unlike_heart));
+            //holder.animation_like.setMinAndMaxProgress(0.5f, 1.0f);
+           // holder.animation_like.playAnimation();
+            holder.iv_like.setImageDrawable(mContext.getResources().getDrawable(R.drawable.gratitude_like_empty_heart));
         }
         //GratitudeJournalingMain gratitudeJournalingMain = (GratitudeJournalingMain) fragment;
         if (model.getProfileImage() != null && model.getProfileImage().length() > 0) {
@@ -204,13 +204,13 @@ public class AdapterGratitudeJournalingMainList extends RecyclerView.Adapter<Ada
         ImageView iv_like;
         RoundedImageView attached_image;
         AppCompatImageView iv_more;
-        LottieAnimationView animation_like;
+       // LottieAnimationView animation_like;
         TextView tv_gj_list_username, tv_desc_text, tv_desc_text_Na, tv_gj_list_date, tv_like_count, tv_share_count, tv_description, tv_category, tv_title;
 
         public ViewHolderJournaling(@NonNull View itemView) {
             super(itemView);
-            animation_like = itemView.findViewById(R.id.animation_like);
-            animation_like.setOnClickListener(this);
+            //animation_like = itemView.findViewById(R.id.animation_like);
+            //animation_like.setOnClickListener(this);
             iv_user_prodile = itemView.findViewById(R.id.iv_user_profile);
             iv_like = itemView.findViewById(R.id.iv_like);
             iv_share = itemView.findViewById(R.id.iv_share);
@@ -254,16 +254,16 @@ public class AdapterGratitudeJournalingMainList extends RecyclerView.Adapter<Ada
                 showOptionMenu(v);
             } /*else if (v.getId() == R.id.iv_like) {
                 toggleLike(getAbsoluteAdapterPosition());
-            } */else if (v.getId() == R.id.animation_like || v.getId()==R.id.iv_like) {
+            } */else if (/*v.getId() == R.id.animation_like ||*/ v.getId()==R.id.iv_like) {
                 if (!dataArrayList.get(getAbsoluteAdapterPosition()).getIsLikeSymbol().equalsIgnoreCase("Like")) {
-                    animation_like.setMinAndMaxProgress(0.0f, 0.5f);
-                    animation_like.playAnimation();
+                    //animation_like.setMinAndMaxProgress(0.0f, 0.5f);
+                    //animation_like.playAnimation();
                     dataArrayList.get(getAbsoluteAdapterPosition()).setIsLikeSymbol("Like");
                     toggleLike(getAbsoluteAdapterPosition());
                     //notifyDataSetChanged();
                 } else {
-                    animation_like.setMinAndMaxProgress(0.5f, 1.0f);
-                    animation_like.playAnimation();
+                    //animation_like.setMinAndMaxProgress(0.5f, 1.0f);
+                   // animation_like.playAnimation();
                     dataArrayList.get(getAbsoluteAdapterPosition()).setIsLikeSymbol("Unlike");
                     toggleLike(getAbsoluteAdapterPosition());
                     //notifyDataSetChanged();

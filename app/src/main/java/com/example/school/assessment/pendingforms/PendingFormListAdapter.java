@@ -8,12 +8,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.school.R;
 import com.example.school.home.adapters.AdapterGratitudeJournalingList;
+import com.google.android.material.card.MaterialCardView;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -21,6 +24,9 @@ import butterknife.ButterKnife;
 public class PendingFormListAdapter extends RecyclerView.Adapter<PendingFormListAdapter.PendingFormViewHolder> {
     private ArrayList<Forms_> formsArrayList;
     Context context;
+    final int min = 200;
+    final int max = 350;
+    int random;
 
     public PendingFormListAdapter(ArrayList<Forms_> formsArrayList, Context context) {
         this.formsArrayList = formsArrayList;
@@ -36,9 +42,12 @@ public class PendingFormListAdapter extends RecyclerView.Adapter<PendingFormList
 
     @Override
     public void onBindViewHolder(@NonNull PendingFormViewHolder holder, int position) {
-        Forms_ item=formsArrayList.get(position);
+        Forms_ item = formsArrayList.get(position);
         holder.txt_date.setText(item.getActual_date_time());
         holder.txt_title.setText(item.getForm_name());
+
+        final int random = new Random().nextInt((max - min) + 1) + min;
+
     }
 
     @Override
@@ -68,6 +77,12 @@ public class PendingFormListAdapter extends RecyclerView.Adapter<PendingFormList
 
         @BindView(R.id.txt_date)
         TextView txt_date;
+
+        @BindView(R.id.cl_assessment_item_main)
+        MaterialCardView cl_assessment_item_main;
+
+        @BindView(R.id.cl_second)
+        ConstraintLayout cl_second;
 
         public PendingFormViewHolder(@NonNull View itemView) {
             super(itemView);

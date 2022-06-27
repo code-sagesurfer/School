@@ -12,6 +12,7 @@
         android:layout_height="match_parent"
         android:text="@string/hello_blank_fragment"
         android:id="@+id/rv_notification"
+        android:paddingTop="16dp"
         tools:listitem="@layout/layout_notification_list_item"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

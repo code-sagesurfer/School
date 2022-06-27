@@ -2,11 +2,11 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="200dp"
-    android:id="@+id/cl_assessment_item_main"
+    android:layout_height="300dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     app:cardCornerRadius="30dp"
     android:layout_margin="3dp"
+    android:id="@+id/cl_assessment_item_main"
     >
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -37,25 +37,25 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/demo_text"
+            android:textSize="16sp"
             android:id="@+id/tv_heading_text"
             android:textColor="@color/white"
-            android:textSize="14sp"
             android:fontFamily="@font/poppins_regular"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="8dp"
-            android:layout_marginStart="18dp"
+            android:layout_marginStart="24dp"
             android:layout_marginEnd="@dimen/size_margin_16"
             />
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="75dp"
-            android:layout_marginBottom="5dp"
+            android:layout_height="80dp"
+            android:layout_marginBottom="8dp"
             android:background="@drawable/bottom_corner_rounded_assessment"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp"
-            android:paddingStart="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:paddingStart="16dp"
             app:layout_constraintBottom_toBottomOf="@+id/iv_form_bg"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
@@ -70,7 +70,7 @@
                 android:fontFamily="@font/poppins_regular"
                 android:text="PHQ9"
                 android:textColor="@color/black"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 android:layout_marginStart="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -106,8 +106,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginStart="8dp"
-
-                android:textSize="14sp"
+                android:layout_marginTop="5dp"
+                android:textSize="16sp"
                 android:id="@+id/txt_last_score"
                 android:layout_marginEnd="@dimen/margin_8"
                 />
@@ -122,8 +122,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginStart="8dp"
-
-                android:textSize="11sp"
+                android:layout_marginTop="5dp"
+                android:textSize="14sp"
                 android:id="@+id/txt_date"
                 android:layout_marginEnd="@dimen/margin_8"
                 />

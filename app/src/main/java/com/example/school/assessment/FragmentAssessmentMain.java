@@ -17,6 +17,7 @@ import com.example.school.R;
 import com.example.school.assessment.model.AllCounterResponseModel;
 import com.example.school.assessment.pendingforms.FragmentPendingForms;
 import com.example.school.assessment.submitted.FragmentSubmittedForms;
+import com.example.school.home.MainActivity;
 import com.example.school.moodtracking.FragmentMoodTrackingListing;
 import com.example.school.resources.APIManager;
 import com.example.school.resources.General;
@@ -61,7 +62,7 @@ public class FragmentAssessmentMain extends Fragment implements View.OnClickList
 
     @BindView(R.id.fl_assessment_container)
     FrameLayout fl_main_container;
-
+    MainActivity mainActivity;
     private static final String TAG = "FragmentAssessmentMain";
     public FragmentAssessmentMain() {
 
@@ -120,7 +121,10 @@ public class FragmentAssessmentMain extends Fragment implements View.OnClickList
     @Override
     public void onResume() {
         super.onResume();
-
+        if (getContext() instanceof MainActivity) {
+            mainActivity = (MainActivity) getContext();
+            mainActivity.setToolbarTitleText(getString(R.string.menu_assessment));
+        }
         getCounter();
     }
 

@@ -10,15 +10,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/ll1"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/iv_user_profile"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_marginStart="16dp"
             android:src="@drawable/square_img_demo"
             app:civ_border_color="@color/green_active"
@@ -36,7 +36,7 @@
             android:layout_marginEnd="16dp"
             android:maxLines="2"
             android:text="Appointment has been added by System Administration."
-            android:textSize="14sp"
+            android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/iv_user_profile"
             app:layout_constraintTop_toTopOf="@+id/iv_user_profile" />
@@ -49,7 +49,7 @@
             android:layout_marginEnd="8dp"
             android:maxLines="2"
             android:text="01 Mar, 22"
-            android:textSize="12sp"
+            android:textSize="14sp"
             android:textColor="@color/color_primary"
             android:layout_marginTop="5dp"
             app:layout_constraintEnd_toStartOf="@+id/btn_delete"
@@ -57,8 +57,8 @@
             app:layout_constraintTop_toBottomOf="@+id/notification_title" />
 
         <ImageView
-            android:layout_width="14dp"
-            android:layout_height="16dp"
+            android:layout_width="16dp"
+            android:layout_height="20dp"
             android:id="@+id/btn_delete"
             android:layout_marginEnd="16dp"
             android:src="@drawable/delete"
@@ -68,8 +68,8 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
     <View
         android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:layout_marginTop="8dp"
+        android:layout_height="0.25dp"
+        android:layout_marginTop="16dp"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
         app:layout_constraintStart_toStartOf="parent"

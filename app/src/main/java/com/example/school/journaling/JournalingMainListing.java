@@ -572,7 +572,6 @@ public class JournalingMainListing extends Fragment implements iSelectedImageRes
         } else {
             //showError(true, status);
         }
-
     }
 
     public void dialogShowFriendAndTeamMembers() {

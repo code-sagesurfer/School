@@ -225,9 +225,13 @@ public class FragmentNotificationListing extends Fragment {
         String time = getDate(notification.getTimestamp());
 
         tv_date.setText(time);
-        tv_greeting.setText("Dear "+Preferences.get(General.NAME)+",");
-        tv_description.setText(notification.getDescription());
-        tv_team_list_user_name.setText(notification.getType() +" added by "+notification.getAdded_by());
+        tv_greeting.setText("Dear " + Preferences.get(General.NAME) + ",");
+        if (notification.getDescription() != null) {
+            tv_description.setText(notification.getDescription());
+        }else {
+            tv_description.setText(notification.getDescription1());
+        }
+        tv_team_list_user_name.setText(notification.getType() + " added by " + notification.getAdded_by());
 
 
         dialog.show();
@@ -241,5 +245,4 @@ public class FragmentNotificationListing extends Fragment {
         String date = DateFormat.format("MMM dd, yyyy | hh:mm a", cal).toString();
         return date;
     }
-
 }
