@@ -26,6 +26,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.example.school.ModelDetailData;
 import com.example.school.R;
 import com.example.school.assessment.pendingforms.Forms_;
+import com.example.school.home.MainActivity;
 import com.example.school.resources.APIManager;
 import com.example.school.resources.Actions_;
 import com.example.school.resources.AppLog;
@@ -67,7 +68,7 @@ public class FragmentNotificationListing extends Fragment {
     private AdapterNotification notificationAdapter;
     private ArrayList<Notification> notificationList = new ArrayList<>();
     private ArrayList<Notification> notificationFilterList = new ArrayList<>();
-
+    MainActivity mainActivity;
     public FragmentNotificationListing() {
 
     }
@@ -119,6 +120,11 @@ public class FragmentNotificationListing extends Fragment {
     public void onResume() {
         super.onResume();
         fetchNotificationNew(0, 50);
+
+        if (getContext() instanceof MainActivity){
+            mainActivity = (MainActivity) getContext();
+            mainActivity.setToolbarTitleText("Notification");
+        }
     }
 
     private void fetchNotificationNew(int min, int max) {

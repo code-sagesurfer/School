@@ -208,6 +208,9 @@ interface Api {
     @POST("mobile_get_signup_instances.php")
     fun get_instances(@Body params: RequestBody): Call<JsonElement>
 
+    @POST( Urls_.FEEDBACK_URL)
+    fun mobile_feedback(@Body params: RequestBody): Call<JsonElement>
+
     @POST("mobile_invitation_operations.php")
     fun mobile_invitation_operations(@Body params: RequestBody): Call<JsonElement>
 

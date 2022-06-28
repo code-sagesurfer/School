@@ -127,6 +127,7 @@ public class General {
     public static final String TEAM_DATA = "team_data";
 
     public static final String UPLOADING_CONTENT_FROM = "uploading_content_from";
+    public static final String SELECTED_IMAGE_BOX = "selected_image_box";
     public static String WELCOME_IMAGE_SKIP_ONCE_URL = "welcomeImageSkipOnce";
     public static final String TIMESTAMP = "timestamp";
     public static final String CHECK = "check";

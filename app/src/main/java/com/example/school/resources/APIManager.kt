@@ -496,6 +496,12 @@ class APIManager {
         call.enqueue(aCallback)
     }
 
+    fun mobile_feedback(@Body params: RequestBody, aCallback: Callback<JsonElement>) {
+        updateAPi()
+        val call: Call<JsonElement> = mApiService!!.mobile_feedback(params)
+        call.enqueue(aCallback)
+    }
+
     fun mobile_youth_operations_new(@Body params: RequestBody, aCallback: Callback<JsonElement>) {
         updateAPi()
         val call: Call<JsonElement> = mApiService!!.mobile_youth_operations_new(params)
