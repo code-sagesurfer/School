@@ -4,8 +4,6 @@ import static com.example.school.home.BaseFragment.MAX_DEFAULT_VALUE_LARGE;
 
 import android.os.Bundle;
 
-import androidx.appcompat.app.AppCompatDelegate;
-import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -13,16 +11,14 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.school.R;
 import com.example.school.goalmanagement.FragmentAddGoal;
-import com.example.school.home.MainActivity;
+import com.example.school.home.main.MainActivity;
 import com.example.school.resources.APIManager;
 import com.example.school.resources.Actions_;
 import com.example.school.resources.AppLog;
@@ -34,12 +30,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 
 import butterknife.BindView;

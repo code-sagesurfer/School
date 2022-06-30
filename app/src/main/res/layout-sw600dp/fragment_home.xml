@@ -13,55 +13,108 @@
         android:paddingBottom="24dp"
         >
     <TextView
-        android:id="@+id/tv_role_bottom_top"
+        android:id="@+id/tv_greeting_for_user"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="40dp"
         android:fontFamily="@font/poppins_regular"
         android:text="@string/greetings"
 
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="24dp"
         android:textColor="@color/splash_text1"
         android:textSize="24sp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:id="@+id/iv_greeting_img"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_marginStart="8dp"
         android:src="@drawable/user_name"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_role_bottom_top"
-        app:layout_constraintStart_toEndOf="@+id/tv_role_bottom_top"
-        app:layout_constraintTop_toTopOf="@+id/tv_role_bottom_top" />
+        app:layout_constraintBottom_toBottomOf="@+id/tv_greeting_for_user"
+        app:layout_constraintStart_toEndOf="@+id/tv_greeting_for_user"
+        app:layout_constraintTop_toTopOf="@+id/tv_greeting_for_user" />
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:layout_marginStart="8dp"
         android:src="@drawable/user_name"
         android:layout_marginEnd="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_role_bottom_top"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_greeting_for_user"
         app:layout_constraintEnd_toEndOf="parent"
         app:civ_border_color="@color/color_primary"
         app:civ_border_width="0.5dp"
         android:id="@+id/iv_user_profile"
-        app:layout_constraintTop_toTopOf="@+id/tv_role_bottom_top" />
+        app:layout_constraintTop_toTopOf="@+id/tv_greeting_for_user" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="130dp"
+        android:layout_height="200dp"
         android:orientation="horizontal"
         android:layout_marginTop="16dp"
         android:id="@+id/rv_quotes"
-
+        android:visibility="invisible"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_role_bottom_top" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_greeting_for_user" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/ic_bg_positive_quotes"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/iv_user_profile">
+
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/poppins_semi_bold"
+                android:text="@string/positive_quotes"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                app:layout_constraintStart_toStartOf="parent"
+
+
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:fontFamily="@font/poppins_regular"
+                android:paddingStart="24dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="16dp"
+                android:text="@string/quote_home"
+                android:textColor="@color/white"
+                android:paddingTop="@dimen/margin_8"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/iv_kids"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView12" />
+
+            <ImageView
+                android:id="@+id/iv_kids"
+                android:layout_width="130dp"
+                android:layout_height="130dp"
+                android:layout_marginEnd="16dp"
+                android:src="@drawable/positive_quotes_icon"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <LinearLayout
             android:layout_width="match_parent"

@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
-import com.example.school.home.MainActivity;
+import com.example.school.home.main.MainActivity;
 import com.example.school.login.LoginActivity;
 import com.example.school.resources.General;
 import com.example.school.resources.Preferences;

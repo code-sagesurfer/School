@@ -24,7 +24,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.school.R;
-import com.example.school.home.MainActivity;
+import com.example.school.home.main.MainActivity;
 import com.example.school.resources.APIManager;
 import com.example.school.resources.Actions_;
 import com.example.school.resources.AppLog;
@@ -34,7 +34,6 @@ import com.example.school.resources.Urls_;
 import com.example.school.resources.apidata.MakeCall;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;

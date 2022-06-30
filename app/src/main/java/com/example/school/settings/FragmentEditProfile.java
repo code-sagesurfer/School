@@ -22,7 +22,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.school.R;
-import com.example.school.home.MainActivity;
+import com.example.school.home.main.MainActivity;
 import com.example.school.resources.APIManager;
 import com.example.school.resources.Actions_;
 import com.example.school.resources.General;
@@ -34,9 +34,6 @@ import com.example.school.resources.apidata.MakeCall;
 import com.example.school.resources.showstatus.ShowToast;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-
-import org.w3c.dom.Text;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

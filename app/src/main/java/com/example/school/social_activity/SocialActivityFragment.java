@@ -14,8 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.school.R;
-import com.example.school.emotional_support.FragmentEmotionalSupport;
-import com.example.school.home.MainActivity;
+import com.example.school.home.main.MainActivity;
 import com.example.school.resources.APIManager;
 import com.example.school.resources.AppLog;
 import com.example.school.resources.General;

@@ -257,4 +257,26 @@ public class GetTime {
         return 0;
     }
 
+
+        public static String getGreetingTime(){
+            Calendar c = Calendar.getInstance();
+            int timeOfDay = c.get(Calendar.HOUR_OF_DAY);
+
+            if(timeOfDay >= 0 && timeOfDay < 12){
+                return  "Good Morning";
+            }else if(timeOfDay >= 12 && timeOfDay < 16){
+                return  "Good Afternoon";
+            }else {
+                return  "Good Evening";
+            }
+
+
+            /*else if(timeOfDay >= 16 && timeOfDay < 24){
+                return  "Good Evening";
+                //Toast.makeText(this, "Good Evening", Toast.LENGTH_SHORT).show();
+            }else if(timeOfDay >= 21 && timeOfDay < 24){
+               // Toast.makeText(this, "Good Night", Toast.LENGTH_SHORT).show();
+            }*/
+
+        }
 }

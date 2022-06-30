@@ -24,7 +24,7 @@
         android:requestLegacyExternalStorage="true"
         android:theme="@style/Theme.School">
         <activity
-            android:name=".home.MainActivity"
+            android:name=".home.main.MainActivity"
             android:exported="false"
             android:label="@string/title_activity_main"
             android:theme="@style/Theme.School.NoActionBar" />

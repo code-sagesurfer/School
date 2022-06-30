@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:layout_marginTop="24dp"
-        android:padding="@dimen/size_margin_10"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -21,8 +21,9 @@
             android:layout_width="75dp"
             android:layout_height="80dp"
             android:id="@+id/cv_total"
+            android:layout_marginBottom="8dp"
             app:cardCornerRadius="10dp"
-
+            app:cardPreventCornerOverlap="true"
             app:cardBackgroundColor="#F19336">
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
@@ -225,12 +226,15 @@
         app:layout_constraintTop_toBottomOf="@+id/header_layout" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_goals"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:id="@+id/rv_goals"
-        tools:listitem="@layout/layout_skill_development_list_item"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView7"
+        app:layout_constraintVertical_bias="0.0"
+        tools:listitem="@layout/layout_skill_development_list_item" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:layout_width="wrap_content"

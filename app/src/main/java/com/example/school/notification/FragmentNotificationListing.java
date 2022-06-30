@@ -2,8 +2,6 @@ package com.example.school.notification;
 
 import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions.withCrossFade;
 
-import android.app.Activity;
-import android.content.Context;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -23,10 +21,9 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
-import com.example.school.ModelDetailData;
 import com.example.school.R;
 import com.example.school.assessment.pendingforms.Forms_;
-import com.example.school.home.MainActivity;
+import com.example.school.home.main.MainActivity;
 import com.example.school.resources.APIManager;
 import com.example.school.resources.Actions_;
 import com.example.school.resources.AppLog;
@@ -36,7 +33,6 @@ import com.example.school.resources.Urls_;
 import com.example.school.resources.apidata.MakeCall;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
-import com.makeramen.roundedimageview.RoundedImageView;
 
 import java.util.ArrayList;
 import java.util.Calendar;

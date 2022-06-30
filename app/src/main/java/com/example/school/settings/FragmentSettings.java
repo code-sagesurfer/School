@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.school.R;
-import com.example.school.home.MainActivity;
+import com.example.school.home.main.MainActivity;
 
 /**
  * @author Rahul Maske (rahul.maske@sagesurfer.com)

@@ -13,7 +13,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +30,7 @@ import com.example.school.home.adapters.AdapterGratitudeJournalingList;
 import com.example.school.home.adapters.AdapterPlannerData;
 import com.example.school.home.adapters.AdaptersMoodData;
 import com.example.school.home.dailyplanner.FragmentPlannerMain;
-import com.example.school.intakeconsent.FragmentIntakeConsentMain;
+import com.example.school.home.main.MainActivity;
 import com.example.school.journaling.JournalingMainListing;
 import com.example.school.moodtracking.DashboardData;
 import com.example.school.moodtracking.FragmentMoodTrackingListing;
@@ -41,6 +40,7 @@ import com.example.school.resources.APIManager;
 import com.example.school.resources.Actions_;
 import com.example.school.resources.AppLog;
 import com.example.school.resources.General;
+import com.example.school.resources.GetTime;
 import com.example.school.resources.Preferences;
 import com.example.school.resources.Urls_;
 import com.example.school.resources.apidata.MakeCall;
@@ -86,8 +86,8 @@ public class HomeFragment extends Fragment {
     RecyclerView rv_mood;
     MainActivity mainActivity;
     int [] viewIds = {
-            R.id.tv_role_bottom_top,
-            R.id.imageView,
+            R.id.tv_greeting_for_user,
+            R.id.iv_greeting_img,
             R.id.iv_user_profile,
             R.id.rv_quotes,
             R.id.cl_physical_activity,
@@ -161,6 +161,8 @@ public class HomeFragment extends Fragment {
             }
         });
 
+
+
         dataMood = new DataMood();
         dataJournaling = new DataJournaling();
         dataPlanner = new DataPlanner();
@@ -177,6 +179,8 @@ public class HomeFragment extends Fragment {
         RecyclerView.LayoutManager mLayoutManagerPlanner = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);
         homeBinding.rvPlanner.setLayoutManager(mLayoutManagerPlanner);
         homeBinding.rvPlanner.setItemAnimator(new DefaultItemAnimator());
+
+        setGreetings();
 
         homeBinding.clEmotionalSupport.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -205,6 +209,8 @@ public class HomeFragment extends Fragment {
                 openFragmentAdequateSleep();
             }
         });
+
+
 
         homeBinding.tvViewAllJournaling.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -250,6 +256,18 @@ public class HomeFragment extends Fragment {
                     .into(homeBinding.ivUserProfile);
         }
         return root;
+    }
+
+    private void setGreetings() {
+        homeBinding.tvGreetingForUser.setText(GetTime.getGreetingTime());
+
+        if (GetTime.getGreetingTime().equals("Good Morning")){
+            homeBinding.ivGreetingImg.setImageResource(R.drawable.ic_good_morning);
+        }else if (GetTime.getGreetingTime().equals("Good Afternoon")){
+            homeBinding.ivGreetingImg.setImageResource(R.drawable.ic_good_afternoon);
+        }else if (GetTime.getGreetingTime().equals("Good Evening")){
+            homeBinding.ivGreetingImg.setImageResource(R.drawable.good_evening);
+        }
     }
 
     @Override

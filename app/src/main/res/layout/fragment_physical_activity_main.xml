@@ -79,7 +79,7 @@
             app:layout_constraintTop_toBottomOf="@+id/txt_weight" />
 
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/iv_greeting_img"
             android:layout_width="30dp"
             android:layout_height="50dp"
             android:layout_marginStart="16dp"
@@ -100,7 +100,7 @@
             android:textSize="@dimen/text_size_12"
             app:layout_constraintBottom_toTopOf="@+id/textVi"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintStart_toEndOf="@+id/iv_greeting_img"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_chainStyle="packed" />
 
@@ -116,7 +116,7 @@
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
+            app:layout_constraintStart_toEndOf="@+id/iv_greeting_img"
             app:layout_constraintTop_toBottomOf="@+id/txt_height" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

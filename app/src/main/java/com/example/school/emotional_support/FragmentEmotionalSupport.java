@@ -17,7 +17,7 @@ import android.widget.Toast;
 
 import com.example.school.R;
 import com.example.school.home.DataJournaling;
-import com.example.school.home.MainActivity;
+import com.example.school.home.main.MainActivity;
 import com.example.school.home.ModelGratitudeListingResponseData;
 import com.example.school.home.DataMood;
 import com.example.school.home.MoodJournalDataMood_;

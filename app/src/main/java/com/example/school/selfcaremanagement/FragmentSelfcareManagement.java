@@ -21,11 +21,8 @@ import com.example.school.FragmentDetailDisplay;
 import com.example.school.ItemDetailView;
 import com.example.school.ModelDetailData;
 import com.example.school.R;
-import com.example.school.home.MainActivity;
-import com.example.school.nutrition.FragmentProperNutrition;
+import com.example.school.home.main.MainActivity;
 import com.example.school.resources.General;
-import com.example.school.social_activity.SocialActivityFragment;
-import com.google.android.gms.dynamic.IFragmentWrapper;
 
 import java.util.ArrayList;
 

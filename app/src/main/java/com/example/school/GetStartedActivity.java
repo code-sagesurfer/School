@@ -6,8 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 
-import com.example.school.home.HomeFragment;
-import com.example.school.home.MainActivity;
+import com.example.school.home.main.MainActivity;
 
 public class GetStartedActivity extends AppCompatActivity {
 

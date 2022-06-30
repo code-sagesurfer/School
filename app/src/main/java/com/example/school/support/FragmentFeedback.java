@@ -4,6 +4,7 @@ import static com.bumptech.glide.load.resource.drawable.DrawableTransitionOption
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -26,8 +27,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.school.R;
-import com.example.school.assessment.pendingforms.ModelFormListResponse;
-import com.example.school.home.MainActivity;
+import com.example.school.home.main.MainActivity;
 import com.example.school.resources.APIManager;
 import com.example.school.resources.Actions_;
 import com.example.school.resources.ArrayOperations;
@@ -54,7 +54,6 @@ import com.permissionx.guolindev.callback.RequestCallback;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -168,11 +167,11 @@ public class FragmentFeedback extends Fragment implements View.OnClickListener {
                 break;*/
 
             case R.id.iv_close_icon_1:
-                new RemoveAttachment(1, "" + getAttachmentId(0)).execute();
+                new RemoveAttachment(1, ""+Preferences.get(General.IMAGE_ID_1)).execute();
                 break;
 
                 case R.id.iv_close_icon_2:
-                new RemoveAttachment(2, "" + getAttachmentId(1)).execute();
+                new RemoveAttachment(2, "" +Preferences.get(General.IMAGE_ID_2)).execute();
                 break;
 
             case R.id.btn_submit:
@@ -206,13 +205,13 @@ public class FragmentFeedback extends Fragment implements View.OnClickListener {
         requestMap.put(General.ACTION, "add");
         requestMap.put(General.MESSAGE, message);
 
-        if (attachmentArrayList.size() == 1) {
-            requestMap.put("img1", "" + attachmentArrayList.get(0).getId());
+        if (Preferences.get(General.IMAGE_ID_1).contains(General.IMAGE_ID_1)) {
+            requestMap.put("img1", "" + Preferences.get(General.IMAGE_ID_1));
         } else {
             requestMap.put("img1", "");
         }
-        if (attachmentArrayList.size() > 1) {
-            requestMap.put("img2", "" + attachmentArrayList.get(1).getId());
+        if (Preferences.get(General.IMAGE_ID_1).contains(General.IMAGE_ID_2)) {
+            requestMap.put("img2", "" + Preferences.get(General.IMAGE_ID_2));
         } else {
             requestMap.put("img2", "");
         }
@@ -342,7 +341,7 @@ public class FragmentFeedback extends Fragment implements View.OnClickListener {
             }
 
             if (CheckFileType.imageFile(file_path)) {
-                new UploadFile(requestCode, file_path).execute();
+                new UploadFile(requestCode, file_path, getActivity()).execute();
             } else {
                 //ShowSnack.viewWarning(imageViewSupportFeedbackAttachmentOne, this.getResources().getString(R.string.valid_file_error), getContext());
                 Toast.makeText(mainActivity, "" + this.getResources().getString(R.string.valid_file_error), Toast.LENGTH_SHORT).show();
@@ -357,17 +356,19 @@ public class FragmentFeedback extends Fragment implements View.OnClickListener {
         ShowLoader showLoader;
         final int position;
         final String path;
+        Activity activity;
 
-        UploadFile(int position, String path) {
+        UploadFile(int position, String path, Activity activity) {
             this.position = position;
             this.path = path;
+            this.activity = activity;
         }
 
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            //showLoader = new ShowLoader();
-            // showLoader.showUploadDialog(getActivity());
+            showLoader = new ShowLoader();
+             showLoader.showUploadDialog(activity,"Uploading..");
         }
 
         @Override
@@ -397,6 +398,11 @@ public class FragmentFeedback extends Fragment implements View.OnClickListener {
                                     wallAttachment_.setSize(FileOperations.getSize(path));
                                     wallAttachment_.setPosition(position);
                                     attachmentArrayList.add(wallAttachment_);
+                                    if (Preferences.get(General.SELECTED_IMAGE_BOX).equalsIgnoreCase("first")) {
+                                        Preferences.save(General.IMAGE_ID_1,""+object.get(General.ID).getAsInt());
+                                    }else if (Preferences.get(General.SELECTED_IMAGE_BOX).equalsIgnoreCase("second")) {
+                                        Preferences.save(General.IMAGE_ID_2,""+object.get(General.ID).getAsInt());
+                                    }
                                 }
                             } else {
                                 status = 11;
@@ -511,19 +517,22 @@ public class FragmentFeedback extends Fragment implements View.OnClickListener {
             super.onPostExecute(aVoid);
             if (position == 0) {
                 attachmentArrayList.clear();
-
             }
             if (position == 1) {
                 ShowToast.toast(getContext().getResources().getString(R.string.removed), getContext());
                 roundedImageView.setImageDrawable(null);
                 iv_close_icon_1.setVisibility(View.GONE);
+                iv_select_image_btn_1.setVisibility(View.VISIBLE);
                 removeAttachmentId(1);
+                Preferences.removeKey(General.IMAGE_ID_1);
             }
             if (position == 2) {
                 ShowToast.toast(getContext().getResources().getString(R.string.removed), getContext());
                 roundedImageView2.setImageDrawable(null);
                 iv_close_icon_2.setVisibility(View.GONE);
+                iv_select_image_btn_2.setVisibility(View.VISIBLE);
                 removeAttachmentId(2);
+                Preferences.removeKey(General.IMAGE_ID_2);
             }
         }
     }
@@ -541,5 +550,4 @@ public class FragmentFeedback extends Fragment implements View.OnClickListener {
             }
         }
     }
-
 }

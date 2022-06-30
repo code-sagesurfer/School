@@ -244,6 +244,7 @@
     <string name="valid_file_error">Please select valid file</string>
     <string name="max_10_mb_allowed">Max file size allowed is 10MB</string>
     <string name="removed">Removed</string>
+    <string name="quote_home">Good mental health improves the overall quality of life.</string>
     <string-array name="goal_frequency">
         <item>Select Frequency</item>
         <item>Daily</item>

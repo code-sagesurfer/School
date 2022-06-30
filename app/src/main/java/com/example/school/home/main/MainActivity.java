@@ -1,4 +1,4 @@
-package com.example.school.home;
+package com.example.school.home.main;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -23,11 +23,10 @@ import com.example.school.R;
 
 import com.example.school.assessment.FragmentAssessmentMain;
 import com.example.school.databinding.ActivityMainBinding;
-import com.example.school.emotional_support.FragmentEmotionalSupport;
 import com.example.school.goalmanagement.FragmentAddGoal;
 import com.example.school.goalmanagement.InterfaceGoalImageResponseHandler;
+import com.example.school.home.HomeFragment;
 import com.example.school.home.dailyplanner.FragmentPlannerMain;
-import com.example.school.home.ui.ModelGratitudeListingResponse;
 import com.example.school.journaling.JournalingMainListing;
 import com.example.school.journaling.iSelectedImageResponse;
 import com.example.school.login.LoginActivity;
@@ -71,6 +70,9 @@ import androidx.fragment.app.FragmentTransaction;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.HashMap;
 
@@ -94,6 +96,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     Toolbar toolbar;
+    RecyclerView rv_drawer_menu;
     boolean showHide;
     CircleImageView iv_user_profile;
     private TextView tv_role, tv_user_name;
@@ -122,6 +125,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 //toolbar.setNavigationIcon(R.drawable.vi_drawer_hamburger_icon);
             }
         };
+
+
+
         //toggle.setDrawerIndicatorEnabled(false);
         toolbar = (Toolbar) findViewById(R.id.main_toolbar);
         tv_toolbar_title = toolbar.findViewById(R.id.tv_toolbar_title);
@@ -155,11 +161,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         View headerview = navigationView.getHeaderView(0);
         navigationView.setNavigationItemSelectedListener(this);
 
-        tv_user_name = headerview.findViewById(R.id.tv_user_name);
-        tv_role = headerview.findViewById(R.id.tv_role);
-        iv_user_profile = headerview.findViewById(R.id.iv_user_profile);
+        tv_user_name = navigationView.findViewById(R.id.tv_user_name);
+        tv_role = navigationView.findViewById(R.id.tv_role);
+        iv_user_profile = navigationView.findViewById(R.id.iv_user_profile);
         tv_user_name.setText(Preferences.get(General.NAME));
         tv_role.setText(Preferences.get(General.ROLE));
+
+        rv_drawer_menu=navigationView.findViewById(R.id.rv_drawerMenus);
+        RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(MainActivity.this,LinearLayoutManager.VERTICAL,false);
+        rv_drawer_menu.setLayoutManager(layoutManager);
+        rv_drawer_menu.setItemAnimator(new DefaultItemAnimator());
+
 
         if (Preferences.get(General.IMAGE) != null && Preferences.get(General.IMAGE).length() != 0) {
             Glide.with(this)
@@ -176,17 +188,22 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
 
-        tv_settings = headerview.findViewById(R.id.tv_settings);
-        iv_settings = headerview.findViewById(R.id.iv_settings);
+        tv_settings = navigationView.findViewById(R.id.tv_settings);
+        iv_settings = navigationView.findViewById(R.id.iv_settings);
         iv_settings.setOnClickListener(this);
         tv_settings.setOnClickListener(this);
 
+
+        setDrawerMenus();
         FragmentManager fragManager = getSupportFragmentManager();
         FragmentTransaction ft = fragManager.beginTransaction();
         //ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left);
         ft.replace(R.id.main_container, new HomeFragment(), "HomeFragment");
         //ft.addToBackStack("HomeFragment");
         ft.commit();
+
+
+
 
         //mDrawerList = (ListView) findViewById(R.id.left_drawer);
        /* binding = ActivityMainBinding.inflate(getLayoutInflater());
@@ -206,6 +223,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Objects.requireNonNull(getSupportActionBar()).setElevation(0);
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.drawer_menu);
         binding.appBarMain.includeContentMain.llHome.setOnClickListener(this);*/
+    }
+
+    private void setDrawerMenus() {
+        Log.i(TAG, "setDrawerMenus: size "+DrawerMenuList.getDrawerMenuList().size());
+        AdapterDrawerMenu adapterDrawerMenu=new AdapterDrawerMenu(DrawerMenuList.getDrawerMenuList(),MainActivity.this);
+        rv_drawer_menu.setAdapter(adapterDrawerMenu);
     }
 
     @Override
@@ -314,92 +337,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         fragmentCreateFolder.show(getSupportFragmentManager(), "ItemListDialogFragment");
     }
 
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-        AppLog.i(TAG, "onNavigationItemSelected: ");
-        AppLog.i(TAG, "onMenuItemClick: item " + item.getTitle());
-        if (item.getTitle().toString().equals("Home")) {
-            FragmentManager fragManager = getSupportFragmentManager();
-            FragmentTransaction ft = fragManager.beginTransaction();
-            //ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left);
-            ft.replace(R.id.main_container, new HomeFragment(), "HomeFragment");
 
-            ft.commit();
-            mDrawerLayout.closeDrawer(Gravity.LEFT);
-        } else if (item.getTitle().toString().equals("Journaling")) {
-            FragmentManager fragManager = getSupportFragmentManager();
-            FragmentTransaction ft = fragManager.beginTransaction();
-            //ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left);
-            ft.replace(R.id.main_container, new JournalingMainListing(), "JournalingMainListing");
-            ft.addToBackStack("HomeFragment");
-            ft.commit();
-            mDrawerLayout.closeDrawer(Gravity.LEFT);
-        } else if (item.getTitle().toString().equals("Mood Tracking")) {
-            FragmentManager fragManager = getSupportFragmentManager();
-            FragmentTransaction ft = fragManager.beginTransaction();
-            //ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left);
-            ft.replace(R.id.main_container, new FragmentMoodTrackingListing(), "FragmentMoodTrackingListing");
-            ft.addToBackStack("HomeFragment");
-            ft.commit();
-            mDrawerLayout.closeDrawer(Gravity.LEFT);
-        } else if (item.getTitle().toString().equals("Team Care")) {
-            getTeamListFromServer();
-        } else if (item.getTitle().toString().equals("Self-Care")) {
-            FragmentManager fragManager = getSupportFragmentManager();
-            FragmentTransaction ft = fragManager.beginTransaction();
-            //ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left);
-            ft.replace(R.id.main_container, new FragmentSelfcareManagement(), "FragmentSelfcareManagement");
-            ft.addToBackStack("HomeFragment");
-            ft.commit();
-            mDrawerLayout.closeDrawer(Gravity.LEFT);
-        } else if (item.getTitle().toString().equals("Support")) {
-            FragmentManager fragManager = getSupportFragmentManager();
-            FragmentTransaction ft = fragManager.beginTransaction();
-            //ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left);
-            ft.replace(R.id.main_container, new FragmentSupport(), "FragmentSupport");
-            ft.addToBackStack("HomeFragment");
-            ft.commit();
-            mDrawerLayout.closeDrawer(Gravity.LEFT);
-        } else if (item.getTitle().toString().equals("Goal Management")) {
-            FragmentManager fragManager = getSupportFragmentManager();
-            FragmentTransaction ft = fragManager.beginTransaction();
-            //ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left);
-            ft.replace(R.id.main_container, new FragmentSkillDevelopment(), "FragmentSkillDevelopment");
-            ft.addToBackStack("HomeFragment");
-            ft.commit();
-            mDrawerLayout.closeDrawer(Gravity.LEFT);
-        } else if (item.getTitle().toString().equals("Daily Planner")) {
-            FragmentManager fragManager = getSupportFragmentManager();
-            FragmentTransaction ft = fragManager.beginTransaction();
-            //ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left);
-            ft.replace(R.id.main_container, new FragmentPlannerMain(), "FragmentPlannerMain");
-            ft.addToBackStack("HomeFragment");
-            ft.commit();
-            mDrawerLayout.closeDrawer(Gravity.LEFT);
-        } else if (item.getTitle().toString().equals("Assessment")) {
-            FragmentManager fragManager = getSupportFragmentManager();
-            FragmentTransaction ft = fragManager.beginTransaction();
-            //ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left);
-            ft.replace(R.id.main_container, new FragmentAssessmentMain(), "FragmentAssessmentMain");
-            ft.addToBackStack("HomeFragment");
-            ft.commit();
-            mDrawerLayout.closeDrawer(Gravity.LEFT);
-        } else if (item.getTitle().toString().equals("Logout")) {
-            OauthPreferences.clear();
-            Preferences.clear();
-
-            SharedPreferences loginPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
-            SharedPreferences.Editor loginPrefsEditor = loginPreferences.edit();
-            loginPrefsEditor.clear();
-            loginPrefsEditor.apply();
-
-            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-            startActivity(intent);
-            finish();
-            mDrawerLayout.closeDrawer(Gravity.LEFT);
-        }
-        return true;
-    }
 
     private void getTeamListFromServer() {
         HashMap<String, String> requestMap = new HashMap<>();
@@ -561,6 +499,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tv_toolbar_title.setText(displayText);
     }
 
+
+
     @SuppressLint("StaticFieldLeak")
     private class UploadFile extends AsyncTask<String, Void, Integer> {
         ShowLoader showLoader;
@@ -668,5 +608,179 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     break;
             }
         }
+    }
+
+    public void onDrawerMenuItemClicked(ModelDrawerMenuListItems modelDrawerMenuListItems) {
+        if (modelDrawerMenuListItems.getName().equals("Home")){
+            FragmentManager fragManager = getSupportFragmentManager();
+            FragmentTransaction ft = fragManager.beginTransaction();
+            //ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left);
+            ft.replace(R.id.main_container, new HomeFragment(), "HomeFragment");
+            ft.commit();
+            mDrawerLayout.closeDrawer(Gravity.LEFT);
+        }else if (modelDrawerMenuListItems.getName().equals("Journaling")){
+            FragmentManager fragManager = getSupportFragmentManager();
+            FragmentTransaction ft = fragManager.beginTransaction();
+            //ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left);
+            ft.replace(R.id.main_container, new JournalingMainListing(), "JournalingMainListing");
+            ft.addToBackStack("HomeFragment");
+            ft.commit();
+            mDrawerLayout.closeDrawer(Gravity.LEFT);
+        }else if (modelDrawerMenuListItems.getName().equals("Mood Tracking")){
+            FragmentManager fragManager = getSupportFragmentManager();
+            FragmentTransaction ft = fragManager.beginTransaction();
+            //ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left);
+            ft.replace(R.id.main_container, new FragmentMoodTrackingListing(), "FragmentMoodTrackingListing");
+            ft.addToBackStack("HomeFragment");
+            ft.commit();
+            mDrawerLayout.closeDrawer(Gravity.LEFT);
+        }else if (modelDrawerMenuListItems.getName().equals("Team Care")){
+            getTeamListFromServer();
+        }else if (modelDrawerMenuListItems.getName().equals("Self-Care")){
+            FragmentManager fragManager = getSupportFragmentManager();
+            FragmentTransaction ft = fragManager.beginTransaction();
+            //ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left);
+            ft.replace(R.id.main_container, new FragmentSelfcareManagement(), "FragmentSelfcareManagement");
+            ft.addToBackStack("HomeFragment");
+            ft.commit();
+            mDrawerLayout.closeDrawer(Gravity.LEFT);
+        }else if (modelDrawerMenuListItems.getName().equals("Support")){
+            FragmentManager fragManager = getSupportFragmentManager();
+            FragmentTransaction ft = fragManager.beginTransaction();
+            //ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left);
+            ft.replace(R.id.main_container, new FragmentSupport(), "FragmentSupport");
+            ft.addToBackStack("HomeFragment");
+            ft.commit();
+            mDrawerLayout.closeDrawer(Gravity.LEFT);
+        }else if (modelDrawerMenuListItems.getName().equals("Goal Management")){
+            FragmentManager fragManager = getSupportFragmentManager();
+            FragmentTransaction ft = fragManager.beginTransaction();
+            //ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left);
+            ft.replace(R.id.main_container, new FragmentSkillDevelopment(), "FragmentSkillDevelopment");
+            ft.addToBackStack("HomeFragment");
+            ft.commit();
+            mDrawerLayout.closeDrawer(Gravity.LEFT);
+        }else if (modelDrawerMenuListItems.getName().equals("Daily Planner")){
+            FragmentManager fragManager = getSupportFragmentManager();
+            FragmentTransaction ft = fragManager.beginTransaction();
+            //ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left);
+            ft.replace(R.id.main_container, new FragmentPlannerMain(), "FragmentPlannerMain");
+            ft.addToBackStack("HomeFragment");
+            ft.commit();
+            mDrawerLayout.closeDrawer(Gravity.LEFT);
+        }else if (modelDrawerMenuListItems.getName().equals("Assessment")){
+            FragmentManager fragManager = getSupportFragmentManager();
+            FragmentTransaction ft = fragManager.beginTransaction();
+            //ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left);
+            ft.replace(R.id.main_container, new FragmentAssessmentMain(), "FragmentAssessmentMain");
+            ft.addToBackStack("HomeFragment");
+            ft.commit();
+            mDrawerLayout.closeDrawer(Gravity.LEFT);
+        }else if (modelDrawerMenuListItems.getName().equals("Logout")){
+            OauthPreferences.clear();
+            Preferences.clear();
+
+            SharedPreferences loginPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
+            SharedPreferences.Editor loginPrefsEditor = loginPreferences.edit();
+            loginPrefsEditor.clear();
+            loginPrefsEditor.apply();
+
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+            mDrawerLayout.closeDrawer(Gravity.LEFT);
+        }
+    }
+
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        if (item.getTitle().toString().equals("Home")) {
+            mDrawerLayout.closeDrawer(Gravity.LEFT);
+            FragmentManager fragManager = getSupportFragmentManager();
+            FragmentTransaction ft = fragManager.beginTransaction();
+            //ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left);
+            ft.replace(R.id.main_container, new HomeFragment(), "HomeFragment");
+
+            ft.commit();
+        }
+        else if (item.getTitle().toString().equals("Journaling")) {
+            mDrawerLayout.closeDrawer(Gravity.LEFT);
+            FragmentManager fragManager = getSupportFragmentManager();
+            FragmentTransaction ft = fragManager.beginTransaction();
+            //ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left);
+            ft.replace(R.id.main_container, new JournalingMainListing(), "JournalingMainListing");
+            ft.addToBackStack("HomeFragment");
+            ft.commit();
+        }
+        else if (item.getTitle().toString().equals("Mood Tracking")) {
+            mDrawerLayout.closeDrawer(Gravity.LEFT);
+
+            FragmentManager fragManager = getSupportFragmentManager();
+            FragmentTransaction ft = fragManager.beginTransaction();
+            //ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left);
+            ft.replace(R.id.main_container, new FragmentMoodTrackingListing(), "FragmentMoodTrackingListing");
+            ft.addToBackStack("HomeFragment");
+            ft.commit();
+        } else if (item.getTitle().toString().equals("Team Care")) {
+            getTeamListFromServer();
+        } else if (item.getTitle().toString().equals("Self-Care")) {
+            mDrawerLayout.closeDrawer(Gravity.LEFT);
+
+            FragmentManager fragManager = getSupportFragmentManager();
+            FragmentTransaction ft = fragManager.beginTransaction();
+            //ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left);
+            ft.replace(R.id.main_container, new FragmentSelfcareManagement(), "FragmentSelfcareManagement");
+            ft.addToBackStack("HomeFragment");
+            ft.commit();
+        } else if (item.getTitle().toString().equals("Support")) {
+            mDrawerLayout.closeDrawer(Gravity.LEFT);
+            FragmentManager fragManager = getSupportFragmentManager();
+            FragmentTransaction ft = fragManager.beginTransaction();
+            //ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left);
+            ft.replace(R.id.main_container, new FragmentSupport(), "FragmentSupport");
+            ft.addToBackStack("HomeFragment");
+            ft.commit();
+        } else if (item.getTitle().toString().equals("Goal Management")) {
+            mDrawerLayout.closeDrawer(Gravity.LEFT);
+            FragmentManager fragManager = getSupportFragmentManager();
+            FragmentTransaction ft = fragManager.beginTransaction();
+            //ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left);
+            ft.replace(R.id.main_container, new FragmentSkillDevelopment(), "FragmentSkillDevelopment");
+            ft.addToBackStack("HomeFragment");
+            ft.commit();
+
+        } else if (item.getTitle().toString().equals("Daily Planner")) {
+            mDrawerLayout.closeDrawer(Gravity.LEFT);
+            FragmentManager fragManager = getSupportFragmentManager();
+            FragmentTransaction ft = fragManager.beginTransaction();
+            //ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left);
+            ft.replace(R.id.main_container, new FragmentPlannerMain(), "FragmentPlannerMain");
+            ft.addToBackStack("HomeFragment");
+            ft.commit();
+
+        } else if (item.getTitle().toString().equals("Assessment")) {
+            mDrawerLayout.closeDrawer(Gravity.LEFT);
+            FragmentManager fragManager = getSupportFragmentManager();
+            FragmentTransaction ft = fragManager.beginTransaction();
+            //ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left);
+            ft.replace(R.id.main_container, new FragmentAssessmentMain(), "FragmentAssessmentMain");
+            ft.addToBackStack("HomeFragment");
+            ft.commit();
+
+        } else if (item.getTitle().toString().equals("Logout")) {
+            OauthPreferences.clear();
+            Preferences.clear();
+
+            SharedPreferences loginPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
+            SharedPreferences.Editor loginPrefsEditor = loginPreferences.edit();
+            loginPrefsEditor.clear();
+            loginPrefsEditor.apply();
+
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+            mDrawerLayout.closeDrawer(Gravity.LEFT);
+        }
+        return true;
     }
 }
