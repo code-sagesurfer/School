@@ -32,8 +32,8 @@
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_marginTop="12dp"
-        android:background="@drawable/image_test"
-        android:scaleType="fitCenter"
+        android:src="@drawable/placeholder"
+        android:scaleType="centerCrop"
 
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

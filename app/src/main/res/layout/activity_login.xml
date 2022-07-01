@@ -76,25 +76,47 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_text_std_login" />
 
-                <EditText
-                    android:id="@+id/et_password"
+
+                <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-
-                    android:layout_height="55dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/cl_password"
                     android:layout_marginTop="24dp"
-                    android:background="@drawable/light_orange_rounded_shape"
-                    android:drawableEnd="@drawable/password"
-                    android:fontFamily="@font/poppins_regular"
-                    android:hint="@string/password"
-
-                    android:paddingStart="24dp"
-
-                    android:paddingEnd="24dp"
-                    android:textColorHint="@color/text_hint_color"
-                    android:textSize="17sp"
                     app:layout_constraintEnd_toEndOf="parent"
+                    android:background="@drawable/light_orange_rounded_shape"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/et_username" />
+                    app:layout_constraintTop_toBottomOf="@+id/et_username" >
+                    <EditText
+                        android:id="@+id/et_password"
+                        android:layout_width="match_parent"
+
+                        android:layout_height="55dp"
+
+                        android:background="@android:color/transparent"
+                        android:password="true"
+                        android:fontFamily="@font/poppins_regular"
+                        android:hint="@string/password"
+                        android:inputType="textPassword"
+                        android:paddingStart="24dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:textColorHint="@color/text_hint_color"
+                        android:textSize="17sp"
+                        />
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:id="@+id/btn_password_toggle"
+                        android:src="@drawable/password"
+                        android:layout_marginEnd="24dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/et_password"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
 
                 <EditText
                     android:id="@+id/et_code"
@@ -114,7 +136,7 @@
                     android:textSize="17sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/et_password" />
+                    app:layout_constraintTop_toBottomOf="@+id/cl_password" />
 
                 <CheckBox
                     android:id="@+id/cb_remember_me"

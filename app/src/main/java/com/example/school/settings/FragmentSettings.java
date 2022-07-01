@@ -47,11 +47,7 @@ public class FragmentSettings extends Fragment implements View.OnClickListener{
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        if (getActivity() instanceof MainActivity) {
-            mainActivity = (MainActivity) getActivity();
-            mainActivity.setToolbarTitleText("Settings");
 
-        }
     }
 
     @Override
@@ -94,6 +90,16 @@ public class FragmentSettings extends Fragment implements View.OnClickListener{
                 ft1.addToBackStack("FragmentSettings");
                 ft1.commit();
                 break;
+        }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (getActivity() instanceof MainActivity) {
+            mainActivity = (MainActivity) getActivity();
+            mainActivity.setToolbarTitleText("Settings");
+            mainActivity.changeDrawerIcon(false);
         }
     }
 }

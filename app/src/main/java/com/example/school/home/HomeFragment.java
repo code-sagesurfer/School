@@ -119,6 +119,7 @@ public class HomeFragment extends Fragment {
             mainActivity = (MainActivity) context;
             mainActivity.setToolbarTitleText(getString(R.string.menu_home));
             mainActivity.changeDrawerIcon(false);
+            mainActivity.toggleBellIcon(false);
         }
     }
 

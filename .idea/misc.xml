@@ -161,12 +161,13 @@
         <entry key="..\:/workspace/School_17_06_2022/app/src/main/res/drawable/rounded_white_button_with_border.xml" value="0.262" />
         <entry key="..\:/workspace/School_17_06_2022/app/src/main/res/drawable/team_listing_item_border_color_primary.xml" value="0.27" />
         <entry key="..\:/workspace/School_17_06_2022/app/src/main/res/layout-land/layout_assessment_list_item.xml" value="0.33" />
-        <entry key="..\:/workspace/School_17_06_2022/app/src/main/res/layout-sw600dp/activity_login.xml" value="0.309375" />
+        <entry key="..\:/workspace/School_17_06_2022/app/src/main/res/layout-sw600dp/activity_login.xml" value="0.5" />
         <entry key="..\:/workspace/School_17_06_2022/app/src/main/res/layout-sw600dp/activity_main.xml" value="0.33" />
         <entry key="..\:/workspace/School_17_06_2022/app/src/main/res/layout-sw600dp/activity_splash.xml" value="0.33" />
         <entry key="..\:/workspace/School_17_06_2022/app/src/main/res/layout-sw600dp/dialog_add_new_journaling.xml" value="0.33" />
-        <entry key="..\:/workspace/School_17_06_2022/app/src/main/res/layout-sw600dp/dialog_invite_member.xml" value="0.33" />
+        <entry key="..\:/workspace/School_17_06_2022/app/src/main/res/layout-sw600dp/dialog_invite_member.xml" value="0.5" />
         <entry key="..\:/workspace/School_17_06_2022/app/src/main/res/layout-sw600dp/drawer_menu_item.xml" value="0.30416666666666664" />
+        <entry key="..\:/workspace/School_17_06_2022/app/src/main/res/layout-sw600dp/drop_down_selected_text_item_layout.xml" value="0.30416666666666664" />
         <entry key="..\:/workspace/School_17_06_2022/app/src/main/res/layout-sw600dp/fragment_about_us.xml" value="0.33" />
         <entry key="..\:/workspace/School_17_06_2022/app/src/main/res/layout-sw600dp/fragment_assessment_main.xml" value="0.33" />
         <entry key="..\:/workspace/School_17_06_2022/app/src/main/res/layout-sw600dp/fragment_f_a_q_details.xml" value="0.5" />
@@ -199,11 +200,15 @@
         <entry key="..\:/workspace/School_17_06_2022/app/src/main/res/layout/dialog_add_new_journaling.xml" value="0.25" />
         <entry key="..\:/workspace/School_17_06_2022/app/src/main/res/layout/dialog_invite_member.xml" value="0.25" />
         <entry key="..\:/workspace/School_17_06_2022/app/src/main/res/layout/dialog_notification_item_clicked.xml" value="0.5" />
+        <entry key="..\:/workspace/School_17_06_2022/app/src/main/res/layout/dialog_view_detail.xml" value="0.25" />
         <entry key="..\:/workspace/School_17_06_2022/app/src/main/res/layout/drawer_menu_item.xml" value="0.22" />
+        <entry key="..\:/workspace/School_17_06_2022/app/src/main/res/layout/drop_down_selected_text_item_layout.xml" value="0.25" />
         <entry key="..\:/workspace/School_17_06_2022/app/src/main/res/layout/fragment_about_us.xml" value="0.1972972972972973" />
         <entry key="..\:/workspace/School_17_06_2022/app/src/main/res/layout/fragment_add_goal.xml" value="0.33" />
         <entry key="..\:/workspace/School_17_06_2022/app/src/main/res/layout/fragment_assessment_main.xml" value="0.25" />
+        <entry key="..\:/workspace/School_17_06_2022/app/src/main/res/layout/fragment_change_password.xml" value="0.1972972972972973" />
         <entry key="..\:/workspace/School_17_06_2022/app/src/main/res/layout/fragment_crisis_management.xml" value="0.33" />
+        <entry key="..\:/workspace/School_17_06_2022/app/src/main/res/layout/fragment_edit_profile.xml" value="0.1972972972972973" />
         <entry key="..\:/workspace/School_17_06_2022/app/src/main/res/layout/fragment_f_a_q_details.xml" value="0.30416666666666664" />
         <entry key="..\:/workspace/School_17_06_2022/app/src/main/res/layout/fragment_feedback.xml" value="0.25" />
         <entry key="..\:/workspace/School_17_06_2022/app/src/main/res/layout/fragment_home.xml" value="0.22" />
@@ -230,7 +235,7 @@
         <entry key="..\:/workspace/School_17_06_2022/app/src/main/res/layout/layout_team_details_listing_item.xml" value="0.1972972972972973" />
         <entry key="..\:/workspace/School_17_06_2022/app/src/main/res/layout/nav_header_main.xml" value="0.25" />
         <entry key="..\:/workspace/School_17_06_2022/app/src/main/res/layout/row_faq.xml" value="0.30416666666666664" />
-        <entry key="..\:/workspace/School_17_06_2022/app/src/main/res/layout/toolbar_main.xml" value="0.2968988307066599" />
+        <entry key="..\:/workspace/School_17_06_2022/app/src/main/res/layout/toolbar_main.xml" value="0.22" />
         <entry key="..\:/workspace/School_17_06_2022/app/src/main/res/menu/activity_main_drawer.xml" value="0.1972972972972973" />
       </map>
     </option>

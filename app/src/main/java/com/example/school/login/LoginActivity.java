@@ -7,10 +7,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.text.method.PasswordTransformationMethod;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -73,10 +75,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @BindView(R.id.cb_remember_me)
     CheckBox cb_remember_me;
 
+    @BindView(R.id.btn_password_toggle)
+    ImageView btn_password_toggle;
+
     private ArrayList<ModelInstancesData> serverCodeList;
     private SharedPreferences.Editor loginPrefsEditor;
     private SharedPreferences loginPreferences;
-
+    boolean passwordShown=false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,7 +99,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         serverCodeList = new ArrayList<>();
         loginPreferences = getSharedPreferences("loginPrefs_school", MODE_PRIVATE);
-
+        btn_password_toggle.setOnClickListener(this);
         //btn_login.setEnabled(false);
         if (!BuildConfig.DEBUG) {
         } else {
@@ -226,8 +231,23 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 String password = et_password.getText().toString().trim();
                 String code = et_code.getText().toString().trim();
                 if (isValid(username, password, code)) {
-                    Toast.makeText(this, "login now...", Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(this, "login now...", Toast.LENGTH_SHORT).show();
                     proceedToLoginUser();
+                }
+                break;
+
+            case R.id.btn_password_toggle:
+
+                et_password.setTransformationMethod(null);
+                  if (!passwordShown) {
+                      passwordShown=true;
+                      et_password.setTransformationMethod(null);
+                      btn_password_toggle.setImageResource(R.drawable.ic_unlock_password);
+
+                }else{
+                      passwordShown=false;
+                      btn_password_toggle.setImageResource(R.drawable.password);
+                      et_password.setTransformationMethod(new PasswordTransformationMethod());
                 }
                 break;
         }

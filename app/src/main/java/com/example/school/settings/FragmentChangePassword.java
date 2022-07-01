@@ -78,6 +78,8 @@ public class FragmentChangePassword extends Fragment {
         if (context instanceof MainActivity) {
             mainActivity = (MainActivity) context;
             mainActivity.setToolbarTitleText(getString(R.string.change_password));
+            mainActivity.toggleBellIcon(true);
+            mainActivity.changeDrawerIcon(true);
         }
     }
 
@@ -197,5 +199,12 @@ public class FragmentChangePassword extends Fragment {
                 e.printStackTrace();
             }
         }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        Toast.makeText(mainActivity, "onDetach", Toast.LENGTH_SHORT).show();
+
     }
 }

@@ -289,14 +289,14 @@
 
             <EditText
                 android:layout_width="match_parent"
-                android:layout_height="38dp"
+                android:layout_height="40dp"
                 android:layout_weight="1"
                 android:background="@drawable/team_listing_item_border_color_primary"
                 android:hint="@string/search_user"
                 android:fontFamily="@font/poppins_regular"
                 android:textColor="@color/black"
                 android:paddingTop="3dp"
-                android:textSize="10sp"
+                android:textSize="16sp"
                 android:drawableEnd="@drawable/search"
                 android:textColorHint="@color/black"
                 android:id="@+id/et_search_user"

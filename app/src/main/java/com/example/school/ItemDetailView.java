@@ -8,8 +8,11 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 
+import com.bumptech.glide.Glide;
 import com.example.school.home.ModelPlannerData;
 import com.example.school.resources.AppLog;
+import com.example.school.resources.General;
+import com.example.school.resources.Preferences;
 import com.makeramen.roundedimageview.RoundedImageView;
 
 public class ItemDetailView {
@@ -31,8 +34,11 @@ public class ItemDetailView {
         tv_title.setText(modelPlannerData.getTitle());
         tv_date.setText(modelPlannerData.getDate());
         tv_desc.setText(modelPlannerData.getDesc());
-
-
+        Glide.with(context)
+                .load(modelPlannerData.getImagePath())
+                .placeholder(R.drawable.placeholder)
+                .error(R.drawable.placeholder)
+                .into(iv_planner_item);
 
         dialog.show();
         dialog.setCanceledOnTouchOutside(true);

@@ -47,7 +47,9 @@ import com.example.school.resources.Urls_;
 import com.example.school.resources.oauth.OauthPreferences;
 import com.example.school.resources.showstatus.ShowToast;
 import com.example.school.selfcaremanagement.FragmentSelfcareManagement;
+import com.example.school.settings.FragmentEditProfile;
 import com.example.school.settings.FragmentSettings;
+import com.example.school.settings.InterfaceSaveEditedData;
 import com.example.school.skill_development.FragmentSkillDevelopment;
 import com.example.school.support.FragmentSupport;
 import com.example.school.team_care.FragmentTeamDetails;
@@ -109,7 +111,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     long SelectedFile;
     TextView iv_save_data;
     ImageView iv_settings, iv_notification;
-
+    InterfaceSaveEditedData interfaceSaveEditedData;
     @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -126,15 +128,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         };
 
-
-
+        interfaceSaveEditedData =new FragmentEditProfile();
         //toggle.setDrawerIndicatorEnabled(false);
         toolbar = (Toolbar) findViewById(R.id.main_toolbar);
         tv_toolbar_title = toolbar.findViewById(R.id.tv_toolbar_title);
         iv_save_data = toolbar.findViewById(R.id.iv_save_data);
         iv_notification = toolbar.findViewById(R.id.iv_notification);
         iv_notification.setOnClickListener(this);
-
+        iv_save_data.setOnClickListener(this);
         //bottom navigation views
         LinearLayout ll_home = findViewById(R.id.ll_home);
         LinearLayout ll_nav_second_menu = findViewById(R.id.ll_nav_second_menu);
@@ -167,8 +168,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tv_user_name.setText(Preferences.get(General.NAME));
         tv_role.setText(Preferences.get(General.ROLE));
 
-        rv_drawer_menu=navigationView.findViewById(R.id.rv_drawerMenus);
-        RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(MainActivity.this,LinearLayoutManager.VERTICAL,false);
+        rv_drawer_menu = navigationView.findViewById(R.id.rv_drawerMenus);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MainActivity.this, LinearLayoutManager.VERTICAL, false);
         rv_drawer_menu.setLayoutManager(layoutManager);
         rv_drawer_menu.setItemAnimator(new DefaultItemAnimator());
 
@@ -203,8 +204,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         ft.commit();
 
 
-
-
         //mDrawerList = (ListView) findViewById(R.id.left_drawer);
        /* binding = ActivityMainBinding.inflate(getLayoutInflater());
         setSupportActionBar(binding.appBarMain.myToolbar.mainToolbar);*/
@@ -226,8 +225,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void setDrawerMenus() {
-        Log.i(TAG, "setDrawerMenus: size "+DrawerMenuList.getDrawerMenuList().size());
-        AdapterDrawerMenu adapterDrawerMenu=new AdapterDrawerMenu(DrawerMenuList.getDrawerMenuList(),MainActivity.this);
+        Log.i(TAG, "setDrawerMenus: size " + DrawerMenuList.getDrawerMenuList().size());
+        AdapterDrawerMenu adapterDrawerMenu = new AdapterDrawerMenu(DrawerMenuList.getDrawerMenuList(), MainActivity.this);
         rv_drawer_menu.setAdapter(adapterDrawerMenu);
     }
 
@@ -300,10 +299,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 ftNotification.replace(R.id.main_container, new FragmentNotificationListing(), "FragmentNotificationListing");
                 //ft.addToBackStack("HomeFragment");
                 ftNotification.commit();
-
                 break;
 
-
+            case R.id.iv_save_data:
+                interfaceSaveEditedData.saveEditedData();
         }
     }
 
@@ -336,7 +335,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 ItemListDialogFragment.newInstance(1);
         fragmentCreateFolder.show(getSupportFragmentManager(), "ItemListDialogFragment");
     }
-
 
 
     private void getTeamListFromServer() {
@@ -499,6 +497,23 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         tv_toolbar_title.setText(displayText);
     }
 
+    public void toggleBellIcon(boolean toggle) {
+        if (toggle) {
+            iv_notification.setVisibility(View.GONE);
+        }else{
+            iv_notification.setVisibility(View.VISIBLE);
+        }
+    }
+
+    public void toogleSaveButton(boolean toggle) {
+        if (toggle) {
+            iv_save_data.setVisibility(View.VISIBLE);
+        }else{
+            iv_save_data.setVisibility(View.GONE);
+        }
+    }
+
+
 
 
     @SuppressLint("StaticFieldLeak")
@@ -611,14 +626,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     public void onDrawerMenuItemClicked(ModelDrawerMenuListItems modelDrawerMenuListItems) {
-        if (modelDrawerMenuListItems.getName().equals("Home")){
+        if (modelDrawerMenuListItems.getName().equals("Home")) {
             FragmentManager fragManager = getSupportFragmentManager();
             FragmentTransaction ft = fragManager.beginTransaction();
             //ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left);
             ft.replace(R.id.main_container, new HomeFragment(), "HomeFragment");
             ft.commit();
             mDrawerLayout.closeDrawer(Gravity.LEFT);
-        }else if (modelDrawerMenuListItems.getName().equals("Journaling")){
+        } else if (modelDrawerMenuListItems.getName().equals("Journaling")) {
             FragmentManager fragManager = getSupportFragmentManager();
             FragmentTransaction ft = fragManager.beginTransaction();
             //ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left);
@@ -626,7 +641,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             ft.addToBackStack("HomeFragment");
             ft.commit();
             mDrawerLayout.closeDrawer(Gravity.LEFT);
-        }else if (modelDrawerMenuListItems.getName().equals("Mood Tracking")){
+        } else if (modelDrawerMenuListItems.getName().equals("Mood Tracking")) {
             FragmentManager fragManager = getSupportFragmentManager();
             FragmentTransaction ft = fragManager.beginTransaction();
             //ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left);
@@ -634,9 +649,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             ft.addToBackStack("HomeFragment");
             ft.commit();
             mDrawerLayout.closeDrawer(Gravity.LEFT);
-        }else if (modelDrawerMenuListItems.getName().equals("Team Care")){
+        } else if (modelDrawerMenuListItems.getName().equals("Team Care")) {
             getTeamListFromServer();
-        }else if (modelDrawerMenuListItems.getName().equals("Self-Care")){
+        } else if (modelDrawerMenuListItems.getName().equals("Self-Care")) {
             FragmentManager fragManager = getSupportFragmentManager();
             FragmentTransaction ft = fragManager.beginTransaction();
             //ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left);
@@ -644,7 +659,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             ft.addToBackStack("HomeFragment");
             ft.commit();
             mDrawerLayout.closeDrawer(Gravity.LEFT);
-        }else if (modelDrawerMenuListItems.getName().equals("Support")){
+        } else if (modelDrawerMenuListItems.getName().equals("Support")) {
             FragmentManager fragManager = getSupportFragmentManager();
             FragmentTransaction ft = fragManager.beginTransaction();
             //ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left);
@@ -652,7 +667,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             ft.addToBackStack("HomeFragment");
             ft.commit();
             mDrawerLayout.closeDrawer(Gravity.LEFT);
-        }else if (modelDrawerMenuListItems.getName().equals("Goal Management")){
+        } else if (modelDrawerMenuListItems.getName().equals("Goal Management")) {
             FragmentManager fragManager = getSupportFragmentManager();
             FragmentTransaction ft = fragManager.beginTransaction();
             //ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left);
@@ -660,7 +675,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             ft.addToBackStack("HomeFragment");
             ft.commit();
             mDrawerLayout.closeDrawer(Gravity.LEFT);
-        }else if (modelDrawerMenuListItems.getName().equals("Daily Planner")){
+        } else if (modelDrawerMenuListItems.getName().equals("Daily Planner")) {
             FragmentManager fragManager = getSupportFragmentManager();
             FragmentTransaction ft = fragManager.beginTransaction();
             //ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left);
@@ -668,7 +683,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             ft.addToBackStack("HomeFragment");
             ft.commit();
             mDrawerLayout.closeDrawer(Gravity.LEFT);
-        }else if (modelDrawerMenuListItems.getName().equals("Assessment")){
+        } else if (modelDrawerMenuListItems.getName().equals("Assessment")) {
             FragmentManager fragManager = getSupportFragmentManager();
             FragmentTransaction ft = fragManager.beginTransaction();
             //ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left);
@@ -676,7 +691,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             ft.addToBackStack("HomeFragment");
             ft.commit();
             mDrawerLayout.closeDrawer(Gravity.LEFT);
-        }else if (modelDrawerMenuListItems.getName().equals("Logout")){
+        } else if (modelDrawerMenuListItems.getName().equals("Logout")) {
             OauthPreferences.clear();
             Preferences.clear();
 
@@ -702,8 +717,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             ft.replace(R.id.main_container, new HomeFragment(), "HomeFragment");
 
             ft.commit();
-        }
-        else if (item.getTitle().toString().equals("Journaling")) {
+        } else if (item.getTitle().toString().equals("Journaling")) {
             mDrawerLayout.closeDrawer(Gravity.LEFT);
             FragmentManager fragManager = getSupportFragmentManager();
             FragmentTransaction ft = fragManager.beginTransaction();
@@ -711,8 +725,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             ft.replace(R.id.main_container, new JournalingMainListing(), "JournalingMainListing");
             ft.addToBackStack("HomeFragment");
             ft.commit();
-        }
-        else if (item.getTitle().toString().equals("Mood Tracking")) {
+        } else if (item.getTitle().toString().equals("Mood Tracking")) {
             mDrawerLayout.closeDrawer(Gravity.LEFT);
 
             FragmentManager fragManager = getSupportFragmentManager();

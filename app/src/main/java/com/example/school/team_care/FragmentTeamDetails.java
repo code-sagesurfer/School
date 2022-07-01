@@ -605,6 +605,7 @@ public class FragmentTeamDetails extends Fragment {
             mainActivity = (MainActivity) getContext();
             mainActivity.setToolbarTitleText(getString(R.string.Personal_Support_Team));
             mainActivity.changeDrawerIcon(false);
+            mainActivity.toggleBellIcon(false);
         }
 
         getGroupMemberListWithRales(teamData.getAllTeams().get(0).getGroupId());

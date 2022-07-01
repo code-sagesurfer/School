@@ -56,7 +56,7 @@ import retrofit2.Response;
  * Created on 31/05/2022
  * Last Modified on
  */
-public class FragmentEditProfile extends Fragment implements View.OnClickListener{
+public class FragmentEditProfile extends Fragment implements View.OnClickListener,InterfaceSaveEditedData{
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private static final String TAG = "FragmentEditProfile";
@@ -126,6 +126,8 @@ public class FragmentEditProfile extends Fragment implements View.OnClickListene
         if (getActivity() instanceof MainActivity) {
             mainActivity = (MainActivity) getActivity();
             mainActivity.setToolbarTitleText("Edit Profile Setting");
+            mainActivity.changeDrawerIcon(true);
+            mainActivity.toogleSaveButton(true);
         }
     }
 
@@ -514,5 +516,10 @@ public class FragmentEditProfile extends Fragment implements View.OnClickListene
         calendar2.setTime(date2);
 
         return calendar1.compareTo(calendar2);
+    }
+
+    @Override
+    public void saveEditedData() {
+        saveUpdatedProfile();
     }
 }
