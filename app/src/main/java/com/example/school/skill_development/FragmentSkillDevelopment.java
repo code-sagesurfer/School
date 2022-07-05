@@ -129,6 +129,8 @@ public class FragmentSkillDevelopment extends Fragment implements SelfGoalListAd
             mainActivity =(MainActivity) getContext();
             mainActivity.setToolbarTitleText("Goal Management ");
             mainActivity.changeDrawerIcon(false);
+
+            mainActivity.toggleBellIcon(false);
         }
         firstTimeLoading = true;
         getAllGoalNew(0,50);

@@ -27,4 +27,8 @@
     <dimen name="margin_16">16dp</dimen>
     <dimen name="text_16">16sp</dimen>
     <dimen name="text_size_20">20sp</dimen>
+    <dimen name="standard_text_size_mobile">14sp</dimen>
+    <dimen name="small_text_size_mobile">12sp</dimen>
+    <dimen name="big_text_size_mobile">16sp</dimen>
+    <dimen name="extra_big_text_size_mobile">18sp</dimen>
 </resources>

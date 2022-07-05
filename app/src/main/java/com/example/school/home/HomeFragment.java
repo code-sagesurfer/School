@@ -120,6 +120,8 @@ public class HomeFragment extends Fragment {
             mainActivity.setToolbarTitleText(getString(R.string.menu_home));
             mainActivity.changeDrawerIcon(false);
             mainActivity.toggleBellIcon(false);
+
+
         }
     }
 

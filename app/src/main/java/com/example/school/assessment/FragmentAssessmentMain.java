@@ -123,6 +123,8 @@ public class FragmentAssessmentMain extends Fragment implements View.OnClickList
         if (getContext() instanceof MainActivity) {
             mainActivity = (MainActivity) getContext();
             mainActivity.setToolbarTitleText(getString(R.string.menu_assessment));
+
+            mainActivity.toggleBellIcon(false);
         }
         getCounter();
     }

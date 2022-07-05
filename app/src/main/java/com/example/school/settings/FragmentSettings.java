@@ -1,6 +1,7 @@
 package com.example.school.settings;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -76,11 +77,15 @@ public class FragmentSettings extends Fragment implements View.OnClickListener{
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.tv_edit_profile:
-                FragmentManager fragManager =getActivity().getSupportFragmentManager();
+                /*FragmentManager fragManager =getActivity().getSupportFragmentManager();
                 FragmentTransaction ft = fragManager.beginTransaction();
                 ft.replace(R.id.main_container, new FragmentEditProfile(), "FragmentEditProfile");
                 ft.addToBackStack("FragmentSettings");
-                ft.commit();
+                ft.commit();*/
+
+                Intent intent=new Intent(getActivity(),FragmentEditProfile.class);
+                startActivity(intent);
+
                 break;
 
             case R.id.tv_change_password:
@@ -100,6 +105,8 @@ public class FragmentSettings extends Fragment implements View.OnClickListener{
             mainActivity = (MainActivity) getActivity();
             mainActivity.setToolbarTitleText("Settings");
             mainActivity.changeDrawerIcon(false);
+
+            mainActivity.toggleBellIcon(true);
         }
     }
 }

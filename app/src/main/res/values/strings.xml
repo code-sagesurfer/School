@@ -144,7 +144,7 @@
     <string name="last_score">Last Score</string>
     <string name="patient_name">Patient Name *</string>
     <string name="enter_name">Enter Name</string>
-    <string name="date_of_birth">Date of Birth</string>
+    <string name="date_of_birth">Date Of Birth</string>
     <string name="select_date">Select Date</string>
     <string name="assessment_que_1">1) Little interest of pleasure in doing things *</string>
     <string name="not_at_all">Not at all</string>
@@ -245,6 +245,10 @@
     <string name="max_10_mb_allowed">Max file size allowed is 10MB</string>
     <string name="removed">Removed</string>
     <string name="quote_home">Good mental health improves the overall quality of life.</string>
+    <string name="edit_profile_setting">Edit profile settings</string>
+    <string name="email_id">Email Id</string>
+    <string name="register">Register</string>
+    <string name="accept_terms">I accept terms and conditions</string>
     <string-array name="goal_frequency">
         <item>Select Frequency</item>
         <item>Daily</item>

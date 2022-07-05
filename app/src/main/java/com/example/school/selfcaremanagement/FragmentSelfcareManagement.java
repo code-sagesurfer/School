@@ -126,6 +126,8 @@ public class FragmentSelfcareManagement extends Fragment implements View.OnClick
             mainActivity = (MainActivity) getContext();
             mainActivity.setToolbarTitleText(getString(R.string.menu_self_care));
             mainActivity.changeDrawerIcon(false);
+
+            mainActivity.toggleBellIcon(false);
         }
 
         selfcareData.fetchSelfcareNewData(0, 30, getContext(), getActivity(), TAG, true, FragmentSelfcareManagement.this);

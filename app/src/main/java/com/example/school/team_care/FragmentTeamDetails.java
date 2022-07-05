@@ -606,6 +606,8 @@ public class FragmentTeamDetails extends Fragment {
             mainActivity.setToolbarTitleText(getString(R.string.Personal_Support_Team));
             mainActivity.changeDrawerIcon(false);
             mainActivity.toggleBellIcon(false);
+
+            mainActivity.toggleBellIcon(false);
         }
 
         getGroupMemberListWithRales(teamData.getAllTeams().get(0).getGroupId());
@@ -641,7 +643,7 @@ public class FragmentTeamDetails extends Fragment {
 
 
         if (roleArrayList.size() > 0) {
-            teamIdAdapter = new ArrayAdapter<String>(getActivity(), R.layout.drop_down_selected_text_item_layout, roleNameList);
+            teamIdAdapter = new ArrayAdapter<String>(getActivity(), R.layout.drop_down_selected_invite_member, roleNameList);
             teamIdAdapter.setDropDownViewResource(R.layout.drop_down_text_item_layout);
             sp_role.setAdapter(teamIdAdapter);
             sp_role.setSelection(0);

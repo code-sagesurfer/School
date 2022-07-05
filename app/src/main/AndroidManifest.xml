@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.school">
 
-
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"
+    <uses-permission
+        android:name="android.permission.ACCESS_FINE_LOCATION"
         tools:ignore="CoarseFineLocation" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -12,17 +12,24 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_INTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_INTERNAL_STORAGE" />
-
-    <uses-permission android:name="android.permission.LOCAL_MAC_ADDRESS"
+    <uses-permission
+        android:name="android.permission.LOCAL_MAC_ADDRESS"
         tools:ignore="ProtectedPermissions" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:requestLegacyExternalStorage="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:requestLegacyExternalStorage="true"
         android:theme="@style/Theme.School">
+        <activity
+            android:name=".login.ActivityRegisterUser"
+            android:exported="false" />
+        <activity
+            android:name=".login.forgotpassword.ActivityForgotPassword"
+            android:exported="false" />
         <activity
             android:name=".home.main.MainActivity"
             android:exported="false"
@@ -33,6 +40,9 @@
             android:exported="false" />
         <activity
             android:name=".login.LoginActivity"
+            android:exported="false" />
+        <activity
+            android:name=".settings.FragmentEditProfile"
             android:exported="false" />
         <activity
             android:name=".SplashActivity"

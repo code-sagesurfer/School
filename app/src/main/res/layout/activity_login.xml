@@ -49,7 +49,7 @@
                     android:fontFamily="@font/poppins_regular"
                     android:text="@string/student_login"
                     android:textColor="@color/black"
-                    android:textSize="18sp"
+                    android:textSize="@dimen/extra_big_text_size_mobile"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/iv_sagesurfer_icon" />
@@ -70,7 +70,7 @@
 
                     android:paddingEnd="24dp"
                     android:textColorHint="@color/text_hint_color"
-                    android:textSize="17sp"
+                    android:textSize="@dimen/standard_text_size_mobile"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.0"
                     app:layout_constraintStart_toStartOf="parent"
@@ -102,7 +102,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         android:textColorHint="@color/text_hint_color"
-                        android:textSize="17sp"
+                        android:textSize="@dimen/standard_text_size_mobile"
                         />
 
                     <ImageView
@@ -133,7 +133,7 @@
 
                     android:paddingEnd="24dp"
                     android:textColorHint="@color/text_hint_color"
-                    android:textSize="17sp"
+                    android:textSize="@dimen/standard_text_size_mobile"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/cl_password" />
@@ -145,7 +145,7 @@
                     android:layout_marginTop="16dp"
                     android:text="@string/remember_me"
                     android:textColor="@color/text_hint_color"
-                    android:textSize="16sp"
+                    android:textSize="@dimen/standard_text_size_mobile"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/et_code" />
 
@@ -163,7 +163,7 @@
                     android:text="@string/login"
                     android:textAllCaps="false"
                     android:textColor="@color/white"
-                    android:textSize="17sp"
+                    android:textSize="@dimen/standard_text_size_mobile"
 
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -176,6 +176,7 @@
                     android:layout_marginTop="24dp"
                     android:fontFamily="@font/poppins_regular"
                     android:gravity="center"
+                    android:textSize="@dimen/standard_text_size_mobile"
                     android:paddingStart="24dp"
                     android:paddingEnd="24dp"
                     android:text="@string/forgot_password"
@@ -190,16 +191,17 @@
                     android:layout_marginTop="16dp"
                     android:fontFamily="@font/poppins_regular"
                     android:gravity="center"
+                    android:textSize="@dimen/standard_text_size_mobile"
                     android:text="@string/register_msg"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/textView11"
+                    app:layout_constraintEnd_toStartOf="@+id/tv_register_link"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintHorizontal_chainStyle="packed"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_forgot_pass" />
 
                 <TextView
-                    android:id="@+id/textView11"
+                    android:id="@+id/tv_register_link"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
@@ -208,6 +210,7 @@
                     android:textColor="@color/link_color"
                     android:layout_marginStart="3dp"
                     android:text="@string/click_here"
+                    android:textSize="@dimen/standard_text_size_mobile"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toEndOf="@+id/textView10"

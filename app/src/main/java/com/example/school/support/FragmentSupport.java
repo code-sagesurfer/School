@@ -95,6 +95,8 @@ public class FragmentSupport extends Fragment implements View.OnClickListener{
             mainActivity = (MainActivity) getContext();
             mainActivity.setToolbarTitleText(getString(R.string.support));
             mainActivity.changeDrawerIcon(false);
+
+            mainActivity.toggleBellIcon(true);
         }
     }
 

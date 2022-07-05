@@ -28,7 +28,7 @@ import retrofit2.Response;
 
 public class CityFetch {
     private static final String TAG = "CityFetch";
-    public void loadCityList(int stateId, Context context, Activity activity, Fragment fragment) {
+    public void loadCityList(int stateId, Context context, Activity activity) {
         HashMap<String, String> requestMap = new HashMap<>();
         requestMap.put(General.ACTION, Actions_.GET_CITY);
         requestMap.put(General.STATE_ID, String.valueOf(stateId));
@@ -50,11 +50,14 @@ public class CityFetch {
                                 Gson gson = new Gson();
                                 Log.i(TAG, "onResponse: loadStateList "+response.body().toString());
                                 ModelStatesResponse modelStatesResponse = gson.fromJson(response.body(), ModelStatesResponse.class);
-                                if (fragment instanceof FragmentEditProfile){
+                                /*if (fragment instanceof FragmentEditProfile){
                                     FragmentEditProfile editProfile=(FragmentEditProfile) fragment;
 
                                     editProfile.setCityData(modelStatesResponse.getGet_city());
-                                }
+                                }*/
+                                FragmentEditProfile editProfile=new FragmentEditProfile();
+                                editProfile.setCityData(modelStatesResponse.getGet_city());
+
 
                             }
                         } catch (Exception e) {

@@ -45,6 +45,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
+            android:textSize="14sp"
             android:inputType="textCapSentences"
             android:backgroundTint="@color/color_primary"
             android:fontFamily="@font/poppins_regular"
@@ -124,12 +125,12 @@
                 android:layout_height="110dp"
 
                 android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
+                android:layout_marginEnd="16dp"
                 app:cardCornerRadius="16dp">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
-                    android:layout_height="110dp">
+                    android:layout_height="116dp">
 
 
                     <com.makeramen.roundedimageview.RoundedImageView

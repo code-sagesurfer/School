@@ -120,6 +120,8 @@ public class FragmentNotificationListing extends Fragment {
         if (getContext() instanceof MainActivity){
             mainActivity = (MainActivity) getContext();
             mainActivity.setToolbarTitleText("Notification");
+
+            mainActivity.toggleBellIcon(false);
         }
     }
 

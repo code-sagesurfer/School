@@ -38,7 +38,7 @@
                 android:fontFamily="@font/poppins_medium"
                 android:text="@string/edit_profile_setting"
                 android:textColor="@color/black"
-                android:textSize="16sp"
+                android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/iv_save_img"
                 app:layout_constraintStart_toEndOf="@+id/iv_backButton"
@@ -46,8 +46,8 @@
 
             <ImageView
                 android:id="@+id/iv_save_img"
-                android:layout_width="18dp"
-                android:layout_height="20dp"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
                 android:src="@drawable/ic_save"
                 android:visibility="visible"
                 android:layout_marginEnd="8dp"
@@ -58,12 +58,12 @@
 
             <TextView
                 android:id="@+id/iv_save_profile"
-                android:layout_width="40dp"
+                android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:fontFamily="@font/poppins_regular"
                 android:text="Save"
                 android:textColor="@color/black"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 android:visibility="visible"
                 android:gravity="center"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -118,7 +118,7 @@
                 android:gravity="center"
                 android:text="@string/hello_blank_fragment"
                 android:textColor="@color/black"
-                android:textSize="18sp"
+                android:textSize="20sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -144,7 +144,7 @@
                 android:gravity="center"
                 android:text="@string/students"
                 android:textColor="@color/color_primary"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -178,7 +178,7 @@
 
                         android:text="@string/first_name"
                         android:textColor="@color/black"
-                        android:textSize="14sp" />
+                        android:textSize="16sp" />
 
                     <EditText
 
@@ -189,7 +189,7 @@
                         android:fontFamily="@font/poppins_medium"
                         android:gravity="start"
                         android:textColor="@color/black"
-                        android:textSize="14sp" />
+                        android:textSize="16sp" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -218,7 +218,7 @@
 
                             android:text="@string/last_name"
                             android:textColor="@color/black"
-                            android:textSize="14sp" />
+                            android:textSize="16sp" />
 
                         <EditText
 
@@ -230,7 +230,7 @@
                             android:gravity="start"
                             android:inputType="textCapWords"
                             android:textColor="@color/black"
-                            android:textSize="14sp" />
+                            android:textSize="16sp" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -248,7 +248,7 @@
                 android:gravity="start"
                 android:text="@string/username"
                 android:textColor="@color/black"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
@@ -265,7 +265,7 @@
                 android:focusable="false"
                 android:fontFamily="@font/poppins_regular"
                 android:textColor="@color/black"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView13" />
@@ -281,7 +281,7 @@
                 android:gravity="start"
                 android:text="@string/email"
                 android:textColor="@color/black"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/et_username" />
@@ -297,7 +297,7 @@
                 android:editable="false"
                 android:fontFamily="@font/poppins_regular"
                 android:textColor="@color/black"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_email" />
@@ -313,7 +313,7 @@
                 android:gravity="start"
                 android:text="@string/date_of_birth"
                 android:textColor="@color/black"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/et_email" />
@@ -328,12 +328,10 @@
                 android:clickable="false"
                 android:drawableEnd="@drawable/ic_calendar"
                 android:editable="false"
-
-                android:paddingEnd="16dp"
                 android:focusable="false"
                 android:fontFamily="@font/poppins_regular"
                 android:textColor="@color/black"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_date_of_birth" />
@@ -349,7 +347,7 @@
                 android:gravity="start"
                 android:text="@string/country"
                 android:textColor="@color/black"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/et_dob" />
@@ -365,7 +363,7 @@
 
                 android:backgroundTint="@color/color_primary"
                 android:fontFamily="@font/poppins_regular"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_country" />
@@ -382,7 +380,7 @@
 
                 android:text="@string/state"
                 android:textColor="@color/black"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/sp_country" />
@@ -397,7 +395,7 @@
                 android:backgroundTint="@color/color_primary"
                 android:fontFamily="@font/poppins_regular"
                 android:textColor="@color/black"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_state" />
@@ -413,7 +411,7 @@
                 android:gravity="start"
                 android:text="@string/city"
                 android:textColor="@color/black"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/sp_state" />
@@ -428,7 +426,7 @@
                 android:backgroundTint="@color/color_primary"
                 android:fontFamily="@font/poppins_regular"
                 android:textColor="@color/black"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_city" />

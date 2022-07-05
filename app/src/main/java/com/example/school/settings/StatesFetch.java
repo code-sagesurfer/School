@@ -34,7 +34,7 @@ import retrofit2.Response;
  */
 public class StatesFetch {
     ArrayList<GetState> stateArrayList;
-    public void loadStateList(int counrtyId, String Tag, Context context, Activity activity, Fragment fragment) {
+    public void loadStateList(int counrtyId, String Tag, Context context, Activity activity) {
 
         HashMap<String, String> requestMap = new HashMap<>();
         requestMap.put(General.ACTION, Actions_.GET_STATE);
@@ -60,10 +60,13 @@ public class StatesFetch {
                             ModelStatesResponse modelStatesResponse = gson.fromJson(response.body(), ModelStatesResponse.class);
                             stateArrayList = new ArrayList<>();
                             stateArrayList=modelStatesResponse.getGetState();
-                            if (fragment instanceof FragmentEditProfile){
+                            /*if (fragment instanceof FragmentEditProfile){
                                 FragmentEditProfile editProfile=(FragmentEditProfile) fragment;
                                 editProfile.setStateData(stateArrayList);
-                            }
+                            }*/
+
+                            FragmentEditProfile fragmentEditProfile=new FragmentEditProfile();
+                            fragmentEditProfile.setStateData(stateArrayList);
                         }
                     } catch (Exception e) {
                         e.printStackTrace();

@@ -40,6 +40,8 @@ public class FragmentAboutUs extends Fragment {
             mainActivity = (MainActivity) context;
             mainActivity.setToolbarTitleText(getString(R.string.about_us));
             mainActivity.changeDrawerIcon(true);
+
+            mainActivity.toggleBellIcon(true);
         }
     }
 

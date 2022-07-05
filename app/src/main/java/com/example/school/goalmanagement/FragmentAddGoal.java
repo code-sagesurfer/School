@@ -113,6 +113,8 @@ public class FragmentAddGoal extends Fragment implements View.OnClickListener, I
             mainActivity=(MainActivity) getContext();
             mainActivity.changeDrawerIcon(true);
             mainActivity.setToolbarTitleText("Add Goal");
+
+            mainActivity.toggleBellIcon(false);
         }
     }
 

@@ -120,6 +120,8 @@ public class JournalingMainListing extends Fragment implements iSelectedImageRes
         if (context instanceof MainActivity) {
             mainActivity = (MainActivity) context;
             mainActivity.setToolbarTitleText(getString(R.string.menu_journaling));
+
+            mainActivity.toggleBellIcon(false);
         }
     }
 

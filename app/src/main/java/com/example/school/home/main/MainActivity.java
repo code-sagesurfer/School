@@ -109,9 +109,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
     long SelectedFile;
-    TextView iv_save_data;
-    ImageView iv_settings, iv_notification;
-    InterfaceSaveEditedData interfaceSaveEditedData;
+
+    ImageView iv_settings, iv_notification,iv_save_img;
+
     @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -128,15 +128,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         };
 
-        interfaceSaveEditedData =new FragmentEditProfile();
         //toggle.setDrawerIndicatorEnabled(false);
         toolbar = (Toolbar) findViewById(R.id.main_toolbar);
         tv_toolbar_title = toolbar.findViewById(R.id.tv_toolbar_title);
-        iv_save_data = toolbar.findViewById(R.id.iv_save_data);
+
         iv_notification = toolbar.findViewById(R.id.iv_notification);
+        iv_save_img = toolbar.findViewById(R.id.iv_save_img);
+
         iv_notification.setOnClickListener(this);
-        iv_save_data.setOnClickListener(this);
-        //bottom navigation views
+
         LinearLayout ll_home = findViewById(R.id.ll_home);
         LinearLayout ll_nav_second_menu = findViewById(R.id.ll_nav_second_menu);
         LinearLayout ll_nav_third_menu = findViewById(R.id.ll_nav_third_menu);
@@ -301,8 +301,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 ftNotification.commit();
                 break;
 
-            case R.id.iv_save_data:
-                interfaceSaveEditedData.saveEditedData();
+
         }
     }
 
@@ -504,17 +503,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             iv_notification.setVisibility(View.VISIBLE);
         }
     }
-
-    public void toogleSaveButton(boolean toggle) {
-        if (toggle) {
-            iv_save_data.setVisibility(View.VISIBLE);
-        }else{
-            iv_save_data.setVisibility(View.GONE);
-        }
-    }
-
-
-
 
     @SuppressLint("StaticFieldLeak")
     private class UploadFile extends AsyncTask<String, Void, Integer> {

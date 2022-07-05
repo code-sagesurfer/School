@@ -21,6 +21,8 @@ import com.daimajia.androidanimations.library.YoYo;
 import com.example.school.BuildConfig;
 import com.example.school.R;
 import com.example.school.home.main.MainActivity;
+import com.example.school.login.forgotpassword.ActivityForgotPassword;
+import com.example.school.resources.APIManager;
 import com.example.school.resources.Actions_;
 import com.example.school.resources.AppLog;
 import com.example.school.resources.Connectivity;
@@ -72,6 +74,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @BindView(R.id.btn_login)
     TextView btn_login;
 
+    @BindView(R.id.tv_forgot_pass)
+    TextView tv_forgot_pass;
+
+    @BindView(R.id.tv_register_link)
+    TextView tv_register_link;
+
     @BindView(R.id.cb_remember_me)
     CheckBox cb_remember_me;
 
@@ -81,7 +89,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private ArrayList<ModelInstancesData> serverCodeList;
     private SharedPreferences.Editor loginPrefsEditor;
     private SharedPreferences loginPreferences;
-    boolean passwordShown=false;
+    boolean passwordShown = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -107,7 +116,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             et_username.setText("rahuladult");
             et_password.setText("Sag&#2539!");
         }
-
+        tv_forgot_pass.setOnClickListener(this);
+        tv_register_link.setOnClickListener(this);
         btn_login.setOnClickListener(LoginActivity.this);
         try {
             getInstances();
@@ -158,7 +168,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         YoYo.with(Techniques.ZoomIn)
                 .duration(800)
                 .repeat(0)
-                .playOn(findViewById(R.id.textView11));
+                .playOn(findViewById(R.id.tv_register_link));
         YoYo.with(Techniques.ZoomIn)
                 .duration(800)
                 .repeat(0)
@@ -231,7 +241,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 String password = et_password.getText().toString().trim();
                 String code = et_code.getText().toString().trim();
                 if (isValid(username, password, code)) {
-                   // Toast.makeText(this, "login now...", Toast.LENGTH_SHORT).show();
+                    // Toast.makeText(this, "login now...", Toast.LENGTH_SHORT).show();
                     proceedToLoginUser();
                 }
                 break;
@@ -239,16 +249,24 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             case R.id.btn_password_toggle:
 
                 et_password.setTransformationMethod(null);
-                  if (!passwordShown) {
-                      passwordShown=true;
-                      et_password.setTransformationMethod(null);
-                      btn_password_toggle.setImageResource(R.drawable.ic_unlock_password);
+                if (!passwordShown) {
+                    passwordShown = true;
+                    et_password.setTransformationMethod(null);
+                    btn_password_toggle.setImageResource(R.drawable.ic_unlock_password);
 
-                }else{
-                      passwordShown=false;
-                      btn_password_toggle.setImageResource(R.drawable.password);
-                      et_password.setTransformationMethod(new PasswordTransformationMethod());
+                } else {
+                    passwordShown = false;
+                    btn_password_toggle.setImageResource(R.drawable.password);
+                    et_password.setTransformationMethod(new PasswordTransformationMethod());
                 }
+                break;
+
+            case R.id.tv_register_link:
+                startActivity(new Intent(LoginActivity.this,ActivityRegisterUser.class));
+                break;
+
+            case R.id.tv_forgot_pass:
+                startActivity(new Intent(LoginActivity.this, ActivityForgotPassword.class));
                 break;
         }
 
@@ -330,7 +348,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void loginUser(String user_name, String password) {
         try {
-            //APIManager.Companion.getInstance().showProgressDialog(getContext(), true, "Loading....");
+
             HashMap<String, String> keyMap = KeyMaker_.getKey();
             HashMap<String, String> requestMap = new HashMap<>();
             requestMap.put(General.KEY, keyMap.get(General.KEY));
@@ -354,7 +372,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             RequestBody requestBody = MakeCall.makeLoginCall(requestMap, url, TAG, this, this);
 
-
+            APIManager.Companion.getInstance().showProgressDialog(LoginActivity.this, true, "Loading....");
             APIInterface apiInterface = LoginAPIManager.getClient().create(APIInterface.class);
 
             Call<JsonElement> jsonElementCall = apiInterface.doGetListResources(requestBody);
@@ -365,7 +383,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     JsonElement mJsonElement = response.body();
                     Gson gson = new Gson();
                     ModelMainResponse mRewardsCategoryResponseModel = gson.fromJson(String.valueOf(response.body()), ModelMainResponse.class);
-
+                    APIManager.Companion.getInstance().dismissProgressDialog();
 
                     if (mRewardsCategoryResponseModel.getDetails().getStatus() == 1) {
                         Preferences.save(General.USER_ID, mRewardsCategoryResponseModel.getDetails().getUserid());
@@ -412,11 +430,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 @Override
                 public void onFailure(Call<JsonElement> call, Throwable t) {
                     AppLog.e(TAG, "onResponse: " + t.getMessage());
+                    APIManager.Companion.getInstance().dismissProgressDialog();
                 }
             });
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
             AppLog.e(TAG, "onResponse: " + e.getMessage());
+            APIManager.Companion.getInstance().dismissProgressDialog();
         }
     }
 

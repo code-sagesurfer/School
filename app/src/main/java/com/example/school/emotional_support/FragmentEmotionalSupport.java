@@ -52,6 +52,8 @@ public class FragmentEmotionalSupport extends Fragment {
         if (context instanceof MainActivity) {
             mainActivity = (MainActivity) context;
             mainActivity.setToolbarTitleText(getString(R.string.emotional_support));
+
+            mainActivity.toggleBellIcon(false);
         }
     }
 

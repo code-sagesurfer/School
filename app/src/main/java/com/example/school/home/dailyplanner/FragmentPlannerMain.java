@@ -42,6 +42,7 @@ public class FragmentPlannerMain extends Fragment {
             mainActivity.setToolbarTitleText(getString(R.string.menu_daily_planner));
             mainActivity.changeDrawerIcon(false);
             mainActivity.toggleBellIcon(false);
+
         }
     }
 

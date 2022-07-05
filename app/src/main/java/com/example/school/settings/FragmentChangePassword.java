@@ -153,7 +153,7 @@ public class FragmentChangePassword extends Fragment {
 
         if (requestBody != null) {
             try {
-                APIManager.Companion.getInstance().showProgressDialog(getActivity(), false, "Loading Countries...");
+                APIManager.Companion.getInstance().showProgressDialog(getActivity(), false, "");
 
                 APIManager.Companion.getInstance().mobile_user_settings(requestBody, new Callback<JsonElement>() {
                     @Override

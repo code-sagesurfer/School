@@ -50,6 +50,8 @@ public class FragmentFAQDetails extends Fragment implements View.OnClickListener
             mainActivity = (MainActivity) context;
             mainActivity.setToolbarTitleText(getString(R.string.faq));
             mainActivity.changeDrawerIcon(true);
+
+            mainActivity.toggleBellIcon(true);
         }
     }
 

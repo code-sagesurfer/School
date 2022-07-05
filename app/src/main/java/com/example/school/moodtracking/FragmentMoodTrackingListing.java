@@ -47,6 +47,8 @@ public class FragmentMoodTrackingListing extends Fragment {
         if (context instanceof MainActivity){
             mainActivity=(MainActivity) context;
             mainActivity.setToolbarTitleText(getString(R.string.mood_tracking));
+
+            mainActivity.toggleBellIcon(false);
         }
     }
 

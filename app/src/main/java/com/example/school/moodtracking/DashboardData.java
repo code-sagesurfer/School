@@ -47,6 +47,7 @@ public class DashboardData {
 
         RequestBody requestBody = MakeCall.make(requestMap, url, TAG, context, activity);
 
+        assert requestBody != null;
         APIManager.Companion.getInstance().mobile_youth_dashboard(requestBody, new Callback<JsonElement>() {
             @Override
             public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {

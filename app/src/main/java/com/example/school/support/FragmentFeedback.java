@@ -103,6 +103,8 @@ public class FragmentFeedback extends Fragment implements View.OnClickListener {
             mainActivity = (MainActivity) context;
             mainActivity.setToolbarTitleText(getString(R.string.feedback));
             mainActivity.changeDrawerIcon(true);
+
+            mainActivity.toggleBellIcon(true);
         }
     }
 
