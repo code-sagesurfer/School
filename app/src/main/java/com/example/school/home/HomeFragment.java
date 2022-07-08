@@ -280,7 +280,8 @@ public class HomeFragment extends Fragment {
         showAnimationEffect();
 
         DashboardData dashboardData = new DashboardData();
-        dashboardData.getDashboardData(getContext(), getActivity(), HomeFragment.this);
+        dashboardData.getDashboardData(getContext(), getActivity(),
+                HomeFragment.this);
 
         Date currentTime = Calendar.getInstance().getTime();
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");

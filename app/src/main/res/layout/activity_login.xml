@@ -89,9 +89,7 @@
                     <EditText
                         android:id="@+id/et_password"
                         android:layout_width="match_parent"
-
                         android:layout_height="55dp"
-
                         android:background="@android:color/transparent"
                         android:password="true"
                         android:fontFamily="@font/poppins_regular"
@@ -106,10 +104,10 @@
                         />
 
                     <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
+                        android:layout_width="26dp"
+                        android:layout_height="24dp"
                         android:id="@+id/btn_password_toggle"
-                        android:src="@drawable/password"
+                        android:src="@drawable/ic_password"
                         android:layout_marginEnd="24dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="@+id/et_password"
@@ -144,6 +142,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
                     android:text="@string/remember_me"
+                    android:buttonTint="@color/color_primary"
                     android:textColor="@color/text_hint_color"
                     android:textSize="@dimen/standard_text_size_mobile"
                     app:layout_constraintStart_toStartOf="parent"

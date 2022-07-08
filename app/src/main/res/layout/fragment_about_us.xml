@@ -93,7 +93,7 @@
                     android:gravity="center"
                     android:text="@string/sagesurfer"
                     android:textColor="@color/color_primary"
-                    android:textSize="12sp"
+                    android:textSize="11sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/company_name_txt" />
@@ -143,7 +143,7 @@
                     android:gravity="center"
                     android:text="1.1"
                     android:textColor="@color/color_primary"
-                    android:textSize="12sp"
+                    android:textSize="11sp"
 
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -208,7 +208,7 @@
                     android:gravity="center"
                     android:text="@string/sagesurfer_email"
                     android:textColor="@color/color_primary"
-                    android:textSize="12sp"
+                    android:textSize="11sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/contact_us__name_txt" />
@@ -259,7 +259,7 @@
                     android:gravity="center"
                     android:text="@string/company_website"
                     android:textColor="@color/color_primary"
-                    android:textSize="12sp"
+                    android:textSize="11sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/website_txt" />

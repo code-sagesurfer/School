@@ -270,7 +270,6 @@ public class GetTime {
                 return  "Good Evening";
             }
 
-
             /*else if(timeOfDay >= 16 && timeOfDay < 24){
                 return  "Good Evening";
                 //Toast.makeText(this, "Good Evening", Toast.LENGTH_SHORT).show();
@@ -279,4 +278,54 @@ public class GetTime {
             }*/
 
         }
+
+
+        public static String compareDate(String DateOne,String DateTwo){
+            try {
+                SimpleDateFormat sdformat = new SimpleDateFormat("yyyy-MM-dd");
+                Date d1 = sdformat.parse(DateOne);
+                Date d2 = sdformat.parse(DateTwo);
+
+                if(d1.compareTo(d2) > 0) {
+                    //System.out.println("Date 1 occurs after Date 2");
+                    return "DateOneIsGreater";
+                } else if(d1.compareTo(d2) < 0) {
+                    //System.out.println("Date 1 occurs before Date 2");
+                    return "DateTwoIsGreater";
+                } else if(d1.compareTo(d2) == 0) {
+                    return "BothAreEqual";
+                    //System.out.println("Both dates are equal");
+                }
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+            return "Something went wrong";
+        }
+
+    public static boolean checkWeekDifference(String startDate, String endDate) {
+
+        SimpleDateFormat sdformat = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date d1 = sdformat.parse(startDate);
+            Date d2 = sdformat.parse(endDate);
+            long different = d2.getTime() - d1.getTime();
+            long secondsInMilli = 1000;
+            long minutesInMilli = secondsInMilli * 60;
+            long hoursInMilli = minutesInMilli * 60;
+            long daysInMilli = hoursInMilli * 24;
+
+            long elapsedDays = different / daysInMilli;
+            different = different % daysInMilli;
+
+            if(elapsedDays<7){
+                return false;
+            }else{
+                return true;
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
 }

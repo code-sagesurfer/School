@@ -46,19 +46,23 @@ public class FragmentFAQDetails extends Fragment implements View.OnClickListener
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        if (context instanceof MainActivity) {
-            mainActivity = (MainActivity) context;
-            mainActivity.setToolbarTitleText(getString(R.string.faq));
-            mainActivity.changeDrawerIcon(true);
 
-            mainActivity.toggleBellIcon(true);
-        }
     }
 
     public FragmentFAQDetails() {
         // Required empty public constructor
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (getContext() instanceof MainActivity) {
+            mainActivity = (MainActivity) getContext();
+            mainActivity.setToolbarTitleText(getString(R.string.faq));
+            mainActivity.changeDrawerIcon(true);
+            mainActivity.toggleBellIcon(true);
+        }
+    }
 
     public static FragmentFAQDetails newInstance(String param1, String param2) {
         FragmentFAQDetails fragment = new FragmentFAQDetails();

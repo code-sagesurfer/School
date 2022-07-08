@@ -19,6 +19,7 @@ import android.widget.Toast;
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
 import com.example.school.BuildConfig;
+import com.example.school.GetStartedActivity;
 import com.example.school.R;
 import com.example.school.home.main.MainActivity;
 import com.example.school.login.forgotpassword.ActivityForgotPassword;
@@ -85,7 +86,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @BindView(R.id.btn_password_toggle)
     ImageView btn_password_toggle;
-
+    SharedPreferences loginSharedPreferences;
+    SharedPreferences.Editor loginPrefEdit;
     private ArrayList<ModelInstancesData> serverCodeList;
     private SharedPreferences.Editor loginPrefsEditor;
     private SharedPreferences loginPreferences;
@@ -124,6 +126,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         } catch (Exception e) {
             e.printStackTrace();
         }
+        loginSharedPreferences = getSharedPreferences("LoginPreferences", MODE_PRIVATE);
+
     }
 
     @Override
@@ -240,6 +244,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 String username = et_username.getText().toString().trim();
                 String password = et_password.getText().toString().trim();
                 String code = et_code.getText().toString().trim();
+
+                if (cb_remember_me.isChecked()) {
+                    loginPrefEdit = loginSharedPreferences.edit();
+                    loginPrefEdit.putString(General.USERNAME, username);
+                    loginPrefEdit.putString(General.INSTANCE_CODE, code);
+                    loginPrefEdit.commit();
+                }
+
                 if (isValid(username, password, code)) {
                     // Toast.makeText(this, "login now...", Toast.LENGTH_SHORT).show();
                     proceedToLoginUser();
@@ -252,17 +264,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 if (!passwordShown) {
                     passwordShown = true;
                     et_password.setTransformationMethod(null);
-                    btn_password_toggle.setImageResource(R.drawable.ic_unlock_password);
+                    btn_password_toggle.setImageResource(R.drawable.ic_password_unlock);
 
                 } else {
                     passwordShown = false;
-                    btn_password_toggle.setImageResource(R.drawable.password);
+                    btn_password_toggle.setImageResource(R.drawable.ic_password);
                     et_password.setTransformationMethod(new PasswordTransformationMethod());
                 }
                 break;
 
             case R.id.tv_register_link:
-                startActivity(new Intent(LoginActivity.this,ActivityRegisterUser.class));
+                startActivity(new Intent(LoginActivity.this, ActivityRegisterUser.class));
                 break;
 
             case R.id.tv_forgot_pass:
@@ -296,18 +308,30 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     //Checking if all fields are valid or not
     private boolean isValid(String user_name, String password, String code) {
-        if (user_name.trim().length() <= 0 || !LoginValidator.isUsername(user_name)) {
+        if (user_name.length() == 0) {
+            et_username.setError(this.getResources().getString(R.string.please_enter_username));
+            return false;
+        } else if (!LoginValidator.isUsername(user_name)) {
             et_username.setError(this.getResources().getString(R.string.invalid_input));
             return false;
         }
-        if (password.trim().length() <= 0 || !LoginValidator.isPassword(password)) {
+
+        if (password.trim().length() == 0) {
+            et_password.setError(this.getResources().getString(R.string.please_enter_password));
+            return false;
+        } else if (!LoginValidator.isPassword(password)) {
             et_password.setError(this.getResources().getString(R.string.invalid_input));
             return false;
         }
-        if (code.trim().length() <= 0 || !LoginValidator.isCode(code)) {
+
+        if (code.trim().length() == 0) {
+            et_code.setError(this.getResources().getString(R.string.please_enter_code));
+            return false;
+        } else if (!LoginValidator.isCode(code)) {
             et_code.setError(this.getResources().getString(R.string.invalid_input));
             return false;
         }
+
         if (code.equalsIgnoreCase("sage018") || code.equalsIgnoreCase("sage019")) {
             et_code.setError(this.getResources().getString(R.string.invalid_server_code));
             return false;
@@ -415,15 +439,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 mRewardsCategoryResponseModel.getDetails().getClientSecret(),
                                 Preferences.get(Constants.DOMAIN).replaceAll(Constants.INSATNCE_NAME, ""),
                                 getApplicationContext(),LoginActivity.this);*/
-
                             authorize.getAuthorized(mRewardsCategoryResponseModel.getDetails().getClientId(),
                                     mRewardsCategoryResponseModel.getDetails().getClientSecret(),
                                     Preferences.get(General.DOMAIN).replaceAll(General.INSATNCE_NAME, ""),
                                     getApplicationContext());
+                            Toast.makeText(LoginActivity.this, "Account logged in successfully", Toast.LENGTH_SHORT).show();
                         }
-
                     } else {
-                        Toast.makeText(LoginActivity.this, "" + mRewardsCategoryResponseModel.getDetails().getError(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(LoginActivity.this, "Username and password are invalid", Toast.LENGTH_SHORT).show();
                     }
                 }
 
@@ -460,9 +483,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     //TokenCallbacks overridden methods after getting token after authorization
     @Override
     public void tokenSuccessCallback(JSONObject jsonObject) {
-
         AppLog.d(TAG, "tokenSuccessCallback: ");
-        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        Intent intent = new Intent(LoginActivity.this, GetStartedActivity.class);
         startActivity(intent);
         finish();
     }

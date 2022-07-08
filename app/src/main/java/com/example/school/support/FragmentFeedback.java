@@ -67,10 +67,10 @@ import retrofit2.Response;
 public class FragmentFeedback extends Fragment implements View.OnClickListener {
 
     @BindView(R.id.roundedImageView)
-    RoundedImageView roundedImageView;
+    ImageView roundedImageView;
 
     @BindView(R.id.roundedImageView2)
-    RoundedImageView roundedImageView2;
+    ImageView roundedImageView2;
 
     /*@BindView(R.id.roundedImageView3)
     RoundedImageView roundedImageView3;*/
@@ -99,19 +99,24 @@ public class FragmentFeedback extends Fragment implements View.OnClickListener {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        if (context instanceof MainActivity) {
-            mainActivity = (MainActivity) context;
-            mainActivity.setToolbarTitleText(getString(R.string.feedback));
-            mainActivity.changeDrawerIcon(true);
 
-            mainActivity.toggleBellIcon(true);
-        }
     }
 
     public FragmentFeedback() {
 
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (getContext() instanceof MainActivity) {
+            mainActivity = (MainActivity) getContext();
+            mainActivity.setToolbarTitleText(getString(R.string.feedback));
+            mainActivity.changeDrawerIcon(true);
+
+            mainActivity.toggleBellIcon(true);
+        }
+    }
 
     public static FragmentFeedback newInstance(String param1, String param2) {
         FragmentFeedback fragment = new FragmentFeedback();
@@ -308,7 +313,7 @@ public class FragmentFeedback extends Fragment implements View.OnClickListener {
     // validate feedback message for it's min/max length
     private boolean validate(String message) {
         if (message == null || message.length() <= 0) {
-            et_describe_problem.setError("Invalid Feedback Message\nMessage is mandatory");
+            et_describe_problem.setError("Please enter message");
             return false;
         }
         if (message.length() < 3) {

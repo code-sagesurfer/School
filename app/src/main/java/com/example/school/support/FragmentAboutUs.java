@@ -36,8 +36,14 @@ public class FragmentAboutUs extends Fragment {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        if (context instanceof MainActivity) {
-            mainActivity = (MainActivity) context;
+
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (getContext() instanceof MainActivity) {
+            mainActivity = (MainActivity) getContext();
             mainActivity.setToolbarTitleText(getString(R.string.about_us));
             mainActivity.changeDrawerIcon(true);
 

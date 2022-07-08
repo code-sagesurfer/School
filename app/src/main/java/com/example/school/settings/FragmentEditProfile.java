@@ -33,6 +33,7 @@ import com.example.school.resources.GetCounters;
 import com.example.school.resources.GetTime;
 import com.example.school.resources.Preferences;
 import com.example.school.resources.Urls_;
+import com.example.school.resources.Utils;
 import com.example.school.resources.apidata.MakeCall;
 import com.example.school.resources.showstatus.ShowToast;
 import com.google.gson.Gson;
@@ -152,10 +153,11 @@ public class FragmentEditProfile extends AppCompatActivity implements View.OnCli
         et_fname.setText(Preferences.get(General.FIRST_NAME));
         et_email.setText(Preferences.get(General.EMAIL));
         et_username.setText(Preferences.get(General.USERNAME));
-        et_dob.setText(Preferences.get(General.BIRTDATE));
+        et_dob.setText(Utils.convertDateStringToString(Preferences.get(General.BIRTDATE),"yyyy-MM-dd","MM-dd-yyyy"));
         tv_header_uname.setText(Preferences.get(General.NAME));
         tv_header_role.setText(Preferences.get(General.ROLE));
         dateOfBirth = Preferences.get(General.BIRTDATE);
+
         iv_save_data.setOnClickListener(this);
         iv_backButton.setOnClickListener(this);
         et_dob.setOnClickListener(this);
@@ -182,10 +184,14 @@ public class FragmentEditProfile extends AppCompatActivity implements View.OnCli
     }
 
     private void setDate() {
-        String myFormat = "yyyy-MM-dd";
-        SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
-        et_dob.setText(sdf.format(myCalendar.getTime()));
+        String myFormatSendServer = "yyyy-MM-dd";
+        String myFormatToshow = "MM-dd-yyyy";
 
+        SimpleDateFormat sdf = new SimpleDateFormat(myFormatSendServer, Locale.US);
+        SimpleDateFormat sdf2 = new SimpleDateFormat(myFormatToshow, Locale.US);
+
+        et_dob.setText(sdf2.format(myCalendar.getTime()));
+        dateOfBirth=sdf.format(myCalendar.getTime());
     }
 
 
@@ -274,7 +280,7 @@ public class FragmentEditProfile extends AppCompatActivity implements View.OnCli
         RequestBody requestBody = MakeCall.make(requestMap, url, Tag, context, activity);
         if (requestBody != null) {
 
-            APIManager.Companion.getInstance().showProgressDialog(activity, false, "Loading States...");
+            APIManager.Companion.getInstance().showProgressDialog(activity, false, "Loading...");
 
             APIManager.Companion.getInstance().mobile_self_care(requestBody, new Callback<JsonElement>() {
                 @Override
@@ -367,7 +373,7 @@ public class FragmentEditProfile extends AppCompatActivity implements View.OnCli
         RequestBody requestBody = MakeCall.make(requestMap, url, TAG, context, activity);
         if (requestBody != null) {
             try {
-                APIManager.Companion.getInstance().showProgressDialog(activity, false, "Loading Cities...");
+                APIManager.Companion.getInstance().showProgressDialog(activity, false, "Loading...");
 
                 APIManager.Companion.getInstance().mobile_self_care(requestBody, new Callback<JsonElement>() {
                     @Override
@@ -453,7 +459,7 @@ public class FragmentEditProfile extends AppCompatActivity implements View.OnCli
         RequestBody requestBody = MakeCall.make(requestMap, url, TAG, FragmentEditProfile.this, FragmentEditProfile.this);
         if (requestBody != null) {
             try {
-                APIManager.Companion.getInstance().showProgressDialog(FragmentEditProfile.this, false, "Loading Countries...");
+                APIManager.Companion.getInstance().showProgressDialog(FragmentEditProfile.this, false, "Loading...");
 
                 APIManager.Companion.getInstance().mobile_self_care(requestBody, new Callback<JsonElement>() {
                     @Override
@@ -512,9 +518,9 @@ public class FragmentEditProfile extends AppCompatActivity implements View.OnCli
             for (int i = 0; i < stateArrayList.size(); i++) {
                 stateNameList.add(stateArrayList.get(i).getName());
             }
-
+//drop_down_selected_text_item_layout_setting, drop_down_text_item_layout
             if (stateNameList.size() > 0) {
-                ArrayAdapter<String> adapterConsumer = new ArrayAdapter<String>(FragmentEditProfile.this, R.layout.drop_down_selected_text_item_layout, stateNameList);
+                ArrayAdapter<String> adapterConsumer = new ArrayAdapter<String>(FragmentEditProfile.this, R.layout.drop_down_selected_text_item_layout_setting, stateNameList);
                 adapterConsumer.setDropDownViewResource(R.layout.drop_down_text_item_layout);
                 sp_state.setAdapter(adapterConsumer);
 
@@ -538,7 +544,9 @@ public class FragmentEditProfile extends AppCompatActivity implements View.OnCli
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.iv_save_img || view.getId() == R.id.iv_save_profile ) {
-            saveUpdatedProfile();
+            if (validateViews()){
+                saveUpdatedProfile();
+            }
         } else if (view.getId() == R.id.et_dob) {
 
                 DatePickerDialog datePickerDialog = new DatePickerDialog(FragmentEditProfile.this, startDateDatePicker,
@@ -586,13 +594,24 @@ public class FragmentEditProfile extends AppCompatActivity implements View.OnCli
         }
     }
 
+    private boolean validateViews() {
+        if (et_fname.getText().toString().trim().length()<=0){
+            et_fname.setError(getResources().getString(R.string.field_required));
+            return false;
+        }else if (et_lname.getText().toString().trim().length()<=0){
+            et_lname.setError(getResources().getString(R.string.field_required));
+            return false;
+        }else {
+            return true;
+        }
+    }
+
     private void saveUpdatedProfile() {
         HashMap<String, String> requestMap = new HashMap<>();
         requestMap.put(General.ACTION, Actions_.EDIT_PROFILE);
         requestMap.put(General.DOB, et_dob.getText().toString().trim());
         requestMap.put(General.FIRST_NAME, et_fname.getText().toString().trim());
         requestMap.put(General.LAST_NAME, et_lname.getText().toString().trim());
-
         int posCounrty = sp_country.getSelectedItemPosition();
         int counrtyId = countryArrayList.get(posCounrty).getId();
         requestMap.put(General.COUNTRY, String.valueOf(counrtyId));
@@ -644,9 +663,9 @@ public class FragmentEditProfile extends AppCompatActivity implements View.OnCli
                                         Preferences.save(General.EMAIL, "" + et_email.getText().toString().trim());
                                         Preferences.save(General.STATE_ID, stateId);
                                         Preferences.save(General.CITY_ID, cityId);
-                                        //Preferences.save(General.BIRTDATE, GetTime.yy_mm_dd(date_of_birth));
-
                                         Preferences.save(General.BIRTDATE, dateOfBirth);
+
+                                        //Preferences.save(General.BIRTDATE, et_dob.getText().toString().trim());
                                         Preferences.save(General.NAME, "" + et_fname.getText().toString().trim() + " " +
                                                 et_lname.getText().toString().trim());
                                     } else {
@@ -713,10 +732,10 @@ public class FragmentEditProfile extends AppCompatActivity implements View.OnCli
             }
 
             if (cityNameList.size() > 0) {
-                ArrayAdapter<String> adapterConsumer = new ArrayAdapter<String>(FragmentEditProfile.this, R.layout.drop_down_selected_text_item_layout, cityNameList);
+                ArrayAdapter<String> adapterConsumer = new ArrayAdapter<String>(FragmentEditProfile.this, R.layout.drop_down_selected_text_item_layout_setting, cityNameList);
                 adapterConsumer.setDropDownViewResource(R.layout.drop_down_text_item_layout);
                 sp_city.setAdapter(adapterConsumer);
-
+//drop_down_selected_text_item_layout_setting, drop_down_text_item_layout
                 for (int i = 0; i < cityArrayList.size(); i++) {
                     if (Integer.parseInt(Preferences.get(General.CITY_ID)) == cityArrayList.get(i).getId()) {
                         //for default selection of state

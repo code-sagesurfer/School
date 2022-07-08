@@ -45,8 +45,13 @@ public class FAQAdapter extends RecyclerView.Adapter<FAQAdapter.MyHolder> {
 
         if (objList.get(position).getIsSelected()==1){
             holder.tv_faq_que_desc.setVisibility(View.VISIBLE);
+            holder.faq_que.setTextColor(context.getResources().getColor(R.color.color_primary));
+            holder.iv_faq_btn.setImageResource(R.drawable.ic_down_arrow);
         }else{
+            holder.faq_que.setTextColor(context.getResources().getColor(R.color.black));
             holder.tv_faq_que_desc.setVisibility(View.GONE);
+            holder.iv_faq_btn.setImageResource(R.drawable.ic_arrow_forward);
+
         }
 
         /*
@@ -61,6 +66,8 @@ public class FAQAdapter extends RecyclerView.Adapter<FAQAdapter.MyHolder> {
         holder.btnForward.setOnClickListener(clickListener);*/
 
     }
+
+
 
     @Override
     public int getItemCount() {

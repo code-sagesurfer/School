@@ -31,4 +31,7 @@
     <dimen name="small_text_size_mobile">12sp</dimen>
     <dimen name="big_text_size_mobile">16sp</dimen>
     <dimen name="extra_big_text_size_mobile">18sp</dimen>
+    <dimen name="standard_text_size_tab">16sp</dimen>
+    <dimen name="big_text_size_tab">18sp</dimen>
+    <dimen name="small_text_size_tab">14sp</dimen>
 </resources>

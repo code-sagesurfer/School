@@ -33,7 +33,9 @@ import com.example.school.R;
 import com.example.school.home.main.MainActivity;
 import com.example.school.resources.APIManager;
 import com.example.school.resources.Actions_;
+import com.example.school.resources.AppLog;
 import com.example.school.resources.General;
+import com.example.school.resources.GetTime;
 import com.example.school.resources.Preferences;
 import com.example.school.resources.Urls_;
 import com.example.school.resources.apidata.MakeCall;
@@ -76,6 +78,9 @@ public class FragmentAddGoal extends Fragment implements View.OnClickListener, I
     @BindView(R.id.btn_submit)
     Button btn_submit;
 
+    @BindView(R.id.btn_cancel_gratitude)
+    Button btn_cancel_gratitude;
+
     String file_path;
     static String SelectedFileId = "";
     MainActivity mainActivity;
@@ -109,11 +114,10 @@ public class FragmentAddGoal extends Fragment implements View.OnClickListener, I
     @Override
     public void onResume() {
         super.onResume();
-        if (getContext() instanceof MainActivity){
-            mainActivity=(MainActivity) getContext();
+        if (getContext() instanceof MainActivity) {
+            mainActivity = (MainActivity) getContext();
             mainActivity.changeDrawerIcon(true);
             mainActivity.setToolbarTitleText("Add Goal");
-
             mainActivity.toggleBellIcon(false);
         }
     }
@@ -129,8 +133,9 @@ public class FragmentAddGoal extends Fragment implements View.OnClickListener, I
         tv_goal_attachment.setOnClickListener(this);
         tv_goal_start_date.setOnClickListener(this);
         tv_goal_end_date.setOnClickListener(this);
+        btn_cancel_gratitude.setOnClickListener(this);
         String[] frequencyArray = {"Select Frequency", "Daily", "Weekly", "Monthly"};
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, frequencyArray);
+        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(), R.layout.simple_spinner_item_goal, frequencyArray);
         sp_goal_frequency.setAdapter(dataAdapter);
         btn_submit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -145,7 +150,6 @@ public class FragmentAddGoal extends Fragment implements View.OnClickListener, I
                 myCalendar.set(Calendar.YEAR, year);
                 myCalendar.set(Calendar.MONTH, monthOfYear);
                 myCalendar.set(Calendar.DAY_OF_MONTH, dayOfMonth);
-
                 setDate("start");
             }
         };
@@ -162,21 +166,24 @@ public class FragmentAddGoal extends Fragment implements View.OnClickListener, I
         };
         return view;
     }
-    String StartDate,EndDate;
+
+    String StartDate, EndDate;
+
     private void setDate(String view) {
         String myFormat = "yyyy-MM-dd";
+        String myDisplayFormat = "MM-dd-yyyy";
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
+        SimpleDateFormat sdf2 = new SimpleDateFormat(myDisplayFormat, Locale.US);
 
        /* String myFormatToSendServer = "dd-MM-yyyy";
         SimpleDateFormat sdf2 = new SimpleDateFormat(myFormatToSendServer, Locale.US);*/
 
-
         if (view.equals("start")) {
-            StartDate=sdf.format(myCalendar.getTime());
-            tv_goal_start_date.setText(sdf.format(myCalendar.getTime()));
+            StartDate = sdf.format(myCalendar.getTime());
+            tv_goal_start_date.setText(sdf2.format(myCalendar.getTime()));
         } else {
-            tv_goal_end_date.setText(sdf.format(myCalendar.getTime()));
-            EndDate=sdf.format(myCalendar.getTime());
+            tv_goal_end_date.setText(sdf2.format(myCalendar.getTime()));
+            EndDate = sdf.format(myCalendar.getTime());
         }
     }
 
@@ -185,23 +192,37 @@ public class FragmentAddGoal extends Fragment implements View.OnClickListener, I
         String GoalDesc = et_desc.getText().toString().trim();
         String StartDate = tv_goal_start_date.getText().toString().trim();
         String EndDate = tv_goal_end_date.getText().toString().trim();
-
+        AppLog.d(TAG, "validateViews: "+GetTime.compareDate(StartDate,EndDate));
         if (GoalName.equalsIgnoreCase("")) {
             et_goal_title.setError(getString(R.string.field_required));
         } else if (GoalDesc.equalsIgnoreCase("")) {
             et_desc.setError(getString(R.string.field_required));
-        } else if (StartDate.equalsIgnoreCase("")) {
+        } else if (StartDate.equalsIgnoreCase("Enter date")) {
             tv_goal_start_date.setError(getString(R.string.field_required));
-        } else if (EndDate.equalsIgnoreCase("")) {
+        } else if (EndDate.equalsIgnoreCase("Enter date")) {
             tv_goal_end_date.setError(getString(R.string.field_required));
         } else if (sp_goal_frequency.getSelectedItemPosition() == 0) {
-            Toast.makeText(getContext(), "Please select ", Toast.LENGTH_SHORT).show();
-        } else {
-            if (sp_goal_frequency.getSelectedItemPosition() != 3) {
-                createGoal("action", GoalName, GoalDesc);
-            } else {
-                Toast.makeText(getContext(), "You can not create monthly goal.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getContext(), "Please select frequency", Toast.LENGTH_SHORT).show();
+        } else if (GetTime.compareDate(StartDate,EndDate).equals("DateTwoIsGreater")
+                || GetTime.compareDate(StartDate,EndDate).equals("DateTwoIsGreater"))
+        {
+            if (sp_goal_frequency.getSelectedItem().toString().equals("Weekly")){
+                if (GetTime.checkWeekDifference(StartDate,EndDate)){
+                    if (sp_goal_frequency.getSelectedItemPosition() != 3) {
+                        createGoal(Actions_.GOAL_ACTION, GoalName, GoalDesc);
+                    } else {
+                        Toast.makeText(getContext(), "You can not create monthly goal.", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+
+            }else  if (sp_goal_frequency.getSelectedItem().toString().equals("Weekly")){
+
             }
+
+
+        }else{
+            Toast.makeText(getContext(), "End date should be greater.", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -265,6 +286,10 @@ public class FragmentAddGoal extends Fragment implements View.OnClickListener, I
                 openEndDatePicker();
                 break;
 
+            case R.id.btn_cancel_gratitude:
+                getActivity().onBackPressed();
+                break;
+
 
         }
     }
@@ -277,7 +302,6 @@ public class FragmentAddGoal extends Fragment implements View.OnClickListener, I
         datePickerDialog.show();
     }
 
-
     private void openDatePicker() {
         DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), startDateDatePicker,
                 myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
@@ -287,25 +311,21 @@ public class FragmentAddGoal extends Fragment implements View.OnClickListener, I
 
     }
 
-
     @Override
     public void onGoalImageSelected(Context context, String path, long file_id) {
-        Log.d(TAG, "onGoalImageSelected: data reached");
+        AppLog.d(TAG, "onGoalImageSelected: data reached");
         file_path = path;
-        // tv_file_name.setText(file_path);
         SelectedFileId = String.valueOf(file_id);
-        iv_goal_attached_image.setVisibility(View.VISIBLE);
-        //iv_error_message.setVisibility(View.GONE);
-
         setAttachedImage(file_path);
     }
 
     public void setAttachedImage(String file_path) {
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inSampleSize = 8;
+        iv_goal_attached_image.setVisibility(View.VISIBLE);
         final Bitmap b = BitmapFactory.decodeFile(file_path, options);
         iv_goal_attached_image.setImageBitmap(b);
-        Log.i(TAG, "setAttachedImage: id - " + SelectedFileId);
+        AppLog.i(TAG, "setAttachedImage: id - " + SelectedFileId);
     }
 
     @Override
@@ -318,9 +338,7 @@ public class FragmentAddGoal extends Fragment implements View.OnClickListener, I
     // 1: Yes/no Goal
     // 2: Global goal (Tread this goal same as Counting goal)
     private void createGoal(String action, String goalName, String goalDesc) {
-
         String frequencyUnit = "";
-
         String checked_noti = "";
         if (sp_goal_frequency.getSelectedItem().toString().equals("Daily")) {
             checked_noti = "day";
@@ -334,7 +352,6 @@ public class FragmentAddGoal extends Fragment implements View.OnClickListener, I
             frequencyUnit = "1,Mon-Tue-Wed-Thu-Fri-Sat-Sun";
         }
 
-
         HashMap<String, String> requestMap = new HashMap<>();
         requestMap.put(General.TIMEZONE, Preferences.get(General.TIMEZONE));
         requestMap.put(General.ACTION, Actions_.GOAL_ACTION);
@@ -345,28 +362,21 @@ public class FragmentAddGoal extends Fragment implements View.OnClickListener, I
         requestMap.put(General.START_DATE, StartDate);
         requestMap.put(General.END_DATE, EndDate);
         requestMap.put(General.DESCRIPTION, goalDesc);
-
         requestMap.put(General.ID, "0");
-
         requestMap.put(General.MILESTONE_ID, "");
-
-
         requestMap.put("del_mile_id", "0");
         requestMap.put(General.MILESTONE, "");
         requestMap.put(General.MILESTONE_DATE, "");
         requestMap.put("notification", "1");
         requestMap.put("notify_at", "0");
-
         requestMap.put("frequency_unit", frequencyUnit);
-
         requestMap.put("occurrences", "1");
-
-
         requestMap.put("quantity", "0");
         requestMap.put("checked_noti", checked_noti);
         requestMap.put("img_gallery_id", SelectedFileId);
-
         requestMap.put(General.START_TIME, "12:00");
+
+
         if (sp_goal_frequency.getSelectedItem().toString().equalsIgnoreCase("weekly")) {
 
             requestMap.put(General.FREQUENCY, "daily");
@@ -374,13 +384,10 @@ public class FragmentAddGoal extends Fragment implements View.OnClickListener, I
             requestMap.put(General.FREQUENCY, "week");
         }
 
-
         String url = Preferences.get(General.DOMAIN) + "/" + Urls_.MOBILE_SELF_GOAL;
-
         RequestBody requestBody = MakeCall.make(requestMap, url, TAG, getContext(), getActivity());
         if (requestBody != null) {
             try {
-
                 APIManager.Companion.getInstance().self_goal(requestBody, new Callback<JsonElement>() {
                     @Override
                     public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
@@ -389,13 +396,15 @@ public class FragmentAddGoal extends Fragment implements View.OnClickListener, I
                             Log.d(TAG, "onResponse: " + response.body().toString());
                             Gson gson = new Gson();
                             ModelAddGoalResponse listResponse = gson.fromJson(response.body(), ModelAddGoalResponse.class);
-                            if (listResponse.getGoalAction().get(0).getStatus()==1) {
+                            if (listResponse.getGoalAction().get(0).getStatus() == 1) {
                                 Toast.makeText(getContext(), "" + listResponse.getGoalAction().get(0).getMsg(), Toast.LENGTH_SHORT).show();
                                 sp_goal_frequency.setSelection(0);
                                 et_goal_title.setText("");
                                 et_desc.setText("");
                                 tv_goal_start_date.setText("");
+                                tv_goal_start_date.setError(null);
                                 tv_goal_end_date.setText("");
+                                tv_goal_end_date.setError(null);
                                 iv_goal_attached_image.setVisibility(View.INVISIBLE);
                             } else {
                                 Toast.makeText(getContext(), "" + listResponse.getGoalAction().get(0).getMsg(), Toast.LENGTH_SHORT).show();
@@ -435,6 +444,4 @@ public class FragmentAddGoal extends Fragment implements View.OnClickListener, I
         }
         //ShowToast.toast(this.getResources().getString(R.string.action_failed), getApplicationContext());
     }
-
-
 }

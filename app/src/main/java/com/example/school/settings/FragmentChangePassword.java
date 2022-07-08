@@ -59,6 +59,7 @@ public class FragmentChangePassword extends Fragment {
     private String mParam1;
     private String mParam2;
     MainActivity mainActivity;
+
     public FragmentChangePassword() {
 
     }
@@ -96,14 +97,14 @@ public class FragmentChangePassword extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view= inflater.inflate(R.layout.fragment_change_password, container, false);
-        ButterKnife.bind(this,view);
+        View view = inflater.inflate(R.layout.fragment_change_password, container, false);
+        ButterKnife.bind(this, view);
 
         et_confirm_password.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean b) {
-                if (!b){
-                    if (!et_new_password.getText().toString().trim().equals(et_confirm_password.getText().toString().trim())){
+                if (!b) {
+                    if (!et_new_password.getText().toString().trim().equals(et_confirm_password.getText().toString().trim())) {
                         et_confirm_password.setError(getString(R.string.password_not_matched));
                     }
                 }
@@ -113,10 +114,10 @@ public class FragmentChangePassword extends Fragment {
         btn_change_password.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String current_password=et_current_password.getText().toString().trim();
-                String newPassword=et_new_password.getText().toString().trim();
-                String confirmPassword=et_confirm_password.getText().toString().trim();
-                validateViews(current_password,newPassword,confirmPassword);
+                String current_password = et_current_password.getText().toString().trim();
+                String newPassword = et_new_password.getText().toString().trim();
+                String confirmPassword = et_confirm_password.getText().toString().trim();
+                validateViews(current_password, newPassword, confirmPassword);
 
             }
         });
@@ -124,19 +125,21 @@ public class FragmentChangePassword extends Fragment {
     }
 
     private void validateViews(String current_password, String newPassword, String confirmPassword) {
-        if (current_password.equals("")){
+        if (current_password.equals("")) {
             et_current_password.setError(getResources().getString(R.string.field_required));
-        }else if (current_password.length()<5){
+        } else if (current_password.length() < 5) {
             et_current_password.setError(getResources().getString(R.string.min_five_characters));
-        }else if (newPassword.equals("")){
+        } else if (newPassword.equals("")) {
             et_new_password.setError(getResources().getString(R.string.field_required));
-        }else if (newPassword.length()<5){
+        } else if (newPassword.length() < 5) {
             et_confirm_password.setError(getResources().getString(R.string.min_five_characters));
-        }else if (confirmPassword.equals("")){
+        } else if (confirmPassword.equals("")) {
             et_confirm_password.setError(getResources().getString(R.string.field_required));
-        }else if (confirmPassword.length()<5){
+        } else if (confirmPassword.length() < 5) {
             et_confirm_password.setError(getResources().getString(R.string.min_five_characters));
-        }else{
+        } else if (!newPassword.equals(confirmPassword)) {
+            Toast.makeText(mainActivity, "New password and confirm new password should match", Toast.LENGTH_SHORT).show();
+        } else {
             changePassword();
         }
     }
@@ -162,13 +165,13 @@ public class FragmentChangePassword extends Fragment {
                         try {
                             JsonElement element = response.body();
                             Gson gson = new Gson();
-                            Log.i(TAG, "onResponse:changePassword  "+response.body().toString());
+                            Log.i(TAG, "onResponse:changePassword  " + response.body().toString());
                             ModelResetPasswordResponse resetPasswordResponse = gson.fromJson(response.body(), ModelResetPasswordResponse.class);
-                            if (resetPasswordResponse.getResetPassword().getStatus().equals("1")){
-                                Toast.makeText(getActivity(), ""+resetPasswordResponse.getResetPassword().getMsg(), Toast.LENGTH_SHORT).show();
+                            if (resetPasswordResponse.getResetPassword().getStatus().equals("1")) {
+                                Toast.makeText(getActivity(), "" + resetPasswordResponse.getResetPassword().getMsg(), Toast.LENGTH_SHORT).show();
                                 getActivity().onBackPressed();
-                            }else{
-                                Toast.makeText(getActivity(), ""+resetPasswordResponse.getResetPassword().getMsg(), Toast.LENGTH_SHORT).show();
+                            } else {
+                                Toast.makeText(getActivity(), "" + resetPasswordResponse.getResetPassword().getMsg(), Toast.LENGTH_SHORT).show();
                             }
 
                         } catch (Exception e) {
@@ -204,7 +207,5 @@ public class FragmentChangePassword extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
-        Toast.makeText(mainActivity, "onDetach", Toast.LENGTH_SHORT).show();
-
     }
 }

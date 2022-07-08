@@ -108,7 +108,7 @@
                         android:layout_width="20dp"
                         android:layout_height="20dp"
                         android:id="@+id/btn_password_toggle"
-                        android:src="@drawable/password"
+                        android:src="@drawable/ic_password"
                         android:layout_marginEnd="24dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="@+id/et_password"

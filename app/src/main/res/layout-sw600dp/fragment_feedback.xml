@@ -84,11 +84,11 @@
 
 
 
-                    <com.makeramen.roundedimageview.RoundedImageView
+                    <ImageView
                         android:id="@+id/roundedImageView"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-
+                        android:scaleType="centerCrop"
                         android:background="@color/green_light"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
@@ -133,10 +133,11 @@
                     android:layout_height="170dp">
 
 
-                    <com.makeramen.roundedimageview.RoundedImageView
+                    <ImageView
                         android:id="@+id/roundedImageView2"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:scaleType="centerCrop"
                         android:background="@color/green_light"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"

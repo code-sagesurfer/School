@@ -19,7 +19,7 @@
         android:fontFamily="@font/poppins_regular"
         android:text="@string/personal_support_team"
         android:textColor="@color/black"
-        android:textSize="16sp"
+        android:textSize="@dimen/standard_text_size_tab"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -117,7 +117,7 @@
             android:maxLength="15"
             android:text="Olivia Brown"
             android:textColor="@color/white"
-            android:textSize="16sp"
+            android:textSize="@dimen/big_text_size_tab"
             app:layout_constraintStart_toEndOf="@+id/view_user_count"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -130,7 +130,7 @@
             android:maxLength="16"
             android:text="@string/care_team"
             android:textColor="@color/white"
-            android:textSize="14sp"
+            android:textSize="@dimen/standard_text_size_tab"
             app:layout_constraintStart_toEndOf="@+id/view_user_count"
             app:layout_constraintTop_toBottomOf="@+id/tv_user_name" />
 
@@ -198,7 +198,7 @@
         android:fontFamily="@font/poppins_regular"
         android:text="@string/event_activity"
         android:textColor="@color/black"
-        android:textSize="16sp"
+        android:textSize="@dimen/standard_text_size_tab"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cl_top_block" />
 
@@ -223,7 +223,7 @@
         android:fontFamily="@font/poppins_regular"
         android:text="@string/social_activity"
         android:textColor="@color/black"
-        android:textSize="16sp"
+        android:textSize="@dimen/standard_text_size_tab"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rv_events" />
 
@@ -248,7 +248,7 @@
         android:fontFamily="@font/poppins_regular"
         android:text="@string/gamification"
         android:textColor="@color/black"
-        android:textSize="16sp"
+        android:textSize="@dimen/standard_text_size_tab"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rv_social_activity" />
 

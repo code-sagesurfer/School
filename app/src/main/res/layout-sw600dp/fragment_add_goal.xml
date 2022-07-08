@@ -18,14 +18,14 @@
         android:fontFamily="@font/poppins_regular"
         android:text="@string/goal_title"
         android:textColor="@color/black"
-        android:textSize="14sp"
+        android:textSize="@dimen/standard_text_size_tab"
         app:layout_constraintStart_toStartOf="parent"
        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/et_goal_title"
         android:layout_width="match_parent"
-        android:layout_height="38dp"
+        android:layout_height="42dp"
         android:layout_weight="1"
         android:background="@drawable/team_listing_item_border_color_primary"
         android:fontFamily="@font/poppins_regular"
@@ -37,7 +37,7 @@
         android:layout_marginTop="3dp"
         android:textColor="@color/black"
         android:textColorHint="@color/text_hint_color"
-        android:textSize="14sp"
+        android:textSize="@dimen/standard_text_size_tab"
         app:layout_constraintTop_toBottomOf="@+id/tv_title_txt"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -51,7 +51,7 @@
             android:fontFamily="@font/poppins_regular"
             android:text="@string/goal_discription"
             android:textColor="@color/black"
-            android:textSize="14sp"
+            android:textSize="@dimen/standard_text_size_tab"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/et_goal_title" />
 
@@ -71,7 +71,7 @@
             android:paddingEnd="16dp"
             android:textColor="@color/black"
             android:textColorHint="@color/text_hint_color"
-            android:textSize="14sp"
+            android:textSize="@dimen/standard_text_size_tab"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_desc_txt" />
@@ -84,7 +84,7 @@
             android:fontFamily="@font/poppins_regular"
             android:text="@string/frequency"
             android:textColor="@color/black"
-            android:textSize="14sp"
+            android:textSize="@dimen/standard_text_size_tab"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/et_desc" />
 
@@ -156,7 +156,7 @@
                     android:fontFamily="@font/poppins_regular"
                     android:text="@string/start_date"
                     android:textColor="@color/black"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/standard_text_size_tab"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -169,6 +169,7 @@
                     android:gravity="center_vertical"
                     android:text="@string/enter_date"
                     android:paddingStart="16dp"
+                    android:textSize="@dimen/standard_text_size_tab"
                     android:id="@+id/tv_goal_start_date"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -192,7 +193,7 @@
                     android:fontFamily="@font/poppins_regular"
                     android:text="@string/end_date"
                     android:textColor="@color/black"
-                    android:textSize="14sp"
+                    android:textSize="@dimen/standard_text_size_tab"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 
@@ -205,6 +206,7 @@
                     android:gravity="center_vertical"
                     android:paddingStart="16dp"
                     android:text="@string/enter_date"
+                    android:textSize="@dimen/standard_text_size_tab"
                     android:id="@+id/tv_goal_end_date"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -221,7 +223,8 @@
             android:fontFamily="@font/poppins_regular"
             android:text="@string/Select_Goal_Image"
             android:textColor="@color/black"
-            android:textSize="14sp"
+
+            android:textSize="@dimen/standard_text_size_tab"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
 
@@ -242,7 +245,7 @@
             android:fontFamily="@font/poppins_regular"
             android:text="@string/attachment"
             android:textColor="@color/black"
-            android:textSize="12sp"
+            android:textSize="@dimen/standard_text_size_tab"
             android:layout_marginStart="8dp"
             app:layout_constraintStart_toEndOf="@+id/imageView9"
             app:layout_constraintTop_toBottomOf="@+id/msg" />
@@ -286,7 +289,7 @@
                 android:paddingEnd="16dp"
                 android:textColor="@color/black"
                 android:textColorHint="@color/black"
-                android:textSize="14sp" />
+                android:textSize="@dimen/standard_text_size_tab"/>
 
             <Button
                 android:id="@+id/btn_submit"
@@ -302,7 +305,7 @@
                 android:paddingEnd="16dp"
                 android:textColor="@color/black"
                 android:textColorHint="@color/white"
-                android:textSize="14sp" />
+                android:textSize="@dimen/standard_text_size_tab" />
 
         </LinearLayout>
 

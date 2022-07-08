@@ -166,7 +166,7 @@
     <string name="city">City</string>
     <string name="current_password">Current Password</string>
     <string name="new_password">New Password</string>
-    <string name="confirm_password">Confirm Password</string>
+    <string name="confirm_password">Confirm New Password</string>
     <string name="detail_view">Detail View</string>
     <string name="desc_demo_text">Lorem Ipsum is simply dummy text of the printing and typesetting industry. \nLorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book</string>
     <string name="frequently_asked_questions">Frequently Asked Questions</string>
@@ -249,6 +249,11 @@
     <string name="email_id">Email Id</string>
     <string name="register">Register</string>
     <string name="accept_terms">I accept terms and conditions</string>
+    <string name="please_enter_username">Please enter username</string>
+    <string name="please_enter_password">Please enter password</string>
+    <string name="please_enter_code">Please enter mobile code</string>
+    <string name="daily_mood">Daily Mood</string>
+    <string name="enter_date">Enter Date</string>
     <string-array name="goal_frequency">
         <item>Select Frequency</item>
         <item>Daily</item>

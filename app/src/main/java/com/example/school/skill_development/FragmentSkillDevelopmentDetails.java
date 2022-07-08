@@ -22,6 +22,7 @@ import com.example.school.home.main.MainActivity;
 import com.example.school.resources.APIManager;
 import com.example.school.resources.Actions_;
 import com.example.school.resources.General;
+import com.example.school.resources.GetTime;
 import com.example.school.resources.Preferences;
 import com.example.school.resources.Urls_;
 import com.example.school.resources.apidata.MakeCall;
@@ -43,7 +44,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class FragmentSkillDevelopmentDetails extends Fragment {
+public class FragmentSkillDevelopmentDetails extends Fragment implements View.OnClickListener {
 
     @BindView(R.id.tv_question_desc)
     TextView tv_question_desc;
@@ -54,7 +55,7 @@ public class FragmentSkillDevelopmentDetails extends Fragment {
     @BindView(R.id.tv_date)
     TextView tv_date;
 
- @BindView(R.id.tv_input_date)
+    @BindView(R.id.tv_input_date)
     TextView tv_input_date;
 
     @BindView(R.id.btn_submit)
@@ -68,6 +69,9 @@ public class FragmentSkillDevelopmentDetails extends Fragment {
 
     @BindView(R.id.ll_buttons)
     LinearLayout ll_buttons;
+
+    @BindView(R.id.btn_cancel_gratitude)
+    Button btn_cancel_gratitude;
 
     DatePickerDialog.OnDateSetListener startDateDatePicker;
     final Calendar myCalendar = Calendar.getInstance();
@@ -120,22 +124,22 @@ public class FragmentSkillDevelopmentDetails extends Fragment {
         ButterKnife.bind(this, view);
 
         tv_question_desc.setText(goal_.getName());
-        tv_date.setText(goal_.getStart_date());
+        tv_date.setText(GetTime.month_DdYyyy(goal_.getStart_date()) + " to " + GetTime.month_DdYyyy(goal_.getEnd_date()));
         goal_desc.setText(goal_.getDescription());
 
-        if (goal_.getToday_status()==1){
+        if (goal_.getToday_status() == 1) {
             //Input needed
             ll_buttons.setVisibility(View.VISIBLE);
-        }else if(goal_.getToday_status()==2){
+        } else if (goal_.getToday_status() == 2) {
             //Input provided
             ll_buttons.setVisibility(View.GONE);
-        }else {
+        } else {
             //completed
             ll_buttons.setVisibility(View.GONE);
 
         }
 
-
+        btn_cancel_gratitude.setOnClickListener(this);
 
         btn_yes.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -164,7 +168,7 @@ public class FragmentSkillDevelopmentDetails extends Fragment {
         btn_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (tv_date.getText().toString().equalsIgnoreCase("")) {
+                if (tv_date.getText().toString().equalsIgnoreCase("Select Date")) {
                     tv_date.setError(getString(R.string.field_required));
                 } else if (!isButtonClicked) {
                     Toast.makeText(getContext(), "Please provide input", Toast.LENGTH_SHORT).show();
@@ -185,26 +189,44 @@ public class FragmentSkillDevelopmentDetails extends Fragment {
             }
         };
 
-        tv_input_date.setOnClickListener(new View.OnClickListener() {
+      /*  tv_input_date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 openDatePicker();
             }
-        });
+        });*/
+
+        tv_input_date.setOnClickListener(this);
 
         return view;
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.btn_cancel_gratitude:
+                getActivity().onBackPressed();
+                break;
+
+            case R.id.tv_input_date:
+                openDatePicker();
+                break;
+        }
     }
 
     private void setDate(String view) {
         String myFormat = "yyyy-MM-dd";
         SimpleDateFormat sdf = new SimpleDateFormat(myFormat, Locale.US);
 
+        String myFormat2 = "MM-dd-yyyy";
+        SimpleDateFormat sdf2 = new SimpleDateFormat(myFormat2, Locale.US);
+
        /* String myFormatToSendServer = "dd-MM-yyyy";
         SimpleDateFormat sdf2 = new SimpleDateFormat(myFormatToSendServer, Locale.US);*/
 
 
         SelectedDate = sdf.format(myCalendar.getTime());
-        tv_input_date.setText(sdf.format(myCalendar.getTime()));
+        tv_input_date.setText(sdf2.format(myCalendar.getTime()));
 
     }
 
@@ -213,7 +235,7 @@ public class FragmentSkillDevelopmentDetails extends Fragment {
         super.onResume();
         if (getContext() instanceof MainActivity) {
             mainActivity = (MainActivity) getContext();
-            mainActivity.setToolbarTitleText("Skill Development Details");
+            mainActivity.setToolbarTitleText("Goal details");
             mainActivity.changeDrawerIcon(true);
         }
     }
@@ -223,6 +245,7 @@ public class FragmentSkillDevelopmentDetails extends Fragment {
                 myCalendar.get(Calendar.YEAR), myCalendar.get(Calendar.MONTH),
                 myCalendar.get(Calendar.DAY_OF_MONTH));
         datePickerDialog.getDatePicker().setMinDate(new Date().getTime());
+        datePickerDialog.getDatePicker().setMaxDate(new Date().getTime());
         datePickerDialog.show();
     }
 
@@ -268,10 +291,10 @@ public class FragmentSkillDevelopmentDetails extends Fragment {
                             ModelInputProvidingResponse modelInputProvidingResponse = gson.fromJson(element.toString(), ModelInputProvidingResponse.class);
                             ArrayList<ModelCount> modelCounterArrayList = modelInputProvidingResponse.getAddCount();
                             if (modelInputProvidingResponse.getAddCount().get(0).getStatus() == 1) {
-                                Toast.makeText(mainActivity, ""+modelCounterArrayList.get(0).getMsg(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(mainActivity, "" + modelCounterArrayList.get(0).getMsg(), Toast.LENGTH_SHORT).show();
                                 getActivity().onBackPressed();
                             } else {
-                                Toast.makeText(mainActivity, ""+modelCounterArrayList.get(0).getMsg(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(mainActivity, "" + modelCounterArrayList.get(0).getMsg(), Toast.LENGTH_SHORT).show();
                             }
                         } catch (Exception e) {
                             e.printStackTrace();
@@ -310,10 +333,6 @@ public class FragmentSkillDevelopmentDetails extends Fragment {
                             addLayout(model); // object will be passed into layout and set layout
                             Log.e(TAG, "addCount: error is : " + object.getString(General.MSG));
                             //Toast.makeText(this, object.getString(General.MSG), Toast.LENGTH_SHORT).show();
-
-
-
-
                         } else {
                             //ShowToast.internalErrorOccurred(getApplicationContext());
                         }

@@ -38,7 +38,7 @@ public class CityFetch {
         RequestBody requestBody = MakeCall.make(requestMap, url, TAG, context, activity);
         if (requestBody != null) {
             try {
-                APIManager.Companion.getInstance().showProgressDialog(activity, false, "Loading Cities...");
+                APIManager.Companion.getInstance().showProgressDialog(activity, false, "Loading...");
 
                 APIManager.Companion.getInstance().mobile_self_care(requestBody, new Callback<JsonElement>() {
                     @Override

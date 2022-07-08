@@ -308,7 +308,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void changeDrawerIcon(boolean showHide) {
         this.showHide = showHide;
         if (showHide) {
-            toolbar.setNavigationIcon(R.drawable.vi_left_arrow_white);
+            toolbar.setNavigationIcon(R.drawable.ic_app_back_button);
             toolbar.setNavigationOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -578,14 +578,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                         //permissionResult.onUploadImageForGratitude(SelectedFile,MainActivity.this,path);
                         //showErrorMessage
 
-                        if (Preferences.contains(General.UPLOADING_CONTENT_FROM)) {
-                            if (Preferences.get(General.UPLOADING_CONTENT_FROM).equalsIgnoreCase("JournalingMainListing")) {
-                                imageResponseInterface.onImageSelectedMethod1(MainActivity.this, path, SelectedFile);
-                            } else if (Preferences.get(General.UPLOADING_CONTENT_FROM).equalsIgnoreCase("FragmentAddGoal")) {
-                                Log.i(TAG, "onPostExecute:FragmentAddGoal ");
-                                interfaceGoalImageResponseHandler.onGoalImageSelected(MainActivity.this, path, SelectedFile);
-                            }
-                        }
+
 
 
                     } else {
@@ -593,6 +586,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 //                    permissionResult.onUploadImageForMedicine(SelectedFile,MainActivity.this);
                         Log.i(TAG, "onPostExecute : file_id" + SelectedFile);
                     }
+
+                    if (Preferences.contains(General.UPLOADING_CONTENT_FROM)) {
+                        if (Preferences.get(General.UPLOADING_CONTENT_FROM).equalsIgnoreCase("JournalingMainListing")) {
+                            imageResponseInterface.onImageSelectedMethod1(MainActivity.this, path, SelectedFile);
+                        } else if (Preferences.get(General.UPLOADING_CONTENT_FROM).equalsIgnoreCase("FragmentAddGoal")) {
+                            Log.i(TAG, "onPostExecute:FragmentAddGoal ");
+                            interfaceGoalImageResponseHandler.onGoalImageSelected(MainActivity.this, path, SelectedFile);
+                        }
+                    }
+
                     //et_select_file.setText(FileOperations.getFileName(path));
                     break;
                 case 2:
@@ -619,6 +622,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             FragmentTransaction ft = fragManager.beginTransaction();
             //ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left);
             ft.replace(R.id.main_container, new HomeFragment(), "HomeFragment");
+            ft.setCustomAnimations(R.animator.slide_up, R.animator.slide_down, R.animator.slide_up, R.animator.slide_down);
             ft.commit();
             mDrawerLayout.closeDrawer(Gravity.LEFT);
         } else if (modelDrawerMenuListItems.getName().equals("Journaling")) {
@@ -626,6 +630,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             FragmentTransaction ft = fragManager.beginTransaction();
             //ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left);
             ft.replace(R.id.main_container, new JournalingMainListing(), "JournalingMainListing");
+            ft.setCustomAnimations(R.animator.slide_up, R.animator.slide_down, R.animator.slide_up, R.animator.slide_down);
             ft.addToBackStack("HomeFragment");
             ft.commit();
             mDrawerLayout.closeDrawer(Gravity.LEFT);
@@ -634,6 +639,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             FragmentTransaction ft = fragManager.beginTransaction();
             //ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left);
             ft.replace(R.id.main_container, new FragmentMoodTrackingListing(), "FragmentMoodTrackingListing");
+            ft.setCustomAnimations(R.animator.slide_up, R.animator.slide_down, R.animator.slide_up, R.animator.slide_down);
             ft.addToBackStack("HomeFragment");
             ft.commit();
             mDrawerLayout.closeDrawer(Gravity.LEFT);
@@ -644,6 +650,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             FragmentTransaction ft = fragManager.beginTransaction();
             //ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left);
             ft.replace(R.id.main_container, new FragmentSelfcareManagement(), "FragmentSelfcareManagement");
+            ft.setCustomAnimations(R.animator.slide_up, R.animator.slide_down, R.animator.slide_up, R.animator.slide_down);
             ft.addToBackStack("HomeFragment");
             ft.commit();
             mDrawerLayout.closeDrawer(Gravity.LEFT);
@@ -652,6 +659,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             FragmentTransaction ft = fragManager.beginTransaction();
             //ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left);
             ft.replace(R.id.main_container, new FragmentSupport(), "FragmentSupport");
+            ft.setCustomAnimations(R.animator.slide_up, R.animator.slide_down, R.animator.slide_up, R.animator.slide_down);
             ft.addToBackStack("HomeFragment");
             ft.commit();
             mDrawerLayout.closeDrawer(Gravity.LEFT);
@@ -660,6 +668,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             FragmentTransaction ft = fragManager.beginTransaction();
             //ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left);
             ft.replace(R.id.main_container, new FragmentSkillDevelopment(), "FragmentSkillDevelopment");
+            ft.setCustomAnimations(R.animator.slide_up, R.animator.slide_down, R.animator.slide_up, R.animator.slide_down);
             ft.addToBackStack("HomeFragment");
             ft.commit();
             mDrawerLayout.closeDrawer(Gravity.LEFT);
@@ -668,6 +677,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             FragmentTransaction ft = fragManager.beginTransaction();
             //ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left);
             ft.replace(R.id.main_container, new FragmentPlannerMain(), "FragmentPlannerMain");
+            ft.setCustomAnimations(R.animator.slide_up, R.animator.slide_down, R.animator.slide_up, R.animator.slide_down);
             ft.addToBackStack("HomeFragment");
             ft.commit();
             mDrawerLayout.closeDrawer(Gravity.LEFT);
@@ -676,6 +686,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             FragmentTransaction ft = fragManager.beginTransaction();
             //ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left);
             ft.replace(R.id.main_container, new FragmentAssessmentMain(), "FragmentAssessmentMain");
+            ft.setCustomAnimations(R.animator.slide_up, R.animator.slide_down, R.animator.slide_up, R.animator.slide_down);
             ft.addToBackStack("HomeFragment");
             ft.commit();
             mDrawerLayout.closeDrawer(Gravity.LEFT);
