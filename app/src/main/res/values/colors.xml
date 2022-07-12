@@ -44,5 +44,6 @@
     <color name="self_goal_total">#f46dbc</color>
     <color name="text_color_read">#848484</color>
     <color name="text_color_primary">#333333</color>
+    <color name="btn_add_self_care">#EB3939</color>
 
 </resources>

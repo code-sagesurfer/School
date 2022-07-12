@@ -254,6 +254,26 @@
     <string name="please_enter_code">Please enter mobile code</string>
     <string name="daily_mood">Daily Mood</string>
     <string name="enter_date">Enter Date</string>
+    <string name="crisis_quote">“Yesterday is history, tomorrow is a mystery, today is a gift of God, which is why we call it the present.”</string>
+    <string name="call_a_frnd">Call A Friend</string>
+    <string name="medical_care_pro">Medical Care Provider</string>
+    <string name="contac_family_dr">Contact My Family Doctor</string>
+    <string name="talk_someone">Talk to Someone Now</string>
+    <string name="National_Suicide_Prevention_Lifeline">National Suicide Prevention Lifeline</string>
+    <string name="National_Suicide_Prevention_Lifeline_num">1-800-273-8255</string>
+    <string name="add_friend">Add Friend</string>
+    <string name="name">Name</string>
+    <string name="mobile">Mobile</string>
+    <string name="enter_mobile_num">Enter Mobile Number</string>
+    <string name="save">Save</string>
+    <string name="add_medical_care_pro">Add Medical Care Provider</string>
+    <string name="add_self_care">Add Self-Care</string>
+    <string name="category_type">Category Type</string>
+    <string name="resource">Resource</string>
+    <string name="enter_resource">Enter Resource</string>
+    <string name="select_user">Select User</string>
+    <string name="content_type">Content Type</string>
+    <string name="add_self_care2">Add Self-Care</string>
     <string-array name="goal_frequency">
         <item>Select Frequency</item>
         <item>Daily</item>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingTop="14dp"
+    android:paddingBottom="1dp"
+    android:background="@color/white"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:id="@+id/tv_member_name"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:fontFamily="@font/poppins_regular"
+        android:text="@string/username"
+        android:textColor="@color/black"
+        android:textSize="@dimen/standard_text_size_tab"
+        android:maxLength="12"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:fontFamily="@font/poppins_regular"
+        android:text="@string/username"
+        android:textColor="@color/color_primary"
+        android:textSize="@dimen/standard_text_size_tab"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toStartOf="@+id/iv_edit_member"
+        app:layout_constraintStart_toEndOf="@+id/tv_member_name"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/iv_edit_member"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginEnd="16dp"
+        android:src="@drawable/ic_edit_crisis"
+
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_member_name"
+        app:layout_constraintEnd_toStartOf="@+id/iv_trash"
+        app:layout_constraintTop_toTopOf="@+id/tv_member_name"
+        app:layout_constraintVertical_bias="0.428" />
+
+    <ImageView
+        android:id="@+id/iv_trash"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:src="@drawable/ic_trash"
+        android:visibility="visible"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintTop_toTopOf="@+id/tv_member_name"
+        app:layout_constraintBottom_toBottomOf="@+id/tv_member_name"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:layout_editor_absoluteY="8dp" />
+
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@color/black"
+        android:layout_marginStart="@dimen/margin_16"
+        android:layout_marginEnd="16dp"
+        android:layout_marginTop="14dp"
+        app:layout_constraintTop_toBottomOf="@+id/tv_member_name"
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>

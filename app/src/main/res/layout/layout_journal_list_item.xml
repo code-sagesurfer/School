@@ -149,7 +149,7 @@
 
         <TextView
             android:id="@+id/tv_location"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/size_margin_16"
             android:layout_marginTop="4dp"
@@ -160,9 +160,27 @@
             android:text="Location"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_14"
-            app:layout_constraintEnd_toEndOf="parent"
+
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_description" />
+
+        <TextView
+            android:id="@+id/tv_location_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/size_margin_16"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="@dimen/size_margin_16"
+            android:fontFamily="@font/poppins_regular"
+            android:maxLength="200"
+            android:maxLines="3"
+            android:text="N/A"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_14"
+
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/tv_location"
             app:layout_constraintTop_toBottomOf="@+id/tv_description" />
 
         <com.makeramen.roundedimageview.RoundedImageView
@@ -171,7 +189,7 @@
             android:layout_height="45dp"
             android:layout_marginStart="@dimen/size_margin_16"
             android:layout_marginTop="@dimen/size_margin_16"
-            android:background="@drawable/school_get_started"
+            android:background="@drawable/placeholder"
             android:scaleType="centerCrop"
             android:visibility="visible"
             app:layout_constraintStart_toStartOf="parent"
@@ -200,7 +218,7 @@
                 android:layout_marginStart="@dimen/size_margin_16"
                 android:layout_marginEnd="@dimen/size_24"
                 android:fontFamily="@font/poppins_regular"
-                android:text="2"
+                android:text="0"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size_16"
                 app:layout_constraintBottom_toBottomOf="@+id/iv_share"
@@ -223,7 +241,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/size_margin_16"
-                android:text="12"
+                android:text="0"
                 android:textColor="@color/black"
                 android:textSize="@dimen/text_size_16"
 

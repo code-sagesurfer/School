@@ -560,7 +560,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/poppins_regular"
             android:text="@string/planner"
-            app:layout_goneMarginTop="50dp"
+            app:layout_goneMarginTop="70dp"
             android:textColor="@color/black"
             android:textSize="14sp"
             android:layout_marginStart="16dp"

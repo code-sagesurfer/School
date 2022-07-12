@@ -34,4 +34,5 @@
     <dimen name="standard_text_size_tab">16sp</dimen>
     <dimen name="big_text_size_tab">18sp</dimen>
     <dimen name="small_text_size_tab">14sp</dimen>
+    <dimen name="size_margin_8">8dp</dimen>
 </resources>

@@ -7,59 +7,59 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.example.school.home.ui.home.HomeFragment"
+        android:name="com.sagesurfer.school.home.ui.home.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" />
 
     <fragment
         android:id="@+id/nav_gallery"
-        android:name="com.example.school.home.ui.gallery.GalleryFragment"
+        android:name="com.sagesurfer.school.home.ui.gallery.GalleryFragment"
         android:label="@string/menu_gallery"
         tools:layout="@layout/fragment_gallery" />
 
     <fragment
         android:id="@+id/nav_slideshow"
-        android:name="com.example.school.home.ui.slideshow.SlideshowFragment"
+        android:name="com.sagesurfer.school.home.ui.slideshow.SlideshowFragment"
         android:label="@string/menu_slideshow"
         tools:layout="@layout/fragment_slideshow" />
 
     <fragment
         android:id="@+id/nav_journaling"
-        android:name="com.example.school.journaling.JournalingMainListing"
+        android:name="com.sagesurfer.school.journaling.JournalingMainListing"
         android:label="@string/menu_journaling"
         tools:layout="@layout/fragment_journaling_main_listing" />
 
     <fragment
         android:id="@+id/nav_assessment"
-        android:name="com.example.school.assessment.FragmentAssessmentMain"
+        android:name="com.sagesurfer.school.assessment.FragmentAssessmentMain"
         android:label="@string/menu_assessment"
         tools:layout="@layout/fragment_assessment_main" />
     <fragment
         android:id="@+id/nav_nutrition"
-        android:name="com.example.school.nutrition.FragmentProperNutrition"
+        android:name="com.sagesurfer.school.nutrition.FragmentProperNutrition"
         android:label="@string/menu_nutrition"
         tools:layout="@layout/fragment_proper_nutrition" />
     <fragment
         android:id="@+id/nav_team_care"
-        android:name="com.example.school.team_care.FragmentTeamDetails"
+        android:name="com.sagesurfer.school.team_care.FragmentTeamDetails"
         android:label="@string/menu_team_care"
         tools:layout="@layout/fragment_team_details" />
 
     <fragment
         android:id="@+id/nav_edu_and_spi"
-        android:name="com.example.school.education_and_speritual.FragmentEduAndSpiritual"
+        android:name="com.sagesurfer.school.education_and_speritual.FragmentEduAndSpiritual"
         android:label="@string/menu_edu_and_spi"
         tools:layout="@layout/" />
 
     <fragment
         android:id="@+id/nav_positive_quotes"
-        android:name="com.example.school.positive_quotes.FragmentPositiveQuotesListing"
+        android:name="com.sagesurfer.school.positive_quotes.FragmentPositiveQuotesListing"
         android:label="@string/positive_quotes"
         tools:layout="@layout/fragment_positive_quotes_listing" />
 
     <fragment
         android:id="@+id/nav_support"
-        android:name="com.example.school.support.FragmentSupport"
+        android:name="com.sagesurfer.school.support.FragmentSupport"
         android:label="@string/support"
         tools:layout="@layout/fragment_support" />
 </navigation>

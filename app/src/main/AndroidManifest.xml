@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.example.school">
+    package="com.sagesurfer.school">
 
     <uses-permission
         android:name="android.permission.ACCESS_FINE_LOCATION"
@@ -25,31 +25,30 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.School">
         <activity
-            android:name=".login.ActivityRegisterUser"
+            android:name="com.sagesurfer.school.login.ActivityRegisterUser"
             android:exported="false" />
         <activity
-            android:name=".login.forgotpassword.ActivityForgotPassword"
+            android:name="com.sagesurfer.school.login.forgotpassword.ActivityForgotPassword"
             android:exported="false" />
         <activity
-            android:name=".home.main.MainActivity"
+            android:name="com.sagesurfer.school.home.main.MainActivity"
             android:exported="false"
             android:label="@string/title_activity_main"
             android:theme="@style/Theme.School.NoActionBar" />
         <activity
-            android:name=".GetStartedActivity"
+            android:name="com.sagesurfer.school.GetStartedActivity"
             android:exported="false" />
         <activity
-            android:name=".login.LoginActivity"
+            android:name="com.sagesurfer.school.login.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".settings.FragmentEditProfile"
+            android:name="com.sagesurfer.school.settings.FragmentEditProfile"
             android:exported="false" />
         <activity
-            android:name=".SplashActivity"
+            android:name="com.sagesurfer.school.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

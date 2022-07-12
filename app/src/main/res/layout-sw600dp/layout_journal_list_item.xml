@@ -70,13 +70,13 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/iv_more"
-                android:layout_width="@dimen/txt_size_35"
+                android:layout_width="30dp"
                 android:layout_height="@dimen/txt_size_35"
-                android:layout_marginTop="@dimen/size_margin_16"
+                android:layout_marginTop="3dp"
                 android:layout_marginEnd="@dimen/margin_8"
                 android:padding="@dimen/size_6"
-                app:layout_constraintBottom_toBottomOf="parent"
-                android:tint="@color/gray_text"
+
+
                 android:src="@drawable/vi_three_white_dots_v"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -140,7 +140,7 @@
             android:fontFamily="@font/poppins_regular"
             android:maxLength="200"
             android:maxLines="3"
-            android:text="I do not want to talk with anyone, I will kill myself if someone talk with me, and feeling overhelmed need help, please call."
+            android:text=""
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_14"
             app:layout_constraintEnd_toEndOf="parent"
@@ -149,7 +149,7 @@
 
         <TextView
             android:id="@+id/tv_location"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/size_margin_16"
             android:layout_marginTop="4dp"
@@ -160,9 +160,27 @@
             android:text="Location"
             android:textColor="@color/black"
             android:textSize="@dimen/text_size_14"
-            app:layout_constraintEnd_toEndOf="parent"
+
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_description" />
+
+        <TextView
+            android:id="@+id/tv_location_data"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/size_margin_16"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="@dimen/size_margin_16"
+            android:fontFamily="@font/poppins_regular"
+            android:maxLength="200"
+            android:maxLines="3"
+            android:text="N/A"
+            android:textColor="@color/black"
+            android:textSize="@dimen/text_size_14"
+
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/tv_location"
             app:layout_constraintTop_toBottomOf="@+id/tv_description" />
 
         <com.makeramen.roundedimageview.RoundedImageView
