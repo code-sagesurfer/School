@@ -242,7 +242,8 @@ public class AdapterGratitudeJournalingMainList extends RecyclerView.Adapter<Ada
                     return true;
 
                 case R.id.menu_delete:
-                    //deleteItem(dataArrayList.get(getAbsoluteAdapterPosition()));
+
+                    deleteGratitude(dataArrayList.get(getAbsoluteAdapterPosition()));
                     dataArrayList.remove(getAbsoluteAdapterPosition());
                     notifyItemRemoved(getAbsoluteAdapterPosition());
                     return true;
@@ -269,6 +270,7 @@ public class AdapterGratitudeJournalingMainList extends RecyclerView.Adapter<Ada
                    // animation_like.playAnimation();
                     dataArrayList.get(getAbsoluteAdapterPosition()).setIsLikeSymbol("Unlike");
                     toggleLike(getAbsoluteAdapterPosition());
+
                     //notifyDataSetChanged();
                 }
             }
@@ -323,5 +325,8 @@ public class AdapterGratitudeJournalingMainList extends RecyclerView.Adapter<Ada
         journalingMain.editGratitude(modelGratitudeListingResponseData);
     }
 
-
+    private void deleteGratitude(ModelGratitudeListingResponseData modelGratitudeListingResponseData) {
+        //GratitudeJournalingMain journalingMain = (GratitudeJournalingMain) fragment;
+        journalingMain.deleteGratitude(modelGratitudeListingResponseData);
+    }
 }

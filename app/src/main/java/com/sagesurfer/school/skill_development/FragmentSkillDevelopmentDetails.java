@@ -168,7 +168,7 @@ public class FragmentSkillDevelopmentDetails extends Fragment implements View.On
         btn_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (tv_date.getText().toString().equalsIgnoreCase("Select Date")) {
+                if (tv_input_date.getText().toString().equals("Select Date")) {
                     //tv_date.setError(getString(R.string.field_required));
                     Toast.makeText(getActivity(), "Please select date", Toast.LENGTH_SHORT).show();
                 } else if (!isButtonClicked) {
@@ -258,8 +258,6 @@ public class FragmentSkillDevelopmentDetails extends Fragment implements View.On
             SimpleDateFormat displayFormat = new SimpleDateFormat("HH:mm:ss");
             SimpleDateFormat parseFormat = new SimpleDateFormat("hh:mm:ss a");
             time = tv_date.getText().toString().trim();
-
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -271,8 +269,8 @@ public class FragmentSkillDevelopmentDetails extends Fragment implements View.On
         Date dt = new Date();
         SimpleDateFormat sdf = new SimpleDateFormat("HH-mm-ss");
         time = sdf.format(dt);
-        requestMap.put("on_date", date);
-        requestMap.put("on_time", time);
+        requestMap.put("on_date", SelectedDate);
+        requestMap.put("on_time", "");
         requestMap.put("answer", count);
 
         String url = Preferences.get(General.DOMAIN) + Urls_.MOBILE_SELF_GOAL;

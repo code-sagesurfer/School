@@ -191,7 +191,7 @@
             android:gravity="center_vertical"
             android:layout_marginTop="3dp"
             android:paddingEnd="16dp"
-            android:hint="Select Date"
+            android:text="Select Date"
             android:drawableEnd="@drawable/ic_calendar"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"

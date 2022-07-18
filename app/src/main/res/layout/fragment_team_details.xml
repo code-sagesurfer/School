@@ -187,7 +187,8 @@
                 android:gravity="center"
                 android:text="@string/middle_school"
                 android:textColor="@color/black"
-                android:textSize="14dp"
+                android:textSize="14sp"
+                android:maxLength="15"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/iv_user_1" />
@@ -198,12 +199,13 @@
                 android:layout_height="20dp"
                 android:fontFamily="@font/poppins_regular"
                 android:gravity="center"
-                android:maxLength="24"
+                android:maxLength="20"
                 android:maxLines="2"
                 android:minLines="2"
                 android:text="(Parent / Guardian)"
                 android:textColor="@color/color_primary"
                 android:textSize="12sp"
+
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_user_name_1" />
@@ -255,7 +257,9 @@
                 android:gravity="center"
                 android:text="@string/middle_school"
                 android:textColor="@color/black"
-                android:textSize="14dp"
+                android:textSize="14sp"
+                android:maxLength="15"
+
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/iv_user_2" />
@@ -321,7 +325,8 @@
                 android:gravity="center"
                 android:text="@string/middle_school"
                 android:textColor="@color/black"
-                android:textSize="14dp"
+                android:textSize="14sp"
+                android:maxLength="15"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/iv_user_6" />
@@ -363,7 +368,8 @@
                 android:gravity="center"
                 android:text="@string/middle_school"
                 android:textColor="@color/black"
-                android:textSize="14dp"
+                android:textSize="14sp"
+                android:maxLength="15"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -374,12 +380,13 @@
                 android:layout_height="20dp"
                 android:fontFamily="@font/poppins_regular"
                 android:gravity="center"
-                android:maxLength="24"
+                android:maxLength="20"
                 android:maxLines="2"
                 android:minLines="2"
                 android:text="(Parent / Guardian)"
                 android:textColor="@color/color_primary"
                 android:textSize="12sp"
+
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_user_name_4" />
@@ -430,7 +437,8 @@
                 android:gravity="center"
                 android:text="@string/middle_school"
                 android:textColor="@color/black"
-                android:textSize="14dp"
+                android:textSize="14sp"
+                android:maxLength="15"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -441,12 +449,13 @@
                 android:layout_height="20dp"
                 android:fontFamily="@font/poppins_regular"
                 android:gravity="center"
-                android:maxLength="24"
+
                 android:maxLines="2"
                 android:minLines="2"
                 android:text="(Parent / Guardian)"
                 android:textColor="@color/color_primary"
                 android:textSize="12sp"
+                android:maxLength="20"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_user_name_3" />
@@ -497,7 +506,8 @@
                 android:gravity="center"
                 android:text="@string/middle_school"
                 android:textColor="@color/black"
-                android:textSize="14dp"
+                android:textSize="14sp"
+                android:maxLength="16"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -508,12 +518,13 @@
                 android:layout_height="20dp"
                 android:fontFamily="@font/poppins_regular"
                 android:gravity="center"
-                android:maxLength="24"
+                android:maxLength="20"
                 android:maxLines="2"
                 android:minLines="2"
                 android:text="(Parent / Guardian)"
                 android:textColor="@color/color_primary"
                 android:textSize="12sp"
+
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_user_name_5" />

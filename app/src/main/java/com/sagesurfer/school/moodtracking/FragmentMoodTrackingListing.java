@@ -7,6 +7,8 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,9 +17,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.sagesurfer.school.R;
+import com.sagesurfer.school.emotional_support.FragmentViewMoodTracking;
 import com.sagesurfer.school.home.main.MainActivity;
 import com.sagesurfer.school.home.Mood;
+import com.sagesurfer.school.social_activity.SocialActivityFragment;
 
 import java.util.List;
 
@@ -36,7 +41,7 @@ public class FragmentMoodTrackingListing extends Fragment {
 
     private String mParam1;
     private String mParam2;
-
+    FloatingActionButton fb_add_mood;
     public FragmentMoodTrackingListing() {
         // Required empty public constructor
     }
@@ -83,10 +88,23 @@ public class FragmentMoodTrackingListing extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         rv_mood_list=view.findViewById(R.id.rv_mood_list);
+        fb_add_mood=view.findViewById(R.id.fb_add_mood);
 
         RecyclerView.LayoutManager mLayoutManagerPlanner = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         rv_mood_list.setLayoutManager(mLayoutManagerPlanner);
         rv_mood_list.setItemAnimator(new DefaultItemAnimator());
+
+        fb_add_mood.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FragmentManager fragManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction ft = fragManager.beginTransaction();
+                //ft.setCustomAnimations(R.anim.slide_in_left, R.anim.slide_out_left);
+                ft.replace(R.id.main_container, new FragmentViewMoodTracking(), "FragmentViewMoodTracking");
+                //ft.addToBackStack("HomeFragment");
+                ft.commit();
+            }
+        });
 
         DashboardData dashboardData=new DashboardData();
         dashboardData.getDashboardData(getContext(),getActivity(),this);

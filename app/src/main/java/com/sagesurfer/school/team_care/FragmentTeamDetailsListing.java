@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.sagesurfer.school.R;
 import com.sagesurfer.school.home.main.MainActivity;
@@ -28,6 +29,9 @@ public class FragmentTeamDetailsListing extends Fragment {
     @BindView(R.id.rv_team_listing)
     RecyclerView rv_team_listing;
 
+    @BindView(R.id.tv_team_name)
+    TextView tv_team_name;
+    ModelTeamListResponse teamData;
     public FragmentTeamDetailsListing() {
         // Required empty public constructor
     }
@@ -46,7 +50,7 @@ public class FragmentTeamDetailsListing extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             cometChatTeamMemberList = getArguments().getParcelableArrayList(General.TEAM_LIST);
-
+            teamData=getArguments().getParcelable(General.TEAM_DATA);
         }
     }
 
@@ -55,9 +59,9 @@ public class FragmentTeamDetailsListing extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_team_details_listing, container, false);
-        ButterKnife.bind(this,view);
+        ButterKnife.bind(this, view);
 
-        RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         rv_team_listing.setLayoutManager(layoutManager);
         rv_team_listing.setItemAnimator(new DefaultItemAnimator());
 
@@ -67,16 +71,16 @@ public class FragmentTeamDetailsListing extends Fragment {
     }
 
     private void setDataToTeamMemberList() {
-
-        AdapterTeamMembersListing adapter=new AdapterTeamMembersListing(cometChatTeamMemberList,getContext(),this);
+        tv_team_name.setText(teamData.getAllTeams().get(0).getName());
+        AdapterTeamMembersListing adapter = new AdapterTeamMembersListing(cometChatTeamMemberList, getContext(), this);
         rv_team_listing.setAdapter(adapter);
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        if (getContext() instanceof MainActivity){
-            mainActivity=(MainActivity) getContext();
+        if (getContext() instanceof MainActivity) {
+            mainActivity = (MainActivity) getContext();
             mainActivity.setToolbarTitleText(getString(R.string.Personal_Support_Team));
             mainActivity.changeDrawerIcon(true);
         }

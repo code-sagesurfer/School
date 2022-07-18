@@ -31,6 +31,7 @@ import com.sagesurfer.school.resources.AppLog;
 import com.sagesurfer.school.resources.General;
 import com.sagesurfer.school.resources.Preferences;
 import com.sagesurfer.school.resources.Urls_;
+import com.sagesurfer.school.resources.Utils;
 import com.sagesurfer.school.resources.apidata.MakeCall;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
@@ -238,6 +239,7 @@ public class FragmentTeamDetails extends Fragment {
                 FragmentTeamDetailsListing fragmentTeamDetailsListing = new FragmentTeamDetailsListing();
                 Bundle bundle = new Bundle();
                 bundle.putParcelableArrayList(General.TEAM_LIST, cometChatTeamMemberList);
+                bundle.putParcelable(General.TEAM_DATA, teamData);
                 fragmentTeamDetailsListing.setArguments(bundle);
 
                 FragmentManager fm = getActivity().getSupportFragmentManager();
@@ -646,41 +648,47 @@ public class FragmentTeamDetails extends Fragment {
         btn_invite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (et_first_name.getText().toString().trim().equalsIgnoreCase("")) {
-                    et_first_name.setError(getString(R.string.field_required));
-                } else if (et_last_name.getText().toString().trim().equalsIgnoreCase("")) {
-                    et_last_name.setError(getString(R.string.field_required));
-                } else if (et_email.getText().toString().trim().equalsIgnoreCase("")) {
-                    et_email.setError(getString(R.string.field_required));
-                } else {
 
-                    if (Preferences.get(General.DOMAIN_CODE).toLowerCase().equals("sage006")
-                            || Preferences.get(General.DOMAIN_CODE).toLowerCase().equals("sage008")
-                            || Preferences.get(General.DOMAIN_CODE).toLowerCase().equals("sage024")
-                            || Preferences.get(General.DOMAIN_CODE).toLowerCase().equals("sage015")
-                            || Preferences.get(General.DOMAIN_CODE).toLowerCase().equals("sage036")
-                            || Preferences.get(General.DOMAIN_CODE).toLowerCase().equals("sage045")
-                            || Preferences.get(General.DOMAIN_CODE).toLowerCase().equals("sage024")
-                            || Preferences.get(General.DOMAIN_CODE).toLowerCase().equals("sage043")
-                            || Preferences.get(General.DOMAIN_CODE).toLowerCase().equals("sage015")
-                            || Preferences.get(General.DOMAIN_CODE).toLowerCase().equals("sage042")
-                            || Preferences.get(General.DOMAIN_CODE).toLowerCase().equals("sage037")
-                            || Preferences.get(General.DOMAIN_CODE).toLowerCase().equals("sage027")
-                            || Preferences.get(General.DOMAIN_CODE).toLowerCase().equals("sage061")
-                            || Preferences.get(General.DOMAIN_CODE).toLowerCase().equals("sage062")
-                            || Preferences.get(General.DOMAIN_CODE).toLowerCase().equals("sage023")
-                            || Preferences.get(General.DOMAIN_CODE).toLowerCase().equals("sage052")
-                            || Preferences.get(General.DOMAIN_CODE).toLowerCase().equals("sage050")
-                            || Preferences.get(General.DOMAIN_CODE).toLowerCase().equals("sage033")
-                            || Preferences.get(General.DOMAIN_CODE).toLowerCase().equals("sage041")) {
-                        inviteFaciliatedNonFaciliatedTeamMemberAPICalled(et_first_name.getText().toString().trim(), Actions_.TEAM_INVITATION_FACILIATED, et_email.getText().toString().trim(),
-                                et_first_name.getText().toString().trim() + " " + et_last_name.getText().toString().trim(), "");
+                if (newUserForm) {
+                    if (et_first_name.getText().toString().trim().equalsIgnoreCase("")) {
+                        et_first_name.setError(getString(R.string.field_required));
+                    } else if (et_last_name.getText().toString().trim().equalsIgnoreCase("")) {
+                        et_last_name.setError(getString(R.string.field_required));
+                    } else if (et_email.getText().toString().trim().equalsIgnoreCase("")) {
+                        et_email.setError(getString(R.string.field_required));
+
+                    } else if (!Utils.validateEmail(et_email.getText().toString().trim())) {
+                        et_email.setError(getString(R.string.enter_valid_email));
                     } else {
-                        inviteFaciliatedNonFaciliatedTeamMemberAPICalled(et_first_name.getText().toString().trim(), Actions_.TEAM_INVITATION_NON_FACILIATED, et_email.getText().toString().trim(),
-                                et_first_name.getText().toString().trim() + " " + et_last_name.getText().toString().trim(), "");
+
+                        if (Preferences.get(General.DOMAIN_CODE).toLowerCase().equals("sage006")
+                                || Preferences.get(General.DOMAIN_CODE).toLowerCase().equals("sage008")
+                                || Preferences.get(General.DOMAIN_CODE).toLowerCase().equals("sage024")
+                                || Preferences.get(General.DOMAIN_CODE).toLowerCase().equals("sage015")
+                                || Preferences.get(General.DOMAIN_CODE).toLowerCase().equals("sage036")
+                                || Preferences.get(General.DOMAIN_CODE).toLowerCase().equals("sage045")
+                                || Preferences.get(General.DOMAIN_CODE).toLowerCase().equals("sage024")
+                                || Preferences.get(General.DOMAIN_CODE).toLowerCase().equals("sage043")
+                                || Preferences.get(General.DOMAIN_CODE).toLowerCase().equals("sage015")
+                                || Preferences.get(General.DOMAIN_CODE).toLowerCase().equals("sage042")
+                                || Preferences.get(General.DOMAIN_CODE).toLowerCase().equals("sage037")
+                                || Preferences.get(General.DOMAIN_CODE).toLowerCase().equals("sage027")
+                                || Preferences.get(General.DOMAIN_CODE).toLowerCase().equals("sage061")
+                                || Preferences.get(General.DOMAIN_CODE).toLowerCase().equals("sage062")
+                                || Preferences.get(General.DOMAIN_CODE).toLowerCase().equals("sage023")
+                                || Preferences.get(General.DOMAIN_CODE).toLowerCase().equals("sage052")
+                                || Preferences.get(General.DOMAIN_CODE).toLowerCase().equals("sage050")
+                                || Preferences.get(General.DOMAIN_CODE).toLowerCase().equals("sage033")
+                                || Preferences.get(General.DOMAIN_CODE).toLowerCase().equals("sage041")) {
+                            inviteFaciliatedNonFaciliatedTeamMemberAPICalled(et_first_name.getText().toString().trim(), Actions_.TEAM_INVITATION_FACILIATED, et_email.getText().toString().trim(),
+                                    et_first_name.getText().toString().trim() + " " + et_last_name.getText().toString().trim(), "");
+                        } else {
+                            inviteFaciliatedNonFaciliatedTeamMemberAPICalled(et_first_name.getText().toString().trim(), Actions_.TEAM_INVITATION_NON_FACILIATED, et_email.getText().toString().trim(),
+                                    et_first_name.getText().toString().trim() + " " + et_last_name.getText().toString().trim(), "");
+                        }
+
+
                     }
-
-
                 }
             }
         });

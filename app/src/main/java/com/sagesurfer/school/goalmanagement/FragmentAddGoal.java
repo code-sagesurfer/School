@@ -80,7 +80,7 @@ public class FragmentAddGoal extends Fragment implements View.OnClickListener, I
 
     @BindView(R.id.btn_cancel_gratitude)
     Button btn_cancel_gratitude;
-
+    boolean isSelectedFile=false;
     String file_path;
     static String SelectedFileId = "";
     MainActivity mainActivity;
@@ -198,11 +198,13 @@ public class FragmentAddGoal extends Fragment implements View.OnClickListener, I
         } else if (GoalDesc.equalsIgnoreCase("")) {
             et_desc.setError(getString(R.string.field_required));
         } else if (StartDate.equalsIgnoreCase("Enter date")) {
-            tv_goal_start_date.setError(getString(R.string.field_required));
+            //tv_goal_start_date.setError(getString(R.string.field_required));
         } else if (EndDate.equalsIgnoreCase("Enter date")) {
             tv_goal_end_date.setError(getString(R.string.field_required));
         } else if (sp_goal_frequency.getSelectedItemPosition() == 0) {
             Toast.makeText(getContext(), "Please select frequency", Toast.LENGTH_SHORT).show();
+        } else if (!isSelectedFile) {
+            Toast.makeText(getContext(), "Please select file", Toast.LENGTH_SHORT).show();
         } else if (GetTime.compareDate(StartDate,EndDate).equals("DateTwoIsGreater")
                 || GetTime.compareDate(StartDate,EndDate).equals("BothAreEqual"))
         {
@@ -311,9 +313,11 @@ public class FragmentAddGoal extends Fragment implements View.OnClickListener, I
         file_path = path;
         SelectedFileId = String.valueOf(file_id);
         setAttachedImage(file_path);
+
     }
 
     public void setAttachedImage(String file_path) {
+        isSelectedFile=true;
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inSampleSize = 8;
         iv_goal_attached_image.setVisibility(View.VISIBLE);

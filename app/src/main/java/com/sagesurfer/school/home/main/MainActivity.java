@@ -692,10 +692,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             OauthPreferences.clear();
             Preferences.clear();
 
-            SharedPreferences loginPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
+            /*SharedPreferences loginPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
             SharedPreferences.Editor loginPrefsEditor = loginPreferences.edit();
             loginPrefsEditor.clear();
-            loginPrefsEditor.apply();
+            loginPrefsEditor.apply();*/
 
             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(intent);
@@ -781,10 +781,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             OauthPreferences.clear();
             Preferences.clear();
 
-            SharedPreferences loginPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
+            /*SharedPreferences loginPreferences = getSharedPreferences("loginPrefs", MODE_PRIVATE);
             SharedPreferences.Editor loginPrefsEditor = loginPreferences.edit();
             loginPrefsEditor.clear();
-            loginPrefsEditor.apply();
+            loginPrefsEditor.apply();*/
 
             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(intent);

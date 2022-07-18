@@ -131,6 +131,7 @@ public class General {
     public static final String IMAGE_ID_1 = "image_id_1";
     public static final String IMAGE_ID_2 = "image_id_2";
     public static final String INSTANCE_CODE ="instance_code" ;
+    public static final String LOGIN_CODE = "login_code";
     public static String WELCOME_IMAGE_SKIP_ONCE_URL = "welcomeImageSkipOnce";
     public static final String TIMESTAMP = "timestamp";
     public static final String CHECK = "check";

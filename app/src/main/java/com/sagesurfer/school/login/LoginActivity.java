@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.CheckBox;
@@ -113,9 +114,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         //btn_login.setEnabled(false);
         if (!BuildConfig.DEBUG) {
         } else {
-            et_code.setText("sage036");
+           /* et_code.setText("sage036");
             et_username.setText("rahuladult");
-            et_password.setText("Sag&#2539!");
+            et_password.setText("Sag&#2539!");*/
         }
         tv_forgot_pass.setOnClickListener(this);
         tv_register_link.setOnClickListener(this);
@@ -126,6 +127,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             e.printStackTrace();
         }
         loginSharedPreferences = getSharedPreferences("LoginPreferences", MODE_PRIVATE);
+
+        if (loginPreferences.contains(General.USERNAME)){
+            Log.i(TAG, "onCreate: entered in USERNAME ");
+            et_username.setText(loginPreferences.getString(General.USERNAME,""));
+
+        }
+
+        //et_code.setText("daskdjakljsd");
+        if (loginPreferences.contains("server_code")){
+            Log.i(TAG, "onCreate: entered in LOGIN_CODE ");
+            et_code.setText(loginPreferences.getString("server_code",""));
+        }
 
     }
 
@@ -243,13 +256,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 String username = et_username.getText().toString().trim();
                 String password = et_password.getText().toString().trim();
                 String code = et_code.getText().toString().trim();
+                Log.i(TAG, "onClick: "+code);
 
-                if (cb_remember_me.isChecked()) {
-                    loginPrefEdit = loginSharedPreferences.edit();
-                    loginPrefEdit.putString(General.USERNAME, username);
-                    loginPrefEdit.putString(General.INSTANCE_CODE, code);
-                    loginPrefEdit.commit();
-                }
 
                 if (isValid(username, password, code)) {
                     // Toast.makeText(this, "login now...", Toast.LENGTH_SHORT).show();
@@ -295,11 +303,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             loginPrefsEditor.putString("server_code", code);
             loginPrefsEditor.commit();
         } else {
-            loginPrefsEditor = loginPreferences.edit();
+           /* loginPrefsEditor = loginPreferences.edit();
             loginPrefsEditor.clear();
-            loginPrefsEditor.commit();
+            loginPrefsEditor.commit();*/
         }
-
 
         //doLogin(user_name, password);
         loginUser(user_name, password);

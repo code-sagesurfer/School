@@ -109,7 +109,7 @@ public class JournalingMainListing extends Fragment implements iSelectedImageRes
     static RoundedImageView attached_image;
     ImageView iv_filter;
     String gratitudeId;
-
+    boolean isFriendSelected=false;
     ModelGratitudeListingResponseData gratitudeModelDataForEdit;
     public JournalingMainListing() {
         // Required empty public constructor
@@ -325,6 +325,8 @@ public class JournalingMainListing extends Fragment implements iSelectedImageRes
         }
 
 
+
+
         ArrayList<String> nameList = new ArrayList<>();
         nameList.add("Select Category");
         for (ModelCategoryResponseData item : data) {
@@ -332,7 +334,7 @@ public class JournalingMainListing extends Fragment implements iSelectedImageRes
         }
 
 
-        ArrayAdapter aa = new ArrayAdapter(getActivity(), android.R.layout.simple_spinner_item, nameList);
+        ArrayAdapter aa = new ArrayAdapter(getActivity(), R.layout.drop_down_selected_invite_member, nameList);
         aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sp_category.setAdapter(aa);
 
@@ -604,7 +606,7 @@ public class JournalingMainListing extends Fragment implements iSelectedImageRes
         btn_submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                dialog.dismiss();
+
                 ArrayList<ModelFriendListResponseData> updatedList = adapter.getAllUpdatedList();
 
                 //stringBuffer.length()==0
@@ -617,7 +619,7 @@ public class JournalingMainListing extends Fragment implements iSelectedImageRes
                 }
                 for (ModelFriendListResponseData item : updatedList) {
                     if (item.getSelected_status() == 1) {
-
+                        isFriendSelected=true;
                         if (nameBuffer.length() == 0) {
                             nameBuffer.append(item.getFullname());
                         } else {
@@ -634,9 +636,14 @@ public class JournalingMainListing extends Fragment implements iSelectedImageRes
                                 data.setSelected_status(item.getSelected_status());
                             }
                         }
-
                     }
                 }
+                if (isFriendSelected){
+                    dialog.dismiss();
+                }else{
+                    Toast.makeText(getActivity(), "Please select friend", Toast.LENGTH_SHORT).show();
+                }
+
                 tv_share_with_friends.setText(nameBuffer);
             }
         });
@@ -999,11 +1006,7 @@ public class JournalingMainListing extends Fragment implements iSelectedImageRes
                             ModelCategoryResponse categoryResponse = gson.fromJson(response.body(), ModelCategoryResponse.class);
                             if (categoryResponse.getStatus() == 200) {
                                 ArrayList<ModelCategoryResponseData> data = categoryResponse.getData();
-
-
                                 dialogAddGratitude(data, categoryResponse);
-
-
                                 //Toast.makeText(getActivity(), "Deleted Successfully..", Toast.LENGTH_SHORT).show();
                             } else {
 
@@ -1029,6 +1032,58 @@ public class JournalingMainListing extends Fragment implements iSelectedImageRes
     }
 
     long SelectedFile;
+
+    public void deleteGratitude(ModelGratitudeListingResponseData modelGratitudeListingResponseData) {
+        HashMap<String, String> requestMap = new HashMap<>();
+        requestMap.put(General.ACTION, Actions_.GRATITUDE_DELETE);
+        requestMap.put(General.GRATITUDEID, modelGratitudeListingResponseData.getGratituteId());
+        requestMap.put("userid", "" + Preferences.get(General.USER_ID));
+
+        APIManager.Companion.getInstance().showProgressDialog(getContext(), false,
+                getActivity().getString(R.string.loading));
+        String url = Preferences.get(General.DOMAIN) + "/" + Urls_.MOBILE_GRATITUDE_JOURNALING;
+        RequestBody requestBody = MakeCall.make(requestMap, url, TAG, getActivity(), getActivity());
+        if (requestBody != null) {
+            try {
+                APIManager.Companion.getInstance().get_gratitude_list(requestBody, new Callback<JsonElement>() {
+                    @Override
+                    public void onResponse(Call<JsonElement> call, Response<JsonElement> response) {
+                        APIManager.Companion.getInstance().dismissProgressDialog();
+                        try {
+                            Gson gson = new Gson();
+                            ModelGratitudeListingResponse gratitudeListingResponse = gson.fromJson(response.body(), ModelGratitudeListingResponse.class);
+                            if (gratitudeListingResponse.getStatus() == 200) {
+                                Toast.makeText(getActivity(), "Deleted Successfully..", Toast.LENGTH_SHORT).show();
+                                Date currentTime = Calendar.getInstance().getTime();
+                                DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+                                String strDate = dateFormat.format(currentTime);
+                                dataJournaling.fetchGratitudesDataList("", strDate, "", "", getContext(), getActivity(), JournalingMainListing.this);
+
+                                //getEventsForMonth();
+                            } else {
+
+                                //showError(true, 2);
+                                //Toast.makeText(getContext(), "Data not found", Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<JsonElement> call, Throwable t) {
+                        APIManager.Companion.getInstance().dismissProgressDialog();
+                    }
+                });
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            //showError(true, status);
+        }
+    }
+
     @SuppressLint("StaticFieldLeak")
     private class UploadFile extends AsyncTask<String, Void, Integer> {
         ShowLoader showLoader;

@@ -35,14 +35,14 @@
                 android:fontFamily="@font/poppins_regular"
                 android:text="@string/title"
                 android:textColor="@color/black"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_heading" />
 
             <EditText
                 android:id="@+id/et_goal_title"
                 android:layout_width="match_parent"
-                android:layout_height="38dp"
+                android:layout_height="42dp"
                 android:layout_weight="1"
                 android:background="@drawable/team_listing_item_border_color_primary"
                 android:fontFamily="@font/poppins_regular"
@@ -54,7 +54,7 @@
                 android:layout_marginTop="3dp"
                 android:textColor="@color/black"
                 android:textColorHint="@color/text_hint_color"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 app:layout_constraintTop_toBottomOf="@+id/tv_title_txt"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -68,7 +68,7 @@
                 android:fontFamily="@font/poppins_regular"
                 android:text="@string/category_type"
                 android:textColor="@color/black"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/et_goal_title" />
 
@@ -84,7 +84,7 @@
                 <Spinner
                     android:id="@+id/sp_category"
                     android:layout_width="0dp"
-                    android:layout_height="38dp"
+                    android:layout_height="42dp"
                     android:layout_marginTop="3dp"
                     android:layout_weight="1"
                     android:background="@android:color/transparent"
@@ -121,14 +121,14 @@
                 android:fontFamily="@font/poppins_regular"
                 android:text="@string/resource"
                 android:textColor="@color/black"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cl_category" />
 
             <EditText
                 android:id="@+id/et_resource"
                 android:layout_width="match_parent"
-                android:layout_height="38dp"
+                android:layout_height="42dp"
                 android:layout_weight="1"
                 android:background="@drawable/team_listing_item_border_color_primary"
                 android:fontFamily="@font/poppins_regular"
@@ -140,7 +140,7 @@
                 android:layout_marginTop="3dp"
                 android:textColor="@color/black"
                 android:textColorHint="@color/text_hint_color"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 app:layout_constraintTop_toBottomOf="@+id/tv_resource"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -155,7 +155,7 @@
                 android:fontFamily="@font/poppins_regular"
                 android:text="@string/share_with"
                 android:textColor="@color/black"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/et_resource" />
 
@@ -182,7 +182,7 @@
                     android:gravity="center_vertical"
                     android:textColor="@color/black"
                     android:textColorHint="@color/text_hint_color"
-                    android:textSize="14sp"
+                    android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/iv_share_icon"
                     app:layout_constraintStart_toStartOf="parent"
@@ -207,7 +207,7 @@
                 android:fontFamily="@font/poppins_regular"
                 android:text="@string/desc"
                 android:textColor="@color/black"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cl_share_with" />
 
@@ -227,7 +227,7 @@
                 android:paddingEnd="16dp"
                 android:textColor="@color/black"
                 android:textColorHint="@color/text_hint_color"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_desc_txt" />
@@ -240,14 +240,14 @@
                 android:fontFamily="@font/poppins_regular"
                 android:text="@string/content_type"
                 android:textColor="@color/black"
-                android:textSize="14sp"
+                android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/et_desc" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout8"
                 android:layout_width="match_parent"
-                android:layout_height="38dp"
+                android:layout_height="42dp"
                 android:background="@drawable/team_listing_item_border_color_primary"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_frequency">
@@ -289,8 +289,8 @@
 
             <ImageView
                 android:id="@+id/imageView9"
-                android:layout_width="14dp"
-                android:layout_height="15dp"
+                android:layout_width="20dp"
+                android:layout_height="22dp"
                 android:layout_marginTop="32dp"
                 android:src="@drawable/ic_attached"
 
@@ -300,19 +300,19 @@
                 android:id="@+id/tv_goal_attachment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="32dp"
+                android:layout_marginTop="40dp"
                 android:fontFamily="@font/poppins_regular"
                 android:text="@string/attachment"
                 android:textColor="@color/black"
-                android:textSize="12sp"
+                android:textSize="14sp"
                 android:layout_marginStart="8dp"
                 app:layout_constraintStart_toEndOf="@+id/imageView9"
                 app:layout_constraintTop_toBottomOf="@+id/constraintLayout8" />
 
             <com.makeramen.roundedimageview.RoundedImageView
                 android:id="@+id/iv_goal_attached_image"
-                android:layout_width="65dp"
-                android:layout_height="45dp"
+                android:layout_width="80dp"
+                android:layout_height="65dp"
                 android:scaleType="centerCrop"
                 android:visibility="visible"
 
@@ -328,17 +328,18 @@
                 android:id="@+id/ll_buttons"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:weightSum="2"
-                android:padding="2dp"
                 android:layout_marginTop="16dp"
-                app:layout_constraintTop_toBottomOf="@+id/iv_goal_attached_image"
-                tools:layout_editor_absoluteX="16dp">
+                android:orientation="horizontal"
+                android:padding="2dp"
+                android:weightSum="2"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/iv_goal_attached_image">
 
                 <Button
                     android:id="@+id/btn_cancel_gratitude"
                     android:layout_width="match_parent"
-                    android:layout_height="38dp"
+                    android:layout_height="42dp"
                     android:layout_weight="1"
                     android:background="@drawable/rounded_corner_btn_cancel"
                     android:fontFamily="@font/poppins_regular"
@@ -348,7 +349,7 @@
                     android:paddingEnd="16dp"
                     android:textColor="@color/black"
                     android:textColorHint="@color/black"
-                    android:textSize="14sp" />
+                    android:textSize="16sp" />
 
                 <Button
                     android:id="@+id/btn_submit"
@@ -364,7 +365,7 @@
                     android:paddingEnd="16dp"
                     android:textColor="@color/black"
                     android:textColorHint="@color/white"
-                    android:textSize="14sp" />
+                    android:textSize="16sp" />
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

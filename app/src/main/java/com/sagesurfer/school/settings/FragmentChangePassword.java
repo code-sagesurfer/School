@@ -10,6 +10,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import android.text.method.PasswordTransformationMethod;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -252,10 +253,47 @@ public class FragmentChangePassword extends Fragment implements View.OnClickList
         super.onDetach();
     }
 
+    boolean currentPasswordShown=false;
+    boolean newPasswordShown=false;
+    boolean newConfirmPasswordShown=false;
     @Override
     public void onClick(View view) {
         if (view.getId()==R.id.btn_password_toggle1){
+            //et_current_password.setTransformationMethod(null);
+            if (!currentPasswordShown) {
+                currentPasswordShown = true;
+                et_current_password.setTransformationMethod(null);
+                btn_password_toggle1.setImageResource(R.drawable.ic_password_unlock);
 
+            } else {
+                currentPasswordShown = false;
+                btn_password_toggle1.setImageResource(R.drawable.ic_password);
+                et_current_password.setTransformationMethod(new PasswordTransformationMethod());
+            }
+        }else if (view.getId()==R.id.btn_password_toggle2){
+            ///et_new_password.setTransformationMethod(null);
+            if (!newPasswordShown) {
+                newPasswordShown = true;
+                et_new_password.setTransformationMethod(null);
+                btn_password_toggle2.setImageResource(R.drawable.ic_password_unlock);
+
+            } else {
+                newPasswordShown = false;
+                btn_password_toggle2.setImageResource(R.drawable.ic_password);
+                et_new_password.setTransformationMethod(new PasswordTransformationMethod());
+            }
+        }else if (view.getId()==R.id.btn_password_toggle3){
+            //et_confirm_password.setTransformationMethod(null);
+            if (!newConfirmPasswordShown) {
+                newConfirmPasswordShown = true;
+                et_confirm_password.setTransformationMethod(null);
+                btn_password_toggle3.setImageResource(R.drawable.ic_password_unlock);
+
+            } else {
+                newConfirmPasswordShown = false;
+                btn_password_toggle3.setImageResource(R.drawable.ic_password);
+                et_confirm_password.setTransformationMethod(new PasswordTransformationMethod());
+            }
         }
     }
 }

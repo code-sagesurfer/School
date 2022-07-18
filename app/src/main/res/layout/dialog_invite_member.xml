@@ -146,7 +146,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginEnd="16dp"
             android:id="@+id/cl_role"
-
+            android:paddingStart="16dp"
             android:layout_marginTop="8dp"
             android:background="@drawable/team_listing_item_border_color_primary"
             app:layout_constraintTop_toBottomOf="@+id/txt_role_name">

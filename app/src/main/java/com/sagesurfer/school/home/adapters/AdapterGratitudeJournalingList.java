@@ -72,7 +72,5 @@ public class AdapterGratitudeJournalingList extends RecyclerView.Adapter<Adapter
             ll_share=itemView.findViewById(R.id.ll_share);
             cl_view=itemView.findViewById(R.id.cl_view);
         }
-
-
     }
 }

@@ -171,7 +171,7 @@ public class SocialActivityFragment extends Fragment {
                         Gson gson = new Gson();
                         assert response.body() != null;
                         String resposeBody = response.body().toString();
-                        AppLog.i(TAG, "onResponse: " + resposeBody);
+                        AppLog.i(TAG, "getTeamListFromServer onResponse: " + resposeBody);
                         ModelTeamListResponse teamListResponse = gson.fromJson(response.body(), ModelTeamListResponse.class);
                         if (teamListResponse.getAllTeams().get(0).getStatus() == 1) {
                             if (teamListResponse.getAllTeams().size() == 1) {
@@ -203,14 +203,18 @@ public class SocialActivityFragment extends Fragment {
         mDrawerLayout.closeDrawer(Gravity.LEFT);*/
     }
 
+
+
     private void setTeamData() {
 
     }
 
     private void showImagesInBottomView(ModelTeamListResponse teamListResponse) {
         Log.i(TAG, "showImagesInBottomView: ");
-        cometChatTeamMemberList = teamListResponse.getAllTeams().get(0).getMembersList();
-        ;
+
+        tv_user_name.setText(teamListResponse.getAllTeams().get(0).getName());
+
+        cometChatTeamMemberList = teamListResponse.getAllTeams().get(0).getMembersList();;
         if (cometChatTeamMemberList.get(0).getPhoto() != null) {
             Glide.with(getContext())
                     .load(cometChatTeamMemberList.get(0).getPhoto())
